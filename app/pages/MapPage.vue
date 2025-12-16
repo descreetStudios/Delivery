@@ -1,26 +1,16 @@
 <template>
-	<div class="w-full h-screen">
-		<ClientOnly>
-			<MglMap
-				:map-style="style"
-				:center="center"
-				:zoom="zoom"
-			>
-				<MglNavigationControl />
-			</MglMap>
-		</ClientOnly>
+	<div class="flex flex-col bg-gray-50 h-screen">
+		<!-- Map Container -->
+		<div class="flex-1">
+			<MapComponent 
+				@map-loaded="onMapLoaded"
+			/>
+		</div>
 	</div>
 </template>
 
 <script setup>
-const style = "https://demotiles.maplibre.org/style.json";
-const center = [-1.559482, 47.21322];
-const zoom = 8;
+const onMapLoaded = (map) => {
+	console.log("Successfully loaded the map!", map);
+};
 </script>
-
-<style>
-	.maplibregl-map{
-		width: 1000px;
-		height: 1000px;
-	}
-</style>
