@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="top-4 left-4 absolute bg-white/90 shadow backdrop-blur px-3 py-1 rounded text-xs"
+		class="bottom-10 left-2 absolute bg-white shadow backdrop-blur px-3 py-1 rounded text-xs + 5"
 	>
 		<span v-if="lng !== null">
 			{{ lng.toFixed(5) }}, {{ lat.toFixed(5) }}
