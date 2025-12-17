@@ -3,10 +3,9 @@
 		<ClientOnly>
 			<MglMap
 				ref="mapInstance"
-				:map-style="mapStyle"
 				:center="mapCenter"
 				:zoom="mapZoom"
-				class="w-full h-full"
+				:map-style="mapStyle"
 				@map:load="handleMapLoad"
 			>
 				<MglNavigationControl position="top-right" />
@@ -26,11 +25,11 @@ const props = defineProps({
 	},
 	zoom: {
 		type: Number,
-		default: 5,
+		default: 13,
 	},
 	styleUrl: {
 		type: String,
-		default: "https://demotiles.maplibre.org/style.json",
+		default: "https://tiles.openfreemap.org/styles/liberty",
 	},
 });
 
@@ -42,7 +41,7 @@ const mapStyle = ref(props.styleUrl);
 const emit = defineEmits(["map-loaded", "map-click"]);
 
 const handleMapLoad = (map) => {
-	console.log("Map loaded successfully");
+	console.log("Loaded Map Component");
 	emit("map-loaded", map);
 };
 
@@ -61,7 +60,3 @@ defineExpose({
 	},
 });
 </script>
-
-<style>
-
-</style>
