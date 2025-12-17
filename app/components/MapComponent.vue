@@ -2,7 +2,7 @@
 	<div class="relative w-full h-full">
 		<ClientOnly>
 			<MglMap
-				ref="mapInstance"
+				ref="mapWrapperInstance"
 				:center="mapCenter"
 				:zoom="mapZoom"
 				:map-style="mapStyle"
@@ -21,11 +21,11 @@
 const props = defineProps({
 	center: {
 		type: Array,
-		default: () => [-1.559482, 47.21322],
+		default: () => [9.18969, 45.46409],
 	},
 	zoom: {
 		type: Number,
-		default: 13,
+		default: 15,
 	},
 	styleUrl: {
 		type: String,
@@ -33,23 +33,23 @@ const props = defineProps({
 	},
 });
 
-const mapInstance = ref(null);
+const mapWrapperInstance = ref(null);
 const mapCenter = ref(props.center);
 const mapZoom = ref(props.zoom);
 const mapStyle = ref(props.styleUrl);
 
 const emit = defineEmits(["map-loaded", "map-click"]);
 
-const handleMapLoad = (map) => {
+const handleMapLoad = (mapWrapper) => {
 	console.log("Loaded Map Component");
-	emit("map-loaded", map);
+	emit("map-loaded", mapWrapper);
 };
 
 defineExpose({
-	getMap: () => mapInstance.value,
+	getMapWrapper: () => mapWrapperInstance.value,
 	flyTo: (center, zoom = 13) => {
-		if (mapInstance.value) {
-			mapInstance.value.flyTo({ center, zoom });
+		if (mapWrapperInstance.value && mapWrapperInstance.value.map) {
+			mapWrapperInstance.value.flyTo({ center, zoom });
 		}
 	},
 	setCenter: (newCenter) => {
