@@ -16,12 +16,12 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
   --color-primary-text: oklch(100% 0 0);
   --color-inv-primary-text: oklch(0 0 0);
   
-  --color-secondary: oklch(63% 0.3042 316.29);
+  --color-secondary: oklch(34% 0 none);
   --color-secondary-hover: oklch(52.78% 0.258 328.61);
-  --color-secondary-text: oklch(83.86% 0.037 257.91);
+  --color-secondary-text: oklch(70% 0 none);
   --color-inv-secondary-text: oklch(27.3% 0.01 257.91);
   
-  --color-tertiary-text: oklch(55% 0 0);
+  --color-tertiary-text: oklch(60% 0 0);
   
   --color-bg: oklch(15% 0 0);
   --color-inv-bg: oklch(95.5% 0 0);
