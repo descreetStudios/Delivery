@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col bg-bg h-screen">
+	<div class="flex flex-col bg-root h-screen">
 		<div class="flex-1">
 			<MapComponent @map-loaded="onMapLoaded" />
 			<SearchComponent />

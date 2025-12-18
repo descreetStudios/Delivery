@@ -4,9 +4,9 @@
 		class="top-4 left-1/2 z-10 absolute w-105 -translate-x-1/2"
 	>
 		<div class="top-4 left-1/2 z-10 absolute w-105 -translate-x-1/2">
-			<div class="flex items-center bg-surface shadow-lg px-4 rounded-full h-12">
+			<div class="flex items-center bg-bg-surface shadow-lg px-4 rounded-full h-12">
 
-				<div class="justify-center items-center invert size-5 text-bg">
+				<div class="justify-center items-center invert size-5 text-bg-surface">
 					<!-- Search Icon -->
 					<svg
 						v-if="!loading"
@@ -55,7 +55,7 @@
 					type="text"
 					maxlength="100"
 					placeholder="Go wherever you like"
-					class="flex-1 bg-transparent border-0 outline-none focus:outline-none ring-0 focus:ring-0 text-primary-text text-sm placeholder-secondary-text"
+					class="flex-1 bg-transparent border-0 outline-none focus:outline-none ring-0 focus:ring-0 placeholder-text-secondary text-text-primary text-sm"
 					@keydown.down.prevent="next"
 					@keydown.up.prevent="prev"
 					@keydown.enter.prevent="select(activeIndex)"
@@ -66,7 +66,7 @@
 			<transition name="dropdown">
 				<div
 					v-if="!justSelected && (results.length || (!loading && query.length >= 2))"
-					class="bg-white shadow-lg mt-2 rounded-xl max-h-60 overflow-hidden overflow-y-auto appearance-none results-scroll"
+					class="bg-bg-surface shadow-lg mt-2 rounded-xl max-h-60 overflow-hidden overflow-y-auto appearance-none results-scroll"
 				>
 					<ul>
 						<!-- No results -->
