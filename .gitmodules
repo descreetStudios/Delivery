@@ -1,0 +1,3 @@
+[submodule "Delivery-Backend"]
+	path = Delivery-Backend
+	url = https://github.com/descreetStudios/Delivery-Backend
