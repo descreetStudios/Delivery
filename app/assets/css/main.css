@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600&display=swap");
+
 @import "tailwindcss";
 
-/* 
-  NOTE: If you don't have Tailwind CSS IntelliSense installed, ignore the "Unknown at rule @theme" warning in VS Code.
-  @theme is a valid Tailwind CSS directive and works correctly during build.
+/*
+NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @theme" warning in VS Code.
+@theme is a valid Tailwind CSS directive and works correctly during build.
 */
 
 @theme {
@@ -14,22 +15,22 @@
   --color-primary-hover: oklch(56.88% 0.187 259.78);
   --color-primary-text: oklch(100% 0 0);
   --color-inv-primary-text: oklch(0 0 0);
-
+  
   --color-secondary: oklch(63% 0.3042 316.29);
   --color-secondary-hover: oklch(52.78% 0.258 328.61);
   --color-secondary-text: oklch(83.86% 0.037 257.91);
   --color-inv-secondary-text: oklch(27.3% 0.01 257.91);
-
+  
   --color-tertiary-text: oklch(55% 0 0);
-
+  
   --color-bg: oklch(15% 0 0);
   --color-inv-bg: oklch(95.5% 0 0);
-  --color-surface: oklch(21% 0 0);
+  --color-surface: oklch(24% 0 0);
   --color-secondary-surface: oklch(14.5% 0.01 257.91);
   --color-border: oklch(27.5% 0.03 265);
   --color-shadow: rgba(0, 0, 0, 0.4);
   --color-glowing: oklch(94.6% 0 0);
-
+  
   --color-error: oklch(66.1% 0.233 29.23);
   --color-warning: oklch(75.2% 0.2 70.3);
   --color-info: oklch(81.2% 0.2 215.3);
@@ -74,4 +75,14 @@
     border-radius: 8px;
     border: 2px solid var(--color-surface);
   }
+}
+
+.maplibregl-ctrl,
+.maplibregl-ctrl-group 
+{
+  @apply bg-bg; 
+} 
+.maplibregl-ctrl button 
+{
+  @apply bg-bg hover:bg-bg/80 text-bg; 
 }

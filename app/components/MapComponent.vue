@@ -18,6 +18,8 @@
 </template>
 
 <script setup>
+const DEBUG = false;
+
 const props = defineProps({
 	center: {
 		type: Array,
@@ -41,8 +43,13 @@ const mapStyle = ref(props.styleUrl);
 const emit = defineEmits(["map-loaded", "map-click"]);
 
 const handleMapLoad = (mapWrapper) => {
-	console.log("Loaded Map Component");
+	if (DEBUG) console.log("Loaded Map Component");
 	emit("map-loaded", mapWrapper);
+
+	// TODO: Make this dynamically working with settings
+	mapWrapper.map.setProjection({
+		type: ["interpolate", ["linear"], ["zoom"], 0, "globe", 12, "mercator"],
+	});
 };
 
 defineExpose({

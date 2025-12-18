@@ -4,9 +4,7 @@
 		class="top-4 left-1/2 z-10 absolute w-105 -translate-x-1/2"
 	>
 		<div class="top-4 left-1/2 z-10 absolute w-105 -translate-x-1/2">
-			<div
-				class="flex items-center bg-white shadow-lg px-4 rounded-full h-12"
-			>
+			<div class="flex items-center bg-white shadow-lg px-4 rounded-full h-12">
 				<!-- Search Icon -->
 				<svg
 					v-if="!loading"
@@ -239,7 +237,7 @@ const select = (i) => {
 
 	query.value = item.label;
 	results.value = [];
-	
+
 	emit("select", item);
 
 	nextTick(() => {
@@ -331,85 +329,89 @@ defineExpose({
 <style scoped>
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+	width: 6px;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 9999px;
+	background: #d1d5db;
+	border-radius: 9999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+	background: #9ca3af;
 }
 
 /* Highlight text animation */
 .highlight-anim {
-  display: inline-block;
-  animation: highlightPop 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+	display: inline-block;
+	animation: highlightPop 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes highlightPop {
-  0% {
-    transform: scale(0.6);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+	0% {
+		transform: scale(0.6);
+		opacity: 0;
+	}
+
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
 }
 
 /* Not Highlighted text animation */
 .unhighlight-anim {
-  display: inline-block;
-  animation: unhighlightFade 220ms ease-out;
+	display: inline-block;
+	animation: unhighlightFade 220ms ease-out;
 }
 
 @keyframes unhighlightFade {
-  0% {
-    opacity: 0;
-    transform: translateY(2px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	0% {
+		opacity: 0;
+		transform: translateY(2px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* Dropdown animation */
 .dropdown-enter-from,
 .dropdown-leave-to {
-  opacity: 0;
-  transform: translateY(-6px);
+	opacity: 0;
+	transform: translateY(-6px);
 }
 
 .dropdown-enter-active,
 .dropdown-leave-active {
-  transition: opacity 150ms ease, transform 150ms ease;
+	transition: opacity 150ms ease, transform 150ms ease;
 }
 
 .dropdown-enter-to,
 .dropdown-leave-from {
-  opacity: 1;
-  transform: translateY(0);
+	opacity: 1;
+	transform: translateY(0);
 }
 
 /* List item animation */
 .list-item {
-  transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+	transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
 }
 
 .list-item:hover {
-  transform: translateX(4px);
-  background-color: #f3f4f6;
-  box-shadow: inset 3px 0 0 #3b82f6;
+	transform: translateX(4px);
+	background-color: #f3f4f6;
+	box-shadow: inset 3px 0 0 #3b82f6;
 }
 
 .list-item.bg-blue-100 {
-  box-shadow: inset 3px 0 0 #3b82f6;
+	box-shadow: inset 3px 0 0 #3b82f6;
 }
 
 .list-item.bg-blue-100:hover {
-  background-color: #bfdbfe;
-  transform: translateX(4px);
+	background-color: #bfdbfe;
+	transform: translateX(4px);
 }
 </style>

@@ -1,8 +1,10 @@
 <template>
 	<div
-		class="bottom-10 left-2 absolute bg-white shadow backdrop-blur px-3 py-1 rounded text-xs + 5"
+		class="bottom-10 left-2 absolute bg-surface shadow backdrop-blur px-3 py-1 rounded text-primary-text text-xs + 5"
 	>
-		<span v-if="lng !== null">
+		<span
+			v-if="lng !== null"
+		>
 			{{ lng.toFixed(5) }}, {{ lat.toFixed(5) }}
 		</span>
 		<span v-else>
