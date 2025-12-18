@@ -40,7 +40,8 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 [data-theme="light"] {
   --color-primary-text: oklch(0% 0 0);
   --color-inv-primary-text: oklch(100% 0 0);
-  --color-secondary-text: oklch(21.3% 0.01 257.91);
+  --color-secondary: oklch(76% 0 none);
+  --color-secondary-text: oklch(50% 0 none);
   --color-inv-secondary-text: oklch(83.6% 0 0);
   --color-bg: oklch(95.5% 0 0);
   --color-inv-bg: oklch(8.1% 0 0);
