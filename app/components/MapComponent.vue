@@ -54,9 +54,10 @@ const handleMapLoad = (mapWrapper) => {
 
 defineExpose({
 	getMapWrapper: () => mapWrapperInstance.value,
-	flyTo: (center, zoom = 13) => {
+	moveTo: (center, zoom = 16) => {
 		if (mapWrapperInstance.value && mapWrapperInstance.value.map) {
-			mapWrapperInstance.value.flyTo({ center, zoom });
+			if (DEBUG) console.log("Wrapper: ", mapWrapperInstance.value);
+			mapWrapperInstance.value.map.flyTo({ center, zoom });
 		}
 	},
 	setCenter: (newCenter) => {
