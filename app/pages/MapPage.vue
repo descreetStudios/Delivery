@@ -27,7 +27,7 @@ const onMapLoaded = (mapWrapper) => {
 const onSearchSelect = (item) => {
 	if (DEBUG) console.log("Search selected: ", item);
 	if (DEBUG) console.log("Map component", mapRef.value);
-	mapRef.value.moveTo(item.center);
+	mapRef.value.moveToWithBounds(item.center, item.boundingbox);
 	mapRef.value.highlight(mapInstance.value, item);
 };
 </script>

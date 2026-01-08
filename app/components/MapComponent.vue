@@ -142,11 +142,48 @@ const showPointMarker = (map, item) => {
 	});
 };
 
+const calculateZoomFromBounds = (boundingbox) => {
+	// boundingbox: [south, north, west, east]
+	const south = parseFloat(boundingbox[0]);
+	const north = parseFloat(boundingbox[1]);
+	const west = parseFloat(boundingbox[2]);
+	const east = parseFloat(boundingbox[3]);
+	
+	// Calculate the span in degrees
+	const latSpan = north - south;
+	const lngSpan = east - west;
+	const maxSpan = Math.max(latSpan, lngSpan);
+	
+	// Rough zoom calculation
+	// Larger areas = lower zoom, smaller areas = higher zoom
+	let zoom;
+	if (maxSpan > 11) zoom = 2;
+	else if (maxSpan > 10) zoom = 6;       // Country/region level
+	else if (maxSpan > 5) zoom = 7;   // Large area
+	else if (maxSpan > 2) zoom = 8;   // Province level
+	else if (maxSpan > 1) zoom = 9;   // Large city
+	else if (maxSpan > 0.5) zoom = 10; // City
+	else if (maxSpan > 0.2) zoom = 12; // District
+	else if (maxSpan > 0.1) zoom = 13; // Neighborhood
+	else if (maxSpan > 0.05) zoom = 14; // Small area
+	else if (maxSpan > 0.01) zoom = 15; // Street level
+	else zoom = 16;                    // Building/POI
+	
+	return zoom;
+};
+
 defineExpose({
 	getMapWrapper: () => mapWrapperInstance.value,
-	moveTo: (center, zoom = 16) => {
+	moveTo: (center, zoom = 9) => {
 		if (mapWrapperInstance.value && mapWrapperInstance.value.map) {
 			if (DEBUG) console.log("Wrapper: ", mapWrapperInstance.value);
+			mapWrapperInstance.value.map.flyTo({ center, zoom });
+		}
+	},
+	moveToWithBounds: (center, boundingbox) => {
+		if (mapWrapperInstance.value && mapWrapperInstance.value.map) {
+			const zoom = calculateZoomFromBounds(boundingbox);
+			if (DEBUG) console.log("Calculated zoom:", zoom);
 			mapWrapperInstance.value.map.flyTo({ center, zoom });
 		}
 	},
