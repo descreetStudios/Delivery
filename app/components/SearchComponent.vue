@@ -183,6 +183,9 @@ const search = async (q) => {
 		label: item.display_name,
 		description: item.type,
 		center: [parseFloat(item.lon), parseFloat(item.lat)],
+		osm_id: item.osm_id,
+		osm_type: item.osm_type,
+		boundingbox: item.boundingbox,
 	}));
 };
 

@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-const DEBUG = false;
+const DEBUG = true;
 
 const mapRef = ref(null);
 const coordsRef = ref(null);
@@ -21,14 +21,13 @@ const mapInstance = ref(null);
 const onMapLoaded = (mapWrapper) => {
 	if (DEBUG) console.log("Map wrapper instance:", mapWrapper);
 	coordsRef.value.bindMap(mapWrapper);
-
 	mapInstance.value=mapWrapper.map;
-	console.log(mapInstance.value);
 };
 
 const onSearchSelect = (item) => {
 	if (DEBUG) console.log("Search selected: ", item);
 	if (DEBUG) console.log("Map component", mapRef.value);
 	mapRef.value.moveTo(item.center);
+	mapRef.value.highlight(mapInstance.value, item);
 };
 </script>
