@@ -156,18 +156,9 @@ const calculateZoomFromBounds = (boundingbox) => {
 	
 	// Rough zoom calculation
 	// Larger areas = lower zoom, smaller areas = higher zoom
-	let zoom;
-	if (maxSpan > 11) zoom = 2;
-	else if (maxSpan > 10) zoom = 6;       // Country/region level
-	else if (maxSpan > 5) zoom = 7;   // Large area
-	else if (maxSpan > 2) zoom = 8;   // Province level
-	else if (maxSpan > 1) zoom = 9;   // Large city
-	else if (maxSpan > 0.5) zoom = 10; // City
-	else if (maxSpan > 0.2) zoom = 12; // District
-	else if (maxSpan > 0.1) zoom = 13; // Neighborhood
-	else if (maxSpan > 0.05) zoom = 14; // Small area
-	else if (maxSpan > 0.01) zoom = 15; // Street level
-	else zoom = 16;                    // Building/POI
+	console.log("MAX SPAN: ", maxSpan);
+	let zoom = 15 - Math.log2(maxSpan / 0.01);
+	zoom = Math.min(Math.max(zoom, 2.0), 18.0);
 	
 	return zoom;
 };
