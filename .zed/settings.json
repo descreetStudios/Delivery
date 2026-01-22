@@ -1,0 +1,45 @@
+{
+	"language_servers": ["!prettier", "..."],
+	"tab_size": 4,
+	"hard_tabs": true,
+	"lsp": {
+		"eslint": {
+			"settings": {
+				"configFile": ".nuxt/eslint.config.mjs",
+				"experimental": {
+					"useFlatConfig": true,
+				},
+				"validate": ["javascript", "typescript", "vue"],
+			},
+		},
+	},
+	"languages": {
+		"JavaScript": {
+			"tab_size": 4,
+			"hard_tabs": true,
+			"formatter": {
+				"code_action": "source.fixAll.eslint",
+			},
+			"format_on_save": "on",
+		},
+		"TypeScript": {
+			"tab_size": 4,
+			"hard_tabs": true,
+			"formatter": {
+				"code_action": "source.fixAll.eslint",
+			},
+			"format_on_save": "on",
+		},
+		"Vue.js": {
+			"tab_size": 4,
+			"hard_tabs": true,
+			"formatter": {
+				"code_action": "source.fixAll.eslint",
+			},
+			"format_on_save": "on",
+		},
+		"CSS": {
+			"language_servers": ["tailwindcss-language-server"],
+		},
+	},
+}

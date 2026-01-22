@@ -3,11 +3,17 @@ import withNuxt from "./.nuxt/eslint.config.mjs";
 
 export default withNuxt({
     rules: {
+        // Line endings CRLF
+        "linebreak-style": ["error", "windows"],
+
         "semi": ["error", "always"],
         "quotes": ["error", "double"],
         "comma-dangle": ["error", "always-multiline"],
-        "indent": ["error", "tab", { "SwitchCase": 1 }],
-        "vue/html-indent": ["error", "tab"],
+        "indent": ["error", "tab", { "SwitchCase": 1, "tabWidth": 4 }],
+
+        // Vue
+        "vue/html-indent": ["error", "tab", { "baseIndent": 1 }],
+        "vue/script-indent": ["error", "tab", { "baseIndent": 0 }],
         "vue/max-attributes-per-line": ["error", {
             singleline: 1,
             multiline: 1,
