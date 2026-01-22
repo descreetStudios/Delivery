@@ -8,60 +8,60 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 */
 
 @theme {
-  --accent-primary: var(--color-blue-500);
-  --accent-primary-hover: var(--color-blue-600);
-  --accent-primary-soft: var(--color-blue-100);
-  
-  --color-error: oklch(66.1% 0.233 29.23);
-  --color-warning: oklch(75.2% 0.2 70.3);
-  --color-info: oklch(81.2% 0.2 215.3);
-  --color-success: oklch(75.4% 0.2 142.3);
-  
-  --color-bg-root: oklch(15% 0 0);
-  --color-bg-surface: oklch(22% 0 0);
-  
-  --color-text-primary: var(--color-white);
-  --color-text-secondary: oklch(65% 0 0);
-  --color-text-muted: oklch(50% 0 0);
-  
-  --color-border-default: oklch(28% 0.02 260);
-  --color-shadow-default: rgba(0, 0, 0, 0.4);
+	--accent-primary: var(--color-blue-500);
+	--accent-primary-hover: var(--color-blue-600);
+	--accent-primary-soft: var(--color-blue-100);
+
+	--color-error: oklch(66.1% 0.233 29.23);
+	--color-warning: oklch(75.2% 0.2 70.3);
+	--color-info: oklch(81.2% 0.2 215.3);
+	--color-success: oklch(75.4% 0.2 142.3);
+
+	--color-bg-root: oklch(15% 0 0);
+	--color-bg-surface: oklch(22% 0 0);
+
+	--color-text-primary: var(--color-white);
+	--color-text-secondary: oklch(65% 0 0);
+	--color-text-muted: oklch(50% 0 0);
+
+	--color-border-default: oklch(28% 0.02 260);
+	--color-shadow-default: rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="light"] {
-  --color-bg-root: oklch(96% 0 0);
-  --color-bg-surface: oklch(100% 0 0);
-  
-  --color-text-primary: var(--color-black);
-  --color-text-secondary: oklch(45% 0 0);
-  --color-text-muted: oklch(60% 0 0);
-  
-  --color-border-default: oklch(85% 0.01 260);
-  --color-shadow-default: rgba(0, 0, 0, 0.15);
+	--color-bg-root: oklch(96% 0 0);
+	--color-bg-surface: oklch(100% 0 0);
+
+	--color-text-primary: var(--color-black);
+	--color-text-secondary: oklch(45% 0 0);
+	--color-text-muted: oklch(60% 0 0);
+
+	--color-border-default: oklch(85% 0.01 260);
+	--color-shadow-default: rgba(0, 0, 0, 0.15);
 }
 
 @layer base {
-  input,
-  textarea,
-  select {
-    @apply px-4 py-3 rounded-md border bg-bg-surface text-text-primary text-base placeholder-text-secondary focus:bg-bg-surface focus:border-border-default focus:outline-none transition;
-  }
+	input,
+	textarea,
+	select {
+		@apply px-4 py-3 rounded-md border bg-bg-surface text-text-primary text-base placeholder-text-secondary focus:bg-bg-surface focus:border-border-default focus:outline-none transition;
+	}
 }
 
 @layer utilities {
-  .scrollbar-custom {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-border) var(--color-surface);
-  }
-  .scrollbar-custom::-webkit-scrollbar {
-    width: 8px;
-  }
-  .scrollbar-custom::-webkit-scrollbar-track {
-    background: var(--color-surface);
-  }
-  .scrollbar-custom::-webkit-scrollbar-thumb {
-    background-color: var(--color-border);
-    border-radius: 8px;
-    border: 2px solid var(--color-surface);
-  }
+	.scrollbar-custom {
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-border) var(--color-surface);
+	}
+	.scrollbar-custom::-webkit-scrollbar {
+		width: 8px;
+	}
+	.scrollbar-custom::-webkit-scrollbar-track {
+		background: var(--color-surface);
+	}
+	.scrollbar-custom::-webkit-scrollbar-thumb {
+		background-color: var(--color-border);
+		border-radius: 8px;
+		border: 2px solid var(--color-surface);
+	}
 }

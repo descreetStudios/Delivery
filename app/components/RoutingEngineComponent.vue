@@ -6,29 +6,48 @@
 
 <script setup>
 const DEBUG = false;
+const { getLocation } = useLocationApi();
+
 
 const props = defineProps({
 	mapInstance: {
 		type: Object,
 		default: () => null,
 	},
+	data: {
+		type: 
+		{
+			courierId: String,
+			
+		},
+		default: () => null,
+	},
 });
-const response = await fetch(
-	"https://router.project-osrm.org/route/v1/driving/9.5,45.3;9.19,45.46?overview=full&geometries=geojson",
-);
-const data = await response.json();
 
-const route = data.routes[0].geometry;
 
-if (DEBUG) console.log(route);
+onMounted(async () => {
+	const link = ref("");
+	const location = await getLocation("courier1");
+	if (location) {
+		link.value = "https://router.project-osrm.org/route/v1/driving/" + location.longitude + "," + location.latitude + ";9.19,45.46;7.44,46.94?overview=full&geometries=geojson";
+	}
+	console.log(link.value);
 
-onMounted(() => {
+	const response = await fetch(
+		link.value,
+	);
+	const data = await response.json();
+
+	const route = data.routes[0].geometry;
+
+	if (DEBUG) console.log(route);
 	watch(
 		() => props.mapInstance,
 		(newVal, oldVal) => {
 			if (newVal && oldVal == null) {
 				const map = newVal;
 				if (DEBUG) console.log("Map instance ready:", map);
+
 				map.addSource("route", {
 					type: "geojson",
 					data: {

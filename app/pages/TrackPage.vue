@@ -1,7 +1,7 @@
 <template>
 	<div class="tracking-container">
 		<h1>🚚 Live Courier Tracking</h1>
-    
+
 		<!-- Connection Status -->
 		<div class="status-bar">
 			<span
@@ -17,7 +17,7 @@
 				🔴 Disconnected
 			</span>
 		</div>
-    
+
 		<!-- Test Controls -->
 		<div class="controls">
 			<h2>Test Location Update</h2>
@@ -33,7 +33,7 @@
 			</button>
 			<button @click="getTestLocation">Get Location</button>
 		</div>
-    
+
 		<!-- Courier List -->
 		<div class="courier-list">
 			<h2>Active Couriers</h2>
@@ -43,8 +43,8 @@
 			>
 				No active couriers. Send a test location to see them here.
 			</div>
-			<div 
-				v-for="courier in couriers" 
+			<div
+				v-for="courier in couriers"
 				:key="courier.courierId"
 				class="courier-card"
 			>
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 		</div>
-    
+
 		<!-- Raw Data (for debugging) -->
 		<div class="debug-panel">
 			<h2>Debug Info</h2>
@@ -92,11 +92,11 @@ onMounted(() => {
 // Send test location
 const sendTestLocation = async () => {
 	sending.value = true;
-  
-	// Random location around New York City
-	const lat = 40.7128 + (Math.random() - 0.5) * 0.1;
-	const lng = -74.0060 + (Math.random() - 0.5) * 0.1;
-  
+
+	// Random location around Metz
+	const lat = 49.1237 + (Math.random() - 0.5) * 0.1;
+	const lng = 6.1599 + (Math.random() - 0.5) * 0.1;
+
 	const result = await updateLocation({
 		courierId: testCourierId.value,
 		latitude: lat,
@@ -105,11 +105,11 @@ const sendTestLocation = async () => {
 		timestamp: new Date().toISOString(),
 		status: "DELIVERING",
 	});
-  
+
 	if (result.success) {
 		console.log("✅ Location sent!");
 	}
-  
+
 	sending.value = false;
 };
 

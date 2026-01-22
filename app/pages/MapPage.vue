@@ -7,7 +7,10 @@
 			/>
 			<SearchComponent @select="onSearchSelect" />
 			<CoordinatesComponent ref="coordsRef" />
-			<RoutingEngineComponent :map-instance="mapInstance" />
+			<RoutingEngineComponent
+				:map-instance="mapInstance"
+				:data=""
+			/>
 		</div>
 	</div>
 </template>
