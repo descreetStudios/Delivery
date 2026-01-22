@@ -1,31 +1,31 @@
 {
-  "name": "Delivery",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "dependencies": {
-    "@indoorequal/vue-maplibre-gl": "^8.4.2",
-    "@nuxt/eslint": "^1.12.1",
-    "@nuxt/image": "2.0.0",
-    "@tailwindcss/vite": "^4.1.18",
-    "nuxt": "^4.2.2",
-    "nuxt-maplibre": "1.2.0",
-    "tailwindcss": "^4.1.18",
-    "vue": "^3.5.26",
-    "vue-router": "^4.6.4"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@types/node": "^25.0.3",
-    "eslint": "^9.39.2",
-    "eslint-plugin-vue": "^10.6.2",
-    "globals": "^16.5.0",
-    "typescript-eslint": "^8.50.0"
-  }
+	"name": "delivery",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"dependencies": {
+		"@indoorequal/vue-maplibre-gl": "^8.4.2",
+		"@nuxt/eslint": "^1.12.1",
+		"@nuxt/image": "2.0.0",
+		"@tailwindcss/vite": "^4.1.18",
+		"nuxt": "^4.2.2",
+		"nuxt-maplibre": "1.2.2",
+		"tailwindcss": "^4.1.18",
+		"vue": "^3.5.27",
+		"vue-router": "^4.6.4"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.2",
+		"@types/node": "^25.0.10",
+		"eslint": "^9.39.2",
+		"eslint-plugin-vue": "^10.7.0",
+		"globals": "^17.0.0",
+		"typescript-eslint": "^8.53.1"
+	}
 }
