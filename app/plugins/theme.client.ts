@@ -1,9 +1,9 @@
 export default defineNuxtPlugin(() => {
-    const DEBUG = false;
-    const theme = "light";
+	const DEBUG = false;
+	const theme = "light";
 
-    if (import.meta.client) {
-        document.documentElement.setAttribute("data-theme", theme ?? "dark");
-        if (DEBUG) console.log("Tema aggiornato:", theme);
-    }
+	if (import.meta.client) {
+		document.documentElement.setAttribute("data-theme", theme ?? "dark");
+		if (DEBUG) console.log("Tema aggiornato:", theme);
+	}
 });
