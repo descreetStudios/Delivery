@@ -15,11 +15,10 @@ const props = defineProps({
 		default: () => null,
 	},
 	data: {
-		type: 
-		{
-			courierId: String,
-			
-		},
+		type:
+			{
+				courierId: String,
+			},
 		default: () => null,
 	},
 });
@@ -27,11 +26,11 @@ const props = defineProps({
 
 onMounted(async () => {
 	const link = ref("");
-	const location = await getLocation("courier1");
+	const location = await getLocation("courier"+props.data.courierId);
 	if (location) {
 		link.value = "https://router.project-osrm.org/route/v1/driving/" + location.longitude + "," + location.latitude + ";9.19,45.46;7.44,46.94?overview=full&geometries=geojson";
 	}
-	console.log(link.value);
+	if(DEBUG) console.log(link.value);
 
 	const response = await fetch(
 		link.value,

@@ -1,6 +1,8 @@
 import { defineNuxtRouteMiddleware, navigateTo } from "nuxt/app";
 export default defineNuxtRouteMiddleware((to, _from) => {
-	if (to.path != "/MapPage") {
-		return navigateTo({ path: "/MapPage", query: { CourierId: "0000" } });
+	const pages = ["/MapPage", "/TrackPage", "/TestPage"];
+
+	if (!pages.includes(to.path)) {
+		return navigateTo({ path: "/MapPage", query: { courierId: "0000" } });
 	}
 });

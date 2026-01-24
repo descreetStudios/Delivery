@@ -9,14 +9,19 @@
 			<CoordinatesComponent ref="coordsRef" />
 			<RoutingEngineComponent
 				:map-instance="mapInstance"
-				:data=""
+				:data={courierId}
 			/>
 		</div>
 	</div>
 </template>
 
 <script setup>
-const DEBUG = true;
+import { useRoute } from "vue-router";
+
+const DEBUG = false;
+
+const route = useRoute();
+const courierId = ref(route.query.courierId ?? null);
 
 const mapRef = ref(null);
 const coordsRef = ref(null);
