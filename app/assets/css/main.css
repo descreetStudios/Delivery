@@ -8,36 +8,40 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 */
 
 @theme {
-	--accent-primary: var(--color-blue-500);
-	--accent-primary-hover: var(--color-blue-600);
-	--accent-primary-soft: var(--color-blue-100);
-
-	--color-error: oklch(66.1% 0.233 29.23);
-	--color-warning: oklch(75.2% 0.2 70.3);
-	--color-info: oklch(81.2% 0.2 215.3);
-	--color-success: oklch(75.4% 0.2 142.3);
-
-	--color-bg-root: oklch(15% 0 0);
-	--color-bg-surface: oklch(22% 0 0);
-
-	--color-text-primary: var(--color-white);
-	--color-text-secondary: oklch(65% 0 0);
-	--color-text-muted: oklch(50% 0 0);
-
-	--color-border-default: oklch(28% 0.02 260);
-	--color-shadow-default: rgba(0, 0, 0, 0.4);
+  --accent-primary: var(--color-blue-500);
+  --accent-primary-hover: var(--color-blue-600);
+  --accent-primary-soft: var(--color-blue-100);
+  
+  --color-error: oklch(66.1% 0.233 29.23);
+  --color-warning: oklch(75.2% 0.2 70.3);
+  --color-info: oklch(81.2% 0.2 215.3);
+  --color-success: oklch(75.4% 0.2 142.3);
+  
+  --color-bg-root: oklch(15% 0 0);
+  --color-bg-surface: oklch(22% 0 0);
+  --color-bg-primary-surface: oklch(22% 0 0);
+  --color-bg-secondary-surface: oklch(28% 0 250);
+  
+  --color-text-primary: var(--color-white);
+  --color-text-secondary: oklch(65% 0 0);
+  --color-text-muted: oklch(50% 0 0);
+  
+  --color-border-default: oklch(28% 0.02 260);
+  --color-shadow-default: rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="light"] {
-	--color-bg-root: oklch(96% 0 0);
-	--color-bg-surface: oklch(100% 0 0);
-
-	--color-text-primary: var(--color-black);
-	--color-text-secondary: oklch(45% 0 0);
-	--color-text-muted: oklch(60% 0 0);
-
-	--color-border-default: oklch(85% 0.01 260);
-	--color-shadow-default: rgba(0, 0, 0, 0.15);
+  --color-bg-root: oklch(96% 0 0);
+  --color-bg-surface: oklch(100% 0 0);
+  --color-bg-primary-surface: var(--color-blue-100);
+  --color-bg-secondary-surface: var(--color-blue-200);
+  
+  --color-text-primary: var(--color-black);
+  --color-text-secondary: oklch(45% 0 0);
+  --color-text-muted: oklch(60% 0 0);
+  
+  --color-border-default: oklch(85% 0.01 260);
+  --color-shadow-default: rgba(0, 0, 0, 0.15);
 }
 
 @layer base {

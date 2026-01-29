@@ -66,7 +66,7 @@
 			<transition name="dropdown">
 				<div
 					v-if="!justSelected && (results.length || (!loading && query.length >= 2))"
-					class="bg-bg-surface shadow-lg mt-2 rounded-xl max-h-60 overflow-hidden overflow-y-auto appearance-none results-scroll"
+					class="bg-bg-root shadow-lg mt-2 rounded-xl max-h-60 overflow-hidden overflow-y-auto appearance-none results-scroll"
 				>
 					<ul>
 						<!-- No results -->
@@ -84,8 +84,8 @@
 							class="group gap-3 px-4 py-3 transition-colors duration-150 cursor-pointer list-item"
 							:class="[
 								i === activeIndex
-									? 'bg-blue-100 hover:bg-blue-300'
-									: ''
+									? 'bg-bg-primary-surface hover:bg-bg-primary-surface'
+									: 'hover:bg-bg-secondary-surface'
 							]"
 							@click="select(i)"
 						>
@@ -96,7 +96,7 @@
 								viewBox="0 0 24 24"
 								stroke-width="1.5"
 								stroke="currentColor"
-								class="size-5.5"
+								class="size-5.5 text-text-primary"
 							>
 								<path
 									stroke-linecap="round"
@@ -112,7 +112,7 @@
 
 							<div>
 								<!-- Label -->
-								<p class="font-medium text-sm leading-tight">
+								<p class="font-medium text-text-primary text-sm leading-tight">
 									<span
 										v-for="(part, idx) in highlightParts(item.label, query)"
 										:key="idx"
@@ -126,7 +126,7 @@
 								<!-- Description -->
 								<p
 									v-if="item.description"
-									class="text-gray-500 text-xs"
+									class="text-text-primary text-xs"
 								>
 									<span
 										v-for="(part, idx) in highlightParts(item.description, query)"
@@ -407,7 +407,7 @@ defineExpose({
 
 .list-item:hover {
 	transform: translateX(4px);
-	background-color: #f3f4f6;
+	background-color: var(bg-bg-secondary-surface);
 	box-shadow: inset 3px 0 0 #3b82f6;
 }
 
