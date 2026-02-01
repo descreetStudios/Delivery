@@ -46,117 +46,125 @@ const handleMapLoad = (mapWrapper) => {
 	if (DEBUG) console.log("Loaded Map Component");
 	emit("map-loaded", mapWrapper);
 
-	// TODO: Make this dynamically working with settings
-	mapWrapper.map.setProjection({
+	const map = mapWrapper.map;
+
+	map.setProjection({
 		type: ["interpolate", ["linear"], ["zoom"], 0, "globe", 12, "mercator"],
+	});
+
+	// TODO: doesn't work
+	map.once("style.load", () => {
+		if (!map.hasImage("pin-icon")) {
+			console.log("Map does not have pin icon, loading...");
+			map.loadImage("/images/pin-icon.png", (err, image) => {
+				console.log("Loading pin icon");
+				if (err) {
+					console.error(err);
+					return;
+				}
+				map.addImage("pin-icon", image);
+			});
+		}
 	});
 };
 
 const fetchAndHighlightGeometry = async (map, item) => {
-	// Remove existing highlight
-	if (map.getLayer("region-border")) {
-		map.removeLayer("region-border");
-	}
-	if (map.getLayer("region-fill")) {
-		map.removeLayer("region-fill");
-	}
-	if (map.getSource("region")) {
-		map.removeSource("region");
-	}
+	if (map.getLayer("region-border")) map.removeLayer("region-border");
+	if (map.getLayer("region-fill")) map.removeLayer("region-fill");
+	if (map.getSource("region-geometry")) map.removeSource("region-geometry");
 
-	// If item has an OSM ID, fetch its geometry
-	if (item.osm_id && item.osm_type) {
-		try {
-			const osmType = item.osm_type.charAt(0).toUpperCase(); // N, W, or R
-			const response = await fetch(
-				`https://nominatim.openstreetmap.org/lookup?osm_ids=${osmType}${item.osm_id}&format=geojson&polygon_geojson=1`,
-			);
-			const data = await response.json();
-			
-			if (data.features && data.features.length > 0) {
-				const geometry = data.features[0].geometry;
-				
-				map.addSource("region", {
-					type: "geojson",
-					data: {
-						type: "Feature",
-						properties: {},
-						geometry: geometry,
-					},
-				});
+	try {
+		const osmType = item.osm_type.charAt(0).toUpperCase();
+		const response = await fetch(
+			`https://nominatim.openstreetmap.org/lookup?osm_ids=${osmType}${item.osm_id}&format=geojson&polygon_geojson=1`,
+		);
 
-				map.addLayer({
-					id: "region-fill",
-					type: "fill",
-					source: "region",
-					paint: {
-						"fill-color": "#4287f5",
-						"fill-opacity": 0.05,
-					},
-				});
+		const data = await response.json();
 
-				map.addLayer({
-					id: "region-border",
-					type: "line",
-					source: "region",
-					paint: {
-						"line-color": "#4287f5",
-						"line-width": 3,
-					},
-				});
-			}
-		} catch (error) {
-			console.error("Error fetching geometry:", error);
-			// Fallback to point marker
-			showPointMarker(map, item);
-		}
-	} else {
-		// No OSM ID, just show a point
+		const geometry = data.features[0].geometry;
+
+		map.addSource("region-geometry", {
+			type: "geojson",
+			data: {
+				type: "Feature",
+				geometry,
+			},
+		});
+
+		map.addLayer({
+			id: "region-fill",
+			type: "fill",
+			source: "region-geometry",
+			paint: {
+				"fill-color": "#4287f5",
+				"fill-opacity": 0.05,
+			},
+		});
+
+		map.addLayer({
+			id: "region-border",
+			type: "line",
+			source: "region-geometry",
+			paint: {
+				"line-color": "#4287f5",
+				"line-width": 3,
+			},
+		});
+	} catch (err) {
+		console.error("Error fetching geometry:", err);
 		showPointMarker(map, item);
 	}
 };
 
+const fetchAndHighlightCivicGeometry = (map, item) => {
+	if (map.getLayer("region-border")) map.removeLayer("region-border");
+	if (map.getLayer("region-fill")) map.removeLayer("region-fill");
+	if (map.getSource("region-geometry")) map.removeSource("region-geometry");
+
+	showPointMarker(map, item);
+};
+
 const showPointMarker = (map, item) => {
-	map.addSource("region", {
+	if (map.getSource("point")) map.removeSource("point");
+	if (map.getLayer("points")) map.removeLayer("points");
+
+	map.addSource("point", {
 		type: "geojson",
 		data: {
-			type: "Feature",
-			geometry: {
-				type: "Point",
-				coordinates: item.center,
-			},
+			type: "FeatureCollection",
+			features: [
+				{
+					type: "Feature",
+					geometry: {
+						type: "Point",
+						coordinates: item.center,
+					},
+				},
+			],
 		},
 	});
 
 	map.addLayer({
-		id: "region-border",
-		type: "circle",
-		source: "region",
-		paint: {
-			"circle-radius": 15,
-			"circle-color": "#ff0000",
-			"circle-opacity": 0.3,
-			"circle-stroke-width": 2,
-			"circle-stroke-color": "#ff0000",
+		id: "points",
+		type: "symbol",
+		source: "point",
+		layout: {
+			"icon-image": "pin-icon",
+			"icon-size": 0.25,
 		},
 	});
 };
 
 const calculateZoomFromBounds = (boundingbox) => {
-	// boundingbox: [south, north, west, east]
 	const south = parseFloat(boundingbox[0]);
 	const north = parseFloat(boundingbox[1]);
 	const west = parseFloat(boundingbox[2]);
 	const east = parseFloat(boundingbox[3]);
 	
-	// Calculate the span in degrees
 	const latSpan = north - south;
 	const lngSpan = east - west;
 	const maxSpan = Math.max(latSpan, lngSpan);
 	
-	// Rough zoom calculation
-	// Larger areas = lower zoom, smaller areas = higher zoom
-	console.log("MAX SPAN: ", maxSpan);
 	let zoom = 15 - Math.log2(maxSpan / 0.01);
 	zoom = Math.min(Math.max(zoom, 2.0), 18.0);
 	
@@ -186,6 +194,9 @@ defineExpose({
 	},
 	highlight: (map, item) => {
 		fetchAndHighlightGeometry(map, item);
+	},
+	highlightCivic: (map, item) => {
+		fetchAndHighlightCivicGeometry(map, item);
 	},
 });
 </script>

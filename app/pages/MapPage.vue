@@ -5,7 +5,10 @@
 				ref="mapRef"
 				@map-loaded="onMapLoaded"
 			/>
-			<SearchComponent @select="onSearchSelect" />
+			<SearchComponent
+				@select="onSearchSelect"
+				@select-civic="onSearchCivicSelect"
+			/>
 			<CoordinatesComponent ref="coordsRef" />
 			<RoutingEngineComponent
 				:map-instance="mapInstance"
@@ -37,5 +40,12 @@ const onSearchSelect = (item) => {
 	if (DEBUG) console.log("Map component", mapRef.value);
 	mapRef.value.moveToWithBounds(item.center, item.boundingbox);
 	mapRef.value.highlight(mapInstance.value, item);
+};
+
+const onSearchCivicSelect = (item) => {
+	if (DEBUG) console.log("Search civic selected: ", item);
+	if (DEBUG) console.log("Map component", mapRef.value);
+	mapRef.value.moveToWithBounds(item.center, item.boundingbox);
+	mapRef.value.highlightCivic(mapInstance.value, item);
 };
 </script>

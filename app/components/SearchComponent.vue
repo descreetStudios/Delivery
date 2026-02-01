@@ -150,7 +150,7 @@
 <script setup>
 const DEBUG = false;
 
-const emit = defineEmits(["select"]);
+const emit = defineEmits(["select", "select-civic"]);
 
 const rootEl = ref(null);
 const query = ref("");
@@ -231,6 +231,14 @@ watch(activeIndex, () => {
 	}
 });
 
+const isCivic = (item) => {
+	const civicTypes = [
+		"restaurant",
+	];
+
+	return civicTypes.includes(item.description);
+};
+
 const select = (i) => {
 	const item = results.value[i];
 	if (!item) return;
@@ -243,7 +251,10 @@ const select = (i) => {
 	query.value = item.label;
 	results.value = [];
 
-	emit("select", item);
+	if (isCivic(item))
+		emit("select-civic", item);
+	else
+		emit("select", item);
 
 	nextTick(() => {
 		suppressWatch.value = false;
