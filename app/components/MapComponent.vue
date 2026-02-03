@@ -36,6 +36,30 @@
 <script setup>
 const DEBUG = false;
 
+const pinCoordinates = ref([0, 0]);
+const showPin = ref(false);
+
+const pinIconGeojsonSource = computed(() => ({
+	type: "FeatureCollection",
+	features: [
+		{
+			type: "Feature",
+			geometry: {
+				type: "Point",
+				coordinates: pinCoordinates.value,
+			},
+			properties: {
+				symbol: "pin-icon",
+			},
+		},
+	],
+}));
+
+const pinIconLayout = {
+	"icon-image": ["get", "symbol"],
+	"icon-size": 1,
+};
+
 const props = defineProps({
 	center: {
 		type: Array,
@@ -81,6 +105,15 @@ const pinIcon_layout = {
 };
 
 const emit = defineEmits(["map-loaded", "map-click"]);
+
+const updatePinPosition = (coordinates) => {
+	pinCoordinates.value = coordinates;
+	showPin.value = true;
+};
+
+const hidePin = () => {
+	showPin.value = false;
+};
 
 const handleMapLoad = (mapWrapper) => {
 	if (DEBUG) console.log("Loaded Map Component");

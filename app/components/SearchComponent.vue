@@ -234,6 +234,10 @@ watch(activeIndex, () => {
 const isCivic = (item) => {
 	const civicTypes = [
 		"restaurant",
+		"fast-food",
+		"cafe",
+		"bar",
+		"pub",
 	];
 
 	return civicTypes.includes(item.description);
