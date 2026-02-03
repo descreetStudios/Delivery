@@ -8,6 +8,22 @@
 				:map-style="mapStyle"
 				@map:load="handleMapLoad"
 			>
+				<MglImage
+					id="pin-icon"
+					url="/images/pin-icon.png"
+				/>
+        
+				<MglGeoJsonSource
+					v-if="showPin"
+					source-id="point"
+					:data="pinIcon_geojsonSource"
+				>
+					<MglSymbolLayer 
+						layer-id="pin-icon-layer" 
+						:layout="pinIcon_layout" 
+					/>
+				</MglGeoJsonSource>
+
 				<MglNavigationControl position="top-right" />
 				<MglFullscreenControl position="top-right" />
 				<MglGeolocateControl position="top-right" />
@@ -40,6 +56,30 @@ const mapCenter = ref(props.center);
 const mapZoom = ref(props.zoom);
 const mapStyle = ref(props.styleUrl);
 
+const pinCoordinates = ref([0, 0]);
+const showPin = ref(false);
+
+const pinIcon_geojsonSource = computed(() => ({
+	type: "FeatureCollection",
+	features: [
+		{
+			type: "Feature",
+			geometry: {
+				type: "Point",
+				coordinates: pinCoordinates.value,
+			},
+			properties: {
+				symbol: "pin-icon",
+			},
+		},
+	],
+}));
+
+const pinIcon_layout = {
+	"icon-image": ["get", "symbol"],
+	"icon-size": 1,
+};
+
 const emit = defineEmits(["map-loaded", "map-click"]);
 
 const handleMapLoad = (mapWrapper) => {
@@ -51,21 +91,15 @@ const handleMapLoad = (mapWrapper) => {
 	map.setProjection({
 		type: ["interpolate", ["linear"], ["zoom"], 0, "globe", 12, "mercator"],
 	});
+};
 
-	// TODO: doesn't work
-	map.once("style.load", () => {
-		if (!map.hasImage("pin-icon")) {
-			console.log("Map does not have pin icon, loading...");
-			map.loadImage("/images/pin-icon.png", (err, image) => {
-				console.log("Loading pin icon");
-				if (err) {
-					console.error(err);
-					return;
-				}
-				map.addImage("pin-icon", image);
-			});
-		}
-	});
+const updatePinPosition = (coordinates) => {
+	pinCoordinates.value = coordinates;
+	showPin.value = true;
+};
+
+const hidePin = () => {
+	showPin.value = false;
 };
 
 const fetchAndHighlightGeometry = async (map, item) => {
@@ -110,9 +144,10 @@ const fetchAndHighlightGeometry = async (map, item) => {
 				"line-width": 3,
 			},
 		});
+		hidePin();
 	} catch (err) {
 		console.error("Error fetching geometry:", err);
-		showPointMarker(map, item);
+		showPointMarker(item);
 	}
 };
 
@@ -121,38 +156,12 @@ const fetchAndHighlightCivicGeometry = (map, item) => {
 	if (map.getLayer("region-fill")) map.removeLayer("region-fill");
 	if (map.getSource("region-geometry")) map.removeSource("region-geometry");
 
-	showPointMarker(map, item);
+	showPointMarker(item);
 };
 
-const showPointMarker = (map, item) => {
-	if (map.getSource("point")) map.removeSource("point");
-	if (map.getLayer("points")) map.removeLayer("points");
-
-	map.addSource("point", {
-		type: "geojson",
-		data: {
-			type: "FeatureCollection",
-			features: [
-				{
-					type: "Feature",
-					geometry: {
-						type: "Point",
-						coordinates: item.center,
-					},
-				},
-			],
-		},
-	});
-
-	map.addLayer({
-		id: "points",
-		type: "symbol",
-		source: "point",
-		layout: {
-			"icon-image": "pin-icon",
-			"icon-size": 0.25,
-		},
-	});
+const showPointMarker = (item) => {
+	if (DEBUG) console.log(item.center);
+	updatePinPosition(item.center);
 };
 
 const calculateZoomFromBounds = (boundingbox) => {
@@ -197,6 +206,12 @@ defineExpose({
 	},
 	highlightCivic: (map, item) => {
 		fetchAndHighlightCivicGeometry(map, item);
+	},
+	showPin: (coordinates) => {
+		updatePinPosition(coordinates);
+	},
+	hidePin: () => {
+		hidePin();
 	},
 });
 </script>
