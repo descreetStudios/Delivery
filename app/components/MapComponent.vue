@@ -16,11 +16,11 @@
 				<MglGeoJsonSource
 					v-if="showPin"
 					source-id="point"
-					:data="pinIcon_geojsonSource"
+					:data="pinIconGeojsonSource"
 				>
 					<MglSymbolLayer 
-						layer-id="pin-icon-layer" 
-						:layout="pinIcon_layout" 
+						layer-id="pin-layer" 
+						:layout="pinIconLayout" 
 					/>
 				</MglGeoJsonSource>
 
@@ -35,6 +35,26 @@
 
 <script setup>
 const DEBUG = false;
+
+const props = defineProps({
+	center: {
+		type: Array,
+		default: () => [9.18969, 45.46409],
+	},
+	zoom: {
+		type: Number,
+		default: 9,
+	},
+	styleUrl: {
+		type: String,
+		default: "https://tiles.openfreemap.org/styles/liberty",
+	},
+});
+
+const mapWrapperInstance = ref(null);
+const mapCenter = ref(props.center);
+const mapZoom = ref(props.zoom);
+const mapStyle = ref(props.styleUrl);
 
 const pinCoordinates = ref([0, 0]);
 const showPin = ref(false);
@@ -60,50 +80,6 @@ const pinIconLayout = {
 	"icon-size": 1,
 };
 
-const props = defineProps({
-	center: {
-		type: Array,
-		default: () => [9.18969, 45.46409],
-	},
-	zoom: {
-		type: Number,
-		default: 9,
-	},
-	styleUrl: {
-		type: String,
-		default: "https://tiles.openfreemap.org/styles/liberty",
-	},
-});
-
-const mapWrapperInstance = ref(null);
-const mapCenter = ref(props.center);
-const mapZoom = ref(props.zoom);
-const mapStyle = ref(props.styleUrl);
-
-const pinCoordinates = ref([0, 0]);
-const showPin = ref(false);
-
-const pinIcon_geojsonSource = computed(() => ({
-	type: "FeatureCollection",
-	features: [
-		{
-			type: "Feature",
-			geometry: {
-				type: "Point",
-				coordinates: pinCoordinates.value,
-			},
-			properties: {
-				symbol: "pin-icon",
-			},
-		},
-	],
-}));
-
-const pinIcon_layout = {
-	"icon-image": ["get", "symbol"],
-	"icon-size": 1,
-};
-
 const emit = defineEmits(["map-loaded", "map-click"]);
 
 const updatePinPosition = (coordinates) => {
@@ -124,15 +100,6 @@ const handleMapLoad = (mapWrapper) => {
 	map.setProjection({
 		type: ["interpolate", ["linear"], ["zoom"], 0, "globe", 12, "mercator"],
 	});
-};
-
-const updatePinPosition = (coordinates) => {
-	pinCoordinates.value = coordinates;
-	showPin.value = true;
-};
-
-const hidePin = () => {
-	showPin.value = false;
 };
 
 const fetchAndHighlightGeometry = async (map, item) => {
