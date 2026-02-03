@@ -25,6 +25,7 @@ const props = defineProps({
 
 
 onMounted(async () => {
+	if (props.data.courierId=="0000") return;
 	const link = ref("");
 	const location = await getLocation("courier"+props.data.courierId);
 	if (location) {
