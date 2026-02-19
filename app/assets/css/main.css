@@ -8,6 +8,8 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 */
 
 @theme {
+  --breakpoint-3xl: 1920px;
+  
   --accent-primary: var(--color-blue-500);
   --accent-primary-hover: var(--color-blue-600);
   --accent-primary-soft: var(--color-blue-100);
