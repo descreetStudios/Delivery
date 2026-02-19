@@ -78,6 +78,8 @@ const pinIconGeojsonSource = computed(() => ({
 const pinIconLayout = {
 	"icon-image": ["get", "symbol"],
 	"icon-size": 1,
+	"icon-anchor": "bottom",
+	"icon-offset": [0, -15],
 };
 
 const emit = defineEmits(["map-loaded", "map-click"]);
