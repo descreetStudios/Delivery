@@ -10,21 +10,12 @@
 				@select-civic="onSearchCivicSelect"
 			/>
 			<CoordinatesComponent ref="coordsRef" />
-			<RoutingEngineComponent
-				:map-instance="mapInstance"
-				:data="{courierId}"
-			/>
 		</SidebarComponent>
 	</div>
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-
 const DEBUG = false;
-
-const route = useRoute();
-const courierId = ref(route.query.courierId ?? null);
 
 const mapRef = ref(null);
 const coordsRef = ref(null);
