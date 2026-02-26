@@ -163,13 +163,6 @@ const suppressWatch = ref(false);
 let debounceTimer;
 const cache = new Map();
 
-const props = defineProps({
-	filter: {
-		type: Function,
-		default: null,
-	},
-});
-
 /**
  * Must return:
  * [{ label, description?, center }]
