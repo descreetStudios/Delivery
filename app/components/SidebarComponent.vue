@@ -12,7 +12,7 @@
 					icon="i-heroicons-bars-3-20-solid"
 					color="neutral"
 					variant="ghost"
-					class="size-11"
+					class="size-11 text-text-primary"
 					@click="toggleCollapse"
 				/>
 			</div>
