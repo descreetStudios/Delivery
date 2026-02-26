@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col bg-root h-screen">
-		<div class="flex-1">
+		<SidebarComponent>
 			<MapComponent
 				ref="mapRef"
 				@map-loaded="onMapLoaded"
@@ -12,9 +12,9 @@
 			<CoordinatesComponent ref="coordsRef" />
 			<RoutingEngineComponent
 				:map-instance="mapInstance"
-				:data={courierId}
+				:data="{courierId}"
 			/>
-		</div>
+		</SidebarComponent>
 	</div>
 </template>
 
