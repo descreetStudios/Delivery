@@ -1,12 +1,10 @@
 <template>
-	<div>
-		<!-- <h1>Ciao</h1>   -->
-	</div>
+	<div />
 </template>
 
 <script setup>
 const DEBUG = false;
-const { getLocation } = useLocationApi();
+const { getRoutingData } = useRoutingEngineApi();
 
 
 const props = defineProps({
@@ -25,18 +23,7 @@ const props = defineProps({
 
 
 onMounted(async () => {
-	if (props.data.courierId=="0000" || props.data.courierId==null) return;
-	const link = ref("");
-	const location = await getLocation("courier"+props.data.courierId);
-	if (location) {
-		link.value = "https://router.project-osrm.org/route/v1/driving/" + location.longitude + "," + location.latitude + ";9.19,45.46;7.44,46.94?overview=full&geometries=geojson";
-	}
-	if(DEBUG) console.log(link.value);
-
-	const response = await fetch(
-		link.value,
-	);
-	const data = await response.json();
+	const data = await getRoutingData(props.data.courierId);
 
 	const route = data.routes[0].geometry;
 
