@@ -9,19 +9,31 @@ export const useRoutingEngineApi = () => {
 
 		const DEBUG = false;
 		const { getLocation } = useLocationApi();
-
-		if (courierId == "0000" || courierId == null) return;
+		const location = ref("");
+		const response = ref("");
 		const link = ref("");
-		const location = await getLocation("courier" + courierId);
+
+		if (courierId == "0000" || courierId == null) throw new Error("Invalid courierId");
+
+		try {
+			location.value = await getLocation("courier" + courierId);
+		} catch (err) {
+			throw new Error(err.message);
+		}
 		if (location) {
-			link.value = "https://router.project-osrm.org/route/v1/driving/" + location.longitude + "," + location.latitude + ";9.19,45.46;7.44,46.94?overview=full&geometries=geojson&steps=true";
+			link.value = "https://router.project-osrm.org/route/v1/driving/" + location.value.longitude + "," + location.value.latitude + ";9.19,45.46;7.44,46.94?overview=full&geometries=geojson&steps=true";
 		}
 		if (DEBUG) console.log(link.value);
 
-		const response = await fetch(
-			link.value,
-		);
-		return await response.json();
+		try {
+			response.value = await fetch(
+				link.value,
+			);
+		} catch (err) {
+			throw new Error("Unable to fetch the route: " + err);
+		}
+
+		return await response.value.json();
 	};
 
 	return {

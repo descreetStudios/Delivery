@@ -5,7 +5,7 @@
 <script setup>
 const DEBUG = false;
 const { getRoutingData } = useRoutingEngineApi();
-
+const routingData = ref("");
 
 const props = defineProps({
 	mapInstance: {
@@ -21,11 +21,15 @@ const props = defineProps({
 	},
 });
 
+const drawRoutingPolyline = async () => {
+	try {
+		routingData.value = await getRoutingData(props.data.courierId);
+	} catch (err) {
+		console.error(err);
+		return;
+	}
 
-onMounted(async () => {
-	const data = await getRoutingData(props.data.courierId);
-
-	const route = data.routes[0].geometry;
+	const route = routingData.value.routes[0].geometry;
 
 	if (DEBUG) console.log(route);
 	watch(
@@ -61,6 +65,11 @@ onMounted(async () => {
 		},
 		{ immediate: true },
 	);
+};
+
+
+onMounted(async () => {
+	drawRoutingPolyline();
 });
 </script>
 

@@ -1,7 +1,7 @@
 export const useLocationApi = () => {
 	const config = useRuntimeConfig();
 	const apiBase = config.public.apiBase || "http://localhost:8080/api/locations";
-  
+
 	/**
    * Update courier location
    * @param {Object} location - Location data
@@ -27,7 +27,7 @@ export const useLocationApi = () => {
 			return { success: false, error };
 		}
 	};
-  
+
 	/**
    * Get courier location
    * @param {string} courierId - Courier ID
@@ -39,14 +39,12 @@ export const useLocationApi = () => {
 			return location;
 		} catch (error) {
 			if (error.status === 404) {
-				console.log(`Courier ${courierId} not found`);
-				return null;
+				throw new Error(`Courier ${courierId} not found`);
 			}
-			console.error("Failed to get location:", error);
-			throw error;
+			throw new Error("Failed to get location:" + error);
 		}
 	};
-  
+
 	return {
 		updateLocation,
 		getLocation,
