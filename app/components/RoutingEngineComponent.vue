@@ -28,6 +28,8 @@ const drawRoutingPolyline = async () => {
 		console.error(err);
 		return;
 	}
+	
+	if(DEBUG) console.log(routingData.value);
 
 	const route = routingData.value.routes[0].geometry;
 
