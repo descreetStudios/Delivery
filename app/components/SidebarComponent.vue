@@ -45,7 +45,7 @@
 	</div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 // Settings
 const DEFAULT_WIDTH = 420;
 
