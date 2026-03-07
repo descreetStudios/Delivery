@@ -1,16 +1,16 @@
 <template>
 	<div class="flex flex-col bg-root h-screen">
 		<SidebarComponent>
-			<MapComponent
-				ref="mapRef"
-				@map-loaded="onMapLoaded"
-			/>
 			<SearchComponent
 				@select="onSearchSelect"
 				@select-civic="onSearchCivicSelect"
 			/>
-			<CoordinatesComponent ref="coordsRef" />
 		</SidebarComponent>
+		<MapComponent
+			ref="mapRef"
+			@map-loaded="onMapLoaded"
+		/>
+		<CoordinatesComponent ref="coordsRef" />
 	</div>
 </template>
 
@@ -23,7 +23,7 @@ const mapInstance = ref(null);
 const onMapLoaded = (mapWrapper) => {
 	if (DEBUG) console.log("Map wrapper instance:", mapWrapper);
 	coordsRef.value.bindMap(mapWrapper);
-	mapInstance.value=mapWrapper.map;
+	mapInstance.value = mapWrapper.map;
 };
 
 const onSearchSelect = (item) => {

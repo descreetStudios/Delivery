@@ -1,5 +1,5 @@
 <template>
-	<div class="flex bg-bg-surface h-screen overflow-hidden font-mono">
+	<div class="z-5 absolute flex-col bg-bg-surface h-screen overflow-hidden font-mono">
 
 		<!-- Floating toggle button -->
 		<Transition name="float">
@@ -32,14 +32,15 @@
 						class="size-17 text-text-primary"
 						@click="toggleCollapse"
 					/>
+					<h1 class="text-text-primary text-2xl">Delivery</h1>
 				</div>
 				<slot name="sidebar" />
 			</template>
 		</aside>
 
 		<!-- Main content -->
-		<main class="relative flex-1 overflow-hidden">
-			<slot />
+		<main class="relative flex-1">
+			<slot v-if="!isCollapsed" />
 		</main>
 	</div>
 </template>
@@ -70,6 +71,7 @@ function toggleCollapse() {
 .float-leave-active {
 	transition: opacity 0.15s ease, transform 0.15s ease;
 }
+
 .float-enter-from,
 .float-leave-to {
 	opacity: 0;
