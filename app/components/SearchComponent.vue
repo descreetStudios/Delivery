@@ -1,7 +1,7 @@
 <template>
 	<div
 		ref="rootEl"
-		class="left-1/2 z-10 absolute w-50 md:w-85 3xl:scale-105 -translate-x-1/2"
+		class="z-10 w-full"
 	>
 		<div class="flex items-center bg-bg-surface shadow-lg px-4 rounded-full h-12">
 

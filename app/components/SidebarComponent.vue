@@ -23,25 +23,26 @@
 			class="relative flex flex-col bg-bg-surface border-border-default border-r overflow-hidden transition-[width] duration-300 ease-in-out pointer-events-auto shrink-0"
 		>
 			<!-- Toggle button -->
-			<template v-if="!isCollapsed">
-				<div class="flex items-center p-1 shrink-0">
-					<UButton
-						icon="i-heroicons-bars-3-20-solid"
-						color="neutral"
-						variant="ghost"
-						class="size-17 text-text-primary"
-						@click="toggleCollapse"
-					/>
-					<h1 class="text-text-primary text-2xl">Delivery</h1>
-				</div>
+			<div
+				v-show="!isCollapsed"
+				class="flex items-center p-1 shrink-0"
+			>
+				<UButton
+					icon="i-heroicons-bars-3-20-solid"
+					color="neutral"
+					variant="ghost"
+					class="size-17 text-text-primary"
+					@click="toggleCollapse"
+				/>
+				<h1 class="text-text-primary text-2xl">Delivery</h1>
+			</div>
+			<div
+				v-show="!isCollapsed"
+				class="relative flex flex-col items-center gap-5 p-7.5"
+			>
 				<slot name="sidebar" />
-			</template>
+			</div>
 		</aside>
-
-		<!-- Main content -->
-		<main class="relative flex-1">
-			<slot v-if="!isCollapsed" />
-		</main>
 	</div>
 </template>
 

@@ -1,10 +1,23 @@
 <template>
-	<div class="flex flex-col bg-root h-screen">
+	<div class="flex bg-root h-screen">
 		<SidebarComponent>
-			<SearchComponent
-				@select="onSearchSelect"
-				@select-civic="onSearchCivicSelect"
-			/>
+			<template #sidebar>
+				<SearchComponent
+					@select="onSearchSelect"
+					@select-civic="onSearchCivicSelect"
+				/>
+				<div class="items-center gap-5 grid grid-cols-4 p-5 border border-border-default rounded-2xl w-full">
+					<FoodCardComponent />
+					<FoodCardComponent />
+					<FoodCardComponent />
+					<FoodCardComponent />
+				</div>
+				<div>
+					<p class="whitespace-nowrap">Hey, are you a rider?
+						<NuxtLink to="/RiderPage">Click here!</NuxtLink>
+					</p>
+				</div>
+			</template>
 		</SidebarComponent>
 		<MapComponent
 			ref="mapRef"
