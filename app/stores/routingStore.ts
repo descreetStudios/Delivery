@@ -59,15 +59,36 @@ interface Waypoint{
 }
 
 interface RoutingData{
-    loaded:boolean;
+    code:string;
     routes:Route[];
     waypoints: Waypoint[];
 }
 
 export const useRoutingStore = defineStore("routingStore", {
 	state: (): RoutingData => ({
-		loaded: false,
+		code: "NotLoaded",
 		routes:[],
 		waypoints: [],
 	}),
+
+	actions:{
+		async syncRoutingData(courierId: string){
+			const { getRoutingData } = useRoutingEngineApi();
+
+			try{
+				const data:RoutingData = await getRoutingData(courierId) as RoutingData;
+				this.code=data.code;
+				this.routes = data.routes;
+				this.waypoints = data.waypoints;
+			}catch(error){
+				this.code= error as string;
+
+    	        let message;
+				if (error instanceof Error) message = error.message;
+				else message = String(error);
+
+				reportError(message);
+			}
+		},
+	},
 });

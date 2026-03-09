@@ -8,13 +8,13 @@
 		<CoordinatesComponent ref="coordsRef" />
 		<RoutingEngineComponent
 			:map-instance="mapInstance"
-			:data="{courierId}"
 		/>
 	</div>
 </template>
 
 <script setup>
 import { useRoute } from "vue-router";
+const { $routingStore } = useNuxtApp();
 
 const DEBUG = false;
 
@@ -27,5 +27,6 @@ const onMapLoaded = (mapWrapper) => {
 	if (DEBUG) console.log("Map wrapper instance:", mapWrapper);
 	coordsRef.value.bindMap(mapWrapper);
 	mapInstance.value=mapWrapper.map;
+	$routingStore.syncRoutingData(courierId.value);
 };
 </script>

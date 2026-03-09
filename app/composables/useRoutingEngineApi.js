@@ -1,3 +1,4 @@
+
 export const useRoutingEngineApi = () => {
 
 	/**
@@ -20,20 +21,18 @@ export const useRoutingEngineApi = () => {
 		} catch (err) {
 			throw new Error(err.message);
 		}
-		if (location) {
+		if (location.value) {
 			link.value = "https://router.project-osrm.org/route/v1/driving/" + location.value.longitude + "," + location.value.latitude + ";9.19,45.46;7.44,46.94?overview=full&geometries=geojson&steps=true";
 		}
 		if (DEBUG) console.log(link.value);
 
 		try {
-			response.value = await fetch(
-				link.value,
-			);
+			response.value = await $fetch(link.value);
 		} catch (err) {
 			throw new Error("Unable to fetch the route: " + err);
 		}
 
-		return await response.value.json();
+		return response.value;
 	};
 
 	return {

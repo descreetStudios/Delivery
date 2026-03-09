@@ -1,3 +1,5 @@
+import { useRuntimeConfig } from "#app";
+
 export const useLocationApi = () => {
 	const config = useRuntimeConfig();
 	const apiBase = config.public.apiBase || "http://localhost:8080/api/locations";

@@ -4,36 +4,25 @@
 
 <script setup>
 const DEBUG = false;
-const { getRoutingData } = useRoutingEngineApi();
-const routingData = ref("");
+
+const { $routingStore } = useNuxtApp();
+const routingData = ref();
 
 const props = defineProps({
 	mapInstance: {
 		type: Object,
 		default: () => null,
 	},
-	data: {
-		type:
-			{
-				courierId: String,
-			},
-		default: () => null,
-	},
 });
 
-const drawRoutingPolyline = async () => {
-	try {
-		routingData.value = await getRoutingData(props.data.courierId);
-	} catch (err) {
-		console.error(err);
-		return;
-	}
-	
-	if(DEBUG) console.log(routingData.value);
+const drawRoutingPolyline = () => {
+
+	if (DEBUG) console.log(routingData.value);
 
 	const route = routingData.value.routes[0].geometry;
 
 	if (DEBUG) console.log(route);
+
 	watch(
 		() => props.mapInstance,
 		(newVal, oldVal) => {
@@ -71,7 +60,24 @@ const drawRoutingPolyline = async () => {
 
 
 onMounted(async () => {
-	drawRoutingPolyline();
+	const stopWatch = watch(
+		() => $routingStore.code,
+		(newVal, oldVal) => {
+			if (newVal != oldVal) {
+				if (newVal == "Ok") {
+					if (DEBUG) console.log("routingStore loaded!");
+					routingData.value = $routingStore.$state;
+					drawRoutingPolyline();
+					stopWatch();
+				}
+				else if (newVal == "NotLoaded") return;
+				else {
+					console.error(newVal);
+				}
+			}
+		},
+		{ immediate: true },
+	);
 });
 </script>
 
