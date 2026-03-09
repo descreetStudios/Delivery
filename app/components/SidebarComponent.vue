@@ -20,7 +20,7 @@
 		<!-- Sidebar -->
 		<aside
 			:style="{ width: isCollapsed ? '0px' : sidebarWidth + 'px' }"
-			class="relative flex flex-col bg-bg-surface border-border-default border-r overflow-hidden transition-[width] duration-300 ease-in-out pointer-events-auto shrink-0"
+			class="relative flex flex-col bg-bg-surface border-border-default border-r h-screen overflow-hidden transition-[width] duration-300 ease-in-out pointer-events-auto shrink-0"
 		>
 			<!-- Toggle button -->
 			<div

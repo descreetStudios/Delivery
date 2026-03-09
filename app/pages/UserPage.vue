@@ -6,14 +6,21 @@
 					@select="onSearchSelect"
 					@select-civic="onSearchCivicSelect"
 				/>
-				<div class="items-center gap-5 grid grid-cols-4 p-5 border border-border-default rounded-2xl w-full">
+				<hr class="border-0.5 border-border-default w-full">
+				<h2 class="text-text-primary">Ristorante: {{ ristorante }}</h2>
+				<div class="items-center gap-8 grid grid-cols-2 p-5 border border-border-default rounded-lg w-full max-h-132.5 overflow-y-auto scrollbar-custom">
 					<FoodCardComponent />
 					<FoodCardComponent />
 					<FoodCardComponent />
 					<FoodCardComponent />
+					<FoodCardComponent />
+					<FoodCardComponent />
+					<FoodCardComponent />
+					<FoodCardComponent />
+
 				</div>
 				<div>
-					<p class="whitespace-nowrap">Hey, are you a rider?
+					<p class="text-text-primary whitespace-nowrap">Hey, are you a rider?
 						<NuxtLink to="/RiderPage">Click here!</NuxtLink>
 					</p>
 				</div>
