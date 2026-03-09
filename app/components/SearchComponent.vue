@@ -146,7 +146,7 @@
 </template>
 
 <script setup>
-const DEBUG = false;
+const { $DEBUG } = useNuxtApp();
 
 const emit = defineEmits(["select", "select-civic"]);
 
@@ -245,7 +245,7 @@ const select = (i) => {
 	const item = results.value[i];
 	if (!item) return;
 
-	if (DEBUG) console.log("Selected search option");
+	if ($DEBUG) console.log("Selected search option");
 
 	justSelected.value = true;
 	suppressWatch.value = true;

@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-const DEBUG = false;
+const { $DEBUG } = useNuxtApp();
 
 const props = defineProps({
 	center: {
@@ -94,7 +94,7 @@ const hidePin = () => {
 };
 
 const handleMapLoad = (mapWrapper) => {
-	if (DEBUG) console.log("Loaded Map Component");
+	if ($DEBUG) console.log("Loaded Map Component");
 	emit("map-loaded", mapWrapper);
 
 	const map = mapWrapper.map;
@@ -162,7 +162,7 @@ const fetchAndHighlightCivicGeometry = (map, item) => {
 };
 
 const showPointMarker = (item) => {
-	if (DEBUG) console.log(item.center);
+	if ($DEBUG) console.log(item.center);
 	updatePinPosition(item.center);
 };
 
@@ -186,14 +186,14 @@ defineExpose({
 	getMapWrapper: () => mapWrapperInstance.value,
 	moveTo: (center, zoom = 9) => {
 		if (mapWrapperInstance.value && mapWrapperInstance.value.map) {
-			if (DEBUG) console.log("Wrapper: ", mapWrapperInstance.value);
+			if ($DEBUG) console.log("Wrapper: ", mapWrapperInstance.value);
 			mapWrapperInstance.value.map.flyTo({ center, zoom });
 		}
 	},
 	moveToWithBounds: (center, boundingbox) => {
 		if (mapWrapperInstance.value && mapWrapperInstance.value.map) {
 			const zoom = calculateZoomFromBounds(boundingbox);
-			if (DEBUG) console.log("Calculated zoom:", zoom);
+			if ($DEBUG) console.log("Calculated zoom:", zoom);
 			mapWrapperInstance.value.map.flyTo({ center, zoom });
 		}
 	},

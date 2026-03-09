@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-const DEBUG = false;
+const { $DEBUG } = useNuxtApp();
 
 const { $routingStore } = useNuxtApp();
 const routingData = ref();
@@ -17,18 +17,18 @@ const props = defineProps({
 
 const drawRoutingPolyline = () => {
 
-	if (DEBUG) console.log(routingData.value);
+	if ($DEBUG) console.log(routingData.value);
 
 	const route = routingData.value.routes[0].geometry;
 
-	if (DEBUG) console.log(route);
+	if ($DEBUG) console.log(route);
 
 	watch(
 		() => props.mapInstance,
 		(newVal, oldVal) => {
 			if (newVal && oldVal == null) {
 				const map = newVal;
-				if (DEBUG) console.log("Map instance ready:", map);
+				if ($DEBUG) console.log("Map instance ready:", map);
 
 				map.addSource("route", {
 					type: "geojson",
@@ -65,7 +65,7 @@ onMounted(async () => {
 		(newVal, oldVal) => {
 			if (newVal != oldVal) {
 				if (newVal == "Ok") {
-					if (DEBUG) console.log("routingStore loaded!");
+					if ($DEBUG) console.log("routingStore loaded!");
 					routingData.value = $routingStore.$state;
 					drawRoutingPolyline();
 					stopWatch();
