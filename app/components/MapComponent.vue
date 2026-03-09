@@ -12,15 +12,15 @@
 					id="pin-icon"
 					url="/images/pin-icon.png"
 				/>
-        
+
 				<MglGeoJsonSource
 					v-if="showPin"
 					source-id="point"
 					:data="pinIconGeojsonSource"
 				>
-					<MglSymbolLayer 
-						layer-id="pin-layer" 
-						:layout="pinIconLayout" 
+					<MglSymbolLayer
+						layer-id="pin-layer"
+						:layout="pinIconLayout"
 					/>
 				</MglGeoJsonSource>
 
@@ -162,7 +162,7 @@ const fetchAndHighlightCivicGeometry = (map, item) => {
 };
 
 const showPointMarker = (item) => {
-	if ($DEBUG) console.log(item.center);
+	if ($DEBUG) console.log("Centered item: ", item.center);
 	updatePinPosition(item.center);
 };
 
@@ -171,14 +171,14 @@ const calculateZoomFromBounds = (boundingbox) => {
 	const north = parseFloat(boundingbox[1]);
 	const west = parseFloat(boundingbox[2]);
 	const east = parseFloat(boundingbox[3]);
-	
+
 	const latSpan = north - south;
 	const lngSpan = east - west;
 	const maxSpan = Math.max(latSpan, lngSpan);
-	
+
 	let zoom = 15 - Math.log2(maxSpan / 0.01);
 	zoom = Math.min(Math.max(zoom, 2.0), 18.0);
-	
+
 	return zoom;
 };
 
@@ -193,7 +193,7 @@ defineExpose({
 	moveToWithBounds: (center, boundingbox) => {
 		if (mapWrapperInstance.value && mapWrapperInstance.value.map) {
 			const zoom = calculateZoomFromBounds(boundingbox);
-			if ($DEBUG) console.log("Calculated zoom:", zoom);
+			if ($DEBUG) console.log("Calculated zoom: ", zoom);
 			mapWrapperInstance.value.map.flyTo({ center, zoom });
 		}
 	},

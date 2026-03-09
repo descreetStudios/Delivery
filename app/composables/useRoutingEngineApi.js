@@ -24,7 +24,7 @@ export const useRoutingEngineApi = () => {
 		if (location.value) {
 			link.value = "https://router.project-osrm.org/route/v1/driving/" + location.value.longitude + "," + location.value.latitude + ";9.19,45.46;7.44,46.94?overview=full&geometries=geojson&steps=true";
 		}
-		if ($DEBUG) console.log(link.value);
+		if ($DEBUG) console.log("OSRM link: ", link.value);
 
 		try {
 			response.value = await $fetch(link.value);
