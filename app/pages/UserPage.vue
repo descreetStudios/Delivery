@@ -8,16 +8,19 @@
 				/>
 				<hr class="border-0.5 border-border-default w-full">
 				<h2 class="text-text-primary">Ristorante: {{ ristorante }}</h2>
-				<div class="items-center gap-8 grid grid-cols-2 p-5 border border-border-default rounded-lg w-full max-h-132.5 overflow-y-auto scrollbar-custom">
-					<FoodCardComponent />
-					<FoodCardComponent />
-					<FoodCardComponent />
-					<FoodCardComponent />
-					<FoodCardComponent />
-					<FoodCardComponent />
-					<FoodCardComponent />
-					<FoodCardComponent />
-
+				<div class="py-0.5 pr-0.5 border border-border-default rounded-lg">
+					<div
+						class="items-center gap-8 grid grid-cols-2 p-5 w-full max-h-132.5 overflow-y-auto scrollbar-custom"
+					>
+						<FoodCardComponent />
+						<FoodCardComponent />
+						<FoodCardComponent />
+						<FoodCardComponent />
+						<FoodCardComponent />
+						<FoodCardComponent />
+						<FoodCardComponent />
+						<FoodCardComponent />
+					</div>
 				</div>
 				<div>
 					<p class="text-text-primary whitespace-nowrap">Hey, are you a rider?
@@ -37,6 +40,7 @@
 <script setup>
 const { $DEBUG } = useNuxtApp();
 
+const ristorante = ref(null);
 
 const mapRef = ref(null);
 const coordsRef = ref(null);

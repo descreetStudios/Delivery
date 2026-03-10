@@ -11,7 +11,7 @@
 					icon="i-heroicons-bars-3-20-solid"
 					color="neutral"
 					variant="solid"
-					class="bg-bg-surface shadow-lg rounded-full size-11 text-text-primary"
+					class="flex justify-center items-center bg-bg-surface shadow-lg rounded-full size-11 text-text-primary"
 					@click="toggleCollapse"
 				/>
 			</div>
@@ -20,7 +20,7 @@
 		<!-- Sidebar -->
 		<aside
 			:style="{ width: isCollapsed ? '0px' : sidebarWidth + 'px' }"
-			class="relative flex flex-col bg-bg-surface border-border-default border-r h-screen overflow-hidden transition-[width] duration-300 ease-in-out pointer-events-auto shrink-0"
+			class="relative flex flex-col bg-bg-surface border-border-default border-r h-screen overflow-hidden transition-all duration-300 ease-in-out pointer-events-auto shrink-0"
 		>
 			<!-- Toggle button -->
 			<div
@@ -31,7 +31,7 @@
 					icon="i-heroicons-bars-3-20-solid"
 					color="neutral"
 					variant="ghost"
-					class="size-17 text-text-primary"
+					class="flex justify-center items-center size-17 text-text-primary"
 					@click="toggleCollapse"
 				/>
 				<h1 class="text-text-primary text-2xl">Delivery</h1>
@@ -48,23 +48,31 @@
 
 <script setup>
 // Settings
-const DEFAULT_WIDTH = 420;
+const default_width = ref(420);
+const screenWidth = ref(0);
 
 // Refs
-const sidebarWidth = ref(DEFAULT_WIDTH);
-let oldSidebarWidth = DEFAULT_WIDTH;
+const sidebarWidth = computed(() => default_width.value);
+const oldSidebarWidth = computed(() => default_width.value);
 const isCollapsed = ref(true);
 
 // Methods
 function toggleCollapse() {
 	if (!isCollapsed.value) {
-		oldSidebarWidth = sidebarWidth.value;
+		oldSidebarWidth.value = sidebarWidth.value;
 		isCollapsed.value = true;
 	} else {
 		isCollapsed.value = false;
-		sidebarWidth.value = oldSidebarWidth;
+		sidebarWidth.value = oldSidebarWidth.value;
 	}
 }
+
+onMounted(() => {
+	screenWidth.value = window.innerWidth;
+	if (screenWidth.value <= 640) {
+		default_width.value = screenWidth.value;
+	}
+});
 </script>
 
 <style scoped>
