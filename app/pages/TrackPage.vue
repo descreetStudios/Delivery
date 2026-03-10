@@ -94,8 +94,8 @@ const sendTestLocation = async () => {
 	sending.value = true;
 
 	// Random location around Metz
-	const lat = 49.1237 + (Math.random() - 0.5) * 0.1;
-	const lng = 6.1599 + (Math.random() - 0.5) * 0.1;
+	const lat = 45.30240 + (Math.random() - 0.5) * 0.1;
+	const lng = 9.48550 + (Math.random() - 0.5) * 0.1;
 
 	const result = await updateLocation({
 		courierId: testCourierId.value,
