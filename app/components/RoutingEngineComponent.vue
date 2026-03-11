@@ -3,10 +3,9 @@
 </template>
 
 <script setup>
-const { $DEBUG } = useNuxtApp();
+import { useRoutingStore } from "@/stores/routingStore";
 
-const { $routingStore } = useNuxtApp();
-const routingData = computed(() => $routingStore.$state);
+const { $DEBUG } = useNuxtApp();
 
 const props = defineProps({
 	mapInstance: {
@@ -16,6 +15,17 @@ const props = defineProps({
 });
 
 const map = toRef(props, "mapInstance");
+
+const routingStore = useRoutingStore();
+const routingData = shallowRef(routingStore.$state);
+const unsubscribe = routingStore.$subscribe((mutation, state) => {
+	routingData.value = state;
+	if (state.code == "Ok" && map.value) {
+		drawRoutingPolyline();
+		drawWaypoints();
+	}
+	else waitMapLoading();
+});
 
 const drawRoutingPolyline = () => {
 
@@ -59,19 +69,6 @@ const drawRoutingPolyline = () => {
 	});
 };
 
-const checkStoreStatus = (newVal, oldVal) => {
-	if (newVal != oldVal) {
-		if (newVal == "Ok") {
-			if ($DEBUG) console.log("$routingStore loaded!");
-			return true;
-		}
-		else if (newVal == "NotLoaded") return false;
-		else {
-			throw new Error(newVal);
-		}
-	}
-};
-
 const checkMapStatus = (newVal, oldVal) => {
 	if (newVal) {
 		if (oldVal == null && $DEBUG) {
@@ -83,22 +80,45 @@ const checkMapStatus = (newVal, oldVal) => {
 	return false;
 };
 
-onMounted(async () => {
+const drawWaypoints = () => {
+	const waypoints = routingData.value?.waypoints?.[0]?.geometry; //TODO: Change this!
+
+	console.log(waypoints);
+
+	//Remove older sources and layers
+	if (map.value.getSource("waypoints")) {
+		map.value.removeLayer("waypoints");
+		map.value.removeSource("waypoints");
+	}
+
+	map.value.addSource("waypoints", {
+		type: "geojson",
+		data: {
+			type: "Feature",
+			properties: {},
+			geometry: waypoints,
+		},
+	});
+
+	//TODO: add the waypoints layer
+};
+
+const waitMapLoading = () => {
 	const stopWatch = watch(
-		() => [map.value, routingData.value.code],
-		([mapNewVal, codeNewVal], oldVals = []) => {
-			const [mapOldVal, codeOldVal] = oldVals;
-			try {
-				if (checkMapStatus(mapNewVal, mapOldVal) && checkStoreStatus(codeNewVal, codeOldVal)) {
-					drawRoutingPolyline();
-					stopWatch();
-				}
-			} catch (err) {
-				console.error(err.message);
+		() => map.value,
+		(newVal, oldVal) => {
+			if (checkMapStatus(newVal, oldVal)) {
+				drawRoutingPolyline();
+				drawWaypoints();
+				stopWatch();
 			}
 		},
 		{ immediate: true },
 	);
+};
+
+onUnmounted(() => {
+	unsubscribe();
 });
 </script>
 
