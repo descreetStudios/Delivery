@@ -74,17 +74,15 @@ export const useRoutingStore = defineStore("routingStore", {
 	actions:{
 		async syncRoutingData(courierId: string){
 			const { getRoutingData } = useRoutingEngineApi();
-
-			// Change this to true if you are debugging the store
-			// REMEMBER to revert it before pushing to GitHub
-			const DEBUG = false;
+			const nuxtApp=useNuxtApp();
+			const $DEBUG = await nuxtApp.$DEBUG;
 
 			try{
 				const data:RoutingData = await getRoutingData(courierId) as RoutingData;
 				this.code=data.code;
 				this.routes = data.routes;
 				this.waypoints = data.waypoints;
-				if(DEBUG) console.log("State: ", this.$state);
+				if($DEBUG) console.log("State: ", this.$state);
 			}catch(error){
 				this.code= error as string;
 
