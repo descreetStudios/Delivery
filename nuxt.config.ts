@@ -5,12 +5,13 @@ export default defineNuxtConfig({
 	compatibilityDate: "2025-07-15",
 	devtools: { enabled: true },
 	modules: [
-				 "@nuxt/eslint",
-				 "@nuxt/image",
-				 "nuxt-maplibre",
-				 "@vueuse/nuxt",
-				 "@nuxt/ui",
-				 "@pinia/nuxt",
+		"@nuxt/eslint",
+		"@nuxt/image",
+		"nuxt-maplibre",
+		"@vueuse/nuxt",
+		"@nuxt/ui",
+		"@pinia/nuxt",
+		"@nuxtjs/i18n",
 	],
 
 	css: ["~/assets/css/main.css"],
@@ -33,4 +34,17 @@ export default defineNuxtConfig({
 			},
 		},
 	},
+
+	i18n: {
+		locales: [
+			{ code: "it", iso: "it-IT", file: "it.json", name: "Italiano" },
+			{ code: "en", iso: "en-US", file: "en.json", name: "English" },
+		],
+		defaultLocale: "en",
+		strategy: "prefix",
+
+
+	},
+
+
 });

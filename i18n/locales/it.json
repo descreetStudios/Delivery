@@ -1,0 +1,9 @@
+{
+    "hello": "Ciao",
+    "welcome": "Benvenuto nel sito",
+    "sidebar": {
+        "home": "Hey, sei un rider?",
+        "about": "Chi siamo",
+        "contact": "Contatti"
+    }
+}

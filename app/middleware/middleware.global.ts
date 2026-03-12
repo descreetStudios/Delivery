@@ -2,12 +2,12 @@ import { isEmpty } from "@nuxt/ui/runtime/utils/index.js";
 import { defineNuxtRouteMiddleware, navigateTo } from "nuxt/app";
 
 export default defineNuxtRouteMiddleware((to, _from) => {
-	const PAGES = ["/UserPage", "/RiderPage", "/TrackPage", "/TestPage"];
+	const PAGES = ["/en/UserPage", "/en/RiderPage", "/en/TrackPage", "/en/TestPage"];
 
 	if (!PAGES.includes(to.path)) {
-		return navigateTo({ path: "/UserPage"});
+		return navigateTo({ path: "/en/UserPage"});
 	}
-	if ("/RiderPage".includes(to.path) && isEmpty(to.query) ){
-		return navigateTo({ path: "/RiderPage", query: { courierId: "0000" } });
+	if ("/en/RiderPage".includes(to.path) && isEmpty(to.query) ){
+		return navigateTo({ path: "/en/RiderPage", query: { courierId: "0000" } });
 	}
 });

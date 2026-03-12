@@ -21,7 +21,7 @@
 					</div>
 				</div>
 				<div>
-					<p class="text-text-primary whitespace-nowrap">Hey, are you a rider?
+					<p class="text-text-primary whitespace-nowrap">{{$t('sidebar.home')}}
 						<NuxtLink to="/RiderPage">Click here!</NuxtLink>
 					</p>
 				</div>
