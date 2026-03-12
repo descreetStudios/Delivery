@@ -81,9 +81,21 @@ const checkMapStatus = (newVal, oldVal) => {
 };
 
 const drawWaypoints = () => {
-	const waypoints = routingData.value?.waypoints?.[0]?.geometry; //TODO: Change this!
+	const waypoints = [];
 
-	console.log(waypoints);
+	for (let i = 0; i < routingData.value?.waypoints?.length; i++) {
+		waypoints.push(routingData.value?.waypoints?.[i]?.location);
+	}
+
+	const waypointsFeatures = waypoints.map(coord => ({
+		type: "Feature",
+		geometry: {
+			type: "Point",
+			coordinates: coord,
+		},
+	}));
+
+	if ($DEBUG) console.log("waypointsFeatures: ", waypointsFeatures);
 
 	//Remove older sources and layers
 	if (map.value.getSource("waypoints")) {
@@ -94,13 +106,20 @@ const drawWaypoints = () => {
 	map.value.addSource("waypoints", {
 		type: "geojson",
 		data: {
-			type: "Feature",
-			properties: {},
-			geometry: waypoints,
+			type: "FeatureCollection",
+			features: waypointsFeatures,
 		},
 	});
 
-	//TODO: add the waypoints layer
+	map.value.addLayer({
+		id: "point",
+		type: "circle",
+		source: "waypoints",
+		paint: {
+			"circle-radius": 6,
+			"circle-color": "#ff0000",
+		},
+	});
 };
 
 const waitMapLoading = () => {
