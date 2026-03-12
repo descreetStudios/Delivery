@@ -22,7 +22,7 @@
 				</div>
 				<div>
 					<p class="text-text-primary whitespace-nowrap">{{$t('sidebar.home')}}
-						<NuxtLink to="/RiderPage">Click here!</NuxtLink>
+						<NuxtLink to="/RiderPage">{{$('Click here!')}}</NuxtLink>
 					</p>
 				</div>
 			</template>
