@@ -2,7 +2,7 @@
 	<div class="z-5 absolute flex-col bg-bg-surface h-screen overflow-hidden font-mono">
 
 		<!-- Floating toggle button -->
-		<Transition name="float">
+		<Transition name="float">\
 			<div
 				v-if="isCollapsed"
 				class="top-4 left-4 z-50 fixed"
