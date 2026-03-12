@@ -47,17 +47,19 @@
 </template>
 
 <script setup>
+import { useWindowSize } from "@vueuse/core";
+
 // Settings
+const { width } = useWindowSize();
 const default_width = ref(420);
-const screenWidth = ref(0);
 
 // Refs
-const sidebarWidth = computed(() => default_width.value);
-const oldSidebarWidth = computed(() => default_width.value);
+const sidebarWidth = ref(0);
+const oldSidebarWidth = ref(0);
 const isCollapsed = ref(true);
 
 // Methods
-function toggleCollapse() {
+const toggleCollapse = () => {
 	if (!isCollapsed.value) {
 		oldSidebarWidth.value = sidebarWidth.value;
 		isCollapsed.value = true;
@@ -65,14 +67,35 @@ function toggleCollapse() {
 		isCollapsed.value = false;
 		sidebarWidth.value = oldSidebarWidth.value;
 	}
-}
+};
 
-onMounted(() => {
-	screenWidth.value = window.innerWidth;
-	if (screenWidth.value <= 640) {
-		default_width.value = screenWidth.value;
-	}
+const resize = () => {
+	console.log("resize!");
+	isCollapsed.value = true;
+	sidebarWidth.value = default_width.value;
+	oldSidebarWidth.value = default_width.value;
+	console.log(sidebarWidth.value, "New");
+	console.log(oldSidebarWidth.value, "old");
+};
+
+onUnmounted(() => {
+	stopWatch();
 });
+
+const stopWatch = watch(
+	() => width.value,
+	(newVal) => {
+		if (newVal <= 640) {
+			default_width.value = width.value;
+			if (import.meta.client) resize();
+		}
+		else {
+			default_width.value = 420;
+			if (import.meta.client) resize();
+		}
+	},
+	{ immediate: true },
+);
 </script>
 
 <style scoped>

@@ -9,9 +9,7 @@
 				<hr class="border-0.5 border-border-default w-full">
 				<h2 class="text-text-primary">Ristorante: {{ ristorante }}</h2>
 				<div class="py-0.5 pr-0.5 border border-border-default rounded-lg">
-					<div
-						class="items-center gap-8 grid grid-cols-2 p-5 w-full max-h-132.5 overflow-y-auto scrollbar-custom"
-					>
+					<div class="gap-6 grid grid-cols-2 p-5 w-full max-h-132.5 overflow-y-auto scrollbar-custom">
 						<FoodCardComponent />
 						<FoodCardComponent />
 						<FoodCardComponent />
