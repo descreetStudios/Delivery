@@ -1,14 +1,12 @@
 <template>
 	<div class="flex flex-col bg-root h-screen">
-		<SidebarComponent />
-		<MapComponent
+		<AppSidebarComponent />
+		<AppMapComponent
 			ref="mapRef"
 			@map-loaded="onMapLoaded"
 		/>
-		<CoordinatesComponent ref="coordsRef" />
-		<RoutingEngineComponent 
-			:map-instance="mapInstance" 
-		/>
+		<AppCoordinatesComponent ref="coordsRef" />
+		<AppRoutingEngineComponent :map-instance="mapInstance" />
 	</div>
 </template>
 

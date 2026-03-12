@@ -1,8 +1,8 @@
 <template>
 	<div class="flex bg-root h-screen">
-		<SidebarComponent>
+		<AppSidebarComponent>
 			<template #sidebar>
-				<SearchComponent
+				<AppSearchComponent
 					@select="onSearchSelect"
 					@select-civic="onSearchCivicSelect"
 				/>
@@ -10,28 +10,28 @@
 				<h2 class="text-text-primary">Ristorante: {{ ristorante }}</h2>
 				<div class="py-0.5 pr-0.5 border border-border-default rounded-lg">
 					<div class="gap-6 grid grid-cols-2 p-5 w-full max-h-132.5 overflow-y-auto scrollbar-custom">
-						<FoodCardComponent />
-						<FoodCardComponent />
-						<FoodCardComponent />
-						<FoodCardComponent />
-						<FoodCardComponent />
-						<FoodCardComponent />
-						<FoodCardComponent />
-						<FoodCardComponent />
+						<AppFoodCardComponent />
+						<AppFoodCardComponent />
+						<AppFoodCardComponent />
+						<AppFoodCardComponent />
+						<AppFoodCardComponent />
+						<AppFoodCardComponent />
+						<AppFoodCardComponent />
+						<AppFoodCardComponent />
 					</div>
 				</div>
 				<div>
-					<p class="text-text-primary whitespace-nowrap">{{$t('sidebar.home')}}
-						<NuxtLink to="/RiderPage">{{$('Click here!')}}</NuxtLink>
+					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.home') }}
+						<NuxtLink to="/RiderPage">{{ $('Click here!') }}</NuxtLink>
 					</p>
 				</div>
 			</template>
-		</SidebarComponent>
-		<MapComponent
+		</AppSidebarComponent>
+		<AppMapComponent
 			ref="mapRef"
 			@map-loaded="onMapLoaded"
 		/>
-		<CoordinatesComponent ref="coordsRef" />
+		<AppCoordinatesComponent ref="coordsRef" />
 	</div>
 </template>
 
