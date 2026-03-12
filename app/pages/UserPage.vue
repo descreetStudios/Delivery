@@ -21,8 +21,8 @@
 					</div>
 				</div>
 				<div>
-					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.home') }}
-						<NuxtLink to="/RiderPage">{{ $('Click here!') }}</NuxtLink>
+					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.riderQuestion') }}
+						<NuxtLink to="/RiderPage">{{ $t('sidebar.ctaClick') }}</NuxtLink>
 					</p>
 				</div>
 			</template>

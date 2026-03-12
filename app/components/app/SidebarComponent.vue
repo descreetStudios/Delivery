@@ -2,7 +2,7 @@
 	<div class="z-5 absolute flex-col bg-bg-surface h-screen overflow-hidden font-mono">
 
 		<!-- Floating toggle button -->
-		<Transition name="float">\
+		<Transition name="float">
 			<div
 				v-if="isCollapsed"
 				class="top-4 left-4 z-50 fixed"
@@ -50,6 +50,7 @@
 import { useWindowSize } from "@vueuse/core";
 
 // Settings
+const { $DEBUG } = useNuxtApp();
 const { width } = useWindowSize();
 const default_width = ref(420);
 
@@ -70,12 +71,12 @@ const toggleCollapse = () => {
 };
 
 const resize = () => {
-	console.log("resize!");
+	if ($DEBUG) console.log("resize!");
 	isCollapsed.value = true;
 	sidebarWidth.value = default_width.value;
 	oldSidebarWidth.value = default_width.value;
-	console.log(sidebarWidth.value, "New");
-	console.log(oldSidebarWidth.value, "old");
+	if ($DEBUG) console.log(sidebarWidth.value, "New");
+	if ($DEBUG) console.log(oldSidebarWidth.value, "old");
 };
 
 onUnmounted(() => {

@@ -1,7 +1,6 @@
 {
     "sidebar": {
-        "home": "Hey, are you a rider?",
-        "click": "Click here!",
-        "contact": "Contact"
+        "riderQuestion": "Hey, are you a rider?",
+        "ctaClick": "Click here!"
     }
 }
