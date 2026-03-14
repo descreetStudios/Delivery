@@ -1,0 +1,6 @@
+# Caddyfile.template
+# Replace HOSTNAME and PORT with your local values
+HOSTNAME:443 {
+    reverse_proxy localhost:3000
+    tls internal
+}
