@@ -1,10 +1,10 @@
 import { isEmpty } from "@nuxt/ui/runtime/utils/index.js";
 import { defineNuxtRouteMiddleware, navigateTo } from "nuxt/app";
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((to) => {
 	const PAGES = ["/UserPage", "/RiderPage", "/TrackPage", "/TestPage"];
 
-	if (!PAGES.includes(to.path) && !("/" == from.path)) {
+	if (!PAGES.includes(to.path) && !("/" == to.path)) {
 		return navigateTo({ path: "/" });
 	}
 	if (["/RiderPage"].includes(to.path) && isEmpty(to.query) ){
