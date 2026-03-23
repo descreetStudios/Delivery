@@ -7,6 +7,7 @@
 		</AppSidebarComponent>
 		<AppMapComponent
 			ref="mapRef"
+			:gps="true"
 			@map-loaded="onMapLoaded"
 		/>
 		<AppCoordinatesComponent ref="coordsRef" />

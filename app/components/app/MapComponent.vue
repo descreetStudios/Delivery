@@ -26,11 +26,6 @@
 
 				<MglNavigationControl position="top-right" />
 				<MglFullscreenControl position="top-right" />
-				<MglGeolocateControl
-					position="top-right"
-					:track-user-location="true"
-					:position-options="{ enableHighAccuracy: true, maximumAge: 0 }"
-				/>
 				<MglScaleControl position="bottom-left" />
 			</MglMap>
 		</ClientOnly>
@@ -38,6 +33,8 @@
 </template>
 
 <script setup>
+import maplibregl from "maplibre-gl";
+
 const { $DEBUG } = useNuxtApp();
 
 const props = defineProps({
@@ -52,6 +49,10 @@ const props = defineProps({
 	styleUrl: {
 		type: String,
 		default: "https://tiles.openfreemap.org/styles/liberty",
+	},
+	gps: {
+		type: Boolean,
+		default: false,
 	},
 });
 
@@ -106,6 +107,22 @@ const handleMapLoad = (mapWrapper) => {
 	map.setProjection({
 		type: ["interpolate", ["linear"], ["zoom"], 0, "globe", 12, "mercator"],
 	});
+
+	const geolocate = new maplibregl.GeolocateControl({
+		positionOptions: {
+			enableHighAccuracy: true,
+		},
+		trackUserLocation: true,
+		showAccuracyCircle: true,
+	});
+
+	map.addControl(geolocate);
+
+	if (props.gps) {
+		map.once("idle", () => {
+			geolocate.trigger();
+		});
+	}
 };
 
 const fetchAndHighlightGeometry = async (map, item) => {
