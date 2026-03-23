@@ -35,6 +35,7 @@
 					@click="toggleCollapse"
 				/>
 				<h1 class="text-text-primary text-2xl">Delivery</h1>
+				<slot name="header" />
 			</div>
 			<div
 				v-show="!isCollapsed"
@@ -68,6 +69,10 @@ const toggleCollapse = () => {
 		isCollapsed.value = false;
 		sidebarWidth.value = oldSidebarWidth.value;
 	}
+};
+
+const toggleCart = () => {
+
 };
 
 const resize = () => {
