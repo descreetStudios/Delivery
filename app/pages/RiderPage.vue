@@ -1,6 +1,10 @@
 <template>
 	<div class="flex flex-col bg-root h-screen">
-		<AppSidebarComponent />
+		<AppSidebarComponent>
+			<template #sidebar>
+				<AppRoutingCardComponent />
+			</template>
+		</AppSidebarComponent>
 		<AppMapComponent
 			ref="mapRef"
 			@map-loaded="onMapLoaded"
