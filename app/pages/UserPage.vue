@@ -27,51 +27,61 @@
 					<div class="gap-6 grid grid-cols-2 p-5 w-full max-h-132.5 overflow-y-auto scrollbar-custom">
 						<AppFoodCardComponent
 							name="Pizza margherita"
+							:price="5.5"
 							imgsrc="https://eu.ooni.com/cdn/shop/articles/20220211142754-margherita-9920_0483214a-7057-4277-9a3b-f2ab17c01e13.jpg?v=1737105958&width=2048"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Penne alla puttanesca" 
+							:price="9"
 							imgsrc="https://articafood.it/wp-content/uploads/ambientate/penne-alla-puttanesca.webp"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Trenette al pesto"
+							:price="9"
 							imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmuthcWkzYM27s3B2MySX5GyXmNkikC-6ca83VIeOyjwaBuJGgqlITRJsLLlyZjUSQC9NSXTY-pRpSQHBP3l57xT7gIXN-LrT3o810cg8T&s=10"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Bavette all'astice"
+							:price="12"
 							imgsrc="https://www.sedanoallegro.it/sites/default/files/ricette/thumbnails/0_64d2fjl0_menu_astice_180412.jpg"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Risotto al fumo"
+							:price="10"
 							imgsrc="https://blog.giallozafferano.it/pierobenigni/wp-content/uploads/2020/09/RAF2-scaled.jpg"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Braciola di maiale con patate"
+							:price="10"
 							imgsrc="https://www.burrofuso.com/wp-content/uploads/2014/07/braciole-patate-maialino.jpg"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Pollo alla cacciatora"
+							:price="14"
 							imgsrc="https://www.soniaperonaci.it/wp-content/uploads/2016/10/Pollo-alla-cacciatora-496x661.jpg"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Paillard di vitello"
+							:price="11"
 							imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYOFYLiwovV55rfkExsGJjKIDmlQND965tJQ&s"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Salmone alla griglia con salsa al limone"
+							:price="13"
 							imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6orMdnVk6GxJjYzt5ca0arTpETlRaNuEWfg&s"
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Filetto al pepe verde"
+							:price="15"
 							imgsrc="https://www.ciociariaecucina.it/wp-content/uploads/2025/10/Filetto-al-Pepe-Verde.jpg"
 							@send-order="orders.push($event)"
 						/>
@@ -85,11 +95,12 @@
 					<div
 						class="py-0.5 pr-0.5 border border-border-default rounded-lg"
 					>
-						<div class="flex flex-col gap-6 p-5 w-90 h-121 overflow-y-auto scrollbar-custom">
+						<div class="flex flex-col gap-3 p-3 w-90 h-121 overflow-y-auto scrollbar-custom">
 							<AppOrderComponent
 								v-for="(order, index) in orders"
 								:key="index"
 								:name="order.name"
+								:price="order.price"
 								@delete-order="orders.splice(index, 1)"
 							/>
 						</div>

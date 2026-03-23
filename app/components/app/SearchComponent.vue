@@ -3,8 +3,8 @@
 		ref="rootEl"
 		class="z-10 w-full"
 	>
-		<div class="flex items-center bg-bg-surface shadow-lg px-4 rounded-full h-12">
-
+		<div class="flex items-center bg-bg-surface shadow-lg px-4 border border-border-default rounded-full h-12">
+			
 			<div class="justify-center items-center invert size-5 text-bg-surface">
 				<!-- Search Icon -->
 				<svg
