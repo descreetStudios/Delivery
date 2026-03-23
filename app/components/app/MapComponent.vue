@@ -26,7 +26,11 @@
 
 				<MglNavigationControl position="top-right" />
 				<MglFullscreenControl position="top-right" />
-				<MglGeolocateControl position="top-right" />
+				<MglGeolocateControl
+					position="top-right"
+					:track-user-location="true"
+					:position-options="{ enableHighAccuracy: true, maximumAge: 0 }"
+				/>
 				<MglScaleControl position="bottom-left" />
 			</MglMap>
 		</ClientOnly>
