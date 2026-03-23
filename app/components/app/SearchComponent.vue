@@ -165,7 +165,6 @@ const cache = new Map();
  * Must return:
  * [{ label, description?, center }]
  */
-// TODO: Replace with provider.
 const search = async (q) => {
 	const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&addressdetails=1&limit=5`;
 

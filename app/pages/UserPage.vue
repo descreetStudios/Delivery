@@ -57,9 +57,10 @@ const onSearchSelect = (item) => {
 };
 
 const onSearchCivicSelect = (item) => {
-	if ($DEBUG) console.log("Search civic selected: ", item);
+	console.log("Search civic selected: ", item);
 	if ($DEBUG) console.log("Map component: ", mapRef.value);
 	mapRef.value.moveToWithBounds(item.center, item.boundingbox);
 	mapRef.value.highlightCivic(mapInstance.value, item);
+	ristorante.value = item.label;
 };
 </script>
