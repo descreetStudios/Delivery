@@ -71,10 +71,6 @@ const toggleCollapse = () => {
 	}
 };
 
-const toggleCart = () => {
-
-};
-
 const resize = () => {
 	if ($DEBUG) console.log("resize!");
 	isCollapsed.value = true;

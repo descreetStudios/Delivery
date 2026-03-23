@@ -28,43 +28,52 @@
 						<AppFoodCardComponent
 							name="Pizza margherita"
 							imgsrc="https://eu.ooni.com/cdn/shop/articles/20220211142754-margherita-9920_0483214a-7057-4277-9a3b-f2ab17c01e13.jpg?v=1737105958&width=2048"
+							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Penne alla puttanesca" 
 							imgsrc="https://articafood.it/wp-content/uploads/ambientate/penne-alla-puttanesca.webp"
+							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Trenette al pesto"
 							imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmuthcWkzYM27s3B2MySX5GyXmNkikC-6ca83VIeOyjwaBuJGgqlITRJsLLlyZjUSQC9NSXTY-pRpSQHBP3l57xT7gIXN-LrT3o810cg8T&s=10"
+							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Bavette all'astice"
 							imgsrc="https://www.sedanoallegro.it/sites/default/files/ricette/thumbnails/0_64d2fjl0_menu_astice_180412.jpg"
+							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Risotto al fumo"
 							imgsrc="https://blog.giallozafferano.it/pierobenigni/wp-content/uploads/2020/09/RAF2-scaled.jpg"
+							@send-order="orders.push($event)"
 						/>
-						
 						<AppFoodCardComponent
 							name="Braciola di maiale con patate"
 							imgsrc="https://www.burrofuso.com/wp-content/uploads/2014/07/braciole-patate-maialino.jpg"
+							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Pollo alla cacciatora"
 							imgsrc="https://www.soniaperonaci.it/wp-content/uploads/2016/10/Pollo-alla-cacciatora-496x661.jpg"
+							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Paillard di vitello"
 							imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYOFYLiwovV55rfkExsGJjKIDmlQND965tJQ&s"
+							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Salmone alla griglia con salsa al limone"
 							imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6orMdnVk6GxJjYzt5ca0arTpETlRaNuEWfg&s"
+							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
 							name="Filetto al pepe verde"
 							imgsrc="https://www.ciociariaecucina.it/wp-content/uploads/2025/10/Filetto-al-Pepe-Verde.jpg"
+							@send-order="orders.push($event)"
 						/>
 					</div>
 				</div>
@@ -76,47 +85,12 @@
 					<div
 						class="py-0.5 pr-0.5 border border-border-default rounded-lg"
 					>
-						<div class="gap-6 grid grid-cols-2 p-5 w-full max-h-121 overflow-y-auto scrollbar-custom">
-							<AppFoodCardComponent
-								name="Pizza margherita"
-								imgsrc="https://eu.ooni.com/cdn/shop/articles/20220211142754-margherita-9920_0483214a-7057-4277-9a3b-f2ab17c01e13.jpg?v=1737105958&width=2048"
-							/>
-							<AppFoodCardComponent
-								name="Penne alla puttanesca" 
-								imgsrc="https://articafood.it/wp-content/uploads/ambientate/penne-alla-puttanesca.webp"
-							/>
-							<AppFoodCardComponent
-								name="Trenette al pesto"
-								imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmuthcWkzYM27s3B2MySX5GyXmNkikC-6ca83VIeOyjwaBuJGgqlITRJsLLlyZjUSQC9NSXTY-pRpSQHBP3l57xT7gIXN-LrT3o810cg8T&s=10"
-							/>
-							<AppFoodCardComponent
-								name="Bavette all'astice"
-								imgsrc="https://www.sedanoallegro.it/sites/default/files/ricette/thumbnails/0_64d2fjl0_menu_astice_180412.jpg"
-							/>
-							<AppFoodCardComponent
-								name="Risotto al fumo"
-								imgsrc="https://blog.giallozafferano.it/pierobenigni/wp-content/uploads/2020/09/RAF2-scaled.jpg"
-							/>
-						
-							<AppFoodCardComponent
-								name="Braciola di maiale con patate"
-								imgsrc="https://www.burrofuso.com/wp-content/uploads/2014/07/braciole-patate-maialino.jpg"
-							/>
-							<AppFoodCardComponent
-								name="Pollo alla cacciatora"
-								imgsrc="https://www.soniaperonaci.it/wp-content/uploads/2016/10/Pollo-alla-cacciatora-496x661.jpg"
-							/>
-							<AppFoodCardComponent
-								name="Paillard di vitello"
-								imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYOFYLiwovV55rfkExsGJjKIDmlQND965tJQ&s"
-							/>
-							<AppFoodCardComponent
-								name="Salmone alla griglia con salsa al limone"
-								imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6orMdnVk6GxJjYzt5ca0arTpETlRaNuEWfg&s"
-							/>
-							<AppFoodCardComponent
-								name="Filetto al pepe verde"
-								imgsrc="https://www.ciociariaecucina.it/wp-content/uploads/2025/10/Filetto-al-Pepe-Verde.jpg"
+						<div class="flex flex-col gap-6 p-5 w-90 h-121 overflow-y-auto scrollbar-custom">
+							<AppOrderComponent
+								v-for="(order, index) in orders"
+								:key="index"
+								:name="order.name"
+								@delete-order="orders.splice(index, 1)"
 							/>
 						</div>
 					</div>
@@ -155,6 +129,8 @@ const onMapLoaded = (mapWrapper) => {
 	mapInstance.value = mapWrapper.map;
 };
 
+const orders = ref([]);
+
 const toggleCart = () => {
 	cartShown.value = !cartShown.value;
 };
@@ -167,7 +143,7 @@ const onSearchSelect = (item) => {
 };
 
 const onSearchCivicSelect = (item) => {
-	console.log("Search civic selected: ", item);
+	if ($DEBUG) console.log("Search civic selected: ", item);
 	if ($DEBUG) console.log("Map component: ", mapRef.value);
 	mapRef.value.moveToWithBounds(item.center, item.boundingbox);
 	mapRef.value.highlightCivic(mapInstance.value, item);
