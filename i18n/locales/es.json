@@ -1,7 +1,7 @@
- {
-    "sidebar":{
-        "riderQuestion":"¿Oye, eres a rider?",
-        "ctaClick":"Haz clic aquí!"
+{
+    "sidebar": {
+        "riderQuestion": "¿Oye, eres a rider?",
+        "userQuestion": "¿Oye, eres a usuario?",
+        "ctaClick": "Haz clic aquí!"
     }
-
- }
+}

@@ -3,6 +3,11 @@
 		<AppSidebarComponent>
 			<template #sidebar>
 				<AppRoutingCardComponent />
+				<div>
+					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.userQuestion') }}
+						<NuxtLink to="/UserPage">{{ $t('sidebar.ctaClick') }}</NuxtLink>
+					</p>
+				</div>
 			</template>
 		</AppSidebarComponent>
 		<AppMapComponent

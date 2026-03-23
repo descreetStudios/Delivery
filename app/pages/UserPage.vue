@@ -32,7 +32,7 @@
 							@send-order="orders.push($event)"
 						/>
 						<AppFoodCardComponent
-							name="Penne alla puttanesca" 
+							name="Penne alla puttanesca"
 							:price="9"
 							imgsrc="https://articafood.it/wp-content/uploads/ambientate/penne-alla-puttanesca.webp"
 							@send-order="orders.push($event)"
@@ -92,9 +92,7 @@
 					class="top-0 left-105 fixed flex flex-col items-center gap-2 bg-bg-surface mt-2 ml-5 p-3 border border-border-default rounded-sm w-105 h-150"
 				>
 					<h1 class="top-0 flex text-text-primary text-xl">Ordine</h1>
-					<div
-						class="py-0.5 pr-0.5 border border-border-default rounded-lg"
-					>
+					<div class="py-0.5 pr-0.5 border border-border-default rounded-lg">
 						<div class="flex flex-col gap-3 p-3 w-90 h-121 overflow-y-auto scrollbar-custom">
 							<AppOrderComponent
 								v-for="(order, index) in orders"
@@ -118,7 +116,6 @@
 					</p>
 				</div>
 			</template>
-			
 		</AppSidebarComponent>
 		<AppMapComponent
 			ref="mapRef"

@@ -1,6 +1,7 @@
 {
     "sidebar": {
         "riderQuestion": "Hey, are you a rider?",
+        "userQuestion": "Hey, are you a user?",
         "ctaClick": "Click here!"
     }
 }
