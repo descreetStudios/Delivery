@@ -105,7 +105,10 @@
 							/>
 						</div>
 					</div>
-					<button class="bg-warning my-auto px-2 py-2 border border-border-default rounded-full text-center">
+					<button
+						:disabled="orders.length === 0"
+						class="bg-warning disabled:bg-gray-300 my-auto px-2 py-2 border border-border-default rounded-full disabled:text-gray-600 text-center disabled:cursor-not-allowed surface"
+					>
 						Invia il tuo ordine
 					</button>
 				</div>
