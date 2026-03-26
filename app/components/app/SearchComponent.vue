@@ -53,7 +53,8 @@
 				v-model="query"
 				type="text"
 				maxlength="100"
-				placeholder="Go wherever you like"
+				:placeholder="$t('SearchComponent.search')"
+
 				class="flex-1 bg-transparent border-0 outline-none focus:outline-none ring-0 focus:ring-0 placeholder-text-secondary text-text-primary text-sm"
 				@keydown.down.prevent="next"
 				@keydown.up.prevent="prev"

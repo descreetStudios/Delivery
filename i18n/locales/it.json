@@ -1,4 +1,11 @@
 {
+      "SearchComponent":{
+        "search":"Cerca un ristorante"
+    },
+    "FooterComponent": {
+        "foot":" Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
+        "secondFoot":"Questo progetto è open‑source ed è distribuito sotto licenza"
+    },
     "License": {
         "intro": "Questa applicazione è distribuita secondo i termini della",
         "mid": "Sei libero di ridistribuirla e/o modificarla in conformità a questi termini.",

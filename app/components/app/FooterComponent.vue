@@ -3,10 +3,9 @@
 		<div class="flex flex-wrap justify-between items-center gap-10 m-0 mx-auto max-w-7xl">
 			<!-- Left: Info -->
 			<div class="flex-1 min-w-62.5">
-				<p>&copy; {{ currentYear }} Untitled Delivery Project. Developed by an independent team. All rights
-					reserved.</p>
+				<p>&copy; {{ currentYear }} {{$t('FooterComponent.foot')}}</p>
 				<p>
-					This project is open-source and licensed under
+					{{$t('FooterComponent.secondFoot')}}
 					<NuxtLink
 						to="/License"
 						class="font-semibold text-text-secondary hover:text-secondary-hover hover:underline no-underline"

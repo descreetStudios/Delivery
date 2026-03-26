@@ -1,4 +1,11 @@
 {
+    "SearchComponent": {
+        "search": "Busca un restaurante"
+    },
+    "FooterComponent": {
+        "foot": " Untitled Delivery Project.Desarrollado por un equipo independiente. Todos los derechos reservados.",
+        "secondFoot": "Este proyecto es de código abierto y está licenciado bajo"
+    },
     "License": {
         "intro": "Esta aplicación se distribuye bajo los términos de la",
         "mid": "Eres libre de redistribuirla y/o modificarla de acuerdo con estos términos.",
@@ -6,8 +13,8 @@
         "firstKey": "Libertad para usar, estudiar, modificar y compartir el software.",
         "secondKey": "Obligación de poner a disposición el código fuente, incluso para el uso a través de la red.",
         "thirdKey": "Las versiones modificadas deben seguir siendo libres y abiertas.",
-        "full":"Texto completo de la licencia",
-        "moreInformation":"Para más información, visita el sitio oficial de GNU:"
+        "full": "Texto completo de la licencia",
+        "moreInformation": "Para más información, visita el sitio oficial de GNU:"
     },
     "UserPage": {
         "restaurant": "Restaurante"
