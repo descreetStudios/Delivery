@@ -11,7 +11,7 @@
 		<h2 class="text-text-primary">€{{ props.price.toFixed(2) }}</h2>
 		<button
 			class="bg-warning px-3 py-0.5 border border-border-default rounded-full text-center" 
-			@click="buyFood"
+			@click="buyItem"
 		>
 			Compra
 		</button>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["send-order"]); 
+const emit = defineEmits(["send-item"]); 
 
 const props = defineProps({
 	name: {
@@ -36,12 +36,12 @@ const props = defineProps({
 	},
 });
 
-const buyFood = () => {
-	const order = {
+const buyItem = () => {
+	const item = {
 		name: props.name,
 		price: props.price,
 	};
-	emit("send-order", order);
+	emit("send-item", item);
 };
 
 </script>

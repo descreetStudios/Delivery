@@ -6,7 +6,7 @@
 		</div>
 		<button
 			class="bg-warning ml-auto px-3 py-0.5 border border-border-default rounded-full h-fit text-center" 
-			@click="deleteOrder"
+			@click="deleteItem"
 		>Elimina</button>
 	</div>
 </template>
@@ -23,10 +23,10 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(["delete-order"]);
+const emit = defineEmits(["delete-item"]);
 
-const deleteOrder = () => {
-	emit("delete-order");
+const deleteItem = () => {
+	emit("delete-item");
 };
 </script>
 

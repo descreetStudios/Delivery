@@ -50,50 +50,33 @@
 <script setup>
 import { useWindowSize } from "@vueuse/core";
 
-// Settings
-const { $DEBUG } = useNuxtApp();
 const { width } = useWindowSize();
-const default_width = ref(420);
+const DEFAULT_WIDTH = 420;
 
-// Refs
-const sidebarWidth = ref(0);
-const oldSidebarWidth = ref(0);
+// State
+const sidebarWidth = ref(DEFAULT_WIDTH);
+const oldSidebarWidth = ref(DEFAULT_WIDTH);
 const isCollapsed = ref(true);
 
-// Methods
+// Toggle logic
 const toggleCollapse = () => {
-	if (!isCollapsed.value) {
+	if (isCollapsed.value) {
+		isCollapsed.value = false;
+		sidebarWidth.value = oldSidebarWidth.value || DEFAULT_WIDTH;
+	} else {
 		oldSidebarWidth.value = sidebarWidth.value;
 		isCollapsed.value = true;
-	} else {
-		isCollapsed.value = false;
-		sidebarWidth.value = oldSidebarWidth.value;
 	}
 };
 
-const resize = () => {
-	if ($DEBUG) console.log("resize!");
-	isCollapsed.value = true;
-	sidebarWidth.value = default_width.value;
-	oldSidebarWidth.value = default_width.value;
-	if ($DEBUG) console.log(sidebarWidth.value, "New");
-	if ($DEBUG) console.log(oldSidebarWidth.value, "old");
-};
-
-onUnmounted(() => {
-	stopWatch();
-});
-
-const stopWatch = watch(
+// Responsive behavior
+watch(
 	() => width.value,
-	(newVal) => {
-		if (newVal <= 640) {
-			default_width.value = width.value;
-			if (import.meta.client) resize();
-		}
-		else {
-			default_width.value = 420;
-			if (import.meta.client) resize();
+	(newWidth) => {
+		if (newWidth <= 640) {
+			sidebarWidth.value = newWidth;
+		} else {
+			sidebarWidth.value = DEFAULT_WIDTH;
 		}
 	},
 	{ immediate: true },
