@@ -1,22 +1,22 @@
 <template>
-	<div class="bg-bg-home home-highlight">
+	<div class="bg-bg-home overflow-hidden home-highlight">
 		<section class="flex flex-col justify-center items-center gap-8 h-screen text-center">
 			<h1 class="text-7xl whitespace-nowrap">
 				<span class="font-barlow">Your next </span>
 				<span class="font-fredoka font-semibold text-text-home text-8xl">meal</span>
 				<span class="font-barlow">, already </span>
-				<span class="bg-bg-secondary-home py-1 pr-2 rounded-lg font-orbitron italic tracking-wide">on the way</span>
+				<span class="bg-bg-secondary-home py-1 pr-2 rounded-lg font-orbitron italic tracking-wide select-none">on the way</span>
 			</h1>
 			<p class="font-barlow text-text-home text-3xl">
 				How does it work?
 			</p>
 			<div class="top-[10%] relative flex flex-col items-center gap-1 translate-x-[-50%] translate-y-[-50%]">
-				<span class="block border-text-primary border-r border-b w-8 h-8 animate-arrows" />
+				<span class="block border-black border-r border-b w-8 h-8 animate-arrows" />
 				<span
-					class="block border-text-primary border-r border-b w-8 h-8 animate-arrows [animation-delay:-0.2s]"
+					class="block border-black border-r border-b w-8 h-8 animate-arrows [animation-delay:-0.2s]"
 				/>
 				<span
-					class="block border-text-primary border-r border-b w-8 h-8 animate-arrows [animation-delay:-0.4s]"
+					class="block border-black border-r border-b w-8 h-8 animate-arrows [animation-delay:-0.4s]"
 				/>
 			</div>
 		</section>
@@ -40,7 +40,7 @@
 					{{ section.title }}
 				</h2>
 				<div
-					class="bg-[rgba(255,255,255,0.08)] shadow-2xl backdrop-blur-lg p-4 border-3 border-text-home rounded-2xl text-text-primary text-2xl leading-8"
+					class="bg-[rgba(255,255,255,0.08)] shadow-2xl backdrop-blur-lg p-4 border-3 border-text-home rounded-2xl text-black text-2xl leading-8"
 				>
 					<template v-if="section.links">
 						<NuxtLink

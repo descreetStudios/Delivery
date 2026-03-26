@@ -1,65 +1,76 @@
 <template>
-	<div class="flex flex-col gap-8 bg-bg-root shadow-xl m-12 mx-auto p-10 rounded-3xl max-w-250 font-system-ui text-primary-text">
-		<header class="flex justify-center items-center p-6">
-			<NuxtLink
-				to="/"
-				class="flex justify-center items-center gap-4 bg-surface w-fit h-fit no-underline cursor-pointer select-none"
-				@dragstart.prevent
-			>
-				<NuxtImg
-					src="/images/logo/LogoBank/gamefier-logo-light-128px.png"
-					alt="Delivery Logo"
-					class="mb-2 w-16 pointer-events-none select-none shrink-0"
-					format="webp"
-					@dragstart.prevent
-				/>
-				<h1 class="m-0 font-bold text-primary text-4xl text-center uppercase whitespace-nowrap pointer-events-none select-none shrink-0">Untitled Delivery Project</h1>
-			</NuxtLink>
-		</header>
-
-		<h2 class="flex justify-center m-0 pb-2 border-border border-b-2 font-semibold text-secondary text-3xl">
-			<span>GNU Affero General Public License v3.0 (AGPLv3)</span>
-		</h2>
-
-		<p class="m-0 text-secondary-text text-lg text-center leading-relaxed">
-			{{$t('License.intro')}} 
-			<strong>GNU Affero General Public License v3.0</strong>.<br>
-			{{$t('License.mid')}}
-		</p>
-
-		<section class="bg-bg mb-0 p-8 border border-border rounded-xl">
-			<h3 class="flex items-center gap-2 mb-4 font-semibold text-primary text-2xl">
-				<span>{{$t('License.key')}}</span>
-			</h3>
-			<ul class="pl-3 text-primary-text text-base leading-7 list-disc list-inside">
-				<li>{{$t('License.firstKey')}}</li>
-				<li>{{$t('License.secondKey')}}</li>
-				<li>{{$t('License.thirdKey')}}</li>
-			</ul>
-		</section>
-
-		<section class="bg-bg mb-0 p-8 border border-border rounded-xl">
-			<h3 class="flex items-center gap-2 mb-4 font-semibold text-primary text-2xl">
-				<span>{{$t('License.full')}}</span>
-			</h3>
-			<div class="relative border border-border rounded-xl max-h-112.5 overflow-hidden">
-				<pre class="box-border bg-surface m-0 p-5 max-h-112.5 overflow-y-auto text-courier-new text-primary-text text-sm whitespace-pre-wrap scrollbar-custom">{{ agplText }}</pre>
-			</div>
-		</section>
-
-		<footer class="mt-4 text-tertiary-text text-base text-center">
-			<p>
-				{{$t('License.moreInformation')}}
+	<div class="bg-bg-home p-10 h-full overflow-hidden home-highlight">
+		<div
+			class="flex flex-col gap-8 shadow-xl m-12 mx-auto p-10 rounded-3xl max-w-250 font-system-ui bg-text-home text-primary-text"
+		>
+			<header class="flex justify-center items-center p-6">
 				<NuxtLink
-					to="https://www.gnu.org/licenses/agpl-3.0.html"
-					class="text-info hover:underline no-underline transition duration-200 ease-in-out"
-					target="_blank"
+					to="/"
+					class="flex justify-center items-center gap-4 bg-surface w-fit h-fit no-underline cursor-pointer select-none"
 					@dragstart.prevent
 				>
-					https://www.gnu.org/licenses/agpl-3.0.html
+					<NuxtImg
+						src="/images/logo/LogoBank/gamefier-logo-light-128px.png"
+						alt="Delivery Logo"
+						class="mb-2 w-16 text-bg-home pointer-events-none select-none shrink-0"
+						format="webp"
+						@dragstart.prevent
+					/>
+					<h1
+						class="m-0 font-bold text-bg-home text-4xl text-center uppercase whitespace-nowrap pointer-events-none select-none shrink-0"
+					>
+						Untitled Delivery Project</h1>
 				</NuxtLink>
+			</header>
+
+			<h2
+				class="flex justify-center m-0 pb-2 border-bg-secondary-home border-b-2 font-semibold text-bg-home text-3xl"
+			>
+				<span>GNU Affero General Public License v3.0 (AGPLv3)</span>
+			</h2>
+
+			<p class="m-0 text-bg-home text-lg text-center leading-relaxed">
+				{{ $t('License.intro') }}
+				<strong>GNU Affero General Public License v3.0</strong>.<br>
+				{{ $t('License.mid') }}
 			</p>
-		</footer>
+
+			<section class="bg-bg-home mb-0 p-8 rounded-xl">
+				<h3 class="flex items-center gap-2 mb-4 font-semibold text-black text-2xl">
+					<span>{{ $t('License.key') }}</span>
+				</h3>
+				<ul class="pl-3 text-black text-base leading-7 list-disc list-inside">
+					<li>{{ $t('License.firstKey') }}</li>
+					<li>{{ $t('License.secondKey') }}</li>
+					<li>{{ $t('License.thirdKey') }}</li>
+				</ul>
+			</section>
+
+			<section class="bg-bg-home mb-0 p-8 rounded-xl">
+				<h3 class="flex items-center gap-2 mb-4 font-semibold text-black text-2xl">
+					<span>{{ $t('License.full') }}</span>
+				</h3>
+				<div class="relative border rounded-xl max-h-112.5 overflow-hidden">
+					<pre
+						class="box-border bg-surface m-0 p-5 max-h-112.5 overflow-y-auto text-black text-sm whitespace-pre-wrap scrollbar-custom"
+					>{{ agplText }}</pre>
+				</div>
+			</section>
+
+			<footer class="mt-4 text-bg-home text-base text-center">
+				<p>
+					{{ $t('License.moreInformation') }}
+					<NuxtLink
+						to="https://www.gnu.org/licenses/agpl-3.0.html"
+						class="text-info hover:underline no-underline transition duration-200 ease-in-out"
+						target="_blank"
+						@dragstart.prevent
+					>
+						https://www.gnu.org/licenses/agpl-3.0.html
+					</NuxtLink>
+				</p>
+			</footer>
+		</div>
 	</div>
 </template>
 
@@ -278,6 +289,4 @@ You should also get your employer (if you work as a programmer) or school, if an
 `);
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
