@@ -106,6 +106,7 @@
 					<button
 						:disabled="orders.length === 0"
 						class="bg-warning disabled:bg-gray-300 my-auto px-2 py-2 border border-border-default rounded-full disabled:text-gray-600 text-center disabled:cursor-not-allowed surface"
+						@click="sendOrder"
 					>
 						Invia il tuo ordine
 					</button>
@@ -144,6 +145,14 @@ const orders = ref([]);
 
 const toggleCart = () => {
 	cartShown.value = !cartShown.value;
+};
+
+const sendOrder = () => {
+	console.log("Sending order: ", orders.value);
+	// Here you would typically send the order to your backend or an API
+	// For this example, we'll just clear the cart and log the order
+	orders.value = [];
+	alert("Ordine inviato!");
 };
 
 const onSearchSelect = (item) => {
