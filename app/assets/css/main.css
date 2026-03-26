@@ -28,7 +28,7 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
   --color-text-secondary: oklch(65% 0 0);
   --color-text-muted: oklch(50% 0 0);
   
-  --color-border-default: oklch(28% 0.02 260);
+  --color-border-default: oklch(0.48 0.017 254.7);
   --color-shadow-default: rgba(0, 0, 0, 0.4);
 }
 

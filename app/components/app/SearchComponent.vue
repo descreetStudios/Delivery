@@ -65,7 +65,7 @@
 		<transition name="dropdown">
 			<div
 				v-if="!justSelected && (results.length || (!loading && query.length >= 2))"
-				class="bg-bg-root shadow-lg mt-2 rounded-xl max-h-60 overflow-hidden overflow-y-auto appearance-none results-scroll"
+				class="bg-bg-root shadow-lg mt-2 border border-border-default rounded-xl max-h-60 overflow-hidden overflow-y-auto appearance-none results-scroll"
 			>
 				<ul>
 					<!-- No results -->
