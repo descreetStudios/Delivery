@@ -121,6 +121,7 @@
 		<AppMapComponent
 			ref="mapRef"
 			@map-loaded="onMapLoaded"
+			@gps-change="onGPSChange"
 		/>
 		<AppCoordinatesComponent ref="coordsRef" />
 	</div>
@@ -135,12 +136,19 @@ const mapRef = ref(null);
 const coordsRef = ref(null);
 const mapInstance = ref(null);
 const cartShown = ref(false);
-const mapWrapper = ref(null);
+const gpsCoords = ref({ latitude: 0, longitude: 0 });
+
 const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
 	coordsRef.value.bindMap(mapWrapper);
 	mapWrapper.value = mapWrapper;
 	mapInstance.value = mapWrapper.map;
+};
+
+const onGPSChange = (coords) => {
+	console.log("GPS coordinates changed: ", coords);
+	gpsCoords.value.latitude = coords.coords.latitude;
+	gpsCoords.value.longitude = coords.coords.longitude;
 };
 
 const order = ref({
@@ -163,7 +171,7 @@ const sendOrder = () => {
 	const orderCopy = JSON.parse(JSON.stringify(order.value));
 	orderCopy.id = Date.now();
 	orderCopy.total = orderCopy.items.reduce((sum, item) => sum + item.price, 0);
-	orderCopy.destination = coordsRef.value.bindMap(mapWrapper.value);
+	orderCopy.destination = gpsCoords.value;
 	orderCopy.restaurant = restaurant.value;
 	console.log("Sending order:", orderCopy);
 

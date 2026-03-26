@@ -118,8 +118,9 @@ const handleMapLoad = (mapWrapper) => {
 		geolocate.trigger();
 	});
 
-	geolocate.on("geolocate", (e) => {
-		emit("gps-change", e);
+	geolocate.on("geolocate", (coords) => {
+		console.log("Geolocation obtained: ", coords);
+		emit("gps-change", coords);
 	});
 };
 

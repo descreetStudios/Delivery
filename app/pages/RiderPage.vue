@@ -13,7 +13,7 @@
 		<AppMapComponent
 			ref="mapRef"
 			@map-loaded="onMapLoaded"
-			@gps-change="handleGPSChange"
+			@gps-change="onGPSChange"
 		/>
 		<AppCoordinatesComponent ref="coordsRef" />
 		<AppRoutingEngineComponent :map-instance="mapInstance" />
@@ -38,7 +38,7 @@ const onMapLoaded = (mapWrapper) => {
 	mapInstance.value = mapWrapper.map;
 	routingStore.syncRoutingData(courierId.value);
 };
-const handleGPSChange = (e)=>{
-	routingStore.syncGPS([e.coords.latitude, e.coords.longitude]);
+const onGPSChange = (coords) => {
+	routingStore.syncGPS([coords.coords.latitude, coords.coords.longitude]);
 };
 </script>
