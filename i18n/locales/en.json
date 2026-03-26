@@ -1,4 +1,14 @@
 {
+    "License": {
+        "intro": "This application is distributed under the terms of the",
+        "mid": "You are free to redistribute and/or modify it in accordance with these terms.",
+        "key": "Key Terms",
+        "firstKey": "Freedom to use, study, modify, and share the software.",
+        "secondKey": "Requirement to make the source code available, including for network use.",
+        "thirdKey": "Modified versions must remain free and open.",
+        "full":"Full License Text",
+        "moreInformation":"For more information, please visit the official GNU website:"
+    },
     "UserPage": {
         "restaurant": "Restaurant"
     },

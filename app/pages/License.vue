@@ -22,25 +22,25 @@
 		</h2>
 
 		<p class="m-0 text-secondary-text text-lg text-center leading-relaxed">
-			This application is distributed under the terms of the
+			{{$t('License.intro')}} 
 			<strong>GNU Affero General Public License v3.0</strong>.<br>
-			You are free to redistribute and/or modify it in accordance with these terms.
+			{{$t('License.mid')}}
 		</p>
 
 		<section class="bg-bg mb-0 p-8 border border-border rounded-xl">
 			<h3 class="flex items-center gap-2 mb-4 font-semibold text-primary text-2xl">
-				<span>Key Terms</span>
+				<span>{{$t('License.key')}}</span>
 			</h3>
 			<ul class="pl-3 text-primary-text text-base leading-7 list-disc list-inside">
-				<li>Freedom to use, study, modify, and share the software.</li>
-				<li>Requirement to make the source code available, including for network use.</li>
-				<li>Modified versions must remain free and open.</li>
+				<li>{{$t('License.firstKey')}}</li>
+				<li>{{$t('License.secondKey')}}</li>
+				<li>{{$t('License.thirdKey')}}</li>
 			</ul>
 		</section>
 
 		<section class="bg-bg mb-0 p-8 border border-border rounded-xl">
 			<h3 class="flex items-center gap-2 mb-4 font-semibold text-primary text-2xl">
-				<span>Full License Text</span>
+				<span>{{$t('License.full')}}</span>
 			</h3>
 			<div class="relative border border-border rounded-xl max-h-112.5 overflow-hidden">
 				<pre class="box-border bg-surface m-0 p-5 max-h-112.5 overflow-y-auto text-courier-new text-primary-text text-sm whitespace-pre-wrap scrollbar-custom">{{ agplText }}</pre>
@@ -49,7 +49,7 @@
 
 		<footer class="mt-4 text-tertiary-text text-base text-center">
 			<p>
-				For more information, please visit the official GNU website:
+				{{$t('License.moreInformation')}}
 				<NuxtLink
 					to="https://www.gnu.org/licenses/agpl-3.0.html"
 					class="text-info hover:underline no-underline transition duration-200 ease-in-out"

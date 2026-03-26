@@ -1,10 +1,21 @@
 {
-    "UserPage":{
-        "restaurant":"Ristorante"
+    "License": {
+        "intro": "Questa applicazione è distribuita secondo i termini della",
+        "mid": "Sei libero di ridistribuirla e/o modificarla in conformità a questi termini.",
+        "key": "Termini chiave",
+        "firstKey": "Libertà di usare, studiare, modificare e condividere il software.",
+        "secondKey": "Obbligo di rendere disponibile il codice sorgente, anche in caso di utilizzo tramite rete.",
+        "thirdKey": "Le versioni modificate devono rimanere libere e aperte.",
+        "full":"Testo completo della licenza",
+        "moreInformation":"Per maggiori informazioni, visita il sito ufficiale di GNU:"
+
     },
-        "sidebar": {
-            "riderQuestion": "Hey, sei un rider?",
-            "userQuestion": "Hey, sei un utente?",
-            "ctaClick": "Clicca qui!"
-        }
+    "UserPage": {
+        "restaurant": "Ristorante"
+    },
+    "sidebar": {
+        "riderQuestion": "Hey, sei un rider?",
+        "userQuestion": "Hey, sei un utente?",
+        "ctaClick": "Clicca qui!"
+    }
 }
