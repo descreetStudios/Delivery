@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<!-- Components -->
-		<AppHomepage />
-		<AppNavBar />
-		<AppFooter />
+		<AppHomepageComponent />
+		<AppNavBarComponent />
+		<AppFooterComponent />
 
 		<main class="container">
 			<slot />

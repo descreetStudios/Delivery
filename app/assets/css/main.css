@@ -70,4 +70,22 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 		border-radius: 8px;
 		border: 2px solid var(--color-surface);
 	}
+
+  @keyframes arrows {
+    0% {
+      opacity: 0;
+      transform: rotate(45deg) translate(-5px, -5px);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+  }
+
+  .animate-arrows {
+    animation: arrows 2s infinite;
+  }
 }

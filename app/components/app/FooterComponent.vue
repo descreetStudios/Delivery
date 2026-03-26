@@ -8,26 +8,10 @@
 				<p>
 					This project is open-source and licensed under
 					<NuxtLink
-						to="/license"
+						to="/License"
 						class="font-semibold text-text-secondary hover:text-secondary-hover hover:underline no-underline"
 						@dragstart.prevent
 					>AGPL-3.0 License</NuxtLink>.
-				</p>
-				<p>
-					By using this site, you agree to the
-					<NuxtLink
-						to="/terms-and-conditions"
-						class="font-semibold text-text-secondary hover:text-secondary-hover hover:underline no-underline"
-						@dragstart.prevent
-					>Terms and Conditions</NuxtLink>.
-				</p>
-				<p>
-					Read our
-					<NuxtLink
-						to="/privacy-policy"
-						class="font-semibold text-text-secondary hover:text-secondary-hover hover:underline no-underline"
-						@dragstart.prevent
-					>Privacy Policy</NuxtLink>.
 				</p>
 			</div>
 
