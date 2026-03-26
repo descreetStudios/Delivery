@@ -1,16 +1,16 @@
 <template>
-	<footer class="bg-bg-surface py-10 pt-4 border-t border-t-border font-inter text-text-primary">
+	<footer class="bg-bg-secondary-home py-10 pt-4 border-t-2 border-t-border font-barlow">
 		<div class="flex flex-wrap justify-between items-center gap-10 m-0 mx-auto max-w-7xl">
 			<!-- Left: Info -->
-			<div class="flex-1 min-w-62.5">
+			<div class="flex-1 min-w-62.5 font-semibold text-text-primary">
 				<p>&copy; {{ currentYear }} {{$t('FooterComponent.foot')}}</p>
 				<p>
 					{{$t('FooterComponent.secondFoot')}}
 					<NuxtLink
 						to="/License"
-						class="font-semibold text-text-secondary hover:text-secondary-hover hover:underline no-underline"
+						class="font-semibold text-bg-home hover:text-secondary-hover hover:underline no-underline"
 						@dragstart.prevent
-					>AGPL-3.0 License</NuxtLink>.
+					>AGPL-3.0 License</NuxtLink>
 				</p>
 			</div>
 
@@ -26,7 +26,7 @@
 								href="https://nuxt.com"
 								target="_blank"
 								rel="noopener noreferrer"
-								class="flex flex-col justify-center items-center bg-[rgba(0,220,130,0.18)] shadow-2xl p-4 rounded-xl focus:outline-none w-26 h-26 text-secondary-text text-center transition-all hover:-translate-y-1 duration-200 ease-in-out"
+								class="flex flex-col justify-center items-center bg-bg-home shadow-2xl p-4 border-2 border-text-home rounded-xl focus:outline-none w-26 h-26 text-secondary-text text-center transition-all hover:-translate-y-1 duration-200 ease-in-out"
 								@dragstart.prevent
 							>
 								<Icon
@@ -39,7 +39,7 @@
 								href="https://vuejs.org/"
 								target="_blank"
 								rel="noopener noreferrer"
-								class="flex flex-col justify-center items-center bg-[rgba(66,184,131,0.18)] shadow-2xl p-4 rounded-xl focus:outline-none w-26 h-26 text-secondary-text text-center transition-all hover:-translate-y-1 duration-200 ease-in-out"
+								class="flex flex-col justify-center items-center bg-bg-home shadow-2xl p-4 border-2 border-text-home rounded-xl focus:outline-none w-26 h-26 text-secondary-text text-center transition-all hover:-translate-y-1 duration-200 ease-in-out"
 								@dragstart.prevent
 							>
 								<Icon
@@ -52,7 +52,7 @@
 								href="https://tailwindcss.com/"
 								target="_blank"
 								rel="noopener noreferrer"
-								class="flex flex-col justify-center items-center bg-[rgba(56,189,248,0.18)] shadow-2xl p-4 rounded-xl focus:outline-none w-26 h-26 text-secondary-text text-center transition-all hover:-translate-y-1 duration-200 ease-in-out"
+								class="flex flex-col justify-center items-center bg-bg-home shadow-2xl p-4 border-2 border-text-home rounded-xl focus:outline-none w-26 h-26 text-secondary-text text-center transition-all hover:-translate-y-1 duration-200 ease-in-out"
 								@dragstart.prevent
 							>
 								<Icon
@@ -66,14 +66,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="border-border-default border-l h-28" />
+				<div class="border-text-home border-l h-28" />
 				<div class="flex flex-col items-center gap-4 ml-2">
 					<h4 class="font-bold text-text-primary text-lg text-center">Support us on</h4>
 					<NuxtLink
 						href="https://github.com/descreetStudios/Delivery"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex flex-col justify-center items-center bg-[rgba(130,130,130,0.2)] shadow-2xl p-4 rounded-xl focus:outline-none w-26 h-26 text-secondary-text text-center transition-all hover:-translate-y-1 duration-200 ease-in-out"
+						class="flex flex-col justify-center items-center bg-bg-home shadow-2xl p-4 border-2 border-text-home rounded-xl focus:outline-none w-26 h-26 text-secondary-text text-center transition-all hover:-translate-y-1 duration-200 ease-in-out"
 						@dragstart.prevent
 					>
 						<Icon
