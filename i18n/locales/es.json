@@ -1,4 +1,7 @@
 {
+    "UserPage": {
+        "restaurant": "Restaurante"
+    },
     "sidebar": {
         "riderQuestion": "¿Oye, eres a rider?",
         "userQuestion": "¿Oye, eres a usuario?",

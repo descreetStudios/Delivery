@@ -1,7 +1,10 @@
 {
-    "sidebar": {
-        "riderQuestion": "Hey, sei un rider?",
-        "userQuestion": "Hey, sei un utente?",
-        "ctaClick": "Clicca qui!"
-    }
+    "UserPage":{
+        "restaurant":"Ristorante"
+    },
+        "sidebar": {
+            "riderQuestion": "Hey, sei un rider?",
+            "userQuestion": "Hey, sei un utente?",
+            "ctaClick": "Clicca qui!"
+        }
 }

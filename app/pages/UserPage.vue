@@ -19,7 +19,7 @@
 				<h2
 					v-if="ristorante"
 					class="text-text-primary"
-				><span class="font-bold">Ristorante:</span> {{ ristorante }}</h2>
+				><span class="font-bold">{{$t('UserPage.restaurant')}}:</span> {{ ristorante }}</h2>
 				<div
 					v-if="ristorante"
 					class="py-0.5 pr-0.5 border border-border-default rounded-lg"
