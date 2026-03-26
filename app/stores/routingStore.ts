@@ -62,6 +62,7 @@ interface RoutingData{
     code:string;
     routes:Route[];
     waypoints: Waypoint[];
+    currentGPS: Coordinate;
 }
 
 export const useRoutingStore = defineStore("routingStore", {
@@ -69,6 +70,7 @@ export const useRoutingStore = defineStore("routingStore", {
 		code: "NotLoaded",
 		routes:[],
 		waypoints: [],
+		currentGPS:[0,0],
 	}),
 
 	actions:{
@@ -92,6 +94,10 @@ export const useRoutingStore = defineStore("routingStore", {
 
 				reportError(message);
 			}
+		},
+
+		syncGPS(coords: Coordinate){
+		    this.currentGPS=coords;
 		},
 	},
 });

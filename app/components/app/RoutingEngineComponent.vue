@@ -15,16 +15,13 @@ const props = defineProps({
 });
 
 const map = toRef(props, "mapInstance");
+const waiting = ref(false);
 
 const routingStore = useRoutingStore();
 const routingData = shallowRef(routingStore.$state);
 const unsubscribe = routingStore.$subscribe((mutation, state) => {
 	routingData.value = state;
-	if (state.code == "Ok" && map.value) {
-		drawRoutingPolyline();
-		drawWaypoints();
-	}
-	else waitMapLoading();
+	if (!waiting.value) waitLoading();
 });
 
 const drawRoutingPolyline = () => {
@@ -112,7 +109,7 @@ const drawWaypoints = () => {
 	});
 
 	map.value.addLayer({
-		id: "point",
+		id: "waypoints",
 		type: "circle",
 		source: "waypoints",
 		paint: {
@@ -122,14 +119,18 @@ const drawWaypoints = () => {
 	});
 };
 
-const waitMapLoading = () => {
+const waitLoading = () => {
+	waiting.value = true;    
 	const stopWatch = watch(
 		() => map.value,
 		(newVal, oldVal) => {
-			if (checkMapStatus(newVal, oldVal)) {
+			if (checkMapStatus(newVal, oldVal) && routingData.value.code == "Ok") {
 				drawRoutingPolyline();
 				drawWaypoints();
-				stopWatch();
+				waiting.value = false;
+				nextTick(() => {
+					if (stopWatch) stopWatch();
+				});
 			}
 		},
 		{ immediate: true },

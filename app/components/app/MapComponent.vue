@@ -50,10 +50,6 @@ const props = defineProps({
 		type: String,
 		default: "https://tiles.openfreemap.org/styles/liberty",
 	},
-	gps: {
-		type: Boolean,
-		default: false,
-	},
 });
 
 const mapWrapperInstance = ref(null);
@@ -87,7 +83,7 @@ const pinIconLayout = {
 	"icon-offset": [0, -15],
 };
 
-const emit = defineEmits(["map-loaded", "map-click"]);
+const emit = defineEmits(["map-loaded", "map-click", "gps-change"]);
 
 const updatePinPosition = (coordinates) => {
 	pinCoordinates.value = coordinates;
@@ -118,11 +114,13 @@ const handleMapLoad = (mapWrapper) => {
 
 	map.addControl(geolocate);
 
-	if (props.gps) {
-		map.once("idle", () => {
-			geolocate.trigger();
-		});
-	}
+	map.once("idle", () => {
+		geolocate.trigger();
+	});
+
+	geolocate.on("geolocate", (e) => {
+		emit("gps-change", e);
+	});
 };
 
 const fetchAndHighlightGeometry = async (map, item) => {

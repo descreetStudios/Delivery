@@ -12,8 +12,8 @@
 		</AppSidebarComponent>
 		<AppMapComponent
 			ref="mapRef"
-			:gps="true"
 			@map-loaded="onMapLoaded"
+			@gps-change="handleGPSChange"
 		/>
 		<AppCoordinatesComponent ref="coordsRef" />
 		<AppRoutingEngineComponent :map-instance="mapInstance" />
@@ -22,8 +22,11 @@
 
 <script setup>
 import { useRoute } from "vue-router";
-const { $routingStore, $DEBUG } = useNuxtApp();
+import { useRoutingStore } from "@/stores/routingStore";
 
+const { $DEBUG } = useNuxtApp();
+
+const routingStore = useRoutingStore();
 const route = useRoute();
 const courierId = ref(route.query.courierId ?? null);
 
@@ -33,6 +36,9 @@ const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
 	coordsRef.value.bindMap(mapWrapper);
 	mapInstance.value = mapWrapper.map;
-	$routingStore.syncRoutingData(courierId.value);
+	routingStore.syncRoutingData(courierId.value);
+};
+const handleGPSChange = (e)=>{
+	routingStore.syncGPS([e.coords.latitude, e.coords.longitude]);
 };
 </script>
