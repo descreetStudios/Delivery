@@ -50,6 +50,10 @@ const props = defineProps({
 		type: String,
 		default: "https://tiles.openfreemap.org/styles/liberty",
 	},
+	isUserPage: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 const mapWrapperInstance = ref(null);
@@ -116,10 +120,13 @@ const handleMapLoad = (mapWrapper) => {
 
 	map.once("idle", () => {
 		geolocate.trigger();
+		if (props.isUserPage) {
+			geolocate._watchState = "BACKGROUND";
+		}
 	});
 
 	geolocate.on("geolocate", (coords) => {
-		console.log("Geolocation obtained: ", coords);
+		if ($DEBUG) console.log("Geolocation obtained: ", coords);
 		emit("gps-change", coords);
 	});
 };

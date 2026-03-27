@@ -120,6 +120,7 @@
 		</AppSidebarComponent>
 		<AppMapComponent
 			ref="mapRef"
+			:is-user-page="true"
 			@map-loaded="onMapLoaded"
 			@gps-change="onGPSChange"
 		/>
@@ -146,7 +147,7 @@ const onMapLoaded = (mapWrapper) => {
 };
 
 const onGPSChange = (coords) => {
-	console.log("GPS coordinates changed: ", coords);
+	if ($DEBUG) console.log("GPS coordinates changed: ", coords);
 	gpsCoords.value.latitude = coords.coords.latitude;
 	gpsCoords.value.longitude = coords.coords.longitude;
 };
