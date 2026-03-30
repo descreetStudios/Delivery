@@ -15,12 +15,14 @@ const props = defineProps({
 });
 
 const map = toRef(props, "mapInstance");
-
 const routingStore = useRoutingStore();
-const areRoutingDataLoaded = computed(() => routingStore.code == "Ok");
+const { code, routes, waypoints, _currentGPS } = storeToRefs(routingStore);
+const areRoutingDataLoaded = computed(() => code.value == "Ok");
 const loaded = computed(() => !!map.value && areRoutingDataLoaded.value);
 
 const initRoutingEngineComponent = () => {
+	if ($DEBUG) console.log("Routing data: ", routingStore);
+
 	drawRoutingPolyline();
 	drawWaypoints();
 };
@@ -39,16 +41,13 @@ const stopWatch = watch(
 );
 
 const drawRoutingPolyline = () => {
-
-	if ($DEBUG) console.log("Routing data: ", routingStore);
-
-	const route = routingStore?.routes?.[0]?.geometry;
-	if (!route) {
-		console.error("Route geometry error", routingStore);
+	const routeGeometry = routes.value?.[0]?.geometry;
+	if (!routeGeometry) {
+		console.error("Route geometry error", routes.value);
 		return;
 	}
 
-	if ($DEBUG) console.log("Routing polyline: ", route);
+	if ($DEBUG) console.log("Routing polyline: ", routeGeometry);
 
 	//Remove older sources and layers
 	if (map.value.getSource("route")) {
@@ -61,7 +60,7 @@ const drawRoutingPolyline = () => {
 		data: {
 			type: "Feature",
 			properties: {},
-			geometry: route,
+			geometry: routeGeometry,
 		},
 	});
 
@@ -81,13 +80,13 @@ const drawRoutingPolyline = () => {
 };
 
 const drawWaypoints = () => {
-	const waypoints = [];
+	const waypointsLocations = [];
 
-	for (let i = 0; i < routingStore?.waypoints?.length; i++) {
-		waypoints.push(routingStore?.waypoints?.[i]?.location);
+	for (let i = 0; i < waypoints.value?.length; i++) {
+		waypointsLocations.push(waypoints.value?.[i]?.location);
 	}
 
-	const waypointsFeatures = waypoints.map(coord => ({
+	const waypointsFeatures = waypointsLocations.map(coord => ({
 		type: "Feature",
 		geometry: {
 			type: "Point",
