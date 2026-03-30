@@ -3,9 +3,9 @@
 		<div class="flex flex-wrap justify-between items-center gap-10 m-0 mx-auto max-w-7xl">
 			<!-- Left: Info -->
 			<div class="flex-1 min-w-62.5 font-semibold text-black">
-				<p>&copy; {{ currentYear }} {{$t('FooterComponent.foot')}}</p>
+				<p>&copy; {{ currentYear }} {{ $t('FooterComponent.foot') }}</p>
 				<p>
-					{{$t('FooterComponent.secondFoot')}}
+					{{ $t('FooterComponent.secondFoot') }}
 					<NuxtLink
 						to="/License"
 						class="font-semibold text-bg-home hover:text-secondary-hover hover:underline no-underline"
@@ -91,5 +91,3 @@
 <script setup>
 const currentYear = new Date().getFullYear();
 </script>
-
-<style scoped></style>

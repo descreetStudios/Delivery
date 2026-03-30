@@ -12,12 +12,8 @@
 			</p>
 			<div class="top-[10%] relative flex flex-col items-center gap-1 translate-x-[-50%] translate-y-[-50%]">
 				<span class="block border-black border-r border-b w-8 h-8 animate-arrows" />
-				<span
-					class="block border-black border-r border-b w-8 h-8 animate-arrows [animation-delay:-0.2s]"
-				/>
-				<span
-					class="block border-black border-r border-b w-8 h-8 animate-arrows [animation-delay:-0.4s]"
-				/>
+				<span class="block border-black border-r border-b w-8 h-8 animate-arrows [animation-delay:-0.2s]" />
+				<span class="block border-black border-r border-b w-8 h-8 animate-arrows [animation-delay:-0.4s]" />
 			</div>
 		</section>
 
@@ -109,5 +105,3 @@ const sections = [
 	},
 ];
 </script>
-
-<style></style>

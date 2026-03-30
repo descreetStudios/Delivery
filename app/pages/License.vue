@@ -3,16 +3,16 @@
 		<div
 			class="flex flex-col gap-8 shadow-xl m-12 mx-auto p-10 rounded-3xl max-w-250 font-system-ui bg-text-home text-primary-text"
 		>
-			<header class="flex justify-center items-center p-6">
+			<header class="flex justify-center items-center p-5">
 				<NuxtLink
 					to="/"
-					class="flex justify-center items-center gap-4 bg-surface w-fit h-fit no-underline cursor-pointer select-none"
+					class="flex justify-center items-center gap-6 bg-surface w-fit h-fit no-underline cursor-pointer select-none"
 					@dragstart.prevent
 				>
 					<NuxtImg
-						src="/images/logo/LogoBank/gamefier-logo-light-128px.png"
+						src="/images/delivery-logo.png"
 						alt="Delivery Logo"
-						class="mb-2 w-16 text-bg-home pointer-events-none select-none shrink-0"
+						class="mb-2 w-25 h-auto text-bg-home pointer-events-none select-none shrink-0"
 						format="webp"
 						@dragstart.prevent
 					/>
@@ -288,5 +288,3 @@ If your software can interact with users remotely through a computer network, yo
 You should also get your employer (if you work as a programmer) or school, if any, to sign a "copyright disclaimer" for the program, if necessary. For more information on this, and how to apply and follow the GNU AGPL, see <https://www.gnu.org/licenses/>.
 `);
 </script>
-
-<style lang="scss" scoped></style>

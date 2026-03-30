@@ -5,7 +5,7 @@
 			<h2 class="text-text-primary">€{{ props.price.toFixed(2) }}</h2>
 		</div>
 		<button
-			class="bg-warning ml-auto px-3 py-0.5 border border-border-default rounded-full h-fit text-center" 
+			class="bg-warning ml-auto px-3 py-0.5 border border-border-default rounded-full h-fit text-center"
 			@click="deleteItem"
 		>Elimina</button>
 	</div>
@@ -29,7 +29,3 @@ const deleteItem = () => {
 	emit("delete-item");
 };
 </script>
-
-<style>
-
-</style>
