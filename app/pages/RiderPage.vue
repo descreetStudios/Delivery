@@ -40,9 +40,10 @@ const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
 	coordsRef.value.bindMap(mapWrapper);
 	mapInstance.value = mapWrapper.map;
-	routingStore.syncRoutingData(courierId.value);
+	routingStore.setCourierId(courierId.value);
+	routingStore.syncRoutingData();
 };
 const onGPSChange = (coords) => {
-	routingStore.syncGPS([coords.coords.latitude, coords.coords.longitude]);
+	routingStore.syncGPS([coords.coords.longitude, coords.coords.latitude]);
 };
 </script>

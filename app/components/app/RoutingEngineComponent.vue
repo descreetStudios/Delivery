@@ -4,6 +4,8 @@
 
 <script setup>
 import { useRoutingStore } from "@/stores/routingStore";
+import { point, lineString } from "@turf/helpers";
+import pointToLineDistance from "@turf/point-to-line-distance";
 
 const { $DEBUG } = useNuxtApp();
 
@@ -16,7 +18,7 @@ const props = defineProps({
 
 const map = toRef(props, "mapInstance");
 const routingStore = useRoutingStore();
-const { code, routes, waypoints, _currentGPS } = storeToRefs(routingStore);
+const { code, routes, waypoints, currentGPS } = storeToRefs(routingStore);
 const areRoutingDataLoaded = computed(() => code.value == "Ok");
 const loaded = computed(() => !!map.value && areRoutingDataLoaded.value);
 
@@ -27,17 +29,24 @@ const initRoutingEngineComponent = () => {
 	drawWaypoints();
 };
 
-const stopWatch = watch(
+const stopLoadingWatch = watch(
 	() => loaded.value,
 	(newVal) => {
 		if (newVal) {
 			initRoutingEngineComponent();
 			nextTick(() => {
-				if (stopWatch) stopWatch();
+				if (stopLoadingWatch) stopLoadingWatch();
 			});
 		}
 	},
 	{ immediate: true },
+);
+
+const stopGPSWatch = watch(
+	() => currentGPS.value,
+	(newVal) => {
+		checkPolylineFollowing(newVal);
+	},
 );
 
 const drawRoutingPolyline = () => {
@@ -121,6 +130,27 @@ const drawWaypoints = () => {
 	});
 };
 
-</script>
+const checkPolylineFollowing = async (currentGPSLocation) => {
+	if (!loaded.value) return;
 
-<style></style>
+	const [lng, lat] = currentGPSLocation;
+	const gps = point([lng, lat]);
+	const route = lineString(routes.value?.[0]?.geometry.coordinates);
+	const distance = pointToLineDistance(gps, route, {
+		units: "meters",
+	});
+
+	if ($DEBUG) console.log("Distance", distance);
+
+	if (distance >= 50) {
+		await routingStore.syncRoutingData();
+		drawRoutingPolyline();
+		drawWaypoints();
+	}
+};
+
+onUnmounted(() => {
+	stopGPSWatch();
+});
+
+</script>

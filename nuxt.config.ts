@@ -20,6 +20,7 @@ export default defineNuxtConfig({
 				"@vue/devtools-core",
 				"@vue/devtools-kit",
 				"@indoorequal/vue-maplibre-gl",
+				"maplibre-gl",
 			],
 		},
 	},

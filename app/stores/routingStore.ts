@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-type Coordinate = [number, number];
+type Coordinate = [number, number]; //[lng, lat]
 
 interface Geometry{
     coordinates:Coordinate[];
@@ -63,6 +63,7 @@ interface RoutingData{
     routes:Route[];
     waypoints: Waypoint[];
     currentGPS: Coordinate;
+    courierId:string;
 }
 
 export const useRoutingStore = defineStore("routingStore", {
@@ -71,16 +72,17 @@ export const useRoutingStore = defineStore("routingStore", {
 		routes:[],
 		waypoints: [],
 		currentGPS:[0,0],
+		courierId:"",
 	}),
 
 	actions:{
-		async syncRoutingData(courierId: string){
+		async syncRoutingData(){
 			const { getRoutingData } = useRoutingEngineApi();
 			const nuxtApp=useNuxtApp();
 			const $DEBUG = await nuxtApp.$DEBUG;
 
 			try{
-				const data:RoutingData = await getRoutingData(courierId) as RoutingData;
+				const data:RoutingData = await getRoutingData(this.courierId) as RoutingData;
 				this.code=data.code;
 				this.routes = data.routes;
 				this.waypoints = data.waypoints;
@@ -96,8 +98,24 @@ export const useRoutingStore = defineStore("routingStore", {
 			}
 		},
 
-		syncGPS(coords: Coordinate){
+		async syncGPS(coords: Coordinate){
+			const {updateLocation} = useLocationApi();
+
 		    this.currentGPS=coords;
+			const location={			
+				courierId: "courier" + this.courierId,
+				latitude: this.currentGPS[1],
+				longitude: this.currentGPS[0],
+			};
+			try {
+				await updateLocation(location);
+			} catch (error) {
+				console.error("Failed to update location:", error);
+			}
+		},
+
+		setCourierId(courierId: string){
+			this.courierId=courierId;
 		},
 	},
 });
