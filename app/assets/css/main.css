@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
 
 @import "tailwindcss";
 
@@ -13,7 +13,7 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
   --breakpoint-3xl: 1920px;
 
   --font-barlow: "Barlow", sans-serif;
-  --font-fredoka: "Fredoka", sans-serif;
+  --font-modak: "Modak", sans-serif;
   --font-orbitron: "Orbitron", sans-serif;
   
   --accent-primary: var(--color-blue-500);
@@ -80,8 +80,8 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 		border: 2px solid var(--color-surface);
 	}
 
-  .font-fredoka {
-    font-family: var(--font-fredoka);
+  .font-modak {
+    font-family: var(--font-modak);
   }
 
   .font-orbitron {

@@ -3,7 +3,7 @@
 		<NuxtImg
 			class="my-1 w-20 h-auto"
 			draggable="false"
-			src="/images/food/pizza.png"
+			src="/images/pin-icon.png"
 			format="webp"
 		/>
 		<h1 class="text-text-primary">Gira a destra!</h1>

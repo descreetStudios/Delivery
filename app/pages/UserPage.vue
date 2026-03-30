@@ -1,5 +1,9 @@
 <template>
 	<div class="flex bg-root h-screen">
+		<AppLoadingComponent
+			v-if="!mapInstance"
+			class="z-1000"
+		/>
 		<AppSidebarComponent>
 			<template #header>
 				<UButton

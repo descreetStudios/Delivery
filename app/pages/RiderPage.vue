@@ -1,5 +1,9 @@
 <template>
 	<div class="flex flex-col bg-root h-screen">
+		<AppLoadingComponent
+			v-if="!mapInstance"
+			class="z-1000"
+		/>
 		<AppSidebarComponent>
 			<template #sidebar>
 				<AppRoutingCardComponent />

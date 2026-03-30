@@ -3,7 +3,7 @@
 		<section class="flex flex-col justify-center items-center gap-8 h-screen text-center">
 			<h1 class="text-7xl whitespace-nowrap">
 				<span class="font-barlow">Your next </span>
-				<span class="font-fredoka font-semibold text-text-home text-8xl">meal</span>
+				<span class="font-modak text-text-home text-8xl">meal</span>
 				<span class="font-barlow">, already </span>
 				<span class="bg-bg-secondary-home py-1 pr-2 rounded-lg font-orbitron italic tracking-wide select-none">on the way</span>
 			</h1>
@@ -47,7 +47,7 @@
 							v-for="(text, i) in section.links"
 							:key="i"
 							:to="text.to"
-							class="no-underline"
+							class="text-bg-secondary-home selection:text-white hover:underline no-underline"
 							@dragstart.prevent
 						>
 							<p class="my-2">{{ text.label }}</p>
@@ -95,7 +95,7 @@ const sections = [
 		image: "/images/howItWorks.png",
 		description:
 			"1. Choose your meal\n2. Place your order\n3. Track it in real time\n4. Enjoy your food at home",
-		links: [{ to: "/signup", label: "Order now" }],
+		links: [{ to: "/UserPage", label: "Order now" }],
 		reversed: true,
 	},
 
@@ -105,7 +105,7 @@ const sections = [
 		image: "/images/riders.png",
 		description:
 			"Deliver food on your schedule and earn money with flexible hours.",
-		links: [{ to: "/apply", label: "Apply now" }],
+		links: [{ to: "/RiderPage", label: "Apply now" }],
 	},
 ];
 </script>
