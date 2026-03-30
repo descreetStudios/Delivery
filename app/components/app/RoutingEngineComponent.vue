@@ -15,22 +15,36 @@ const props = defineProps({
 });
 
 const map = toRef(props, "mapInstance");
-const waiting = ref(false);
 
 const routingStore = useRoutingStore();
-const routingData = shallowRef(routingStore.$state);
-const unsubscribe = routingStore.$subscribe((mutation, state) => {
-	routingData.value = state;
-	if (!waiting.value) waitLoading();
-});
+const areRoutingDataLoaded = computed(() => routingStore.code == "Ok");
+const loaded = computed(() => !!map.value && areRoutingDataLoaded.value);
+
+const initRoutingEngineComponent = () => {
+	drawRoutingPolyline();
+	drawWaypoints();
+};
+
+const stopWatch = watch(
+	() => loaded.value,
+	(newVal) => {
+		if (newVal) {
+			initRoutingEngineComponent();
+			nextTick(() => {
+				if (stopWatch) stopWatch();
+			});
+		}
+	},
+	{ immediate: true },
+);
 
 const drawRoutingPolyline = () => {
 
-	if ($DEBUG) console.log("Routing data: ", routingData.value);
+	if ($DEBUG) console.log("Routing data: ", routingStore);
 
-	const route = routingData.value?.routes?.[0]?.geometry;
+	const route = routingStore?.routes?.[0]?.geometry;
 	if (!route) {
-		console.error("Route geometry error", routingData.value);
+		console.error("Route geometry error", routingStore);
 		return;
 	}
 
@@ -66,22 +80,11 @@ const drawRoutingPolyline = () => {
 	});
 };
 
-const checkMapStatus = (newVal, oldVal) => {
-	if (newVal) {
-		if (oldVal == null && $DEBUG) {
-			console.log("Map instance ready: ", map.value);
-		}
-		if (map.value.isStyleLoaded()) return true;
-		return false;
-	}
-	return false;
-};
-
 const drawWaypoints = () => {
 	const waypoints = [];
 
-	for (let i = 0; i < routingData.value?.waypoints?.length; i++) {
-		waypoints.push(routingData.value?.waypoints?.[i]?.location);
+	for (let i = 0; i < routingStore?.waypoints?.length; i++) {
+		waypoints.push(routingStore?.waypoints?.[i]?.location);
 	}
 
 	const waypointsFeatures = waypoints.map(coord => ({
@@ -119,27 +122,6 @@ const drawWaypoints = () => {
 	});
 };
 
-const waitLoading = () => {
-	waiting.value = true;    
-	const stopWatch = watch(
-		() => map.value,
-		(newVal, oldVal) => {
-			if (checkMapStatus(newVal, oldVal) && routingData.value.code == "Ok") {
-				drawRoutingPolyline();
-				drawWaypoints();
-				waiting.value = false;
-				nextTick(() => {
-					if (stopWatch) stopWatch();
-				});
-			}
-		},
-		{ immediate: true },
-	);
-};
-
-onUnmounted(() => {
-	unsubscribe();
-});
 </script>
 
 <style></style>
