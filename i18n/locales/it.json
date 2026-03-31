@@ -1,28 +1,36 @@
 {
-      "SearchComponent":{
-        "search":"Cerca un ristorante"
-    },
-    "FooterComponent": {
-        "foot":" Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
-        "secondFoot":"Questo progetto è open‑source ed è distribuito sotto licenza"
-    },
-    "License": {
-        "intro": "Questa applicazione è distribuita secondo i termini della",
-        "mid": "Sei libero di ridistribuirla e/o modificarla in conformità a questi termini.",
-        "key": "Termini chiave",
-        "firstKey": "Libertà di usare, studiare, modificare e condividere il software.",
-        "secondKey": "Obbligo di rendere disponibile il codice sorgente, anche in caso di utilizzo tramite rete.",
-        "thirdKey": "Le versioni modificate devono rimanere libere e aperte.",
-        "full":"Testo completo della licenza",
-        "moreInformation":"Per maggiori informazioni, visita il sito ufficiale di GNU:"
-
-    },
-    "UserPage": {
-        "restaurant": "Ristorante"
-    },
-    "sidebar": {
-        "riderQuestion": "Hey, sei un rider?",
-        "userQuestion": "Hey, sei un utente?",
-        "ctaClick": "Clicca qui!"
-    }
+  "HomePageComponent": {
+    "yourNext": "Il tuo prossimo",
+    "meal": "pasto",
+    "already": ", già",
+    "onTheWay": ", in arrivo",
+    "how": "Come funziona"
+  },
+  "SearchComponent": {
+    "search": "Cerca un ristorante"
+  },
+  "FooterComponent": {
+    "foot": " Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
+    "secondFoot": "Questo progetto è open-source e concesso in licenza sotto",
+    "built": "Realizzato con",
+    "support": "Supportaci su"
+  },
+  "License": {
+    "intro": "Questa applicazione è distribuita secondo i termini della",
+    "mid": "Sei libero di ridistribuirla e/o modificarla in conformità con tali termini.",
+    "key": "Termini Chiave",
+    "firstKey": "Libertà di usare, studiare, modificare e condividere il software.",
+    "secondKey": "Obbligo di rendere disponibile il codice sorgente, anche per l’uso in rete.",
+    "thirdKey": "Le versioni modificate devono rimanere libere e aperte.",
+    "full": "Testo Completo della Licenza",
+    "moreInformation": "Per maggiori informazioni, visita il sito ufficiale GNU:"
+  },
+  "UserPage": {
+    "restaurant": "Ristorante"
+  },
+  "sidebar": {
+    "riderQuestion": "Ehi, sei un rider?",
+    "userQuestion": "Ehi, sei un utente?",
+    "ctaClick": "Clicca qui!"
+  }
 }

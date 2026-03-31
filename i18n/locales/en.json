@@ -1,10 +1,19 @@
 {
+    "HomePageComponent":{
+        "yourNext":"Your next",
+        "meal":"meal",
+        "already":", already",
+        "onTheWay":", onTheWay",
+        "how":"How does it work"
+    },
     "SearchComponent":{
         "search":"Search a restaurant"
     },
     "FooterComponent": {
         "foot":" Untitled Delivery Project. Developed by an independent team. All rights reserved.",
-        "secondFoot":"This project is open-source and licensed under"
+        "secondFoot":"This project is open-source and licensed under",
+        "built":"Built with",
+        "support":"Support us on"
     },
     "License": {
         "intro": "This application is distributed under the terms of the",

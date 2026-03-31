@@ -2,13 +2,13 @@
 	<div class="bg-bg-home overflow-hidden home-highlight">
 		<section class="flex flex-col justify-center items-center gap-8 h-screen text-center">
 			<h1 class="text-7xl whitespace-nowrap">
-				<span class="font-barlow">Your next </span>
-				<span class="font-modak text-text-home text-8xl">meal</span>
-				<span class="font-barlow">, already </span>
-				<span class="bg-bg-secondary-home py-1 pr-2 rounded-lg font-orbitron italic tracking-wide select-none">on the way</span>
+				<span class="font-barlow">{{ $t('HomePageComponent.yourNext') }} </span>
+				<span class="font-modak text-text-home text-8xl">{{ $t('HomePageComponent.meal') }} </span>
+				<span class="font-barlow">{{ $t('HomePageComponent.already') }}  </span>
+				<span class="bg-bg-secondary-home py-1 pr-2 rounded-lg font-orbitron italic tracking-wide select-none">{{ $t('HomePageComponent.onTheWay') }} </span>
 			</h1>
 			<p class="font-barlow text-text-home text-3xl">
-				How does it work?
+				{{ $t('HomePageComponent.how') }} 
 			</p>
 			<div class="top-[10%] relative flex flex-col items-center gap-1 translate-x-[-50%] translate-y-[-50%]">
 				<span class="block border-black border-r border-b w-8 h-8 animate-arrows" />

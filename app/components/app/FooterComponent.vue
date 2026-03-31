@@ -19,7 +19,7 @@
 				<div class="flex items-center gap-6">
 					<div class="flex flex-col justify-center gap-4">
 						<h4 class="font-bold text-black text-lg text-center">
-							Built with
+							{{ $t('FooterComponent.built') }}
 						</h4>
 						<div class="flex gap-6">
 							<NuxtLink
@@ -68,7 +68,7 @@
 				</div>
 				<div class="border-text-home border-l h-28" />
 				<div class="flex flex-col items-center gap-4 ml-2">
-					<h4 class="font-bold text-black text-lg text-center">Support us on</h4>
+					<h4 class="font-bold text-black text-lg text-center">{{ $t('FooterComponent.support') }}</h4>
 					<NuxtLink
 						href="https://github.com/descreetStudios/Delivery"
 						target="_blank"

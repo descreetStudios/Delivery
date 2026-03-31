@@ -1,27 +1,36 @@
 {
-    "SearchComponent": {
-        "search": "Busca un restaurante"
-    },
-    "FooterComponent": {
-        "foot": " Untitled Delivery Project.Desarrollado por un equipo independiente. Todos los derechos reservados.",
-        "secondFoot": "Este proyecto es de código abierto y está licenciado bajo"
-    },
-    "License": {
-        "intro": "Esta aplicación se distribuye bajo los términos de la",
-        "mid": "Eres libre de redistribuirla y/o modificarla de acuerdo con estos términos.",
-        "key": "Términos clave",
-        "firstKey": "Libertad para usar, estudiar, modificar y compartir el software.",
-        "secondKey": "Obligación de poner a disposición el código fuente, incluso para el uso a través de la red.",
-        "thirdKey": "Las versiones modificadas deben seguir siendo libres y abiertas.",
-        "full": "Texto completo de la licencia",
-        "moreInformation": "Para más información, visita el sitio oficial de GNU:"
-    },
-    "UserPage": {
-        "restaurant": "Restaurante"
-    },
-    "sidebar": {
-        "riderQuestion": "¿Oye, eres a rider?",
-        "userQuestion": "¿Oye, eres a usuario?",
-        "ctaClick": "Haz clic aquí!"
-    }
+  "HomePageComponent": {
+    "yourNext": "Tu próxima",
+    "meal": "comida",
+    "already": ", ya",
+    "onTheWay": ", en camino",
+    "how": "Cómo funciona"
+  },
+  "SearchComponent": {
+    "search": "Buscar un restaurante"
+  },
+  "FooterComponent": {
+    "foot": " Untitled Delivery Project. Desarrollado por un equipo independiente. Todos los derechos reservados.",
+    "secondFoot": "Este proyecto es de código abierto y está licenciado bajo",
+    "built": "Construido con",
+    "support": "Apóyanos en"
+  },
+  "License": {
+    "intro": "Esta aplicación se distribuye bajo los términos de la",
+    "mid": "Eres libre de redistribuirla y/o modificarla de acuerdo con estos términos.",
+    "key": "Términos Clave",
+    "firstKey": "Libertad para usar, estudiar, modificar y compartir el software.",
+    "secondKey": "Obligación de poner el código fuente a disposición, incluso para uso en red.",
+    "thirdKey": "Las versiones modificadas deben seguir siendo libres y abiertas.",
+    "full": "Texto Completo de la Licencia",
+    "moreInformation": "Para más información, visita el sitio oficial de GNU:"
+  },
+  "UserPage": {
+    "restaurant": "Restaurante"
+  },
+  "sidebar": {
+    "riderQuestion": "Oye, ¿eres repartidor?",
+    "userQuestion": "Oye, ¿eres usuario?",
+    "ctaClick": "Haz clic aquí!"
+  }
 }
