@@ -104,13 +104,13 @@ export const useRoutingStore = defineStore("routingStore", {
 			const {updateLocation} = useLocationApi();
 
 		    this.currentGPS=coords;
-			this.currentHeading= +heading.toFixed(0);
+			if(heading) this.currentHeading= +heading.toFixed(0);
 
 			const location={			
 				courierId: "courier" + this.courierId,
 				latitude: this.currentGPS[1],
 				longitude: this.currentGPS[0],
-				heading: this.currentHeading,
+				heading: this.currentHeading || 0,
 			};
 			try {
 				await updateLocation(location);

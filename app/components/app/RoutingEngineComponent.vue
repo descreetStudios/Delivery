@@ -145,7 +145,6 @@ const checkPolylineFollowing = async (currentGPSLocation) => {
 	if (distance >= 50) {
 		await routingStore.syncRoutingData();
 		drawRoutingPolyline();
-		drawWaypoints();
 	}
 };
 
