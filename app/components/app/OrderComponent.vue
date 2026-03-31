@@ -7,7 +7,7 @@
 		<button
 			class="bg-warning ml-auto px-3 py-0.5 border border-border-default rounded-full h-fit text-center"
 			@click="deleteItem"
-		>Elimina</button>
+		>{{ $t('OrderComponent.delete') }}</button>
 	</div>
 </template>
 

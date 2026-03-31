@@ -13,7 +13,7 @@
 			class="bg-warning px-3 py-0.5 border border-border-default rounded-full text-center" 
 			@click="buyItem"
 		>
-			Compra
+			{{ $t('FoodCardComponent.buy') }}
 		</button>
 	</div>
 </template>

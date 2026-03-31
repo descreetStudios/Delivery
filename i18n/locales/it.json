@@ -1,36 +1,75 @@
 {
-  "HomePageComponent": {
-    "yourNext": "Il tuo prossimo",
-    "meal": "pasto",
-    "already": ", già",
-    "onTheWay": ", in arrivo",
-    "how": "Come funziona"
-  },
-  "SearchComponent": {
-    "search": "Cerca un ristorante"
-  },
-  "FooterComponent": {
-    "foot": " Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
-    "secondFoot": "Questo progetto è open-source e concesso in licenza sotto",
-    "built": "Realizzato con",
-    "support": "Supportaci su"
-  },
-  "License": {
-    "intro": "Questa applicazione è distribuita secondo i termini della",
-    "mid": "Sei libero di ridistribuirla e/o modificarla in conformità con tali termini.",
-    "key": "Termini Chiave",
-    "firstKey": "Libertà di usare, studiare, modificare e condividere il software.",
-    "secondKey": "Obbligo di rendere disponibile il codice sorgente, anche per l’uso in rete.",
-    "thirdKey": "Le versioni modificate devono rimanere libere e aperte.",
-    "full": "Testo Completo della Licenza",
-    "moreInformation": "Per maggiori informazioni, visita il sito ufficiale GNU:"
-  },
-  "UserPage": {
-    "restaurant": "Ristorante"
-  },
-  "sidebar": {
-    "riderQuestion": "Ehi, sei un rider?",
-    "userQuestion": "Ehi, sei un utente?",
-    "ctaClick": "Clicca qui!"
-  }
+    "FoodCardComponent": {
+        "buy": "Acquista"
+    },
+    "FoodSearchComponent": {
+        "noResults": "Nessun risultato trovato"
+    },
+    "OrderComponent": {
+        "delete": "Elimina"
+    },
+    "sections": {
+        "hero": {
+            "title": "Piatti Caldi, Distanza Zero",
+            "description": "Ordina dai tuoi ristoranti preferiti e ricevi il cibo velocemente, fresco e direttamente alla tua porta.",
+            "link": "Ordina ora"
+        },
+        "restaurants": {
+            "title": "Esplora i Ristoranti Locali",
+            "description": "Sfoglia un'ampia selezione di ristoranti, dai locali preferiti ai posti più in voga. Qualsiasi cosa tu desideri, la trovi qui."
+        },
+        "delivery": {
+            "title": "Consegna Veloce e Affidabile",
+            "description": "I nostri rider garantiscono una consegna rapida e sicura, mantenendo il tuo cibo fresco e puntuale."
+        },
+        "how": {
+            "title": "Come Funziona",
+            "description": "1. Scegli il tuo pasto\n2. Effettua l’ordine\n3. Seguilo in tempo reale\n4. Goditi il tuo cibo a casa",
+            "link": "Ordina ora"
+        },
+        "riders": {
+            "title": "Diventa un Rider",
+            "description": "Consegna quando vuoi e guadagna con orari flessibili.",
+            "link": "Candidati ora"
+        }
+    },
+    "NavBarComponent": {
+        "user": "Utente",
+        "rider": "Rider",
+        "license": "Licenza"
+    },
+    "HomePageComponent": {
+        "yourNext": "Il tuo prossimo ",
+        "meal": "pasto",
+        "already": ", già ",
+        "onTheWay": "in arrivo",
+        "how": "Come funziona?"
+    },
+    "SearchComponent": {
+        "search": "Cerca un ristorante"
+    },
+    "FooterComponent": {
+        "foot": " Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
+        "secondFoot": "Questo progetto è open-source e concesso in licenza sotto",
+        "built": "Realizzato con",
+        "support": "Supportaci su"
+    },
+    "License": {
+        "intro": "Questa applicazione è distribuita secondo i termini della",
+        "mid": "Sei libero di ridistribuirla e/o modificarla in conformità con tali termini.",
+        "key": "Termini Chiave",
+        "firstKey": "Libertà di usare, studiare, modificare e condividere il software.",
+        "secondKey": "Obbligo di rendere disponibile il codice sorgente, anche per l’uso in rete.",
+        "thirdKey": "Le versioni modificate devono rimanere libere e aperte.",
+        "full": "Testo Completo della Licenza",
+        "moreInformation": "Per maggiori informazioni, visita il sito ufficiale GNU:"
+    },
+    "UserPage": {
+        "restaurant": "Ristorante"
+    },
+    "sidebar": {
+        "riderQuestion": "Ehi, sei un rider?",
+        "userQuestion": "Ehi, sei un utente?",
+        "ctaClick": "Clicca qui!"
+    }
 }

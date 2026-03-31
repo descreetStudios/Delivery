@@ -1,19 +1,58 @@
 {
-    "HomePageComponent":{
-        "yourNext":"Your next",
-        "meal":"meal",
-        "already":", already",
-        "onTheWay":", onTheWay",
-        "how":"How does it work"
+    "FoodCardComponent":{
+        "buy":"Buy"
     },
-    "SearchComponent":{
-        "search":"Search a restaurant"
+    "FoodSearchComponent":{
+        "noResults":"No results found"
+    },
+    "OrderComponent":{
+        "delete":"delete"
+    },
+    "sections": {
+        "hero": {
+            "title": "Hot Meals, Zero Distance",
+            "description": "Order from your favorite restaurants and get your food delivered fast, fresh, and right to your door.",
+            "link": "Order now"
+        },
+        "restaurants": {
+            "title": "Explore Local Restaurants",
+            "description": "Browse a wide selection of restaurants, from local favorites to trending spots. Whatever you're craving, we've got it."
+        },
+        "delivery": {
+            "title": "Fast & Reliable Delivery",
+            "description": "Our riders ensure quick and safe delivery, keeping your food fresh and right on time."
+        },
+        "how": {
+            "title": "How It Works",
+            "description": "1. Choose your meal\n2. Place your order\n3. Track it in real time\n4. Enjoy your food at home",
+            "link": "Order now"
+        },
+        "riders": {
+            "title": "Become a Rider",
+            "description": "Deliver food on your schedule and earn money with flexible hours.",
+            "link": "Apply now"
+        }
+    },
+    "NavBarComponent": {
+        "user": "User",
+        "rider": "Rider",
+        "license": "License"
+    },
+    "HomePageComponent": {
+        "yourNext": "Your next ",
+        "meal": "meal",
+        "already": ", already ",
+        "onTheWay": "on the way",
+        "how": "How does it work?"
+    },
+    "SearchComponent": {
+        "search": "Search a restaurant"
     },
     "FooterComponent": {
-        "foot":" Untitled Delivery Project. Developed by an independent team. All rights reserved.",
-        "secondFoot":"This project is open-source and licensed under",
-        "built":"Built with",
-        "support":"Support us on"
+        "foot": " Untitled Delivery Project. Developed by an independent team. All rights reserved.",
+        "secondFoot": "This project is open-source and licensed under",
+        "built": "Built with",
+        "support": "Support us on"
     },
     "License": {
         "intro": "This application is distributed under the terms of the",

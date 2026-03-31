@@ -74,7 +74,7 @@
 							v-if="!results.length && !loading && query.length >= 2 && !justSelected"
 							class="px-4 py-3 text-gray-500 text-sm"
 						>
-							No results found
+							{{ $t('FoodSearchComponent.noResults') }}
 						</div>
 
 						<li

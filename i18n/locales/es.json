@@ -1,36 +1,75 @@
 {
-  "HomePageComponent": {
-    "yourNext": "Tu próxima",
-    "meal": "comida",
-    "already": ", ya",
-    "onTheWay": ", en camino",
-    "how": "Cómo funciona"
-  },
-  "SearchComponent": {
-    "search": "Buscar un restaurante"
-  },
-  "FooterComponent": {
-    "foot": " Untitled Delivery Project. Desarrollado por un equipo independiente. Todos los derechos reservados.",
-    "secondFoot": "Este proyecto es de código abierto y está licenciado bajo",
-    "built": "Construido con",
-    "support": "Apóyanos en"
-  },
-  "License": {
-    "intro": "Esta aplicación se distribuye bajo los términos de la",
-    "mid": "Eres libre de redistribuirla y/o modificarla de acuerdo con estos términos.",
-    "key": "Términos Clave",
-    "firstKey": "Libertad para usar, estudiar, modificar y compartir el software.",
-    "secondKey": "Obligación de poner el código fuente a disposición, incluso para uso en red.",
-    "thirdKey": "Las versiones modificadas deben seguir siendo libres y abiertas.",
-    "full": "Texto Completo de la Licencia",
-    "moreInformation": "Para más información, visita el sitio oficial de GNU:"
-  },
-  "UserPage": {
-    "restaurant": "Restaurante"
-  },
-  "sidebar": {
-    "riderQuestion": "Oye, ¿eres repartidor?",
-    "userQuestion": "Oye, ¿eres usuario?",
-    "ctaClick": "Haz clic aquí!"
-  }
+    "FoodCardComponent": {
+        "buy": "Comprar"
+    },
+    "FoodSearchComponent": {
+        "noResults": "No se encontraron resultados"
+    },
+    "OrderComponent": {
+        "delete": "Eliminar"
+    },
+    "sections": {
+        "hero": {
+            "title": "Comidas Calientes, Cero Distancia",
+            "description": "Pide de tus restaurantes favoritos y recibe tu comida rápido, fresca y directamente en tu puerta.",
+            "link": "Pedir ahora"
+        },
+        "restaurants": {
+            "title": "Explora Restaurantes Locales",
+            "description": "Explora una amplia selección de restaurantes, desde favoritos locales hasta lugares de moda. Sea lo que sea que antojes, lo tenemos."
+        },
+        "delivery": {
+            "title": "Entrega Rápida y Confiable",
+            "description": "Nuestros repartidores aseguran una entrega rápida y segura, manteniendo tu comida fresca y a tiempo."
+        },
+        "how": {
+            "title": "Cómo Funciona",
+            "description": "1. Elige tu comida\n2. Haz tu pedido\n3. Síguelo en tiempo real\n4. Disfruta tu comida en casa",
+            "link": "Pedir ahora"
+        },
+        "riders": {
+            "title": "Conviértete en Repartidor",
+            "description": "Entrega comida cuando quieras y gana dinero con horarios flexibles.",
+            "link": "Aplicar ahora"
+        }
+    },
+    "NavBarComponent": {
+        "user": "Usuario",
+        "rider": "Repartidor",
+        "license": "Licencia"
+    },
+    "HomePageComponent": {
+        "yourNext": "Tu próxima ",
+        "meal": "comida",
+        "already": ", ya ",
+        "onTheWay": "en camino",
+        "how": "Cómo funciona?"
+    },
+    "SearchComponent": {
+        "search": "Buscar un restaurante"
+    },
+    "FooterComponent": {
+        "foot": "  Untitled Delivery Project. Desarrollado por un equipo independiente. Todos los derechos reservados.",
+        "secondFoot": "Este proyecto es de código abierto y está licenciado bajo",
+        "built": "Construido con",
+        "support": "Apóyanos en"
+    },
+    "License": {
+        "intro": "Esta aplicación se distribuye bajo los términos de la",
+        "mid": "Eres libre de redistribuirla y/o modificarla de acuerdo con estos términos.",
+        "key": "Términos Clave",
+        "firstKey": "Libertad para usar, estudiar, modificar y compartir el software.",
+        "secondKey": "Obligación de poner el código fuente a disposición, incluso para uso en red.",
+        "thirdKey": "Las versiones modificadas deben seguir siendo libres y abiertas.",
+        "full": "Texto Completo de la Licencia",
+        "moreInformation": "Para más información, visita el sitio oficial de GNU:"
+    },
+    "UserPage": {
+        "restaurant": "Restaurante"
+    },
+    "sidebar": {
+        "riderQuestion": "Oye, ¿eres repartidor?",
+        "userQuestion": "Oye, ¿eres usuario?",
+        "ctaClick": "Haz clic aquí!"
+    }
 }

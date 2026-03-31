@@ -50,12 +50,13 @@
 </template>
 
 <script setup>
-const { locale, locales, setLocale, setLocaleCookie } = useI18n();
-const navLinks = [
-	{ label: "User", to: "/UserPage" },
-	{ label: "Rider", to: "/RiderPage" },
-	{ label: "License", to: "/License" },
-];
+const { t, locale, locales, setLocale, setLocaleCookie } = useI18n();
+const navLinks = computed(() => [
+	{ label: t("NavBarComponent.user"), to: "/UserPage" },
+	{ label: t("NavBarComponent.rider"), to: "/RiderPage" },
+	{ label: t("NavBarComponent.license"), to: "/License" },
+]);
+
 const availableLocales = computed(() => {
 	return locales.value.filter(i => i.code !== locale.value);
 });

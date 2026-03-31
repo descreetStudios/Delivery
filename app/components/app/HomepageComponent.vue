@@ -4,11 +4,14 @@
 			<h1 class="text-7xl whitespace-nowrap">
 				<span class="font-barlow">{{ $t('HomePageComponent.yourNext') }} </span>
 				<span class="font-modak text-text-home text-8xl">{{ $t('HomePageComponent.meal') }} </span>
-				<span class="font-barlow">{{ $t('HomePageComponent.already') }}  </span>
-				<span class="bg-bg-secondary-home py-1 pr-2 rounded-lg font-orbitron italic tracking-wide select-none">{{ $t('HomePageComponent.onTheWay') }} </span>
+				<span class="font-barlow">{{ $t('HomePageComponent.already') }} </span>
+				<span
+					class="bg-bg-secondary-home py-1 pr-2 rounded-lg font-orbitron italic tracking-wide select-none"
+				>{{
+					$t('HomePageComponent.onTheWay') }} </span>
 			</h1>
 			<p class="font-barlow text-text-home text-3xl">
-				{{ $t('HomePageComponent.how') }} 
+				{{ $t('HomePageComponent.how') }}
 			</p>
 			<div class="top-[10%] relative flex flex-col items-center gap-1 translate-x-[-50%] translate-y-[-50%]">
 				<span class="block border-black border-r border-b w-8 h-8 animate-arrows" />
@@ -60,48 +63,47 @@
 </template>
 
 <script setup>
-const sections = [
+const { t } = useI18n();
+
+const sections = computed(() => [
 	{
 		id: "hero",
-		title: "Hot Meals, Zero Distance",
+		title: t("sections.hero.title"),
 		image: "/images/hero.png",
-		description:
-			"Order from your favorite restaurants and get your food delivered fast, fresh, and right to your door.",
+		description: t("sections.hero.description"),
 	},
 
 	{
 		id: "restaurants",
-		title: "Explore Local Restaurants",
+		title: t("sections.restaurants.title"),
 		image: "/images/restaurants.png",
-		description:
-			"Browse a wide selection of restaurants, from local favorites to trending spots. Whatever you're craving, we've got it.",
+		description: t("sections.restaurants.description"),
 		reversed: true,
 	},
 
 	{
 		id: "delivery",
-		title: "Fast & Reliable Delivery",
+		title: t("sections.delivery.title"),
 		image: "/images/delivery.png",
-		description:
-			"Our riders ensure quick and safe delivery, keeping your food fresh and right on time.",
+		description: t("sections.delivery.description"),
 	},
+
 	{
 		id: "how-it-works",
-		title: "How It Works",
+		title: t("sections.how.title"),
 		image: "/images/howItWorks.png",
-		description:
-			"1. Choose your meal\n2. Place your order\n3. Track it in real time\n4. Enjoy your food at home",
-		links: [{ to: "/UserPage", label: "Order now" }],
+		description: t("sections.how.description"),
+		links: [{ to: "/UserPage", label: t("sections.how.link") }],
 		reversed: true,
 	},
 
 	{
 		id: "riders",
-		title: "Become a Rider",
+		title: t("sections.riders.title"),
 		image: "/images/riders.png",
-		description:
-			"Deliver food on your schedule and earn money with flexible hours.",
-		links: [{ to: "/RiderPage", label: "Apply now" }],
+		description: t("sections.riders.description"),
+		links: [{ to: "/RiderPage", label: t("sections.riders.link") }],
 	},
-];
+]);
+
 </script>
