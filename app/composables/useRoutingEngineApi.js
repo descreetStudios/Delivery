@@ -22,7 +22,7 @@ export const useRoutingEngineApi = () => {
 			throw new Error(err.message);
 		}
 		if (location.value) {
-			link.value = "https://router.project-osrm.org/route/v1/driving/" + location.value.longitude + "," + location.value.latitude + ";9.49980,45.30570;9.49890,45.30385?overview=full&geometries=geojson&steps=true";
+			link.value = "https://router.project-osrm.org/route/v1/driving/" + location.value.longitude + "," + location.value.latitude + ";9.49980,45.30570;9.49890,45.30385?overview=full&geometries=geojson&steps=true"+ "&bearings=" + location.value.heading + ",20;;";;
 		}
 		if ($DEBUG) console.log("OSRM link: ", link.value);
 

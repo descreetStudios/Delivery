@@ -59,20 +59,22 @@ interface Waypoint{
 }
 
 interface RoutingData{
-    code:string;
-    routes:Route[];
+    code: string;
+    routes: Route[];
     waypoints: Waypoint[];
     currentGPS: Coordinate;
-    courierId:string;
+	currentHeading: number,
+    courierId: string;
 }
 
 export const useRoutingStore = defineStore("routingStore", {
 	state: (): RoutingData => ({
 		code: "NotLoaded",
-		routes:[],
+		routes: [],
 		waypoints: [],
-		currentGPS:[0,0],
-		courierId:"",
+		currentGPS: [0,0],
+		currentHeading: 0,
+		courierId: "",
 	}),
 
 	actions:{
@@ -98,14 +100,17 @@ export const useRoutingStore = defineStore("routingStore", {
 			}
 		},
 
-		async syncGPS(coords: Coordinate){
+		async syncGeolocation(coords: Coordinate, heading: number){
 			const {updateLocation} = useLocationApi();
 
 		    this.currentGPS=coords;
+			this.currentHeading= +heading.toFixed(0);
+
 			const location={			
 				courierId: "courier" + this.courierId,
 				latitude: this.currentGPS[1],
 				longitude: this.currentGPS[0],
+				heading: this.currentHeading,
 			};
 			try {
 				await updateLocation(location);

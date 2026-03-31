@@ -43,7 +43,7 @@ const onMapLoaded = (mapWrapper) => {
 	routingStore.setCourierId(courierId.value);
 	routingStore.syncRoutingData();
 };
-const onGPSChange = (coords) => {
-	routingStore.syncGPS([coords.coords.longitude, coords.coords.latitude]);
+const onGPSChange = async (coords) => {
+	await routingStore.syncGeolocation([coords.coords.longitude, coords.coords.latitude], coords.coords.heading);
 };
 </script>
