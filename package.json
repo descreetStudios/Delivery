@@ -30,6 +30,8 @@
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@iconify-json/heroicons": "^1.2.3",
+		"@iconify-json/logos": "^1.2.11",
+		"@iconify-json/mdi": "^1.2.3",
 		"@types/node": "^25.5.0",
 		"@vueuse/core": "^14.2.1",
 		"@vueuse/nuxt": "^14.2.1",

@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col bg-root h-screen">
+	<div class="flex flex-col bg-root h-full">
 		<AppLoadingComponent
 			v-if="!mapInstance"
 			class="z-1000"
