@@ -101,22 +101,18 @@ export const useRoutingStore = defineStore("routingStore", {
 		},
 
 		async syncGeolocation(coords: Coordinate, heading: number){
-			const {updateLocation} = useLocationApi();
+			const { sendLocationUpdate } = useLocationWebSocket();
 
 		    this.currentGPS=coords;
 			if(heading) this.currentHeading= +heading.toFixed(0);
 
-			const location={			
+			const location={
 				courierId: "courier" + this.courierId,
 				latitude: this.currentGPS[1],
 				longitude: this.currentGPS[0],
 				heading: this.currentHeading || 0,
 			};
-			try {
-				await updateLocation(location);
-			} catch (error) {
-				console.error("Failed to update location:", error);
-			}
+			sendLocationUpdate(location);
 		},
 
 		setCourierId(courierId: string){

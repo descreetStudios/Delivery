@@ -69,6 +69,17 @@
 <script setup>
 import { useLocationApi, useLocationWebSocket  } from "#imports";
 
+/*
+ * TODO: This page uses updateLocation() from useLocationApi() which was removed.
+ * Location updates must now be sent via useLocationWebSocket().sendLocationUpdate().
+ *
+ * Migration needed:
+ *   1. Remove `updateLocation` from useLocationApi() import
+ *   2. Add `sendLocationUpdate` to useLocationWebSocket() import
+ *   3. Replace `await updateLocation({...})` with `sendLocationUpdate({...})`
+ *   4. Remove the async/await pattern in sendTestLocation()
+ */
+
 const { updateLocation, getLocation } = useLocationApi();
 const { connect, isConnected, lastLocation } = useLocationWebSocket();
 
@@ -97,7 +108,7 @@ const sendTestLocation = async () => {
 	const lat = 45.30240 + (Math.random() - 0.5) * 0.1;
 	const lng = 9.48550 + (Math.random() - 0.5) * 0.1;
 
-	const result = await updateLocation({
+	sendLocationUpdate({
 		courierId: testCourierId.value,
 		latitude: lat,
 		longitude: lng,
@@ -106,10 +117,7 @@ const sendTestLocation = async () => {
 		status: "DELIVERING",
 	});
 
-	if (result.success) {
-		console.log("✅ Location sent!");
-	}
-
+	console.log("✅ Location update sent via WebSocket!");
 	sending.value = false;
 };
 

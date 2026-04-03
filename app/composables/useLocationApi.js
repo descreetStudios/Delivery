@@ -48,7 +48,6 @@ export const useLocationApi = () => {
 	};
 
 	return {
-		updateLocation,
 		getLocation,
 	};
 };
