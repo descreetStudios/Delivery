@@ -20,7 +20,7 @@
 		<!-- Sidebar -->
 		<aside
 			:style="{ width: isCollapsed ? '0px' : sidebarWidth + 'px' }"
-			class="relative flex flex-col bg-bg-surface border-border-default border-r h-screen overflow-hidden transition-all duration-300 ease-in-out pointer-events-auto shrink-0"
+			class="relative flex flex-col bg-bg-surface border-border-default border-r h-full overflow-x-hidden transition-all duration-300 ease-in-out pointer-events-auto shrink-0"
 		>
 			<!-- Toggle button -->
 			<div
@@ -54,7 +54,7 @@ const { width } = useWindowSize();
 const DEFAULT_WIDTH = 420;
 
 // State
-const sidebarWidth = ref(DEFAULT_WIDTH);
+const sidebarWidth = computed(() => width.value <= 640 ? width.value : DEFAULT_WIDTH);
 const oldSidebarWidth = ref(DEFAULT_WIDTH);
 const isCollapsed = ref(true);
 
@@ -68,19 +68,6 @@ const toggleCollapse = () => {
 		isCollapsed.value = true;
 	}
 };
-
-// Responsive behavior
-watch(
-	() => width.value,
-	(newWidth) => {
-		if (newWidth <= 640) {
-			sidebarWidth.value = newWidth;
-		} else {
-			sidebarWidth.value = DEFAULT_WIDTH;
-		}
-	},
-	{ immediate: true },
-);
 </script>
 
 <style scoped>
