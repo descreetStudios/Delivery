@@ -1,5 +1,5 @@
 <template>
-	<div class="flex bg-root h-screen">
+	<div class="flex bg-root h-full">
 		<AppLoadingComponent
 			v-if="!mapInstance"
 			class="z-1000"
@@ -28,7 +28,7 @@
 					v-if="restaurant != null"
 					class="py-0.5 pr-0.5 border border-border-default rounded-lg"
 				>
-					<div class="gap-6 grid grid-cols-2 p-5 w-full max-h-132.5 overflow-y-auto scrollbar-custom">
+					<div class="gap-6 grid grid-cols-2 p-5 w-full h-fit md:max-h-132.5 overflow-hidden md:overflow-y-auto scrollbar-custom">
 						<AppFoodCardComponent
 							name="Pizza margherita"
 							:price="5.5"
