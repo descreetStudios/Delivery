@@ -123,7 +123,7 @@ const sendTestLocation = () => {
 		courierId: testCourierId.value,
 		latitude: lat,
 		longitude: lng,
-		heading: Math.random() * 360, // 0-360 degrees
+		heading: +(Math.random() * 360).toFixed(0), // 0-360 degrees
 		timestamp: new Date().toISOString(),
 		status: "DELIVERING",
 	});

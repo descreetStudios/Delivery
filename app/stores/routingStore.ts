@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { getLocationWebSocket } from "#imports";
 
 type Coordinate = [number, number]; //[lng, lat]
 
@@ -101,6 +102,7 @@ export const useRoutingStore = defineStore("routingStore", {
 		},
 
 		async syncGeolocation(coords: Coordinate, heading: number){
+			
 			const ws = getLocationWebSocket();
 
 			if(!ws.isConnected.value){
@@ -114,7 +116,7 @@ export const useRoutingStore = defineStore("routingStore", {
 				courierId: "courier" + this.courierId,
 				latitude: this.currentGPS[1],
 				longitude: this.currentGPS[0],
-				heading: this.currentHeading,
+				heading: this.currentHeading || 0,
 			};
 			
 			ws.sendLocationUpdate(location);
