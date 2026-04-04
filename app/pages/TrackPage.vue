@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-import { useLocationApi, useLocationWebSocket  } from "#imports";
+import { useLocationApi, useLocationWebSocket } from "#imports";
 
 /*
  * TODO: This page uses updateLocation() from useLocationApi() which was removed.
@@ -80,9 +80,10 @@ import { useLocationApi, useLocationWebSocket  } from "#imports";
  *   4. Remove the async/await pattern in sendTestLocation()
  */
 
-const { updateLocation, getLocation } = useLocationApi();
-const { connect, isConnected, lastLocation } = useLocationWebSocket();
+const { getLocation } = useLocationApi();
+const { connect, sendLocationUpdate, subscribeToCourier, isConnected, lastLocation } = useLocationWebSocket();
 
+const { $DEBUG } = useNuxtApp();
 const couriers = ref([]);
 const testCourierId = ref("courier1");
 const sending = ref(false);
@@ -90,6 +91,8 @@ const sending = ref(false);
 // Connect to WebSocket when component mounts
 onMounted(() => {
 	connect((location) => {
+		if ($DEBUG) console.log("New location received:", location);
+
 		// Update or add courier in the list
 		const index = couriers.value.findIndex(c => c.courierId === location.courierId);
 		if (index >= 0) {
@@ -100,8 +103,16 @@ onMounted(() => {
 	});
 });
 
+// Subscribe to courier1 when WebSocket is connected
+watch(
+	() => isConnected.value,
+	(newVal, oldVal) => {
+		if (newVal && !oldVal) subscribeToCourier("courier1");
+	},
+);
+
 // Send test location
-const sendTestLocation = async () => {
+const sendTestLocation = () => {
 	sending.value = true;
 
 	// Random location around Metz
@@ -141,142 +152,142 @@ const formatTime = (timestamp) => {
 
 <style scoped>
 .tracking-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: system-ui, -apple-system, sans-serif;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+	font-family: system-ui, -apple-system, sans-serif;
 }
 
 h1 {
-  color: #2c3e50;
-  margin-bottom: 20px;
+	color: #2c3e50;
+	margin-bottom: 20px;
 }
 
 .status-bar {
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  background: #f8f9fa;
+	padding: 15px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	background: #f8f9fa;
 }
 
 .status {
-  font-weight: 600;
-  font-size: 16px;
+	font-weight: 600;
+	font-size: 16px;
 }
 
 .status.connected {
-  color: #27ae60;
+	color: #27ae60;
 }
 
 .status.disconnected {
-  color: #e74c3c;
+	color: #e74c3c;
 }
 
 .controls {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
 }
 
 .controls input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-right: 10px;
-  width: 200px;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-right: 10px;
+	width: 200px;
 }
 
 .controls button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background: #3498db;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	background: #3498db;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-right: 10px;
 }
 
 .controls button:hover:not(:disabled) {
-  background: #2980b9;
+	background: #2980b9;
 }
 
 .controls button:disabled {
-  background: #95a5a6;
-  cursor: not-allowed;
+	background: #95a5a6;
+	cursor: not-allowed;
 }
 
 .courier-list {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .courier-list h2 {
-  color: #2c3e50;
-  margin-bottom: 15px;
+	color: #2c3e50;
+	margin-bottom: 15px;
 }
 
 .empty {
-  padding: 40px;
-  text-align: center;
-  color: #95a5a6;
-  background: white;
-  border-radius: 8px;
+	padding: 40px;
+	text-align: center;
+	color: #95a5a6;
+	background: white;
+	border-radius: 8px;
 }
 
 .courier-card {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 15px;
 }
 
 .courier-card h3 {
-  margin: 0 0 15px 0;
-  color: #2c3e50;
+	margin: 0 0 15px 0;
+	color: #2c3e50;
 }
 
 .courier-details p {
-  margin: 8px 0;
-  color: #555;
+	margin: 8px 0;
+	color: #555;
 }
 
 .status-delivering {
-  color: #27ae60;
-  font-weight: 600;
+	color: #27ae60;
+	font-weight: 600;
 }
 
 .status-idle {
-  color: #f39c12;
-  font-weight: 600;
+	color: #f39c12;
+	font-weight: 600;
 }
 
 .status-offline {
-  color: #e74c3c;
-  font-weight: 600;
+	color: #e74c3c;
+	font-weight: 600;
 }
 
 .debug-panel {
-  background: #2c3e50;
-  color: #ecf0f1;
-  padding: 20px;
-  border-radius: 8px;
-  margin-top: 20px;
+	background: #2c3e50;
+	color: #ecf0f1;
+	padding: 20px;
+	border-radius: 8px;
+	margin-top: 20px;
 }
 
 .debug-panel h2 {
-  color: #ecf0f1;
-  margin-bottom: 15px;
+	color: #ecf0f1;
+	margin-bottom: 15px;
 }
 
 .debug-panel pre {
-  background: #34495e;
-  padding: 15px;
-  border-radius: 4px;
-  overflow-x: auto;
-  font-size: 12px;
+	background: #34495e;
+	padding: 15px;
+	border-radius: 4px;
+	overflow-x: auto;
+	font-size: 12px;
 }
 </style>

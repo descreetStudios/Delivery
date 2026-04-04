@@ -101,7 +101,11 @@ export const useRoutingStore = defineStore("routingStore", {
 		},
 
 		async syncGeolocation(coords: Coordinate, heading: number){
-			const { sendLocationUpdate } = useLocationWebSocket();
+			const ws = getLocationWebSocket();
+
+			if(!ws.isConnected.value){
+				return;
+			}
 
 		    this.currentGPS=coords;
 			if(heading) this.currentHeading= +heading.toFixed(0);
@@ -110,9 +114,10 @@ export const useRoutingStore = defineStore("routingStore", {
 				courierId: "courier" + this.courierId,
 				latitude: this.currentGPS[1],
 				longitude: this.currentGPS[0],
-				heading: this.currentHeading || 0,
+				heading: this.currentHeading,
 			};
-			sendLocationUpdate(location);
+			
+			ws.sendLocationUpdate(location);
 		},
 
 		setCourierId(courierId: string){

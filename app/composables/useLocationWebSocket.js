@@ -2,6 +2,7 @@ export const useLocationWebSocket = () => {
 	const config = useRuntimeConfig();
 	const wsUrl = config.public.wsUrl || "ws://localhost:8080/ws/locations";
 
+	const { $DEBUG } = useNuxtApp();
 	let ws = null;
 	const isConnected = ref(false);
 	const lastLocation = ref(null);
@@ -14,7 +15,7 @@ export const useLocationWebSocket = () => {
    */
 	const connect = (onLocationUpdate) => {
 		if (ws && ws.readyState === WebSocket.OPEN) {
-			console.log("WebSocket already connected");
+			if ($DEBUG) console.log("WebSocket already connected");
 			return;
 		}
 
@@ -22,7 +23,7 @@ export const useLocationWebSocket = () => {
 			ws = new WebSocket(wsUrl);
 
 			ws.onopen = () => {
-				console.log("✅ WebSocket connected");
+				if ($DEBUG) console.log("WebSocket connected");
 				isConnected.value = true;
 				error.value = null;
 			};
@@ -33,13 +34,13 @@ export const useLocationWebSocket = () => {
 
 					// Handle subscription confirmation
 					if (data.type === "subscription_confirmed") {
-						console.log("✅ Subscribed to courier:", data.courierId);
+						if ($DEBUG) console.log("Subscribed to courier:", data.courierId);
 						return;
 					}
 
 					// Handle location update
 					if (data.courierId) {
-						console.log("📍 Location update for courier", data.courierId, ":", data);
+						if ($DEBUG) console.log("Location update for courier", data.courierId, ":", data);
 						lastLocation.value = data;
 
 						if (onLocationUpdate) {
@@ -52,19 +53,19 @@ export const useLocationWebSocket = () => {
 			};
 
 			ws.onerror = (err) => {
-				console.error("❌ WebSocket error:", err);
+				console.error("WebSocket error:", err);
 				error.value = "WebSocket connection error";
 				isConnected.value = false;
 			};
 
 			ws.onclose = () => {
-				console.log("🔌 WebSocket disconnected");
+				if ($DEBUG) console.log("WebSocket disconnected");
 				isConnected.value = false;
 
 				// Auto-reconnect after 3 seconds
 				setTimeout(() => {
 					if (!isConnected.value) {
-						console.log("Attempting to reconnect...");
+						if ($DEBUG) console.log("Attempting to reconnect...");
 						connect(onLocationUpdate);
 					}
 				}, 3000);
@@ -86,12 +87,12 @@ export const useLocationWebSocket = () => {
 
 		const message = {
 			type: "subscribe",
-			courierId: courierId
+			courierId: courierId,
 		};
 
 		ws.send(JSON.stringify(message));
 		subscribedCouriers.value.push(courierId);
-		console.log(`✅ Subscribed to courier: ${courierId}`);
+		if ($DEBUG) console.log(`Subscribed to courier: ${courierId}`);
 	};
 
 	/**
@@ -104,12 +105,12 @@ export const useLocationWebSocket = () => {
 
 		const message = {
 			type: "unsubscribe",
-			courierId: courierId
+			courierId: courierId,
 		};
 
 		ws.send(JSON.stringify(message));
 		subscribedCouriers.value = subscribedCouriers.value.filter(id => id !== courierId);
-		console.log(`✅ Unsubscribed from courier: ${courierId}`);
+		if ($DEBUG) console.log(`Unsubscribed from courier: ${courierId}`);
 	};
 
 	/**
@@ -124,6 +125,25 @@ export const useLocationWebSocket = () => {
 		}
 	};
 
+	const sendLocationUpdate = (location) => {
+		if (!ws || ws.readyState !== WebSocket.OPEN) {
+			console.warn("WebSocket not connected. Cannot send location.");
+			return;
+		}
+
+		const message = {
+			type: "location_update",
+			courierId: location.courierId,
+			latitude: location.latitude,
+			longitude: location.longitude,
+			heading: location.heading || 0.0,
+			timestamp: location.timestamp || new Date().toISOString(),
+			status: location.status || "ONLINE",
+		};
+
+		ws.send(JSON.stringify(message));
+	};
+
 	// Cleanup on unmount
 	onUnmounted(() => {
 		disconnect();
@@ -134,9 +154,10 @@ export const useLocationWebSocket = () => {
 		disconnect,
 		subscribeToCourier,
 		unsubscribeFromCourier,
+		sendLocationUpdate,
 		isConnected: readonly(isConnected),
 		lastLocation: readonly(lastLocation),
 		error: readonly(error),
-		subscribedCouriers: readonly(subscribedCouriers)
+		subscribedCouriers: readonly(subscribedCouriers),
 	};
 };
