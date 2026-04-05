@@ -30,6 +30,10 @@ const props = defineProps({
 		type: String,
 		default: "",
 	},
+	quantity: {
+		type: Number,
+		default: 1,
+	},
 	price: {
 		type: Number,
 		default: 0,
@@ -39,6 +43,7 @@ const props = defineProps({
 const buyItem = () => {
 	const item = {
 		name: props.name,
+		quantity: props.quantity,
 		price: props.price,
 	};
 	emit("send-item", item);

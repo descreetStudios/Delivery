@@ -2,7 +2,7 @@ import { useRuntimeConfig } from "#app";
 
 export const useLocationApi = () => {
 	const config = useRuntimeConfig();
-	const apiBase = config.public.apiBase || "http://localhost:8080/api/locations";
+	const apiBase = config.public.apiBase || "http://localhost:8080/api";
 
 	/**
    * Update courier location
@@ -12,7 +12,7 @@ export const useLocationApi = () => {
 
 	const updateLocation = async (location) => {
 		try {
-			await $fetch(`${apiBase}/update`, {
+			await $fetch(`${apiBase}/locations/update`, {
 				method: "POST",
 				body: {
 					courierId: location.courierId,
@@ -37,7 +37,7 @@ export const useLocationApi = () => {
    */
 	const getLocation = async (courierId) => {
 		try {
-			const location = await $fetch(`${apiBase}/courier/${courierId}`);
+			const location = await $fetch(`${apiBase}/locations/courier/${courierId}`);
 			return location;
 		} catch (error) {
 			if (error.status === 404) {

@@ -6,7 +6,7 @@
 # Replace PORT if your backend runs on a port other than 8080.
 #
 # Example .env for local development:
-# NUXT_PUBLIC_API_BASE=http://HOSTNAME:8080/api/locations
+# NUXT_PUBLIC_API_BASE=http://HOSTNAME:8080/api
 # NUXT_PUBLIC_WS_URL=wss://HOSTNAME/ws/locations
 #
 # Note: wss:// requires TLS; using 'tls internal' may trigger browser warnings.

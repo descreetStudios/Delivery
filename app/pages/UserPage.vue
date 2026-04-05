@@ -23,7 +23,7 @@
 				<h2
 					v-if="restaurant != null"
 					class="text-text-primary"
-				><span class="font-bold">{{$t('UserPage.restaurant')}}:</span> {{ restaurant.label }}</h2>
+				><span class="font-bold">{{ $t('UserPage.restaurant') }}:</span> {{ restaurant.label }}</h2>
 				<div
 					v-if="restaurant != null"
 					class="py-0.5 pr-0.5 border border-border-default rounded-lg"
@@ -134,9 +134,9 @@
 
 <script setup>
 const { $DEBUG } = useNuxtApp();
+const { createOrder, getOrder: fetchOrder } = useOrdersApi();
 
 const restaurant = ref(null);
-
 const mapRef = ref(null);
 const coordsRef = ref(null);
 const mapInstance = ref(null);
@@ -157,9 +157,9 @@ const onGPSChange = (coords) => {
 };
 
 const order = ref({
-	id: 0,
-	destination: {},
+	id: "0",
 	restaurant: {},
+	destination: {},
 	items: [],
 	total: 0,
 });
@@ -168,22 +168,39 @@ const toggleCart = () => {
 	cartShown.value = !cartShown.value;
 };
 
-const sendOrder = () => {
-	if (!restaurant.value) {
-		alert("Seleziona un ristorante prima!");
-		return;
-	}
-	const orderCopy = JSON.parse(JSON.stringify(order.value));
-	orderCopy.id = Date.now();
-	orderCopy.total = orderCopy.items.reduce((sum, item) => sum + item.price, 0);
-	orderCopy.destination = gpsCoords.value;
-	orderCopy.restaurant = restaurant.value;
-	console.log("Sending order:", orderCopy);
+const sendOrder = async () => {
+	try {
+		if (!restaurant.value) {
+			return;
+		}
+		const orderCopy = JSON.parse(JSON.stringify(order.value));
+		const [longitude, latitude] = restaurant.value.center;
+		orderCopy.restaurant = { latitude, longitude };
+		orderCopy.destination =  { ...gpsCoords.value };
+		orderCopy.total = orderCopy.items.reduce((sum, item) => sum + item.price, 0);
 
-	// Here you would typically send the order to your backend or an API
-	// For this example, we'll just clear the cart and log the order
-	order.value.items = [];
-	alert("Ordine inviato!");
+		const orderId = await createOrder(orderCopy);
+		orderCopy.id = orderId;
+		if ($DEBUG) console.log("Sending order:", orderCopy);
+
+		// TODO: replace this alert with a proper order confirmation popup component
+		alert("Order sent!");
+
+		order.value.items = [];
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+
+// TODO: implement getOrder function
+const getOrder = async (orderId) => {
+	try {
+		const order = await fetchOrder(orderId);
+		if ($DEBUG) console.log(order);
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 const onSearchSelect = (item) => {

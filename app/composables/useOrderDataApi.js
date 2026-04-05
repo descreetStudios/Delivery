@@ -1,4 +1,4 @@
-export const useOrderData = () => {
+export const useOrderDataApi = () => {
 	/**
 	 * Full order management composable
 	 *
@@ -26,7 +26,7 @@ export const useOrderData = () => {
 	 *   fetchCourierLocation: Function
 	 * }}
 	 */
-	const { $fetch, $DEBUG } = useNuxtApp();
+	const { $DEBUG } = useNuxtApp();
 	const orderItems = ref([]);
 	const totalPrice = ref(0);
 	const activeOrder = ref(null);
@@ -131,9 +131,9 @@ export const useOrderData = () => {
    */
 	const updateCourierLocation = async (locationData) => {
 		try {
-			await $fetch(`/api/locations/update`, {
-				method: 'POST',
-				body: locationData
+			await $fetch("/api/locations/update", {
+				method: "POST",
+				body: locationData,
 			});
 			activeOrder.value = null;
 			if ($DEBUG) console.log(`✅ Order ${orderId} completed by courier ${courierId}`);
@@ -156,5 +156,7 @@ export const useOrderData = () => {
 		assignCourierToOrder,
 		completeOrder,
 		fetchCourierLocation,
+		fetchOrder,
+		updateCourierLocation,
 	};
 };
