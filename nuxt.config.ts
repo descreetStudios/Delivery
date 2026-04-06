@@ -59,9 +59,9 @@ export default defineNuxtConfig({
 			alwaysRedirect: true,
 		},
 		locales: [
-			{ code: "it", iso: "it-IT", file: "it.json", name: "Italiano" },
-			{ code: "en", iso: "en-US", file: "en.json", name: "English" },
-			{ code: "es", iso: "es-ES", file: "es.json", name: "Español" },
+			{ code: "it", iso: "it-IT", file: "it.json", name: "Italiano", flag: "it" },
+			{ code: "en", iso: "en-US", file: "en.json", name: "English", flag: "gb" },
+			{ code: "es", iso: "es-ES", file: "es.json", name: "Español", flag: "es" },
 		],
 
 

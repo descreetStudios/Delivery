@@ -1,8 +1,8 @@
 <template>
-	<div>
+	<div class="overflow-hidden">
 		<!-- Components -->
-		<AppHomepageComponent />
 		<AppNavBarComponent />
+		<AppHomepageComponent />
 		<AppFooterComponent />
 
 		<main class="container">
