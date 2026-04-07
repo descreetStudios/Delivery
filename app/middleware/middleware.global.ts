@@ -7,6 +7,9 @@ export default defineNuxtRouteMiddleware((to) => {
 	if (!PAGES.includes(to.path) && !("/" == to.path)) {
 		return navigateTo({ path: "/" });
 	}
+	if (["/UserPage"].includes(to.path) && isEmpty(to.query) ){
+		return navigateTo({ path: "/UserPage", query: { orderId: "0000" } });
+	}
 	if (["/RiderPage"].includes(to.path) && isEmpty(to.query) ){
 		return navigateTo({ path: "/RiderPage", query: { courierId: "0000" } });
 	}

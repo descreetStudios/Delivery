@@ -133,15 +133,22 @@
 </template>
 
 <script setup>
-const { $DEBUG } = useNuxtApp();
-const { createOrder, getOrder: fetchOrder } = useOrdersApi();
+import { useRouter, useRoute } from "vue-router";
+import { useOrderStore } from "@/stores/orderStore";
 
+const { $DEBUG } = useNuxtApp();
+const { createOrder } = useOrdersApi();
+const router = useRouter();
+const route = useRoute();
+
+const orderId = computed(() => route.query.orderId ?? null);
 const restaurant = ref(null);
 const mapRef = ref(null);
 const coordsRef = ref(null);
 const mapInstance = ref(null);
 const cartShown = ref(false);
 const gpsCoords = ref({ latitude: 0, longitude: 0 });
+const orderStore = useOrderStore();
 
 const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
@@ -176,28 +183,22 @@ const sendOrder = async () => {
 		const orderCopy = JSON.parse(JSON.stringify(order.value));
 		const [longitude, latitude] = restaurant.value.center;
 		orderCopy.restaurant = { latitude, longitude };
-		orderCopy.destination =  { ...gpsCoords.value };
+		orderCopy.destination = { ...gpsCoords.value };
 		orderCopy.total = orderCopy.items.reduce((sum, item) => sum + item.price, 0);
 
-		const orderId = await createOrder(orderCopy);
-		orderCopy.id = orderId;
+		const id = await createOrder(orderCopy);
+		orderCopy.id = id;
 		if ($DEBUG) console.log("Sending order:", orderCopy);
-
+		router.replace({
+			query: {
+				...route.query,
+				orderId: id,
+			},
+		});
 		// TODO: replace this alert with a proper order confirmation popup component
 		alert("Order sent!");
 
 		order.value.items = [];
-	} catch (error) {
-		console.log(error);
-	}
-};
-
-
-// TODO: implement getOrder function
-const getOrder = async (orderId) => {
-	try {
-		const order = await fetchOrder(orderId);
-		if ($DEBUG) console.log(order);
 	} catch (error) {
 		console.log(error);
 	}
@@ -217,4 +218,8 @@ const onSearchCivicSelect = (item) => {
 	mapRef.value.highlightCivic(mapInstance.value, item);
 	restaurant.value = item;
 };
+
+onMounted(async () => {
+	if (orderId.value !== "0000") await orderStore.getOrder(orderId.value);
+});
 </script>
