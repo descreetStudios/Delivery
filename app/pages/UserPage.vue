@@ -137,7 +137,7 @@ import { useRouter, useRoute } from "vue-router";
 import { useOrderStore } from "@/stores/orderStore";
 
 const { $DEBUG } = useNuxtApp();
-const { createOrder } = useOrdersApi();
+const orderStore = useOrderStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -148,7 +148,6 @@ const coordsRef = ref(null);
 const mapInstance = ref(null);
 const cartShown = ref(false);
 const gpsCoords = ref({ latitude: 0, longitude: 0 });
-const orderStore = useOrderStore();
 
 const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
@@ -186,9 +185,7 @@ const sendOrder = async () => {
 		orderCopy.destination = { ...gpsCoords.value };
 		orderCopy.total = orderCopy.items.reduce((sum, item) => sum + item.price, 0);
 
-		const id = await createOrder(orderCopy);
-		orderCopy.id = id;
-		if ($DEBUG) console.log("Sending order:", orderCopy);
+		const id = await orderStore.submitOrder(orderCopy);
 		router.replace({
 			query: {
 				...route.query,
@@ -220,6 +217,6 @@ const onSearchCivicSelect = (item) => {
 };
 
 onMounted(async () => {
-	if (orderId.value !== "0000") await orderStore.getOrder(orderId.value);
+	if (orderId.value !== "0000") await orderStore.fetchOrder(orderId.value);
 });
 </script>
