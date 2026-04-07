@@ -167,7 +167,7 @@ const cache = new Map();
  * [{ label, description?, center }]
  */
 const search = async (q) => {
-	const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&addressdetails=1&limit=5`;
+	const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&addressdetails=1&limit=5&countrycodes=IT`;
 
 	const res = await fetch(url, {
 		headers: {
