@@ -12,6 +12,14 @@
 						@dragstart.prevent
 					>AGPL-3.0 License</NuxtLink>
 				</p>
+				<p>Designed by
+					<a
+						href="http://www.freepik.com"
+						class="font-semibold text-bg-home hover:text-secondary-hover hover:underline no-underline"
+						target="_blank"
+						rel="noopener noreferrer"
+					>Freepik</a>
+				</p>
 			</div>
 
 			<!-- Right: Tech Stack -->

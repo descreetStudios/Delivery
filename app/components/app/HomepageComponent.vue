@@ -69,14 +69,14 @@ const sections = computed(() => [
 	{
 		id: "hero",
 		title: t("sections.hero.title"),
-		image: "/images/hero.png",
+		image: "/images/homepage/hero.png",
 		description: t("sections.hero.description"),
 	},
 
 	{
 		id: "restaurants",
 		title: t("sections.restaurants.title"),
-		image: "/images/restaurants.png",
+		image: "/images/homepage/restaurants.png",
 		description: t("sections.restaurants.description"),
 		reversed: true,
 	},
@@ -84,14 +84,14 @@ const sections = computed(() => [
 	{
 		id: "delivery",
 		title: t("sections.delivery.title"),
-		image: "/images/delivery.png",
+		image: "/images/homepage/delivery.png",
 		description: t("sections.delivery.description"),
 	},
 
 	{
 		id: "how-it-works",
 		title: t("sections.how.title"),
-		image: "/images/howItWorks.png",
+		image: "/images/homepage/howItWorks.png",
 		description: t("sections.how.description"),
 		links: [{ to: "/UserPage", label: t("sections.how.link") }],
 		reversed: true,
@@ -100,7 +100,7 @@ const sections = computed(() => [
 	{
 		id: "riders",
 		title: t("sections.riders.title"),
-		image: "/images/riders.png",
+		image: "/images/homepage/riders.png",
 		description: t("sections.riders.description"),
 		links: [{ to: "/RiderPage", label: t("sections.riders.link") }],
 	},
