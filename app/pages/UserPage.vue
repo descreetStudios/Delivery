@@ -129,6 +129,35 @@
 			@gps-change="onGPSChange"
 		/>
 		<AppCoordinatesComponent ref="coordsRef" />
+		
+		<!-- Order Status Modal -->
+		<div
+			v-if="showOrderStatus"
+			class="top-0 left-0 fixed flex items-center justify-center bg-black bg-opacity-50 z-1000 w-full h-full"
+			@click="closeOrderStatus"
+		>
+			<div
+				class="bg-bg-surface p-6 rounded-lg border border-border-default max-w-md"
+				@click.stop
+			>
+				<h2 class="text-xl font-bold text-text-primary mb-4">
+					{{ orderStatus?.assigned ? '✅ Order Assigned' : '⏳ Order Queued' }}
+				</h2>
+				<div class="text-text-primary space-y-2">
+					<p><span class="font-semibold">Order ID:</span> {{ orderStatus?.orderId }}</p>
+					<p><span class="font-semibold">Status:</span> {{ orderStatus?.message }}</p>
+					<p v-if="!orderStatus?.assigned" class="text-sm text-text-secondary mt-2">
+						Your order will be assigned to the nearest available courier as soon as one becomes free.
+					</p>
+				</div>
+				<button
+					class="bg-warning mt-4 px-4 py-2 rounded-full text-white w-full"
+					@click="closeOrderStatus"
+				>
+					Close
+				</button>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -142,6 +171,8 @@ const coordsRef = ref(null);
 const mapInstance = ref(null);
 const cartShown = ref(false);
 const gpsCoords = ref({ latitude: 0, longitude: 0 });
+const orderStatus = ref(null); // To track order status after submission
+const showOrderStatus = ref(false); // To show order status modal
 
 const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
@@ -179,17 +210,31 @@ const sendOrder = async () => {
 		orderCopy.destination =  { ...gpsCoords.value };
 		orderCopy.total = orderCopy.items.reduce((sum, item) => sum + item.price, 0);
 
-		const orderId = await createOrder(orderCopy);
-		orderCopy.id = orderId;
+		const response = await createOrder(orderCopy);
+		orderCopy.id = response.orderId;
+		
+		// Update order status
+		orderStatus.value = {
+			orderId: response.orderId,
+			assigned: response.assigned,
+			status: response.status,
+			message: response.assigned 
+				? "Order assigned to nearest courier!" 
+				: "Order queued - waiting for available courier"
+		};
+		showOrderStatus.value = true;
+		
 		if ($DEBUG) console.log("Sending order:", orderCopy);
-
-		// TODO: replace this alert with a proper order confirmation popup component
-		alert("Order sent!");
 
 		order.value.items = [];
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+const closeOrderStatus = () => {
+	showOrderStatus.value = false;
+	orderStatus.value = null;
 };
 
 

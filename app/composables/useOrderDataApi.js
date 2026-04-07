@@ -127,13 +127,58 @@ export const useOrderDataApi = () => {
 	};
 
 	/**
-   * Update courier location with optional order assignment.
-   */
-	const updateCourierLocation = async (locationData) => {
+	 * Get the active order for a courier.
+	 * @param {string} courierId
+	 */
+	const getActiveOrder = async (courierId) => {
+		if (!courierId) {
+			throw new Error("Invalid courier ID");
+		}
+
 		try {
-			await $fetch("/api/locations/update", {
-				method: "POST",
-				body: locationData,
+			const response = await $fetch(`/api/orders/courier/${courierId}/active`);
+			activeOrder.value = response;
+			return response;
+		} catch (err) {
+			error.value = err.message || "Unable to fetch active order";
+			throw new Error(error.value);
+		}
+	};
+
+	/**
+	 * Assign a courier to an order.
+	 * @param {string} orderId
+	 * @param {string} courierId
+	 */
+	const assignCourierToOrder = async (orderId, courierId) => {
+		if (!orderId || !courierId) {
+			throw new Error("Invalid order ID or courier ID");
+		}
+
+		try {
+			await $fetch(`/api/orders/${orderId}/assign?courierId=${courierId}`, {
+				method: "PUT",
+			});
+			if ($DEBUG) console.log(`✅ Courier ${courierId} assigned to order ${orderId}`);
+		} catch (err) {
+			error.value = err.message || "Unable to assign courier to order";
+			throw new Error(error.value);
+		}
+	};
+
+	/**
+	 * Complete an order.
+	 * @param {string} orderId
+	 * @param {string} courierId
+	 */
+	const completeOrder = async (orderId, courierId) => {
+		if (!orderId || !courierId) {
+			throw new Error("Invalid order ID or courier ID");
+		}
+
+		try {
+			await $fetch(`/api/orders/${orderId}/complete?courierId=${courierId}`, {
+				method: "PUT",
 			});
 			activeOrder.value = null;
 			if ($DEBUG) console.log(`✅ Order ${orderId} completed by courier ${courierId}`);
@@ -156,7 +201,5 @@ export const useOrderDataApi = () => {
 		assignCourierToOrder,
 		completeOrder,
 		fetchCourierLocation,
-		fetchOrder,
-		updateCourierLocation,
 	};
 };

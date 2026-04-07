@@ -12,68 +12,74 @@ export const useLocationWebSocket = () => {
 	/**
    * Connect to WebSocket
    * @param {Function} onLocationUpdate - Callback when location updates
+   * @returns {Promise} Resolves when connected
    */
 	const connect = (onLocationUpdate) => {
 		if (ws && ws.readyState === WebSocket.OPEN) {
 			if ($DEBUG) console.log("WebSocket already connected");
-			return;
+			return Promise.resolve();
 		}
 
-		try {
-			ws = new WebSocket(wsUrl);
+		return new Promise((resolve, reject) => {
+			try {
+				ws = new WebSocket(wsUrl);
 
-			ws.onopen = () => {
-				if ($DEBUG) console.log("WebSocket connected");
-				isConnected.value = true;
-				error.value = null;
-			};
+				ws.onopen = () => {
+					if ($DEBUG) console.log("WebSocket connected");
+					isConnected.value = true;
+					error.value = null;
+					resolve();
+				};
 
-			ws.onmessage = (event) => {
-				try {
-					const data = JSON.parse(event.data);
+				ws.onmessage = (event) => {
+					try {
+						const data = JSON.parse(event.data);
 
-					// Handle subscription confirmation
-					if (data.type === "subscription_confirmed") {
-						if ($DEBUG) console.log("Subscribed to courier:", data.courierId);
-						return;
-					}
-
-					// Handle location update
-					if (data.courierId) {
-						if ($DEBUG) console.log("Location update for courier", data.courierId, ":", data);
-						lastLocation.value = data;
-
-						if (onLocationUpdate) {
-							onLocationUpdate(data);
+						// Handle subscription confirmation
+						if (data.type === "subscription_confirmed") {
+							if ($DEBUG) console.log("Subscribed to courier:", data.courierId);
+							return;
 						}
+
+						// Handle location update
+						if (data.courierId) {
+							if ($DEBUG) console.log("Location update for courier", data.courierId, ":", data);
+							lastLocation.value = data;
+
+							if (onLocationUpdate) {
+								onLocationUpdate(data);
+							}
+						}
+					} catch (err) {
+						console.error("Failed to parse location data:", err);
 					}
-				} catch (err) {
-					console.error("Failed to parse location data:", err);
-				}
-			};
+				};
 
-			ws.onerror = (err) => {
-				console.error("WebSocket error:", err);
-				error.value = "WebSocket connection error";
-				isConnected.value = false;
-			};
+				ws.onerror = (err) => {
+					console.error("WebSocket error:", err);
+					error.value = "WebSocket connection error";
+					isConnected.value = false;
+					reject(new Error("WebSocket connection error"));
+				};
 
-			ws.onclose = () => {
-				if ($DEBUG) console.log("WebSocket disconnected");
-				isConnected.value = false;
+				ws.onclose = () => {
+					if ($DEBUG) console.log("WebSocket disconnected");
+					isConnected.value = false;
 
-				// Auto-reconnect after 3 seconds
-				setTimeout(() => {
-					if (!isConnected.value) {
-						if ($DEBUG) console.log("Attempting to reconnect...");
-						connect(onLocationUpdate);
-					}
-				}, 3000);
-			};
-		} catch (err) {
-			console.error("Failed to create WebSocket:", err);
-			error.value = err.message;
-		}
+					// Auto-reconnect after 3 seconds
+					setTimeout(() => {
+						if (!isConnected.value) {
+							if ($DEBUG) console.log("Attempting to reconnect...");
+							connect(onLocationUpdate);
+						}
+					}, 3000);
+				};
+			} catch (err) {
+				console.error("Failed to create WebSocket:", err);
+				error.value = err.message;
+				reject(err);
+			}
+		});
 	};
 
 	/**

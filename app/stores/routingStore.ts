@@ -59,6 +59,24 @@ interface Waypoint{
     name:string;
 }
 
+interface OrderItem {
+    name: string;
+    quantity: number;
+    price: number;
+}
+
+interface Order {
+    orderId: string;
+    pickupLatitude: number;
+    pickupLongitude: number;
+    deliveryLatitude: number;
+    deliveryLongitude: number;
+    associatedCourierId: string | null;
+    status: string;
+    items: OrderItem[];
+    totalPrice: number;
+}
+
 interface RoutingData{
     code: string;
     routes: Route[];
@@ -66,6 +84,7 @@ interface RoutingData{
     currentGPS: Coordinate;
 	currentHeading: number,
     courierId: string;
+    activeOrder: Order | null;
 }
 
 export const useRoutingStore = defineStore("routingStore", {
@@ -76,6 +95,7 @@ export const useRoutingStore = defineStore("routingStore", {
 		currentGPS: [0,0],
 		currentHeading: 0,
 		courierId: "",
+        activeOrder: null,
 	}),
 
 	actions:{
@@ -102,11 +122,20 @@ export const useRoutingStore = defineStore("routingStore", {
 		},
 
 		async syncGeolocation(coords: Coordinate, heading: number){
-			
 			const ws = getLocationWebSocket();
 
-			if(!ws.isConnected.value){
-				return;
+			// Connect WebSocket if not already connected
+			if (!ws.isConnected.value) {
+				await new Promise<void>((resolve) => {
+					ws.connect(() => {
+						// Wait until connected
+						if (ws.isConnected.value) {
+							resolve();
+						}
+					});
+					// Fallback timeout in case connection takes time
+					setTimeout(() => resolve(), 2000);
+				});
 			}
 
 		    this.currentGPS=coords;
@@ -118,12 +147,34 @@ export const useRoutingStore = defineStore("routingStore", {
 				longitude: this.currentGPS[0],
 				heading: this.currentHeading || 0,
 			};
-			
+
 			ws.sendLocationUpdate(location);
 		},
 
 		setCourierId(courierId: string){
-			this.courierId=courierId;
+			// Normalize: remove "courier" prefix if present, store just the ID
+			this.courierId = courierId?.replace(/^courier/, "") || "";
 		},
+
+        setActiveOrder(order: Order | null) {
+            this.activeOrder = order;
+        },
+
+        async fetchActiveOrder() {
+            if (!this.courierId) {
+                return null;
+            }
+
+            try {
+                const apiBase = "http://localhost:8080/api";
+                const fullCourierId = this.courierId.startsWith("courier") ? this.courierId : "courier" + this.courierId;
+                const order = await $fetch(`${apiBase}/orders/courier/${fullCourierId}/active`);
+                this.activeOrder = order;
+                return order;
+            } catch (error) {
+                this.activeOrder = null;
+                return null;
+            }
+        },
 	},
 });

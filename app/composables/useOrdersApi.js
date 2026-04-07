@@ -29,7 +29,7 @@ export const useOrdersApi = () => {
 	const createOrder = async (order) => {
 		loading.value = true;
 		try {
-			const orderId = await $fetch(`${apiBase}/orders`, {
+			const response = await $fetch(`${apiBase}/orders`, {
 				method: "POST",
 				body: {
 					pickupLatitude: order.restaurant.latitude,
@@ -40,7 +40,8 @@ export const useOrdersApi = () => {
 					totalPrice: order.total,
 				},
 			});
-			return orderId;
+			// Response now includes { orderId, assigned, status }
+			return response;
 		} catch (err) {
 			error.value = err.message || "Unable to create order";
 			throw new Error(error.value);
