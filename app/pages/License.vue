@@ -1,30 +1,30 @@
 <template>
-	<div class="bg-bg-home p-10 h-full overflow-hidden home-highlight">
+	<div class="bg-bg-home p-5 md:p-10 h-full overflow-x-hidden home-highlight">
 		<div
-			class="flex flex-col gap-8 shadow-xl m-12 mx-auto p-10 rounded-3xl max-w-250 font-system-ui bg-text-home text-primary-text"
+			class="flex flex-col gap-8 shadow-xl m-12 mx-auto p-5 md:p-10 rounded-3xl max-w-250 font-system-ui bg-text-home text-primary-text"
 		>
 			<header class="flex justify-center items-center p-5">
 				<NuxtLink
 					to="/"
-					class="flex justify-center items-center gap-6 bg-surface w-fit h-fit no-underline cursor-pointer select-none"
+					class="flex md:flex-row flex-col justify-center items-center gap-3 md:gap-6 bg-surface w-fit h-fit no-underline cursor-pointer select-none"
 					@dragstart.prevent
 				>
 					<NuxtImg
 						src="/images/delivery-logo.png"
 						alt="Delivery Logo"
-						class="mb-2 w-25 h-auto text-bg-home pointer-events-none select-none shrink-0"
+						class="mb-2 w-20 md:w-25 h-auto text-bg-home pointer-events-none select-none shrink-0"
 						format="webp"
 						@dragstart.prevent
 					/>
 					<h1
-						class="m-0 font-bold text-bg-home text-4xl text-center uppercase whitespace-nowrap pointer-events-none select-none shrink-0"
+						class="m-0 font-bold text-bg-home text-2xl md:text-4xl text-center uppercase pointer-events-none select-none shrink-0"
 					>
 						Untitled Delivery Project</h1>
 				</NuxtLink>
 			</header>
 
 			<h2
-				class="flex justify-center m-0 pb-2 border-bg-secondary-home border-b-2 font-semibold text-bg-home text-3xl"
+				class="flex justify-center m-0 pb-2 border-bg-secondary-home border-b-2 font-semibold text-bg-home text-xl md:text-3xl text-center"
 			>
 				<span>GNU Affero General Public License v3.0 (AGPLv3)</span>
 			</h2>
@@ -35,7 +35,7 @@
 				{{ $t('License.mid') }}
 			</p>
 
-			<section class="bg-bg-home mb-0 p-8 rounded-xl">
+			<section class="bg-bg-home mb-0 p-4 md:p-8 rounded-xl">
 				<h3 class="flex items-center gap-2 mb-4 font-semibold text-black text-2xl">
 					<span>{{ $t('License.key') }}</span>
 				</h3>
@@ -46,7 +46,7 @@
 				</ul>
 			</section>
 
-			<section class="bg-bg-home mb-0 p-8 rounded-xl">
+			<section class="bg-bg-home mb-0 p-4 md:p-8 rounded-xl">
 				<h3 class="flex items-center gap-2 mb-4 font-semibold text-black text-2xl">
 					<span>{{ $t('License.full') }}</span>
 				</h3>
