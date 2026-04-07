@@ -24,17 +24,9 @@
 			v-for="section in sections"
 			:id="section.id"
 			:key="section.id"
-			:class="['flex items-center p-15 transition-all ease-in-out', { 'flex-row-reverse': section.reversed }]"
+			:class="['flex flex-wrap items-center justify-center gap-5 md:gap-20 xl:gap-40 p-8 md:p-15 transition-all ease-in-out', { 'flex-row-reverse': section.reversed }]"
 		>
-			<NuxtImg
-				:src="section.image"
-				:alt="section.title"
-				class="ml-0 w-125 h-auto"
-				loading="lazy"
-				format="webp"
-				@dragstart.prevent
-			/>
-			<div class="flex flex-col ml-auto max-w-200">
+			<div class="flex flex-col flex-1 max-w-200">
 				<h2 class="pb-6 pl-1.25 font-semibold text-text-home text-5xl">
 					{{ section.title }}
 				</h2>
@@ -58,6 +50,14 @@
 					</template>
 				</div>
 			</div>
+			<NuxtImg
+				:src="section.image"
+				:alt="section.title"
+				class="flex flex-1 shadow-md ml-0 rounded-xl w-full max-w-125 h-auto"
+				loading="lazy"
+				format="webp"
+				@dragstart.prevent
+			/>
 		</section>
 	</div>
 </template>
