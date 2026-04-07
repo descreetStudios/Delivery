@@ -1,5 +1,5 @@
 <template>
-	<footer class="bg-bg-secondary-home py-10 pt-4 border-t-2 border-t-border font-barlow">
+	<footer class="bg-bg-secondary-home py-10 pt-4 pr-4 pl-4 border-t-2 border-t-border font-barlow">
 		<div class="flex flex-wrap justify-between items-center gap-10 m-0 mx-auto max-w-7xl">
 			<!-- Left: Info -->
 			<div class="flex-1 min-w-62.5 font-semibold text-black">
@@ -15,13 +15,13 @@
 			</div>
 
 			<!-- Right: Tech Stack -->
-			<div class="flex justify-center items-center gap-4 min-w-62.5">
+			<div class="flex flex-wrap justify-center items-center gap-4 min-w-62.5">
 				<div class="flex items-center gap-6">
 					<div class="flex flex-col justify-center gap-4">
 						<h4 class="font-bold text-black text-lg text-center">
 							{{ $t('FooterComponent.built') }}
 						</h4>
-						<div class="flex gap-6">
+						<div class="flex flex-wrap justify-center items-center gap-6">
 							<NuxtLink
 								href="https://nuxt.com"
 								target="_blank"
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="border-text-home border-l h-28" />
+				<div class="max-[544px]:hidden block border-text-home border-l h-28" />
 				<div class="flex flex-col items-center gap-4 ml-2">
 					<h4 class="font-bold text-black text-lg text-center">{{ $t('FooterComponent.support') }}</h4>
 					<NuxtLink
