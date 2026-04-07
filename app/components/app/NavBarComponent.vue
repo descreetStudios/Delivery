@@ -15,7 +15,7 @@
 				<strong class="font-barlow font-bold text-xl md:text-2xl">Untitled Delivery Project</strong>
 			</div>
 
-			<div class="flex flex-row items-center py-3 md:py-0">
+			<div class="flex flex-row items-center md:py-0 pt-3">
 				<!-- Navigation buttons (Center) -->
 				<div class="flex flex-row gap-1 md:gap-10">
 					<NuxtLink
@@ -23,6 +23,7 @@
 						:key="link.label"
 						class="px-3 py-2 font-barlow font-semibold text-md md:text-lg"
 						:to="link.to"
+						:prefetch="false"
 					>
 						{{ link.label }}
 					</NuxtLink>

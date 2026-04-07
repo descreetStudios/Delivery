@@ -162,9 +162,15 @@
 </template>
 
 <script setup>
-const { $DEBUG } = useNuxtApp();
-const { createOrder, getOrder: fetchOrder } = useOrdersApi();
+import { useRouter, useRoute } from "vue-router";
+import { useOrderStore } from "@/stores/orderStore";
 
+const { $DEBUG } = useNuxtApp();
+const orderStore = useOrderStore();
+const router = useRouter();
+const route = useRoute();
+
+const orderId = computed(() => route.query.orderId ?? null);
 const restaurant = ref(null);
 const mapRef = ref(null);
 const coordsRef = ref(null);
@@ -207,7 +213,7 @@ const sendOrder = async () => {
 		const orderCopy = JSON.parse(JSON.stringify(order.value));
 		const [longitude, latitude] = restaurant.value.center;
 		orderCopy.restaurant = { latitude, longitude };
-		orderCopy.destination =  { ...gpsCoords.value };
+		orderCopy.destination = { ...gpsCoords.value };
 		orderCopy.total = orderCopy.items.reduce((sum, item) => sum + item.price, 0);
 
 		const response = await createOrder(orderCopy);
@@ -225,6 +231,15 @@ const sendOrder = async () => {
 		showOrderStatus.value = true;
 		
 		if ($DEBUG) console.log("Sending order:", orderCopy);
+		const id = await orderStore.submitOrder(orderCopy);
+		router.replace({
+			query: {
+				...route.query,
+				orderId: id,
+			},
+		});
+		// TODO: replace this alert with a proper order confirmation popup component
+		alert("Order sent!");
 
 		order.value.items = [];
 	} catch (error) {
@@ -262,4 +277,8 @@ const onSearchCivicSelect = (item) => {
 	mapRef.value.highlightCivic(mapInstance.value, item);
 	restaurant.value = item;
 };
+
+onMounted(async () => {
+	if (orderId.value !== "0000") await orderStore.fetchOrder(orderId.value);
+});
 </script>
