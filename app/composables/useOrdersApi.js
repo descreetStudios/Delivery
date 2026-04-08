@@ -66,10 +66,43 @@ export const useOrdersApi = () => {
 		}
 	};
 
+	const fetchActiveOrder = async (associatedCourierId) => {
+		loading.value = true;
+		try {
+			const fullCourierId = associatedCourierId.startsWith("courier") ? associatedCourierId : "courier" + associatedCourierId;
+			const response = await $fetch(`${apiBase}/orders/courier/${fullCourierId}/active`, {
+				cache: "no-store",
+			});
+			return response;
+		} catch (err) {
+			error.value = err.message || "Unable to fetch active order";
+			throw new Error(error.value);
+		} finally {
+			loading.value = false;
+		}
+	};
+
+	const completeOrder = async (courierId, orderId) => {
+		loading.value = true;
+		try {
+			const fullCourierId = courierId.startsWith("courier") ? courierId : "courier" + courierId;
+			await $fetch(`${apiBase}/orders/${orderId}/complete?courierId=${fullCourierId}`, {
+				method: "PUT",
+			});
+		} catch (err) {
+			error.value = err.message || "Unable to complete active order";
+			throw new Error(error.value);
+		} finally {
+			loading.value = false;
+		}
+	};
+
 	return {
 		loading,
 		error,
 		createOrder,
 		getOrder,
+		fetchActiveOrder,
+		completeOrder,
 	};
 };

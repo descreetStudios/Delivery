@@ -78,12 +78,12 @@ export const useOrderDataApi = () => {
 		if (orderData.totalPrice === undefined) {
 			orderData.totalPrice = orderData.items.reduce(
 				(sum, item) => sum + (item.price || 0) * (item.quantity || 0),
-				0
+				0,
 			);
 		}
 
 		try {
-			const response = await $fetch(`/api/orders`, {
+			const response = await $fetch("/api/orders", {
 				method: "POST",
 				body: {
 					orderId: orderData.orderId,

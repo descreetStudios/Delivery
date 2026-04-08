@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { getLocationWebSocket } from "#imports";
+import { useOrderStore } from "@/stores/orderStore";
 
 type Coordinate = [number, number]; //[lng, lat]
 
@@ -59,30 +60,13 @@ interface Waypoint {
 	name: string;
 }
 
-interface OrderItem {
-    name: string;
-    quantity: number;
-    price: number;
-}
-
-interface Order {
-    orderId: string;
-    pickupLatitude: number;
-    pickupLongitude: number;
-    deliveryLatitude: number;
-    deliveryLongitude: number;
-    associatedCourierId: string | null;
-    status: string;
-    items: OrderItem[];
-    totalPrice: number;
-}
-
-interface RoutingData{
-    code: string;
-    routes: Route[];
-    waypoints: Waypoint[];
-    currentGPS: Coordinate;
+interface RoutingData {
+	code: string;
+	routes: Route[];
+	waypoints: Waypoint[];
+	currentGPS: Coordinate;
 	currentHeading: number,
+<<<<<<< HEAD
     courierId: string;
     activeOrder: Order | null;
 interface RoutingData {
@@ -92,17 +76,24 @@ interface RoutingData {
 	currentGPS: Coordinate;
 	currentHeading: number,
 	courierId: string;
+=======
+	courierId: string;
+	activeOrderId: string,
+>>>>>>> 9e5c46f (feat: enhance order management with active order fetching and completion logic)
 }
 
 export const useRoutingStore = defineStore("routingStore", {
-	state: (): RoutingData => ({
+	state: (): RoutingData & {
+		orderPollingInterval: ReturnType<typeof setInterval> | null
+	} => ({
 		code: "NotLoaded",
 		routes: [],
 		waypoints: [],
 		currentGPS: [0, 0],
 		currentHeading: 0,
-		courierId: "",
-        activeOrder: null,
+		courierId: "0",
+		activeOrderId: "0",
+		orderPollingInterval: null,
 	}),
 
 	actions: {
@@ -128,11 +119,11 @@ export const useRoutingStore = defineStore("routingStore", {
 			}
 		},
 
-		async syncGeolocation(coords: Coordinate, heading: number){
+		async syncGeolocation(coords: Coordinate, heading: number) {
 			const ws = getLocationWebSocket();
 
-			// Connect WebSocket if not already connected
 			if (!ws.isConnected.value) {
+<<<<<<< HEAD
 				await new Promise<void>((resolve) => {
 					ws.connect(() => {
 						// Wait until connected
@@ -148,6 +139,8 @@ export const useRoutingStore = defineStore("routingStore", {
 			const ws = getLocationWebSocket();
 
 			if (!ws.isConnected.value) {
+=======
+>>>>>>> 9e5c46f (feat: enhance order management with active order fetching and completion logic)
 				return;
 			}
 
@@ -165,28 +158,32 @@ export const useRoutingStore = defineStore("routingStore", {
 		},
 
 		setCourierId(courierId: string) {
+<<<<<<< HEAD
 			this.courierId = courierId;
+=======
+			// Normalize: remove "courier" prefix if present, store just the ID
+			this.courierId = courierId?.replace(/^courier/, "") || "";
+>>>>>>> 9e5c46f (feat: enhance order management with active order fetching and completion logic)
 		},
 
-        setActiveOrder(order: Order | null) {
-            this.activeOrder = order;
-        },
+		startOrderPolling() {
+			const orderStore = useOrderStore();
 
-        async fetchActiveOrder() {
-            if (!this.courierId) {
-                return null;
-            }
+			if (this.orderPollingInterval) {
+				clearInterval(this.orderPollingInterval);
+				this.orderPollingInterval = null;
+			}
 
-            try {
-                const apiBase = "http://localhost:8080/api";
-                const fullCourierId = this.courierId.startsWith("courier") ? this.courierId : "courier" + this.courierId;
-                const order = await $fetch(`${apiBase}/orders/courier/${fullCourierId}/active`);
-                this.activeOrder = order;
-                return order;
-            } catch (error) {
-                this.activeOrder = null;
-                return null;
-            }
-        },
+			this.orderPollingInterval = setInterval(async () => {
+				await orderStore.fetchAndSetActiveOrder(this.courierId);
+			}, 3000);
+		},
+
+		stopOrderPolling() {
+			if (this.orderPollingInterval) {
+				clearInterval(this.orderPollingInterval);
+				this.orderPollingInterval = null;
+			}
+		},
 	},
 });
