@@ -66,20 +66,8 @@ interface RoutingData {
 	waypoints: Waypoint[];
 	currentGPS: Coordinate;
 	currentHeading: number,
-<<<<<<< HEAD
-    courierId: string;
-    activeOrder: Order | null;
-interface RoutingData {
-	code: string;
-	routes: Route[];
-	waypoints: Waypoint[];
-	currentGPS: Coordinate;
-	currentHeading: number,
-	courierId: string;
-=======
 	courierId: string;
 	activeOrderId: string,
->>>>>>> 9e5c46f (feat: enhance order management with active order fetching and completion logic)
 }
 
 export const useRoutingStore = defineStore("routingStore", {
@@ -120,27 +108,10 @@ export const useRoutingStore = defineStore("routingStore", {
 		},
 
 		async syncGeolocation(coords: Coordinate, heading: number) {
-			const ws = getLocationWebSocket();
-
-			if (!ws.isConnected.value) {
-<<<<<<< HEAD
-				await new Promise<void>((resolve) => {
-					ws.connect(() => {
-						// Wait until connected
-						if (ws.isConnected.value) {
-							resolve();
-						}
-					});
-					// Fallback timeout in case connection takes time
-					setTimeout(() => resolve(), 2000);
-				});
-		async syncGeolocation(coords: Coordinate, heading: number) {
 
 			const ws = getLocationWebSocket();
 
 			if (!ws.isConnected.value) {
-=======
->>>>>>> 9e5c46f (feat: enhance order management with active order fetching and completion logic)
 				return;
 			}
 
@@ -158,12 +129,9 @@ export const useRoutingStore = defineStore("routingStore", {
 		},
 
 		setCourierId(courierId: string) {
-<<<<<<< HEAD
 			this.courierId = courierId;
-=======
 			// Normalize: remove "courier" prefix if present, store just the ID
 			this.courierId = courierId?.replace(/^courier/, "") || "";
->>>>>>> 9e5c46f (feat: enhance order management with active order fetching and completion logic)
 		},
 
 		startOrderPolling() {
