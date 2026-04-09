@@ -56,7 +56,7 @@ const DEFAULT_WIDTH = 420;
 // State
 const sidebarWidth = computed(() => width.value <= 640 ? width.value : DEFAULT_WIDTH);
 const oldSidebarWidth = ref(DEFAULT_WIDTH);
-const isCollapsed = ref(true);
+const isCollapsed = ref(false);
 
 // Toggle logic
 const toggleCollapse = () => {
