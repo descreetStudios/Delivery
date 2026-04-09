@@ -24,6 +24,18 @@
 					/>
 				</MglGeoJsonSource>
 
+				<!-- Courier location pin -->
+				<MglGeoJsonSource
+					v-if="showCourierPin"
+					source-id="courier-point"
+					:data="courierPinGeojsonSource"
+				>
+					<MglSymbolLayer
+						layer-id="courier-pin-layer"
+						:layout="courierPinIconLayout"
+					/>
+				</MglGeoJsonSource>
+
 				<MglNavigationControl position="top-right" />
 				<MglFullscreenControl position="top-right" />
 				<MglScaleControl position="bottom-left" />
@@ -64,6 +76,9 @@ const mapStyle = ref(props.styleUrl);
 const pinCoordinates = ref([0, 0]);
 const showPin = ref(false);
 
+const courierCoordinates = ref([0, 0]);
+const showCourierPin = ref(false);
+
 const pinIconGeojsonSource = computed(() => ({
 	type: "FeatureCollection",
 	features: [
@@ -80,7 +95,30 @@ const pinIconGeojsonSource = computed(() => ({
 	],
 }));
 
+const courierPinGeojsonSource = computed(() => ({
+	type: "FeatureCollection",
+	features: [
+		{
+			type: "Feature",
+			geometry: {
+				type: "Point",
+				coordinates: courierCoordinates.value,
+			},
+			properties: {
+				symbol: "pin-icon",
+			},
+		},
+	],
+}));
+
 const pinIconLayout = {
+	"icon-image": ["get", "symbol"],
+	"icon-size": 1,
+	"icon-anchor": "bottom",
+	"icon-offset": [0, -15],
+};
+
+const courierPinIconLayout = {
 	"icon-image": ["get", "symbol"],
 	"icon-size": 1,
 	"icon-anchor": "bottom",
@@ -94,8 +132,17 @@ const updatePinPosition = (coordinates) => {
 	showPin.value = true;
 };
 
+const updateCourierPinPosition = (coordinates) => {
+	courierCoordinates.value = coordinates;
+	showCourierPin.value = true;
+};
+
 const hidePin = () => {
 	showPin.value = false;
+};
+
+const hideCourierPin = () => {
+	showCourierPin.value = false;
 };
 
 const handleMapLoad = (mapWrapper) => {
@@ -241,6 +288,12 @@ defineExpose({
 	},
 	hidePin: () => {
 		hidePin();
+	},
+	showCourierPin: (coordinates) => {
+		updateCourierPinPosition(coordinates);
+	},
+	hideCourierPin: () => {
+		hideCourierPin();
 	},
 });
 </script>

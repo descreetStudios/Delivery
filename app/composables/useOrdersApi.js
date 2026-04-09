@@ -75,6 +75,11 @@ export const useOrdersApi = () => {
 			});
 			return response;
 		} catch (err) {
+			// 404 is expected when courier has no active order - don't throw error
+			if (err.status === 404) {
+				if ($DEBUG) console.log(`No active order for courier ${fullCourierId}`);
+				return null;
+			}
 			error.value = err.message || "Unable to fetch active order";
 			throw new Error(error.value);
 		} finally {

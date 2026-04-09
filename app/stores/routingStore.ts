@@ -136,12 +136,21 @@ export const useRoutingStore = defineStore("routingStore", {
 
 		startOrderPolling() {
 			const orderStore = useOrderStore();
+			const nuxtApp = useNuxtApp();
+			const $DEBUG = nuxtApp.$DEBUG;
+
+			// Don't poll if courier ID is invalid or default
+			if (!this.courierId || this.courierId === "0" || this.courierId === "0000") {
+				if ($DEBUG) console.warn("Cannot start polling: invalid courier ID:", this.courierId);
+				return;
+			}
 
 			if (this.orderPollingInterval) {
 				clearInterval(this.orderPollingInterval);
 				this.orderPollingInterval = null;
 			}
 
+			if ($DEBUG) console.log("Starting order polling for courier:", this.courierId);
 			this.orderPollingInterval = setInterval(async () => {
 				await orderStore.fetchAndSetActiveOrder(this.courierId);
 			}, 3000);

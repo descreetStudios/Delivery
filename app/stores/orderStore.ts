@@ -70,12 +70,15 @@ export const useOrderStore = defineStore("orderStore", {
 			try {
 				const data: Order = await getOrder(orderId) as Order;
 				this.orderId = data.orderId;
+				this.associatedCourierId = data.associatedCourierId || "0";
 				this.restaurant = data.restaurant;
 				this.destination = data.destination;
 				this.items = data.items;
 				this.totalPrice = data.totalPrice;
+				this.status = data.status;
 				if ($DEBUG) console.log(data);
 				if ($DEBUG) console.log("State: ", this.$state);
+				return this.$state;
 			} catch (error) {
 				let message;
 				if (error instanceof Error) message = error.message;
@@ -92,12 +95,16 @@ export const useOrderStore = defineStore("orderStore", {
 			this.associatedCourierId = associatedCourierId;
 
 			try {
-				const order: Order = await fetchActiveOrder(this.associatedCourierId) as Order;
-				this.orderId = order.orderId;
-				this.restaurant = order.restaurant;
-				this.destination = order.destination;
-				this.items = order.items;
-				this.totalPrice = order.totalPrice;
+				const order: Order | null = await fetchActiveOrder(this.associatedCourierId) as Order | null;
+				
+				// Only update state if we actually got an order
+				if (order) {
+					this.orderId = order.orderId;
+					this.restaurant = order.restaurant;
+					this.destination = order.destination;
+					this.items = order.items;
+					this.totalPrice = order.totalPrice;
+				}
 			} catch (error) {
 				let message;
 				if (error instanceof Error) message = error.message;

@@ -85,14 +85,18 @@ const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
 	coordsRef.value.bindMap(mapWrapper);
 	mapInstance.value = mapWrapper.map;
-	routingStore.setCourierId(courierId.value);
 	routingStore.syncRoutingData();
 };
 
 // Start polling on mount
 onMounted(() => {
-	routingStore.setCourierId(courierId.value);
-	routingStore.startOrderPolling();
+	// Set courier ID first, then start polling
+	if (courierId.value && courierId.value !== "0" && courierId.value !== "0000") {
+		routingStore.setCourierId(courierId.value);
+		routingStore.startOrderPolling();
+	} else {
+		if ($DEBUG) console.warn("Invalid courier ID, not starting polling:", courierId.value);
+	}
 });
 
 const onGPSChange = async (coords) => {

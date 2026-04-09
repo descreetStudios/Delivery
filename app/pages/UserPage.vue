@@ -170,9 +170,11 @@
 <script setup>
 import { useRouter, useRoute } from "vue-router";
 import { useOrderStore } from "@/stores/orderStore";
+import { useCourierTrackingStore } from "@/stores/courierTrackingStore";
 
 const { $DEBUG } = useNuxtApp();
 const orderStore = useOrderStore();
+const courierTrackingStore = useCourierTrackingStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -185,6 +187,7 @@ const cartShown = ref(false);
 const gpsCoords = ref({ latitude: 0, longitude: 0 });
 const orderStatus = ref(null); // To track order status after submission
 const showOrderStatus = ref(false); // To show order status modal
+const orderPollingInterval = ref(null); // Interval for polling order status
 
 const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
@@ -233,6 +236,10 @@ const sendOrder = async () => {
 		});
 
 		order.value.items = [];
+
+		// Show order status popup and start polling for assignment
+		await checkOrderStatus(id);
+		startOrderStatusPolling(id);
 	} catch (error) {
 		console.log(error);
 	}
@@ -241,6 +248,74 @@ const sendOrder = async () => {
 const closeOrderStatus = () => {
 	showOrderStatus.value = false;
 	orderStatus.value = null;
+};
+
+const checkOrderStatus = async (id) => {
+	try {
+		const order = await orderStore.fetchOrder(id);
+		if (order) {
+			const isAssigned = order.associatedCourierId && order.associatedCourierId !== "0";
+			orderStatus.value = {
+				orderId: order.orderId,
+				assigned: isAssigned,
+				message: isAssigned
+					? "Your order has been assigned to a courier!"
+					: "Your order is waiting in the queue for a courier.",
+				courierId: order.associatedCourierId,
+			};
+
+			// If assigned to courier, start tracking
+			if (isAssigned && order.associatedCourierId) {
+				courierTrackingStore.startTracking(order.associatedCourierId);
+			}
+
+			showOrderStatus.value = true;
+		}
+	} catch (error) {
+		if ($DEBUG) console.error("Error checking order status:", error);
+	}
+};
+
+const startOrderStatusPolling = (id) => {
+	// Poll every 3 seconds to check if order is assigned to a courier
+	orderPollingInterval.value = setInterval(async () => {
+		try {
+			const orderData = await orderStore.fetchOrder(id);
+			if (orderData && orderData.associatedCourierId && orderData.associatedCourierId !== "0") {
+				// Order has been assigned to a courier
+				if (!orderStatus.value?.assigned) {
+					// Update status and show notification
+					orderStatus.value = {
+						orderId: orderData.orderId,
+						assigned: true,
+						message: "Your order has been assigned to a courier!",
+						courierId: orderData.associatedCourierId,
+					};
+					showOrderStatus.value = true;
+
+					// Start tracking the courier
+					courierTrackingStore.startTracking(orderData.associatedCourierId);
+				}
+				// Stop polling once assigned
+				stopOrderStatusPolling();
+			}
+		} catch (error) {
+			// Silently handle 404 errors (order not found) without throwing
+			if (error?.status === 404) {
+				if ($DEBUG) console.warn("Order not found, stopping polling");
+				stopOrderStatusPolling();
+			} else if ($DEBUG) {
+				console.error("Error polling order status:", error);
+			}
+		}
+	}, 3000);
+};
+
+const stopOrderStatusPolling = () => {
+	if (orderPollingInterval.value) {
+		clearInterval(orderPollingInterval.value);
+		orderPollingInterval.value = null;
+	}
 };
 
 const onSearchSelect = (item) => {
@@ -259,6 +334,30 @@ const onSearchCivicSelect = (item) => {
 };
 
 onMounted(async () => {
-	if (orderId.value !== "0000") await orderStore.fetchOrder(orderId.value);
+	if (orderId.value !== "0000") {
+		const order = await orderStore.fetchOrder(orderId.value);
+		// If order exists and has a courier, start tracking
+		if (order && order.associatedCourierId && order.associatedCourierId !== "0") {
+			courierTrackingStore.startTracking(order.associatedCourierId);
+		}
+	}
 });
+
+onUnmounted(() => {
+	stopOrderStatusPolling();
+	courierTrackingStore.stopTracking();
+});
+
+// Watch courier location changes and update map
+watch(
+	() => courierTrackingStore.courierLocation,
+	(newLocation) => {
+		if (newLocation && mapRef.value) {
+			const coords = [newLocation.longitude, newLocation.latitude];
+			if ($DEBUG) console.log("Updating courier pin on map:", coords);
+			mapRef.value.showCourierPin(coords);
+		}
+	},
+	{ deep: true }
+);
 </script>
