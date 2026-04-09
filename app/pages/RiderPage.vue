@@ -91,6 +91,7 @@ const onMapLoaded = (mapWrapper) => {
 
 // Start polling on mount
 onMounted(() => {
+	routingStore.setCourierId(courierId.value);
 	routingStore.startOrderPolling();
 });
 

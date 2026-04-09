@@ -23,12 +23,15 @@
 				<h2
 					v-if="restaurant != null"
 					class="text-text-primary"
-				><span class="font-bold">{{ $t('UserPage.restaurant') }}:</span> {{ restaurant.label }}</h2>
+				><span class="font-bold">{{
+					$t('UserPage.restaurant') }}:</span> {{ restaurant.label }}</h2>
 				<div
 					v-if="restaurant != null"
 					class="py-0.5 pr-0.5 border border-border-default rounded-lg"
 				>
-					<div class="gap-6 grid grid-cols-2 p-5 w-full h-fit md:max-h-132.5 overflow-hidden md:overflow-y-auto scrollbar-custom">
+					<div
+						class="gap-6 grid grid-cols-2 p-5 w-full h-fit md:max-h-132.5 overflow-hidden md:overflow-y-auto scrollbar-custom"
+					>
 						<AppFoodCardComponent
 							name="Pizza margherita"
 							:price="5.5"
@@ -129,7 +132,7 @@
 			@gps-change="onGPSChange"
 		/>
 		<AppCoordinatesComponent ref="coordsRef" />
-		
+
 		<!-- Order Status Modal -->
 		<div
 			v-if="showOrderStatus"
@@ -219,19 +222,15 @@ const sendOrder = async () => {
 		orderCopy.destination = { ...gpsCoords.value };
 		orderCopy.total = orderCopy.items.reduce((sum, item) => sum + item.price, 0);
 
-		
-		// Update order status
-		// orderStatus.value = {
-		// 	orderId: response.orderId,
-		// 	assigned: response.assigned,
-		// 	status: response.status,
-		// 	message: response.assigned 
-		// 		? "Order assigned to nearest courier!" 
-		// 		: "Order queued - waiting for available courier",
-		// };
-		// showOrderStatus.value = true;
-		
 		if ($DEBUG) console.log("Sending order:", orderCopy);
+		const id = await orderStore.submitOrder(orderCopy);
+		orderCopy.id = id;
+		router.replace({
+			query: {
+				...route.query,
+				orderId: id,
+			},
+		});
 
 		order.value.items = [];
 	} catch (error) {
