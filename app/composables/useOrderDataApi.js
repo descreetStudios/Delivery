@@ -87,10 +87,14 @@ export const useOrderDataApi = () => {
 				method: "POST",
 				body: {
 					orderId: orderData.orderId,
-					pickupLatitude: orderData.pickupLatitude,
-					pickupLongitude: orderData.pickupLongitude,
-					deliveryLatitude: orderData.deliveryLatitude,
-					deliveryLongitude: orderData.deliveryLongitude,
+					restaurant: {
+						latitude: orderData.pickupLatitude,
+						longitude: orderData.pickupLongitude,
+					},
+					destination: {
+						latitude: orderData.deliveryLatitude,
+						longitude: orderData.deliveryLongitude,
+					},
 					items: orderData.items.map((item) => ({
 						name: item.name,
 						quantity: item.quantity,

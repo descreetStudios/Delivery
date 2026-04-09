@@ -85,6 +85,7 @@ const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
 	coordsRef.value.bindMap(mapWrapper);
 	mapInstance.value = mapWrapper.map;
+	routingStore.setCourierId(courierId.value);
 	routingStore.syncRoutingData();
 };
 
@@ -100,7 +101,9 @@ onMounted(() => {
 });
 
 const onGPSChange = async (coords) => {
-	await routingStore.syncGeolocation([coords.coords.longitude, coords.coords.latitude], coords.coords.heading);
+	await routingStore.syncGeolocation(
+		[coords.coords.longitude, coords.coords.latitude],
+		coords.coords.heading);
 };
 
 const completeOrderHandler = async () => {

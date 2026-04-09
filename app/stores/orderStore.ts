@@ -90,6 +90,7 @@ export const useOrderStore = defineStore("orderStore", {
 
 		async fetchAndSetActiveOrder(associatedCourierId: string) {
 			const { fetchActiveOrder } = useOrdersApi();
+			const routingStore = useRoutingStore();
 
 			if (!associatedCourierId) return;
 			this.associatedCourierId = associatedCourierId;
@@ -97,13 +98,20 @@ export const useOrderStore = defineStore("orderStore", {
 			try {
 				const order: Order | null = await fetchActiveOrder(this.associatedCourierId) as Order | null;
 				
-				// Only update state if we actually got an order
 				if (order) {
+
+					if (order.orderId == this.orderId) return this.orderId;
+
 					this.orderId = order.orderId;
 					this.restaurant = order.restaurant;
 					this.destination = order.destination;
 					this.items = order.items;
 					this.totalPrice = order.totalPrice;
+					routingStore.syncRoutingData();
+
+					console.log("Fetched active order for courier ", this.associatedCourierId, ": ", order);
+
+					if (order.orderId) return order.orderId;
 				}
 			} catch (error) {
 				let message;
@@ -119,7 +127,7 @@ export const useOrderStore = defineStore("orderStore", {
 
 			try {
 				await completeOrder(this.associatedCourierId, this.orderId);
-				this.$reset();
+    			this.$reset();
 			} catch (error) {
 				let message;
 				if (error instanceof Error) message = error.message;

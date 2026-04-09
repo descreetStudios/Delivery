@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { getLocationWebSocket } from "#imports";
 import { useOrderStore } from "@/stores/orderStore";
+import { is } from "@nuxt/ui/runtime/locale/index.js";
 
 type Coordinate = [number, number]; //[lng, lat]
 
@@ -72,7 +73,8 @@ interface RoutingData {
 
 export const useRoutingStore = defineStore("routingStore", {
 	state: (): RoutingData & {
-		orderPollingInterval: ReturnType<typeof setInterval> | null
+		orderPollingInterval: ReturnType<typeof setInterval> | null,
+		isStopped: boolean,
 	} => ({
 		code: "NotLoaded",
 		routes: [],
@@ -82,6 +84,7 @@ export const useRoutingStore = defineStore("routingStore", {
 		courierId: "0",
 		activeOrderId: "0",
 		orderPollingInterval: null,
+		isStopped: false,
 	}),
 
 	actions: {
@@ -90,8 +93,11 @@ export const useRoutingStore = defineStore("routingStore", {
 			const nuxtApp = useNuxtApp();
 			const $DEBUG = await nuxtApp.$DEBUG;
 
+			const orderStore = useOrderStore();
+
 			try {
-				const data: RoutingData = await getRoutingData(this.courierId) as RoutingData;
+				const data: RoutingData = await getRoutingData(
+					this.courierId, orderStore.restaurant, orderStore.destination) as RoutingData;
 				this.code = data.code;
 				this.routes = data.routes;
 				this.waypoints = data.waypoints;
@@ -144,20 +150,37 @@ export const useRoutingStore = defineStore("routingStore", {
 				if ($DEBUG) console.warn("Cannot start polling: invalid courier ID:", this.courierId);
 				return;
 			}
-
 			if (this.orderPollingInterval) {
 				clearInterval(this.orderPollingInterval);
 				this.orderPollingInterval = null;
 			}
-
 			if ($DEBUG) console.log("Starting order polling for courier:", this.courierId);
 			this.orderPollingInterval = setInterval(async () => {
-				await orderStore.fetchAndSetActiveOrder(this.courierId);
+				if (this.isStopped) return;
+				try {
+					const activeOrderId = await orderStore.fetchAndSetActiveOrder(this.courierId) as string;
+					if (activeOrderId != this.activeOrderId) {
+						const courierId = this.courierId;
+						this.$reset();
+						this.courierId = courierId;
+						this.activeOrderId = activeOrderId;
+					}
+				} catch (error) {
+					this.code = error as string;
+
+					let message;
+					if (error instanceof Error) message = error.message;
+					else message = String(error);
+
+					reportError(message);
+				}
 			}, 3000);
 		},
 
 		stopOrderPolling() {
+			console.log("Stopping order polling...");
 			if (this.orderPollingInterval) {
+				this.isStopped = true;
 				clearInterval(this.orderPollingInterval);
 				this.orderPollingInterval = null;
 			}

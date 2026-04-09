@@ -18,15 +18,36 @@ const props = defineProps({
 
 const map = toRef(props, "mapInstance");
 const routingStore = useRoutingStore();
-const { code, routes, waypoints, currentGPS } = storeToRefs(routingStore);
+const { code, routes, waypoints, currentGPS, activeOrderId } = storeToRefs(routingStore);
 const areRoutingDataLoaded = computed(() => code.value == "Ok");
 const loaded = computed(() => !!map.value && areRoutingDataLoaded.value);
 
 const initRoutingEngineComponent = () => {
 	if ($DEBUG) console.log("Routing data: ", routingStore);
-
 	drawRoutingPolyline();
 	drawWaypoints();
+
+	console.log(activeOrderId.value);
+
+	watch(
+		() => activeOrderId.value,
+		() => {
+			deleteRoutingPolyline();
+			deleteWaypoints();
+			if ($DEBUG) console.log("Active order changed, redrawing route and waypoints.");
+			const stopWatch = watch(
+				() => code.value,
+				(newCode) => {
+					if (newCode == "Ok") {
+						drawRoutingPolyline();
+						drawWaypoints();
+						stopWatch();
+					}
+				},
+				{ immediate: true },
+			);
+		},
+	);
 };
 
 const stopLoadingWatch = watch(
@@ -86,6 +107,20 @@ const drawRoutingPolyline = () => {
 			"line-width": 4,
 		},
 	});
+};
+
+const deleteRoutingPolyline = () => {
+	if (map.value.getSource("route")) {
+		map.value.removeLayer("route");
+		map.value.removeSource("route");
+	}
+};
+
+const deleteWaypoints = () => {
+	if (map.value.getSource("waypoints")) {
+		map.value.removeLayer("waypoints");
+		map.value.removeSource("waypoints");
+	}
 };
 
 const drawWaypoints = () => {

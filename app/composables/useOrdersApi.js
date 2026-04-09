@@ -32,10 +32,8 @@ export const useOrdersApi = () => {
 			const response = await $fetch(`${apiBase}/orders`, {
 				method: "POST",
 				body: {
-					pickupLatitude: order.restaurant.latitude,
-					pickupLongitude: order.restaurant.longitude,
-					deliveryLatitude: order.destination.latitude,
-					deliveryLongitude: order.destination.longitude,
+					restaurant: order.restaurant,
+					destination: order.destination,
 					items: order.items,
 					totalPrice: order.total,
 				},
@@ -57,6 +55,7 @@ export const useOrdersApi = () => {
 		loading.value = true;
 		try {
 			const response = await $fetch(`${apiBase}/orders/${orderId}`);
+			console.log("Order fetched: ", response);
 			return response;
 		} catch (err) {
 			error.value = err.message || "Unable to get order";
@@ -73,7 +72,7 @@ export const useOrdersApi = () => {
 			const response = await $fetch(`${apiBase}/orders/courier/${fullCourierId}/active`, {
 				cache: "no-store",
 			});
-			return response;
+			return response ?? null;
 		} catch (err) {
 			// 404 is expected when courier has no active order - don't throw error
 			if (err.status === 404) {
