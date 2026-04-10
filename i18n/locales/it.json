@@ -8,6 +8,36 @@
     "OrderComponent": {
         "delete": "Elimina"
     },
+    "maneuver": {
+        "turn": {
+            "right": "Gira a destra tra {distance}",
+            "left": "Gira a sinistra tra {distance}",
+            "slight right": "Mantieni la destra tra {distance}",
+            "slight left": "Mantieni la sinistra tra {distance}",
+            "sharp right": "Gira a destra nettamente tra {distance}",
+            "sharp left": "Gira a sinistra nettamente tra {distance}",
+            "straight": "Prosegui dritto per {distance}",
+            "uturn": "Fai un'inversione a U tra {distance}"
+        },
+        "continue": "Continua per {distance}",
+        "merge": "Immettiti nella corsia per {distance}",
+        "roundabout": "Entra nella rotatoria tra {distance}",
+        "exitRoundabout": "Esci dalla rotatoria",
+        "fork": {
+            "right": "Mantieni la destra al bivio tra {distance}",
+            "left": "Mantieni la sinistra al bivio tra {distance}",
+            "straight": "Prosegui dritto al bivio per {distance}"
+        },
+        "endOfRoad": {
+            "right": "Gira a destra a fine strada tra {distance}",
+            "left": "Gira a sinistra a fine strada tra {distance}",
+            "straight": "Prosegui a fine strada per {distance}"
+        },
+        "newName": "La strada cambia nome tra {distance}",
+        "arrive": "Sei arrivato a destinazione",
+        "depart": "Procedi per {distance} verso la partenza",
+        "notification": "{distance}"
+    },
     "sections": {
         "hero": {
             "title": "Piatti Caldi, Distanza Zero",

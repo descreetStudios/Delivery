@@ -8,6 +8,36 @@
     "OrderComponent": {
         "delete": "Eliminar"
     },
+    "maneuver": {
+        "turn": {
+            "right": "Gira a la derecha en {distance}",
+            "left": "Gira a la izquierda en {distance}",
+            "slight right": "Mantente a la derecha en {distance}",
+            "slight left": "Mantente a la izquierda en {distance}",
+            "sharp right": "Gira bruscamente a la derecha en {distance}",
+            "sharp left": "Gira bruscamente a la izquierda en {distance}",
+            "straight": "Continúa recto por {distance}",
+            "uturn": "Haz un cambio de sentido en {distance}"
+        },
+        "continue": "Continúa por {distance}",
+        "merge": "Incorpórate en {distance}",
+        "roundabout": "Entra en la rotonda en {distance}",
+        "exitRoundabout": "Sal de la rotonda",
+        "fork": {
+            "right": "Mantente a la derecha en la bifurcación en {distance}",
+            "left": "Mantente a la izquierda en la bifurcación en {distance}",
+            "straight": "Continúa recto en la bifurcación por {distance}"
+        },
+        "endOfRoad": {
+            "right": "Gira a la derecha al final del camino en {distance}",
+            "left": "Gira a la izquierda al final del camino en {distance}",
+            "straight": "Continúa al final del camino por {distance}"
+        },
+        "newName": "La calle cambia de nombre en {distance}",
+        "arrive": "Has llegado a tu destino",
+        "depart": "Dirígete por {distance} para comenzar",
+        "notification": "{distance}"
+    },
     "sections": {
         "hero": {
             "title": "Comidas Calientes, Cero Distancia",
