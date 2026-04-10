@@ -50,13 +50,17 @@
 <script setup>
 import { useWindowSize } from "@vueuse/core";
 
+onMounted(()=>{
+	toggleCollapse();
+});
+
 const { width } = useWindowSize();
 const DEFAULT_WIDTH = 420;
 
 // State
 const sidebarWidth = computed(() => width.value <= 640 ? width.value : DEFAULT_WIDTH);
 const oldSidebarWidth = ref(DEFAULT_WIDTH);
-const isCollapsed = ref(false);
+const isCollapsed = ref(true); 
 
 // Toggle logic
 const toggleCollapse = () => {

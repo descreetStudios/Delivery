@@ -10,23 +10,27 @@
 					icon="i-heroicons-shopping-cart"
 					color="neutral"
 					variant="ghost"
-					class="flex justify-center items-center ml-auto pr-5 size-17 text-text-primary"
+					class="z-200 flex justify-center items-center ml-auto pr-5 size-17 text-text-primary"
 					@click="toggleCart"
 				/>
 			</template>
 			<template #sidebar>
 				<AppSearchComponent
+					v-if="!cartShown || width>=925"
 					@select="onSearchSelect"
 					@select-civic="onSearchCivicSelect"
 				/>
-				<hr class="border-0.5 border-border-default w-full">
+				<hr
+					v-if="!cartShown || width>=925"
+					class="border-0.5 border-border-default w-full"
+				>
 				<h2
-					v-if="restaurant != null"
+					v-if="restaurant != null && (!cartShown || width>=925)"
 					class="text-text-primary"
 				><span class="font-bold">{{
 					$t('UserPage.restaurant') }}:</span> {{ restaurant.label }}</h2>
 				<div
-					v-if="restaurant != null"
+					v-if="restaurant != null && (!cartShown || width>=925)"
 					class="py-0.5 pr-0.5 border border-border-default rounded-lg"
 				>
 					<div
@@ -96,10 +100,17 @@
 				</div>
 				<div
 					v-if="cartShown"
-					class="top-0 left-105 fixed flex flex-col items-center gap-2 bg-bg-surface mt-2 ml-5 p-3 border border-border-default rounded-sm w-105 h-150"
+					:class="[
+						// Mobile / Tablet
+						'absolute top-0 left-0 w-full h-full',
+
+						// Desktop
+						'min-[925px]:fixed min-[925px]:left-105 min-[925px]:w-105 min-[925px]:h-150 min-[925px]:mt-2 min-[925px]:ml-5 min-[925px]:border min-[925px]:border-border-default min-[925px]:rounded-sm'
+					]"
+					class="z-200 flex flex-col items-center gap-2 bg-bg-surface p-3"
 				>
 					<h1 class="top-0 flex text-text-primary text-xl">Ordine</h1>
-					<div class="py-0.5 pr-0.5 border border-border-default rounded-lg">
+					<div class="mt-4 min-[925px]:mt-0 py-0.5 pr-0.5 border border-border-default rounded-lg">
 						<div class="flex flex-col gap-3 p-3 w-90 h-121 overflow-y-auto scrollbar-custom">
 							<AppOrderComponent
 								v-for="(o, index) in order.items"
@@ -171,8 +182,10 @@
 import { useRouter, useRoute } from "vue-router";
 import { useOrderStore } from "@/stores/orderStore";
 import { useCourierTrackingStore } from "@/stores/courierTrackingStore";
+import { useWindowSize } from "@vueuse/core";
 
 const { $DEBUG } = useNuxtApp();
+const { width } = useWindowSize();
 const orderStore = useOrderStore();
 const courierTrackingStore = useCourierTrackingStore();
 const router = useRouter();
@@ -358,6 +371,6 @@ watch(
 			mapRef.value.showCourierPin(coords);
 		}
 	},
-	{ deep: true }
+	{ deep: true },
 );
 </script>
