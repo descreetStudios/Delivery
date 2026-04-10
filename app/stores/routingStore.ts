@@ -75,6 +75,8 @@ export const useRoutingStore = defineStore("routingStore", {
 	state: (): RoutingData & {
 		orderPollingInterval: ReturnType<typeof setInterval> | null,
 		isStopped: boolean,
+		currentLegIndex: number,
+		currentStepIndex: number,
 	} => ({
 		code: "NotLoaded",
 		routes: [],
@@ -85,7 +87,36 @@ export const useRoutingStore = defineStore("routingStore", {
 		activeOrderId: "0",
 		orderPollingInterval: null,
 		isStopped: false,
+		currentLegIndex: 0,
+		currentStepIndex: 0,
 	}),
+
+	getters: {
+		currentStep: (state): Step | null => {
+			if (!state.routes.length || !state.routes[0]?.legs) return null;
+			const leg = state.routes[0].legs[state.currentLegIndex];
+			if (!leg?.steps) return null;
+			return leg.steps[state.currentStepIndex] || null;
+		},
+
+		allSteps: (state): Step[] => {
+			if (!state.routes.length || !state.routes[0]?.legs) return [];
+			const steps: Step[] = [];
+			for (const leg of state.routes[0].legs) {
+				if (leg.steps) steps.push(...leg.steps);
+			}
+			return steps;
+		},
+
+		totalStepsCount: (state): number => {
+			if (!state.routes.length || !state.routes[0]?.legs) return 0;
+			let count = 0;
+			for (const leg of state.routes[0].legs) {
+				if (leg.steps) count += leg.steps.length;
+			}
+			return count;
+		},
+	},
 
 	actions: {
 		async syncRoutingData() {
@@ -101,6 +132,7 @@ export const useRoutingStore = defineStore("routingStore", {
 				this.code = data.code;
 				this.routes = data.routes;
 				this.waypoints = data.waypoints;
+				this.resetStepTracking();
 				if ($DEBUG) console.log("State: ", this.$state);
 			} catch (error) {
 				this.code = error as string;
@@ -184,6 +216,29 @@ export const useRoutingStore = defineStore("routingStore", {
 				clearInterval(this.orderPollingInterval);
 				this.orderPollingInterval = null;
 			}
+		},
+
+		advanceStep() {
+			if (!this.routes.length || !this.routes[0]?.legs) return;
+
+			const currentLeg = this.routes[0].legs[this.currentLegIndex];
+			if (!currentLeg?.steps) return;
+
+			// Check if there's a next step in the current leg
+			if (this.currentStepIndex < currentLeg.steps.length - 1) {
+				this.currentStepIndex++;
+			} else {
+				// Move to next leg if available
+				if (this.currentLegIndex < this.routes[0].legs.length - 1) {
+					this.currentLegIndex++;
+					this.currentStepIndex = 0;
+				}
+			}
+		},
+
+		resetStepTracking() {
+			this.currentLegIndex = 0;
+			this.currentStepIndex = 0;
 		},
 	},
 });

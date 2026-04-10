@@ -8,6 +8,36 @@
     "OrderComponent":{
         "delete":"delete"
     },
+    "maneuver": {
+        "turn": {
+            "right": "Turn right {distance}",
+            "left": "Turn left {distance}",
+            "slight right": "Bear right {distance}",
+            "slight left": "Bear left {distance}",
+            "sharp right": "Turn sharp right {distance}",
+            "sharp left": "Turn sharp left {distance}",
+            "straight": "Continue straight {distance}",
+            "uturn": "Make a U-turn {distance}"
+        },
+        "continue": "Continue {distance}",
+        "merge": "Merge {distance}",
+        "roundabout": "Enter roundabout {distance}",
+        "exitRoundabout": "Exit roundabout",
+        "fork": {
+            "right": "Keep right at fork {distance}",
+            "left": "Keep left at fork {distance}",
+            "straight": "Continue straight at fork {distance}"
+        },
+        "endOfRoad": {
+            "right": "Turn right at end of road {distance}",
+            "left": "Turn left at end of road {distance}",
+            "straight": "Continue at end of road {distance}"
+        },
+        "newName": "Road name changes {distance}",
+        "arrive": "You have arrived at your destination",
+        "depart": "Head {distance} to start",
+        "notification": "{distance}"
+    },
     "sections": {
         "hero": {
             "title": "Hot Meals, Zero Distance",

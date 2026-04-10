@@ -6,6 +6,7 @@
 import { useRoutingStore } from "@/stores/routingStore";
 import { point, lineString } from "@turf/helpers";
 import pointToLineDistance from "@turf/point-to-line-distance";
+import distance from "@turf/distance";
 
 const { $DEBUG } = useNuxtApp();
 
@@ -65,8 +66,9 @@ const stopLoadingWatch = watch(
 
 const stopGPSWatch = watch(
 	() => currentGPS.value,
-	(newVal) => {
+	async (newVal) => {
 		checkPolylineFollowing(newVal);
+		await trackCurrentStep(newVal);
 	},
 );
 
@@ -163,6 +165,28 @@ const drawWaypoints = () => {
 			"circle-color": "#ff0000",
 		},
 	});
+};
+
+const trackCurrentStep = async (currentGPSLocation) => {
+	if (!loaded.value) return;
+
+	const currentStep = routingStore.currentStep;
+	if (!currentStep?.maneuver?.location) return;
+
+	const [lng, lat] = currentGPSLocation;
+	const maneuverCoords = currentStep.maneuver.location;
+	const dist = distance(
+		point([lng, lat]),
+		point(maneuverCoords),
+		{ units: "meters" },
+	);
+
+	if ($DEBUG) console.log("Distance to next maneuver:", dist.toFixed(0), "m");
+
+	// If within 30 meters of the maneuver point, advance to next step
+	if (dist < 30) {
+		routingStore.advanceStep();
+	}
 };
 
 const checkPolylineFollowing = async (currentGPSLocation) => {
