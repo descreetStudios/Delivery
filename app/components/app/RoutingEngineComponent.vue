@@ -6,9 +6,15 @@
 import { useRoutingStore } from "@/stores/routingStore";
 import { point, lineString } from "@turf/helpers";
 import pointToLineDistance from "@turf/point-to-line-distance";
+import lineSlice from "@turf/line-slice";
+import nearestPointOnLine from "@turf/nearest-point-on-line";
 import distance from "@turf/distance";
 
 const { $DEBUG } = useNuxtApp();
+
+const COLOR_AHEAD = "#0074D9";
+const COLOR_PASSED = "#FF0000";
+const POLYLINE_WIDTH = 5;
 
 const props = defineProps({
 	mapInstance: {
@@ -19,7 +25,7 @@ const props = defineProps({
 
 const map = toRef(props, "mapInstance");
 const routingStore = useRoutingStore();
-const { code, routes, waypoints, currentGPS, activeOrderId } = storeToRefs(routingStore);
+const { code, routes, waypoints, currentGPS, activeOrderId, passedPolyline } = storeToRefs(routingStore);
 const areRoutingDataLoaded = computed(() => code.value == "Ok");
 const loaded = computed(() => !!map.value && areRoutingDataLoaded.value);
 
@@ -34,6 +40,7 @@ const initRoutingEngineComponent = () => {
 		() => activeOrderId.value,
 		() => {
 			deleteRoutingPolyline();
+			deletePassedPolyline();
 			deleteWaypoints();
 			if ($DEBUG) console.log("Active order changed, redrawing route and waypoints.");
 			const stopWatch = watch(
@@ -105,16 +112,61 @@ const drawRoutingPolyline = () => {
 			"line-cap": "round",
 		},
 		paint: {
-			"line-color": "#0074D9",
-			"line-width": 4,
+			"line-color": COLOR_AHEAD,
+			"line-width": POLYLINE_WIDTH,
 		},
 	});
 };
+
+const drawPassedPolyline = () => {
+	if (!map.value.getSource("passed_route")) {
+		map.value.addSource("passed_route", {
+			type: "geojson",
+			data: {
+				type: "Feature",
+				geometry: {
+					type: "LineString",
+					coordinates: passedPolyline.value,
+				},
+			},
+		});
+
+		map.value.addLayer({
+			id: "passed_route",
+			type: "line",
+			source: "passed_route",
+			paint: {
+				"line-color": COLOR_PASSED,
+				"line-width": POLYLINE_WIDTH,
+			},
+		});
+
+	} else {
+		map.value.getSource("passed_route").setData({
+			type: "Feature",
+			geometry: {
+				type: "LineString",
+				coordinates: passedPolyline.value,
+			},
+		});
+
+	}
+
+	map.value.moveLayer("passed_route");
+};
+
 
 const deleteRoutingPolyline = () => {
 	if (map.value.getSource("route")) {
 		map.value.removeLayer("route");
 		map.value.removeSource("route");
+	}
+};
+
+const deletePassedPolyline = () => {
+	if (map.value.getSource("passed_route")) {
+		map.value.removeLayer("passed_route");
+		map.value.removeSource("passed_route");
 	}
 };
 
@@ -204,6 +256,16 @@ const checkPolylineFollowing = async (currentGPSLocation) => {
 	if (distance >= 50) {
 		await routingStore.syncRoutingData();
 		drawRoutingPolyline();
+		drawWaypoints();
+		passedPolyline.value = [];
+	} else if (activeOrderId.value) {
+		const routeCoords = routes.value[0].geometry.coordinates;
+		const snapped = nearestPointOnLine(route, gps);
+
+		const start = point(routeCoords[0]);
+		const sliced = lineSlice(start, snapped, route);
+		passedPolyline.value = sliced.geometry.coordinates;
+		drawPassedPolyline();
 	}
 };
 

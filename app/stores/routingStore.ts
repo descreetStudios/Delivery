@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { getLocationWebSocket } from "#imports";
 import { useOrderStore } from "@/stores/orderStore";
-import { is } from "@nuxt/ui/runtime/locale/index.js";
 
 type Coordinate = [number, number]; //[lng, lat]
 
@@ -66,9 +65,10 @@ interface RoutingData {
 	routes: Route[];
 	waypoints: Waypoint[];
 	currentGPS: Coordinate;
-	currentHeading: number,
+	currentHeading: number;
 	courierId: string;
-	activeOrderId: string,
+	activeOrderId: string;
+	passedPolyline: Coordinate[];
 }
 
 export const useRoutingStore = defineStore("routingStore", {
@@ -89,6 +89,7 @@ export const useRoutingStore = defineStore("routingStore", {
 		isStopped: false,
 		currentLegIndex: 0,
 		currentStepIndex: 0,
+		passedPolyline: [],
 	}),
 
 	getters: {
