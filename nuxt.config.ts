@@ -14,6 +14,16 @@ export default defineNuxtConfig({
 		"@nuxtjs/i18n",
 	],
 
+	app: {
+		head: {
+			link: [
+				{ rel: "icon", type: "image/x-icon", href: "/icon.ico" },
+			],
+			title: "Delivery",
+			titleTemplate: "Delivery - %s",
+		},
+	},
+
 	icon: {
 		clientBundle: {
 			scan: true,
@@ -75,10 +85,5 @@ export default defineNuxtConfig({
 			{ code: "en", iso: "en-US", file: "en.json", name: "English", flag: "gb" },
 			{ code: "es", iso: "es-ES", file: "es.json", name: "Español", flag: "es" },
 		],
-
-
-
 	},
-
-
 });

@@ -61,6 +61,10 @@ import { useRoute } from "vue-router";
 import { useRoutingStore } from "@/stores/routingStore";
 import { useOrderStore } from "@/stores/orderStore";
 
+useHead({
+	title: "Rider",
+});
+
 const { $DEBUG } = useNuxtApp();
 
 const routingStore = useRoutingStore();

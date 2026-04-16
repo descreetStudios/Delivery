@@ -187,6 +187,10 @@ import { useOrderStore } from "@/stores/orderStore";
 import { useCourierTrackingStore } from "@/stores/courierTrackingStore";
 import { useWindowSize } from "@vueuse/core";
 
+useHead({
+	title: "Order",
+});
+
 const { $DEBUG } = useNuxtApp();
 const { width } = useWindowSize();
 const orderStore = useOrderStore();
@@ -201,9 +205,9 @@ const coordsRef = ref(null);
 const mapInstance = ref(null);
 const cartShown = ref(false);
 const gpsCoords = ref({ latitude: 0, longitude: 0 });
-const orderStatus = ref(null); // To track order status after submission
-const showOrderStatus = ref(false); // To show order status modal
-const orderPollingInterval = ref(null); // Interval for polling order status
+const orderStatus = ref(null);
+const showOrderStatus = ref(false);
+const orderPollingInterval = ref(null);
 
 const totalPrice = computed(() => {
 	return order.value.items.reduce((sum, item) => {
