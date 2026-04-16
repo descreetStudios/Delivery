@@ -28,7 +28,7 @@
 						<button
 							class="bg-warning disabled:bg-gray-300 px-4 py-2 rounded-lg w-full text-white disabled:text-gray-600 cursor-pointer disabled:cursor-not-allowed"
 							:disabled="orderMessageDisabled"
-							@click="completeOrderHandler"
+							@click="orderStatusHandler"
 						>
 							{{ orderMessage }}
 						</button>
@@ -80,6 +80,8 @@ const route = useRoute();
 const courierId = ref(route.query.courierId ?? null);
 const orderMessage = ref("");
 const orderMessageDisabled = ref(true);
+const restaurantDist = ref(0);
+const destinationDist = ref(0);
 
 const coordsRef = ref(null);
 const mapInstance = ref(null);
@@ -106,29 +108,27 @@ const onGPSChange = async (coords) => {
 	await routingStore.syncGeolocation(
 		[coords.coords.longitude, coords.coords.latitude],
 		coords.coords.heading);
-	const restaurantDist = distance(
+	restaurantDist.value = distance(
 		point(currentGPS.value),
 		point(waypoints.value[1].location),
 		{ units: "meters" },
 	);
-	const desinationDist = distance(
+	destinationDist.value = distance(
 		point(currentGPS.value),
 		point(waypoints.value[2].location),
 		{ units: "meters" },
 	);
 
-	console.log(status.value);
-
-	if (restaurantDist <= 50 && activeOrder.value.status == "ASSIGNED") {
+	if (restaurantDist.value <= 50 && activeOrder.value.status == "FETCHING") {
 		orderMessage.value = "Pickup order from restaurant";
 		orderMessageDisabled.value = false;
 	}
-	else if (desinationDist <= 50 && activeOrder.value.status == "DELIVERING") {
+	else if (destinationDist.value <= 50 && activeOrder.value.status == "DELIVERING") {
 		orderMessage.value = "Complete order";
 		orderMessageDisabled.value = false;
 	}
 	else {
-		if (activeOrder.value.status == "ASSIGNED")
+		if (activeOrder.value.status == "FETCHING")
 			orderMessage.value = "Reach restaurant";
 		if (activeOrder.value.status == "DELIVERING")
 			orderMessage.value = "Reach order destination";
@@ -136,10 +136,11 @@ const onGPSChange = async (coords) => {
 	}
 };
 
-const completeOrderHandler = async () => {
+const orderStatusHandler = async () => {
 	try {
-		orderStore.completeOrder(courierId.value);
-		activeOrder.value = null;
+		await orderStore.changeOrderStatus();
+		if (activeOrder.value.status == "COMPLETED")
+			activeOrder.value = null;
 	} catch (error) {
 		console.error("Error completing order:", error);
 	}

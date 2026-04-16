@@ -126,11 +126,14 @@ export const useOrderStore = defineStore("orderStore", {
 			}
 		},
 
-		async completeOrder() {
-			const { completeOrder } = useOrdersApi();
+		async changeOrderStatus() {
+			const { updateOrderToDelivering, completeOrder } = useOrdersApi();
 
 			try {
-				await completeOrder(this.associatedCourierId, this.orderId);
+				if (this.status == "FETCHING")
+					await updateOrderToDelivering(this.orderId);
+				else if (this.status == "DELIVERING")
+					await completeOrder(this.associatedCourierId, this.orderId);
     			this.$reset();
 			} catch (error) {
 				let message;
