@@ -101,6 +101,20 @@ export const useOrdersApi = () => {
 		}
 	};
 
+	const updateOrderToDelivering = async (orderId) => {
+		loading.value = true;
+		try {
+			await $fetch(`${apiBase}/orders/${orderId}/delivering`, {
+				method: "PUT",
+			});
+		} catch (err) {
+			error.value = err.message || "Unable to update order to DELIVERING";
+			throw new Error(error.value);
+		} finally {
+			loading.value = false;
+		}
+	};
+
 	return {
 		loading,
 		error,
@@ -108,5 +122,6 @@ export const useOrdersApi = () => {
 		getOrder,
 		fetchActiveOrder,
 		completeOrder,
+		updateOrderToDelivering,
 	};
 };

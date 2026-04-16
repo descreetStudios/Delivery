@@ -192,6 +192,26 @@ export const useOrderDataApi = () => {
 		}
 	};
 
+	/**
+	 * Update order status to DELIVERING when courier confirms pickup.
+	 * @param {string} orderId
+	 */
+	const updateOrderToDelivering = async (orderId) => {
+		if (!orderId) {
+			throw new Error("Invalid order ID");
+		}
+
+		try {
+			await $fetch(`/api/orders/${orderId}/delivering`, {
+				method: "PUT",
+			});
+			if ($DEBUG) console.log(`✅ Order ${orderId} updated to DELIVERING`);
+		} catch (err) {
+			error.value = err.message || "Unable to update order to DELIVERING";
+			throw new Error(error.value);
+		}
+	};
+
 	return {
 		orderItems,
 		totalPrice,
@@ -205,5 +225,6 @@ export const useOrderDataApi = () => {
 		assignCourierToOrder,
 		completeOrder,
 		fetchCourierLocation,
+		updateOrderToDelivering,
 	};
 };
