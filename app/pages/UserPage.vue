@@ -147,29 +147,55 @@
 		<!-- Order Status Modal -->
 		<div
 			v-if="showOrderStatus"
-			class="top-0 left-0 z-1000 fixed flex justify-center items-center bg-black bg-opacity-50 w-full h-full"
+			class="top-0 left-0 z-1000 fixed flex justify-center items-center bg-black/30 backdrop-blur-sm w-full h-full"
 			@click="closeOrderStatus"
 		>
 			<div
-				class="bg-bg-surface p-6 border border-border-default rounded-lg max-w-md"
+				class="bg-white/80 dark:bg-gray-800/80 p-6 border border-gray-200 dark:border-gray-700 rounded-lg max-w-md backdrop-blur-sm"
 				@click.stop
 			>
-				<h2 class="mb-4 font-bold text-text-primary text-xl">
+				<h2 class="mb-4 font-bold text-gray-900 dark:text-white text-xl">
 					{{ orderStatus?.assigned ? '✅ Order Assigned' : '⏳ Order Queued' }}
 				</h2>
-				<div class="space-y-2 text-text-primary">
+				<div class="space-y-2 text-gray-800 dark:text-gray-200">
 					<p><span class="font-semibold">Order ID:</span> {{ orderStatus?.orderId }}</p>
 					<p><span class="font-semibold">Status:</span> {{ orderStatus?.message }}</p>
 					<p
 						v-if="!orderStatus?.assigned"
-						class="mt-2 text-text-secondary text-sm"
+						class="mt-2 text-gray-600 dark:text-gray-400 text-sm"
 					>
 						Your order will be assigned to the nearest available courier as soon as one becomes free.
 					</p>
 				</div>
 				<button
-					class="bg-warning mt-4 px-4 py-2 rounded-full w-full text-white"
+					class="bg-blue-500 hover:bg-blue-600 mt-4 px-4 py-2 rounded-full w-full text-white transition-colors"
 					@click="closeOrderStatus"
+				>
+					Close
+				</button>
+			</div>
+		</div>
+
+		<!-- Delivery Status Modal -->
+		<div
+			v-if="showDeliveryStatus"
+			class="top-0 left-0 z-1000 fixed flex justify-center items-center bg-black/30 backdrop-blur-sm w-full h-full"
+			@click="closeDeliveryStatus"
+		>
+			<div
+				class="bg-white/80 dark:bg-gray-800/80 p-6 border border-gray-200 dark:border-gray-700 rounded-lg max-w-md backdrop-blur-sm"
+				@click.stop
+			>
+				<h2 class="mb-4 font-bold text-gray-900 dark:text-white text-xl">
+					✅ Order Delivered
+				</h2>
+				<div class="space-y-2 text-gray-800 dark:text-gray-200">
+					<p><span class="font-semibold">Order ID:</span> {{ deliveryStatus?.orderId }}</p>
+					<p><span class="font-semibold">Status:</span> {{ deliveryStatus?.message }}</p>
+				</div>
+				<button
+					class="bg-blue-500 hover:bg-blue-600 mt-4 px-4 py-2 rounded-full w-full text-white transition-colors"
+					@click="closeDeliveryStatus"
 				>
 					Close
 				</button>
@@ -201,6 +227,9 @@ const gpsCoords = ref({ latitude: 0, longitude: 0 });
 const orderStatus = ref(null); // To track order status after submission
 const showOrderStatus = ref(false); // To show order status modal
 const orderPollingInterval = ref(null); // Interval for polling order status
+const deliveryStatus = ref(null); // To track delivery status after completion
+const showDeliveryStatus = ref(false); // To show delivery confirmation modal
+const hasShownAssignedStatus = ref(false); // Track if we've already shown the assigned status
 
 const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
@@ -250,8 +279,12 @@ const sendOrder = async () => {
 
 		order.value.items = [];
 
-		// Show order status popup and start polling for assignment
-		await checkOrderStatus(id);
+		// Reset status flags for new order
+		hasShownAssignedStatus.value = false;
+		showOrderStatus.value = false;
+		orderStatus.value = null;
+
+		// Start polling for assignment - checkOrderStatus will be called by polling
 		startOrderStatusPolling(id);
 	} catch (error) {
 		console.log(error);
@@ -261,6 +294,13 @@ const sendOrder = async () => {
 const closeOrderStatus = () => {
 	showOrderStatus.value = false;
 	orderStatus.value = null;
+	// DON'T reset hasShownAssignedStatus here - it should stay true
+	// so the modal doesn't show again on subsequent polls
+};
+
+const closeDeliveryStatus = () => {
+	showDeliveryStatus.value = false;
+	deliveryStatus.value = null;
 };
 
 const checkOrderStatus = async (id) => {
@@ -290,13 +330,32 @@ const checkOrderStatus = async (id) => {
 };
 
 const startOrderStatusPolling = (id) => {
+	console.log("startOrderStatusPolling called for order:", id);
 	// Poll every 3 seconds to check if order is assigned to a courier
 	orderPollingInterval.value = setInterval(async () => {
 		try {
 			const orderData = await orderStore.fetchOrder(id);
+			console.log("Polling order status:", orderData?.status, "assigned:", orderData?.associatedCourierId);
+
+			// Check for delivery completion first
+			if (orderData && orderData.status === "COMPLETED") {
+				if (!deliveryStatus.value?.delivered) {
+					deliveryStatus.value = {
+						orderId: orderData.orderId,
+						delivered: true,
+						message: "Your order has been delivered to the delivery location!",
+					};
+					showDeliveryStatus.value = true;
+					stopOrderStatusPolling();
+				}
+				return;
+			}
+
+			// Check if assigned to courier
 			if (orderData && orderData.associatedCourierId && orderData.associatedCourierId !== "0") {
 				// Order has been assigned to a courier
-				if (!orderStatus.value?.assigned) {
+				if (!hasShownAssignedStatus.value) {
+					console.log("Showing assigned status for order:", id);
 					// Update status and show notification
 					orderStatus.value = {
 						orderId: orderData.orderId,
@@ -305,12 +364,14 @@ const startOrderStatusPolling = (id) => {
 						courierId: orderData.associatedCourierId,
 					};
 					showOrderStatus.value = true;
+					hasShownAssignedStatus.value = true;
 
 					// Start tracking the courier
 					courierTrackingStore.startTracking(orderData.associatedCourierId);
+				} else {
+					console.log("Already showed assigned status for order:", id);
 				}
-				// Stop polling once assigned
-				stopOrderStatusPolling();
+				// Continue polling to detect completion
 			}
 		} catch (error) {
 			// Silently handle 404 errors (order not found) without throwing
@@ -359,6 +420,7 @@ onMounted(async () => {
 onUnmounted(() => {
 	stopOrderStatusPolling();
 	courierTrackingStore.stopTracking();
+	hasShownAssignedStatus.value = false;
 });
 
 // Watch courier location changes and update map
