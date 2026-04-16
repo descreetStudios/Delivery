@@ -154,7 +154,7 @@
 			@click="closeOrderStatus"
 		>
 			<div
-				class="bg-white/80 dark:bg-gray-800/80 p-6 border border-gray-200 dark:border-gray-700 rounded-lg max-w-md backdrop-blur-sm"
+				class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 border border-gray-200 dark:border-gray-700 rounded-lg max-w-md"
 				@click.stop
 			>
 				<h2 class="mb-4 font-bold text-gray-900 dark:text-white text-xl">
@@ -186,7 +186,7 @@
 			@click="closeDeliveryStatus"
 		>
 			<div
-				class="bg-white/80 dark:bg-gray-800/80 p-6 border border-gray-200 dark:border-gray-700 rounded-lg max-w-md backdrop-blur-sm"
+				class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 border border-gray-200 dark:border-gray-700 rounded-lg max-w-md"
 				@click.stop
 			>
 				<h2 class="mb-4 font-bold text-gray-900 dark:text-white text-xl">
@@ -237,9 +237,6 @@ const orderPollingInterval = ref(null); // Interval for polling order status
 const deliveryStatus = ref(null); // To track delivery status after completion
 const showDeliveryStatus = ref(false); // To show delivery confirmation modal
 const hasShownAssignedStatus = ref(false); // Track if we've already shown the assigned status
-const orderStatus = ref(null);
-const showOrderStatus = ref(false);
-const orderPollingInterval = ref(null);
 
 const totalPrice = computed(() => {
 	return order.value.items.reduce((sum, item) => {
