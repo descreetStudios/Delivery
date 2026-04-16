@@ -28,20 +28,22 @@ const routingStore = useRoutingStore();
 const { code, routes, waypoints, currentGPS, activeOrderId, passedPolyline } = storeToRefs(routingStore);
 const areRoutingDataLoaded = computed(() => code.value == "Ok");
 const loaded = computed(() => !!map.value && areRoutingDataLoaded.value);
+const maxProgressOnRoute = ref(0);
 
 const initRoutingEngineComponent = () => {
 	if ($DEBUG) console.log("Routing data: ", routingStore);
 	drawRoutingPolyline();
 	drawWaypoints();
 
-	console.log(activeOrderId.value);
+	if ($DEBUG) console.log("ActiveOrderId: ", activeOrderId.value);
 
 	watch(
 		() => activeOrderId.value,
 		() => {
-			deleteRoutingPolyline();
 			deletePassedPolyline();
+			deleteRoutingPolyline();
 			deleteWaypoints();
+			maxProgressOnRoute.value = 0;
 			if ($DEBUG) console.log("Active order changed, redrawing route and waypoints.");
 			const stopWatch = watch(
 				() => code.value,
@@ -149,7 +151,6 @@ const drawPassedPolyline = () => {
 				coordinates: passedPolyline.value,
 			},
 		});
-
 	}
 
 	map.value.moveLayer("passed_route");
@@ -164,6 +165,7 @@ const deleteRoutingPolyline = () => {
 };
 
 const deletePassedPolyline = () => {
+	passedPolyline.value = [];
 	if (map.value.getSource("passed_route")) {
 		map.value.removeLayer("passed_route");
 		map.value.removeSource("passed_route");
@@ -242,26 +244,36 @@ const trackCurrentStep = async (currentGPSLocation) => {
 };
 
 const checkPolylineFollowing = async (currentGPSLocation) => {
-	if (!loaded.value) return;
+	if (!loaded.value || !activeOrderId.value) return;
 
 	const [lng, lat] = currentGPSLocation;
 	const gps = point([lng, lat]);
 	const route = lineString(routes.value?.[0]?.geometry.coordinates);
-	const distance = pointToLineDistance(gps, route, {
+	const distanceToPolyline = pointToLineDistance(gps, route, {
 		units: "meters",
 	});
+	if ($DEBUG) console.log("Distance", distanceToPolyline);
 
-	if ($DEBUG) console.log("Distance", distance);
-
-	if (distance >= 50) {
+	if (distanceToPolyline >= 25) {
 		await routingStore.syncRoutingData();
 		drawRoutingPolyline();
 		drawWaypoints();
-		passedPolyline.value = [];
-	} else if (activeOrderId.value) {
-		const routeCoords = routes.value[0].geometry.coordinates;
+	} else {
 		const snapped = nearestPointOnLine(route, gps);
+		const currentProgress = snapped.properties.location;
 
+		if (currentProgress < maxProgressOnRoute.value - 25) {
+			await routingStore.syncRoutingData();
+			drawRoutingPolyline();
+			drawWaypoints();
+			return;
+		}
+	
+		if (currentProgress > maxProgressOnRoute.value) {
+			maxProgressOnRoute.value = currentProgress;
+		}
+
+		const routeCoords = routes.value[0].geometry.coordinates;
 		const start = point(routeCoords[0]);
 		const sliced = lineSlice(start, snapped, route);
 		passedPolyline.value = sliced.geometry.coordinates;

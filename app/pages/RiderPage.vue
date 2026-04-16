@@ -7,7 +7,7 @@
 		<AppSidebarComponent>
 			<template #sidebar>
 				<!-- Courier Status -->
-				<div class="mb-2 p-4 rounded-lg bg-text-home">
+				<div class="mb-2 p-4 rounded-lg w-full bg-text-home">
 					<h2 class="mb-2 font-bold text-white text-lg">Courier {{ courierId }}</h2>
 
 					<!-- Active Order -->
@@ -38,7 +38,9 @@
 						<p class="text-white text-center">Waiting for orders...</p>
 					</div>
 				</div>
-				<AppRoutingCardComponent />
+				<AppRoutingCardComponent
+					v-if="routingStore.code === 'Ok' && activeOrder.items!=0"
+				/>
 				<div>
 					<p class="text-black whitespace-nowrap">{{ $t('sidebar.userQuestion') }}
 						<NuxtLink to="/UserPage">{{ $t('sidebar.ctaClick') }}</NuxtLink>
