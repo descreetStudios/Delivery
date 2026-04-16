@@ -5,10 +5,10 @@
 <script setup>
 import { useRoutingStore } from "@/stores/routingStore";
 import { point, lineString } from "@turf/helpers";
-import pointToLineDistance from "@turf/point-to-line-distance";
-import lineSlice from "@turf/line-slice";
-import nearestPointOnLine from "@turf/nearest-point-on-line";
-import distance from "@turf/distance";
+import { pointToLineDistance } from "@turf/point-to-line-distance";
+import { lineSlice } from "@turf/line-slice";
+import { nearestPointOnLine } from "@turf/nearest-point-on-line";
+import { distance } from "@turf/distance";
 
 const { $DEBUG } = useNuxtApp();
 

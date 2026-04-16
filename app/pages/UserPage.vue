@@ -126,7 +126,7 @@
 					</div>
 					<button
 						:disabled="order.items.length === 0"
-						class="bg-bg-secondary-home disabled:bg-gray-300 my-auto px-2 py-2 rounded-lg disabled:text-gray-600 text-center cursor-pointer disabled:cursor-not-allowed surface"
+						class="bg-bg-secondary-home disabled:bg-gray-300 my-auto px-2 py-2 rounded-lg disabled:text-gray-600 text-center cursor-pointer disabled:cursor-not-allowed"
 						@click="sendOrder"
 					>
 						Invia il tuo ordine ({{ totalPrice }}€)

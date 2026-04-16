@@ -76,6 +76,7 @@ export const useOrderStore = defineStore("orderStore", {
 				this.items = data.items;
 				this.totalPrice = data.totalPrice;
 				this.status = data.status;
+				console.log("Status: " , data.status);
 				if ($DEBUG) console.log(data);
 				if ($DEBUG) console.log("State: ", this.$state);
 				return this.$state;
@@ -108,6 +109,7 @@ export const useOrderStore = defineStore("orderStore", {
 					this.restaurant = order.restaurant;
 					this.destination = order.destination;
 					this.items = order.items;
+					this.status = order.status;
 					this.totalPrice = order.totalPrice;
 					routingStore.syncRoutingData();
 
