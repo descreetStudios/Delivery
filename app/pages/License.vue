@@ -78,6 +78,10 @@
 import { NuxtImg } from "#components";
 import { ref } from "vue";
 
+useHead({
+	title: "License",
+});
+
 const agplText = ref(`GNU AFFERO GENERAL PUBLIC LICENSE
 Version 3, 19 November 2007
 

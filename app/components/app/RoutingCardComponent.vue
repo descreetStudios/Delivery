@@ -8,18 +8,24 @@
 				format="webp"
 			/>
 			<div class="flex flex-col items-start">
-				<h1 class="text-text-primary text-lg font-semibold">
+				<h1 class="font-semibold text-bg-secondary-home text-lg">
 					{{ instructionText }}
 				</h1>
-				<p v-if="roadName" class="text-text-secondary text-sm">
+				<p
+					v-if="roadName"
+					class="text-text-secondary text-sm"
+				>
 					{{ roadName }}
 				</p>
-				<p v-if="distanceText" class="text-text-secondary text-sm">
+				<p
+					v-if="distanceText"
+					class="text-text-secondary text-sm"
+				>
 					{{ distanceText }}
 				</p>
 			</div>
 		</div>
-		<hr class="border-0.5 border-border-default w-full">
+		<hr class="mt-5 border-0.5 border-border-default w-full">
 	</div>
 </template>
 

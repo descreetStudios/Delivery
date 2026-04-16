@@ -13,7 +13,7 @@ import distance from "@turf/distance";
 const { $DEBUG } = useNuxtApp();
 
 const COLOR_AHEAD = "#0074D9";
-const COLOR_PASSED = "#FF0000";
+const COLOR_PASSED = "#9E9E9E";
 const POLYLINE_WIDTH = 5;
 
 const props = defineProps({

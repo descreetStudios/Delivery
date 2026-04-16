@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col bg-root h-full">
+	<div class="flex flex-col bg-bg-home h-full">
 		<AppLoadingComponent
 			v-if="!mapInstance"
 			class="z-1000"
@@ -7,15 +7,15 @@
 		<AppSidebarComponent>
 			<template #sidebar>
 				<!-- Courier Status -->
-				<div class="bg-bg-surface mb-2 p-4 border border-border-default rounded-lg">
-					<h2 class="mb-2 font-bold text-text-primary text-lg">🚚 Courier {{ courierId }}</h2>
+				<div class="mb-2 p-4 rounded-lg bg-text-home">
+					<h2 class="mb-2 font-bold text-white text-lg">Courier {{ courierId }}</h2>
 
 					<!-- Active Order -->
 					<div v-if="activeOrder.items!=0">
-						<p class="mb-1 font-semibold text-success text-sm">✅ Order Assigned</p>
-						<p class="mb-1 text-text-secondary text-sm">Order ID: {{ activeOrder.orderId }}</p>
-						<p class="mb-1 text-text-primary text-sm"><span class="font-semibold">Items:</span></p>
-						<ul class="mb-2 ml-2 text-text-primary text-sm">
+						<p class="mb-1 font-semibold text-success text-sm">Order Assigned</p>
+						<p class="mb-1 text-white text-sm">Order ID: {{ activeOrder.orderId }}</p>
+						<p class="mb-1 text-white text-sm"><span class="font-semibold">Items:</span></p>
+						<ul class="mb-2 ml-2 text-white text-sm">
 							<li
 								v-for="(item, index) in activeOrder.items"
 								:key="index"
@@ -23,24 +23,24 @@
 								{{ item.quantity }}x {{ item.name }} - €{{ (item.price * item.quantity).toFixed(2) }}
 							</li>
 						</ul>
-						<p class="mb-3 font-bold text-text-primary text-sm">Total: €{{ activeOrder.totalPrice.toFixed(2)
+						<p class="mb-3 font-bold text-white text-sm">Total: €{{ activeOrder.totalPrice.toFixed(2)
 						}}</p>
 						<button
-							class="bg-warning px-4 py-2 rounded-full w-full text-white"
+							class="bg-warning px-4 py-2 rounded-lg w-full text-white cursor-pointer"
 							@click="completeOrderHandler"
 						>
-							✅ Complete Order
+							Complete Order
 						</button>
 					</div>
 
 					<!-- Waiting State -->
 					<div v-else>
-						<p class="text-text-primary text-center">⏳ Waiting for orders...</p>
+						<p class="text-white text-center">Waiting for orders...</p>
 					</div>
 				</div>
 				<AppRoutingCardComponent />
 				<div>
-					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.userQuestion') }}
+					<p class="text-black whitespace-nowrap">{{ $t('sidebar.userQuestion') }}
 						<NuxtLink to="/UserPage">{{ $t('sidebar.ctaClick') }}</NuxtLink>
 					</p>
 				</div>
@@ -60,6 +60,10 @@
 import { useRoute } from "vue-router";
 import { useRoutingStore } from "@/stores/routingStore";
 import { useOrderStore } from "@/stores/orderStore";
+
+useHead({
+	title: "Rider",
+});
 
 const { $DEBUG } = useNuxtApp();
 
