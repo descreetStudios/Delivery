@@ -12,7 +12,7 @@
 						@dragstart.prevent
 					>AGPL-3.0 License</NuxtLink>
 				</p>
-				<p>Designed by
+				<p>{{$t('FooterComponent.design')}}
 					<a
 						href="http://www.freepik.com"
 						class="font-semibold text-bg-home hover:text-secondary-hover hover:underline no-underline"

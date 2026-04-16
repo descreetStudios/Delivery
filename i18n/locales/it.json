@@ -1,52 +1,52 @@
 {
-    "FoodCardComponent": {
-        "buy": "Acquista"
+    "FoodCardComponent":{
+        "buy":"Acquista"
     },
-    "FoodSearchComponent": {
-        "noResults": "Nessun risultato trovato"
+    "FoodSearchComponent":{
+        "noResults":"Nessun risultato trovato"
     },
-    "OrderComponent": {
-        "delete": "Elimina"
+    "OrderComponent":{
+        "delete":"Elimina"
     },
     "maneuver": {
         "turn": {
-            "right": "Gira a destra tra {distance}",
-            "left": "Gira a sinistra tra {distance}",
-            "slight right": "Mantieni la destra tra {distance}",
-            "slight left": "Mantieni la sinistra tra {distance}",
-            "sharp right": "Gira a destra nettamente tra {distance}",
-            "sharp left": "Gira a sinistra nettamente tra {distance}",
-            "straight": "Prosegui dritto per {distance}",
-            "uturn": "Fai un'inversione a U tra {distance}"
+            "right": "Gira a destra {distance}",
+            "left": "Gira a sinistra {distance}",
+            "slight right": "Svolta leggermente a destra {distance}",
+            "slight left": "Svolta leggermente a sinistra {distance}",
+            "sharp right": "Svolta bruscamente a destra {distance}",
+            "sharp left": "Svolta bruscamente a sinistra {distance}",
+            "straight": "Continua dritto {distance}",
+            "uturn": "Fai un'inversione a U {distance}"
         },
-        "continue": "Continua per {distance}",
-        "merge": "Immettiti nella corsia per {distance}",
-        "roundabout": "Entra nella rotatoria tra {distance}",
-        "exitRoundabout": "Esci dalla rotatoria",
+        "continue": "Continua {distance}",
+        "merge": "Immettiti {distance}",
+        "roundabout": "Entra nella rotonda {distance}",
+        "exitRoundabout": "Esci dalla rotonda",
         "fork": {
-            "right": "Mantieni la destra al bivio tra {distance}",
-            "left": "Mantieni la sinistra al bivio tra {distance}",
-            "straight": "Prosegui dritto al bivio per {distance}"
+            "right": "Tieni la destra al bivio {distance}",
+            "left": "Tieni la sinistra al bivio {distance}",
+            "straight": "Continua dritto al bivio {distance}"
         },
         "endOfRoad": {
-            "right": "Gira a destra a fine strada tra {distance}",
-            "left": "Gira a sinistra a fine strada tra {distance}",
-            "straight": "Prosegui a fine strada per {distance}"
+            "right": "Gira a destra alla fine della strada {distance}",
+            "left": "Gira a sinistra alla fine della strada {distance}",
+            "straight": "Continua alla fine della strada {distance}"
         },
-        "newName": "La strada cambia nome tra {distance}",
+        "newName": "Il nome della strada cambia {distance}",
         "arrive": "Sei arrivato a destinazione",
-        "depart": "Procedi per {distance} verso la partenza",
+        "depart": "Procedi {distance} per iniziare",
         "notification": "{distance}"
     },
     "sections": {
         "hero": {
-            "title": "Piatti Caldi, Distanza Zero",
+            "title": "Piatti Caldi, Zero Distanza",
             "description": "Ordina dai tuoi ristoranti preferiti e ricevi il cibo velocemente, fresco e direttamente alla tua porta.",
             "link": "Ordina ora"
         },
         "restaurants": {
             "title": "Esplora i Ristoranti Locali",
-            "description": "Sfoglia un'ampia selezione di ristoranti, dai locali preferiti ai posti più in voga. Qualsiasi cosa tu desideri, la trovi qui."
+            "description": "Sfoglia una vasta selezione di ristoranti, dai preferiti locali ai posti più in voga. Qualunque sia la tua voglia, ce l'abbiamo."
         },
         "delivery": {
             "title": "Consegna Veloce e Affidabile",
@@ -54,7 +54,7 @@
         },
         "how": {
             "title": "Come Funziona",
-            "description": "1. Scegli il tuo pasto\n2. Effettua l’ordine\n3. Seguilo in tempo reale\n4. Goditi il tuo cibo a casa",
+            "description": "1. Scegli il tuo piatto\n2. Invia l'ordine\n3. Traccialo in tempo reale\n4. Goditi il tuo pasto a casa",
             "link": "Ordina ora"
         },
         "riders": {
@@ -82,24 +82,41 @@
         "foot": " Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
         "secondFoot": "Questo progetto è open-source e concesso in licenza sotto",
         "built": "Realizzato con",
-        "support": "Supportaci su"
+        "support": "Supportaci su",
+        "design": "design di"
     },
     "License": {
         "intro": "Questa applicazione è distribuita secondo i termini della",
-        "mid": "Sei libero di ridistribuirla e/o modificarla in conformità con tali termini.",
+        "mid": "Sei libero di ridistribuirla e/o modificarla in conformità a tali termini.",
         "key": "Termini Chiave",
         "firstKey": "Libertà di usare, studiare, modificare e condividere il software.",
-        "secondKey": "Obbligo di rendere disponibile il codice sorgente, anche per l’uso in rete.",
+        "secondKey": "Obbligo di rendere disponibile il codice sorgente, anche per l'uso in rete.",
         "thirdKey": "Le versioni modificate devono rimanere libere e aperte.",
         "full": "Testo Completo della Licenza",
         "moreInformation": "Per maggiori informazioni, visita il sito ufficiale GNU:"
     },
     "UserPage": {
-        "restaurant": "Ristorante"
+        "restaurant": "Ristorante",
+        "submit":"Invia il tuo ordine",
+        "order":"ID Ordine:",
+        "status":"Stato:",
+        "nearest":"Il tuo ordine verrà assegnato al corriere disponibile più vicino non appena uno sarà libero.",
+        "close":"Chiudi",
+        "delivered":"✅ Ordine Consegnato",
+        "order2":"Ordine"
     },
     "sidebar": {
         "riderQuestion": "Ehi, sei un rider?",
         "userQuestion": "Ehi, sei un utente?",
         "ctaClick": "Clicca qui!"
+    },
+    "RiderPage":{
+        "complete":"Completa ordine",
+        "waiting":"In attesa di ordini...",
+        "courier":"Corriere",
+        "order":"Ordine Assegnato",
+        "id":"ID Ordine:",
+        "items":"Articoli:",
+        "total":"Totale: €"
     }
 }

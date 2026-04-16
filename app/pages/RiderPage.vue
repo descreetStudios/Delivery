@@ -8,13 +8,13 @@
 			<template #sidebar>
 				<!-- Courier Status -->
 				<div class="mb-2 p-4 rounded-lg w-full bg-text-home">
-					<h2 class="mb-2 font-bold text-white text-lg">Courier {{ courierId }}</h2>
+					<h2 class="mb-2 font-bold text-white text-lg">{{$t('RiderPage.courier')}} {{ courierId }}</h2>
 
 					<!-- Active Order -->
 					<div v-if="activeOrder.items != 0">
-						<p class="mb-1 font-semibold text-success text-sm">Order Assigned</p>
-						<p class="mb-1 text-white text-sm">Order ID: {{ activeOrder.orderId }}</p>
-						<p class="mb-1 text-white text-sm"><span class="font-semibold">Items:</span></p>
+						<p class="mb-1 font-semibold text-success text-sm">{{$t('RiderPage.order')}}</p>
+						<p class="mb-1 text-white text-sm">{{$t('RiderPage.id')}} {{ activeOrder.orderId }}</p>
+						<p class="mb-1 text-white text-sm"><span class="font-semibold">{{$t('RiderPage.items')}} </span></p>
 						<ul class="mb-2 ml-2 text-white text-sm">
 							<li
 								v-for="(item, index) in activeOrder.items"
@@ -23,7 +23,7 @@
 								{{ item.quantity }}x {{ item.name }} - €{{ (item.price * item.quantity).toFixed(2) }}
 							</li>
 						</ul>
-						<p class="mb-3 font-bold text-white text-sm">Total: €{{ activeOrder.totalPrice.toFixed(2)
+						<p class="mb-3 font-bold text-white text-sm">{{$t('RiderPage.total')}}{{ activeOrder.totalPrice.toFixed(2)
 						}}</p>
 						<button
 							class="bg-warning disabled:bg-gray-300 px-4 py-2 rounded-lg w-full text-white disabled:text-gray-600 cursor-pointer disabled:cursor-not-allowed"
@@ -36,7 +36,7 @@
 
 					<!-- Waiting State -->
 					<div v-else>
-						<p class="text-white text-center">Waiting for orders...</p>
+						<p class="text-white text-center">{{$t('RiderPage.waiting')}}</p>
 					</div>
 				</div>
 				<AppRoutingCardComponent

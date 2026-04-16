@@ -1,46 +1,46 @@
 {
-    "FoodCardComponent": {
-        "buy": "Comprar"
+    "FoodCardComponent":{
+        "buy":"Comprar"
     },
-    "FoodSearchComponent": {
-        "noResults": "No se encontraron resultados"
+    "FoodSearchComponent":{
+        "noResults":"No se encontraron resultados"
     },
-    "OrderComponent": {
-        "delete": "Eliminar"
+    "OrderComponent":{
+        "delete":"Eliminar"
     },
     "maneuver": {
         "turn": {
-            "right": "Gira a la derecha en {distance}",
-            "left": "Gira a la izquierda en {distance}",
-            "slight right": "Mantente a la derecha en {distance}",
-            "slight left": "Mantente a la izquierda en {distance}",
-            "sharp right": "Gira bruscamente a la derecha en {distance}",
-            "sharp left": "Gira bruscamente a la izquierda en {distance}",
-            "straight": "Continúa recto por {distance}",
-            "uturn": "Haz un cambio de sentido en {distance}"
+            "right": "Gira a la derecha {distance}",
+            "left": "Gira a la izquierda {distance}",
+            "slight right": "Gira ligeramente a la derecha {distance}",
+            "slight left": "Gira ligeramente a la izquierda {distance}",
+            "sharp right": "Gira bruscamente a la derecha {distance}",
+            "sharp left": "Gira bruscamente a la izquierda {distance}",
+            "straight": "Continúa recto {distance}",
+            "uturn": "Haz un giro en U {distance}"
         },
-        "continue": "Continúa por {distance}",
-        "merge": "Incorpórate en {distance}",
-        "roundabout": "Entra en la rotonda en {distance}",
+        "continue": "Continúa {distance}",
+        "merge": "Incorpórate {distance}",
+        "roundabout": "Entra en la rotonda {distance}",
         "exitRoundabout": "Sal de la rotonda",
         "fork": {
-            "right": "Mantente a la derecha en la bifurcación en {distance}",
-            "left": "Mantente a la izquierda en la bifurcación en {distance}",
-            "straight": "Continúa recto en la bifurcación por {distance}"
+            "right": "Mantente a la derecha en la bifurcación {distance}",
+            "left": "Mantente a la izquierda en la bifurcación {distance}",
+            "straight": "Continúa recto en la bifurcación {distance}"
         },
         "endOfRoad": {
-            "right": "Gira a la derecha al final del camino en {distance}",
-            "left": "Gira a la izquierda al final del camino en {distance}",
-            "straight": "Continúa al final del camino por {distance}"
+            "right": "Gira a la derecha al final de la calle {distance}",
+            "left": "Gira a la izquierda al final de la calle {distance}",
+            "straight": "Continúa al final de la calle {distance}"
         },
-        "newName": "La calle cambia de nombre en {distance}",
+        "newName": "El nombre de la calle cambia {distance}",
         "arrive": "Has llegado a tu destino",
-        "depart": "Dirígete por {distance} para comenzar",
+        "depart": "Avanza {distance} para comenzar",
         "notification": "{distance}"
     },
     "sections": {
         "hero": {
-            "title": "Comidas Calientes, Cero Distancia",
+            "title": "Comida Caliente, Cero Distancia",
             "description": "Pide de tus restaurantes favoritos y recibe tu comida rápido, fresca y directamente en tu puerta.",
             "link": "Pedir ahora"
         },
@@ -50,17 +50,17 @@
         },
         "delivery": {
             "title": "Entrega Rápida y Confiable",
-            "description": "Nuestros repartidores aseguran una entrega rápida y segura, manteniendo tu comida fresca y a tiempo."
+            "description": "Nuestros repartidores garantizan una entrega rápida y segura, manteniendo tu comida fresca y puntual."
         },
         "how": {
             "title": "Cómo Funciona",
-            "description": "1. Elige tu comida\n2. Haz tu pedido\n3. Síguelo en tiempo real\n4. Disfruta tu comida en casa",
+            "description": "1. Elige tu comida\n2. Realiza tu pedido\n3. Síguelo en tiempo real\n4. Disfruta tu comida en casa",
             "link": "Pedir ahora"
         },
         "riders": {
             "title": "Conviértete en Repartidor",
-            "description": "Entrega comida cuando quieras y gana dinero con horarios flexibles.",
-            "link": "Aplicar ahora"
+            "description": "Entrega cuando quieras y gana dinero con horarios flexibles.",
+            "link": "Aplica ahora"
         }
     },
     "NavBarComponent": {
@@ -73,33 +73,50 @@
         "meal": "comida",
         "already": ", ya ",
         "onTheWay": "en camino",
-        "how": "Cómo funciona?"
+        "how": "¿Cómo funciona?"
     },
     "SearchComponent": {
         "search": "Buscar un restaurante"
     },
     "FooterComponent": {
-        "foot": "  Untitled Delivery Project. Desarrollado por un equipo independiente. Todos los derechos reservados.",
+        "foot": " Untitled Delivery Project. Desarrollado por un equipo independiente. Todos los derechos reservados.",
         "secondFoot": "Este proyecto es de código abierto y está licenciado bajo",
         "built": "Construido con",
-        "support": "Apóyanos en"
+        "support": "Apóyanos en",
+        "design": "diseño por"
     },
     "License": {
         "intro": "Esta aplicación se distribuye bajo los términos de la",
         "mid": "Eres libre de redistribuirla y/o modificarla de acuerdo con estos términos.",
         "key": "Términos Clave",
         "firstKey": "Libertad para usar, estudiar, modificar y compartir el software.",
-        "secondKey": "Obligación de poner el código fuente a disposición, incluso para uso en red.",
-        "thirdKey": "Las versiones modificadas deben seguir siendo libres y abiertas.",
+        "secondKey": "Requisito de poner el código fuente a disposición, incluso para uso en red.",
+        "thirdKey": "Las versiones modificadas deben permanecer libres y abiertas.",
         "full": "Texto Completo de la Licencia",
         "moreInformation": "Para más información, visita el sitio oficial de GNU:"
     },
     "UserPage": {
-        "restaurant": "Restaurante"
+        "restaurant": "Restaurante",
+        "submit":"Envía tu pedido",
+        "order":"ID del Pedido:",
+        "status":"Estado:",
+        "nearest":"Tu pedido será asignado al repartidor disponible más cercano tan pronto como haya uno libre.",
+        "close":"Cerrar",
+        "delivered":"✅ Pedido Entregado",
+        "oreder2":"Pedido"
     },
     "sidebar": {
         "riderQuestion": "Oye, ¿eres repartidor?",
         "userQuestion": "Oye, ¿eres usuario?",
         "ctaClick": "Haz clic aquí!"
+    },
+    "RiderPage":{
+        "complete":"Completar pedido",
+        "waiting":"Esperando pedidos...",
+        "courier":"Repartidor",
+        "order":"Pedido Asignado",
+        "id":"ID del Pedido:",
+        "items":"Artículos:",
+        "total":"Total: €"
     }
 }

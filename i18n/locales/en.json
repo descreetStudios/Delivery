@@ -82,7 +82,8 @@
         "foot": " Untitled Delivery Project. Developed by an independent team. All rights reserved.",
         "secondFoot": "This project is open-source and licensed under",
         "built": "Built with",
-        "support": "Support us on"
+        "support": "Support us on",
+        "design": "design by"
     },
     "License": {
         "intro": "This application is distributed under the terms of the",
@@ -95,11 +96,28 @@
         "moreInformation": "For more information, please visit the official GNU website:"
     },
     "UserPage": {
-        "restaurant": "Restaurant"
+        "restaurant": "Restaurant",
+        "submit":"Submit your order",
+        "order":"Order ID:",
+        "status":"Status:",
+        "nearest":"Your order will be assigned to the nearest available courier as soon as one becomes free.",
+        "close":"Close",
+        "delivered":"✅ Order Delivered",
+        "order2":"order"
+        
     },
     "sidebar": {
         "riderQuestion": "Hey, are you a rider?",
         "userQuestion": "Hey, are you a user?",
         "ctaClick": "Click here!"
+    },
+    "RiderPage":{
+        "complete":"Complete order",
+        "waiting":"Waiting for orders...",
+        "courier":"Courier",
+        "order":"Order Assigned",
+        "id":"Order ID:",
+        "items":"Items:",
+        "total":"Total: €"
     }
 }

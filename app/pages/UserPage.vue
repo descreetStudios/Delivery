@@ -112,7 +112,7 @@
 					]"
 					class="z-200 flex flex-col items-center gap-2 bg-bg-home p-3"
 				>
-					<h1 class="top-0 flex text-black text-xl">Ordine</h1>
+					<h1 class="top-0 flex text-black text-xl">{{$t('UserPage.order2')}}</h1>
 					<div class="mt-4 min-[925px]:mt-0 py-0.5 pr-0.5 border border-border-default rounded-lg">
 						<div class="flex flex-col gap-3 p-3 w-90 h-121 overflow-y-auto scrollbar-custom">
 							<AppOrderComponent
@@ -129,7 +129,7 @@
 						class="bg-bg-secondary-home disabled:bg-gray-300 my-auto px-2 py-2 rounded-lg disabled:text-gray-600 text-center cursor-pointer disabled:cursor-not-allowed"
 						@click="sendOrder"
 					>
-						Invia il tuo ordine ({{ totalPrice }}€)
+						{{$t('UserPage.submit')}}({{ totalPrice }}€)
 					</button>
 				</div>
 				<div>
@@ -161,20 +161,20 @@
 					{{ orderStatus?.assigned ? '✅ Order Assigned' : '⏳ Order Queued' }}
 				</h2>
 				<div class="space-y-2 text-gray-800 dark:text-gray-200">
-					<p><span class="font-semibold">Order ID:</span> {{ orderStatus?.orderId }}</p>
-					<p><span class="font-semibold">Status:</span> {{ orderStatus?.message }}</p>
+					<p><span class="font-semibold">{{$t('UserPage.order')}}</span> {{ orderStatus?.orderId }}</p>
+					<p><span class="font-semibold">{{$t('UserPage.status')}}</span> {{ orderStatus?.message }}</p>
 					<p
 						v-if="!orderStatus?.assigned"
 						class="mt-2 text-gray-600 dark:text-gray-400 text-sm"
 					>
-						Your order will be assigned to the nearest available courier as soon as one becomes free.
+						{{$t('UserPage.nearest')}}
 					</p>
 				</div>
 				<button
 					class="bg-blue-500 hover:bg-blue-600 mt-4 px-4 py-2 rounded-full w-full text-white transition-colors"
 					@click="closeOrderStatus"
 				>
-					Close
+					{{$t('UserPage.close')}}
 				</button>
 			</div>
 		</div>
@@ -190,17 +190,17 @@
 				@click.stop
 			>
 				<h2 class="mb-4 font-bold text-gray-900 dark:text-white text-xl">
-					✅ Order Delivered
+					{{$t('UserPage.delivered')}}
 				</h2>
 				<div class="space-y-2 text-gray-800 dark:text-gray-200">
-					<p><span class="font-semibold">Order ID:</span> {{ deliveryStatus?.orderId }}</p>
-					<p><span class="font-semibold">Status:</span> {{ deliveryStatus?.message }}</p>
+					<p><span class="font-semibold">{{$t('UserPage.order')}}</span> {{ deliveryStatus?.orderId }}</p>
+					<p><span class="font-semibold">{{$t('UserPage.status')}}</span> {{ deliveryStatus?.message }}</p>
 				</div>
 				<button
 					class="bg-blue-500 hover:bg-blue-600 mt-4 px-4 py-2 rounded-full w-full text-white transition-colors"
 					@click="closeDeliveryStatus"
 				>
-					Close
+					{{$t('UserPage.close')}}
 				</button>
 			</div>
 		</div>
