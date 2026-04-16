@@ -55,7 +55,7 @@ export const useOrdersApi = () => {
 		loading.value = true;
 		try {
 			const response = await $fetch(`${apiBase}/orders/${orderId}`);
-			console.log("Order fetched: ", response);
+			if ($DEBUG) console.log("Order fetched: ", response);
 			return response;
 		} catch (err) {
 			error.value = err.message || "Unable to get order";
@@ -76,6 +76,7 @@ export const useOrdersApi = () => {
 		} catch (err) {
 			// 404 is expected when courier has no active order - don't throw error
 			if (err.status === 404) {
+				const fullCourierId = associatedCourierId.startsWith("courier") ? associatedCourierId : "courier" + associatedCourierId;
 				if ($DEBUG) console.log(`No active order for courier ${fullCourierId}`);
 				return null;
 			}

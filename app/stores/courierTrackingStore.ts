@@ -1,4 +1,7 @@
 import { defineStore } from "pinia";
+import { getLocationWebSocket } from "#imports";
+import { watch } from "vue";
+
 
 interface CourierLocation {
 	courierId: string;
@@ -30,9 +33,13 @@ export const useCourierTrackingStore = defineStore("courierTrackingStore", {
 		 * @param courierId - The courier ID to track
 		 */
 		async startTracking(courierId: string) {
-			const { subscribeToCourier, onLocationUpdate } = useCourierTracking();
-
 			if (!courierId || courierId === "0") {
+				return;
+			}
+
+			const ws = getLocationWebSocket();
+
+			if (!ws.isConnected.value) {
 				return;
 			}
 
@@ -40,12 +47,14 @@ export const useCourierTrackingStore = defineStore("courierTrackingStore", {
 			this.isTracking = true;
 
 			// Set up location update handler
-			onLocationUpdate((data: any) => {
+			watch(ws.lastLocation, (data) => {
+				if (!data) return;
+
 				this.courierLocation = data as CourierLocation;
 			});
 
 			// Subscribe to the courier
-			subscribeToCourier(courierId);
+			ws.subscribeToCourier(courierId);
 			this.isSubscribed = true;
 		},
 
@@ -53,10 +62,14 @@ export const useCourierTrackingStore = defineStore("courierTrackingStore", {
 		 * Stop tracking the current courier
 		 */
 		stopTracking() {
-			const { unsubscribeFromCourier } = useCourierTracking();
+			const ws = getLocationWebSocket();
+
+			if (!ws.isConnected.value) {
+				return;
+			}
 
 			if (this.isSubscribed) {
-				unsubscribeFromCourier();
+				ws.unsubscribeFromCourier();
 				this.isSubscribed = false;
 			}
 

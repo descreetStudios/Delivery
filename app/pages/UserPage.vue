@@ -343,12 +343,12 @@ const checkOrderStatus = async (id) => {
 };
 
 const startOrderStatusPolling = (id) => {
-	console.log("startOrderStatusPolling called for order:", id);
+	if ($DEBUG) console.log("startOrderStatusPolling called for order:", id);
 	// Poll every 3 seconds to check if order is assigned to a courier
 	orderPollingInterval.value = setInterval(async () => {
 		try {
 			const orderData = await orderStore.fetchOrder(id);
-			console.log("Polling order status:", orderData?.status, "assigned:", orderData?.associatedCourierId);
+			if ($DEBUG) console.log("Polling order status:", orderData?.status, "assigned:", orderData?.associatedCourierId);
 
 			// Check for delivery completion first
 			if (orderData && orderData.status === "COMPLETED") {
@@ -368,7 +368,7 @@ const startOrderStatusPolling = (id) => {
 			if (orderData && orderData.associatedCourierId && orderData.associatedCourierId !== "0") {
 				// Order has been assigned to a courier
 				if (!hasShownAssignedStatus.value) {
-					console.log("Showing assigned status for order:", id);
+					if ($DEBUG) console.log("Showing assigned status for order:", id);
 					// Update status and show notification
 					orderStatus.value = {
 						orderId: orderData.orderId,
@@ -382,7 +382,7 @@ const startOrderStatusPolling = (id) => {
 					// Start tracking the courier
 					courierTrackingStore.startTracking(orderData.associatedCourierId);
 				} else {
-					console.log("Already showed assigned status for order:", id);
+					if ($DEBUG) console.log("Already showed assigned status for order:", id);
 				}
 				// Continue polling to detect completion
 			}
