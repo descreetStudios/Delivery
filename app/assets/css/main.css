@@ -37,7 +37,7 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
   --color-text-home: oklch(0.3167 0.0723 38.86);
   --color-text-muted: oklch(50% 0 0);
   
-  --color-border-default: oklch(0.48 0.017 254.7);
+  --color-border-default: oklch(0.39 0.0021 67.76);
   --color-shadow-default: rgba(0, 0, 0, 0.4);
 }
 
@@ -51,7 +51,7 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
   --color-text-secondary: oklch(45% 0 0);
   --color-text-muted: oklch(60% 0 0);
   
-  --color-border-default: oklch(85% 0.01 260);
+  --color-border-default: oklch(0.39 0.0021 67.76);
   --color-shadow-default: rgba(0, 0, 0, 0.15);
 }
 
@@ -68,21 +68,31 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 }
 
 @layer utilities {
-	.scrollbar-custom {
-		scrollbar-width: thin;
-		scrollbar-color: var(--color-border) var(--color-surface);
-	}
-	.scrollbar-custom::-webkit-scrollbar {
-		width: 8px;
-	}
-	.scrollbar-custom::-webkit-scrollbar-track {
-		background: var(--color-surface);
-	}
-	.scrollbar-custom::-webkit-scrollbar-thumb {
-		background-color: var(--color-border);
-		border-radius: 8px;
-		border: 2px solid var(--color-surface);
-	}
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb, rgba(0, 0, 0, 0.3)) transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb, rgba(0, 0, 0, 0.3));
+    border-radius: 8px;
+    border: 2px solid transparent;
+  }
+
+  .scrollbar-custom:hover {
+    scrollbar-color: var(--scrollbar-thumb-hover, rgba(0, 0, 0, 0.5)) transparent;
+  }
+  .scrollbar-custom:hover::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-hover, rgba(0, 0, 0, 0.5));
+  }
 
   .font-modak {
     font-family: var(--font-modak);

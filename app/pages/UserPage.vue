@@ -1,18 +1,21 @@
 <template>
-	<div class="flex bg-root h-full">
+	<div class="flex bg-bg-home h-full">
 		<AppLoadingComponent
 			v-if="!mapInstance"
 			class="z-1000"
 		/>
 		<AppSidebarComponent>
 			<template #header>
-				<UButton
-					icon="i-heroicons-shopping-cart"
-					color="neutral"
-					variant="ghost"
-					class="z-200 flex justify-center items-center ml-auto pr-5 size-17 text-text-primary"
-					@click="toggleCart"
-				/>
+				<div class="z-200 flex flex-row items-center mr-5 ml-auto">
+					<div class="flex justify-center items-center bg-bg-secondary-home rounded-full w-7 h-7 text-md">{{ order.items.length }}</div>
+					<UButton
+						icon="i-heroicons-shopping-cart"
+						color="neutral"
+						variant="ghost"
+						class="mt-1 size-10 text-black cursor-pointer"
+						@click="toggleCart"
+					/>
+				</div>
 			</template>
 			<template #sidebar>
 				<AppSearchComponent
@@ -26,7 +29,7 @@
 				>
 				<h2
 					v-if="restaurant != null && (!cartShown || width>=925)"
-					class="text-text-primary"
+					class="text-black"
 				><span class="font-bold">{{
 					$t('UserPage.restaurant') }}:</span> {{ restaurant.label }}</h2>
 				<div
@@ -107,9 +110,9 @@
 						// Desktop
 						'min-[925px]:fixed min-[925px]:left-105 min-[925px]:w-105 min-[925px]:h-150 min-[925px]:mt-2 min-[925px]:ml-5 min-[925px]:border min-[925px]:border-border-default min-[925px]:rounded-sm'
 					]"
-					class="z-200 flex flex-col items-center gap-2 bg-bg-surface p-3"
+					class="z-200 flex flex-col items-center gap-2 bg-bg-home p-3"
 				>
-					<h1 class="top-0 flex text-text-primary text-xl">Ordine</h1>
+					<h1 class="top-0 flex text-black text-xl">Ordine</h1>
 					<div class="mt-4 min-[925px]:mt-0 py-0.5 pr-0.5 border border-border-default rounded-lg">
 						<div class="flex flex-col gap-3 p-3 w-90 h-121 overflow-y-auto scrollbar-custom">
 							<AppOrderComponent
@@ -123,14 +126,14 @@
 					</div>
 					<button
 						:disabled="order.items.length === 0"
-						class="bg-warning disabled:bg-gray-300 my-auto px-2 py-2 border border-border-default rounded-full disabled:text-gray-600 text-center disabled:cursor-not-allowed surface"
+						class="bg-bg-secondary-home disabled:bg-gray-300 my-auto px-2 py-2 rounded-lg disabled:text-gray-600 text-center cursor-pointer disabled:cursor-not-allowed surface"
 						@click="sendOrder"
 					>
-						Invia il tuo ordine
+						Invia il tuo ordine ({{ totalPrice }}€)
 					</button>
 				</div>
 				<div>
-					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.riderQuestion') }}
+					<p class="text-black whitespace-nowrap">{{ $t('sidebar.riderQuestion') }}
 						<NuxtLink to="/RiderPage">{{ $t('sidebar.ctaClick') }}</NuxtLink>
 					</p>
 				</div>
@@ -201,6 +204,12 @@ const gpsCoords = ref({ latitude: 0, longitude: 0 });
 const orderStatus = ref(null); // To track order status after submission
 const showOrderStatus = ref(false); // To show order status modal
 const orderPollingInterval = ref(null); // Interval for polling order status
+
+const totalPrice = computed(() => {
+	return order.value.items.reduce((sum, item) => {
+		return sum + item.price;
+	}, 0);
+});
 
 const onMapLoaded = (mapWrapper) => {
 	if ($DEBUG) console.log("Map wrapper instance: ", mapWrapper);
