@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 		"@nuxtjs/i18n",
 	],
 
-	 icon: {
+	icon: {
 		clientBundle: {
 			scan: true,
 			sizeLimitKb: 256,
