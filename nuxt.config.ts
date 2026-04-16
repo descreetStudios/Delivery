@@ -14,6 +14,13 @@ export default defineNuxtConfig({
 		"@nuxtjs/i18n",
 	],
 
+	 icon: {
+		clientBundle: {
+			scan: true,
+			sizeLimitKb: 256,
+		},
+	},
+
 	vite: {
 		optimizeDeps: {
 			include: [
@@ -21,11 +28,11 @@ export default defineNuxtConfig({
 				"@vue/devtools-kit",
 				"@indoorequal/vue-maplibre-gl",
 				"maplibre-gl",
-				'@turf/helpers',
-				'@turf/point-to-line-distance',
-				'@turf/line-slice',
-				'@turf/nearest-point-on-line',
-				'@turf/distance',
+				"@turf/helpers",
+				"@turf/point-to-line-distance",
+				"@turf/line-slice",
+				"@turf/nearest-point-on-line",
+				"@turf/distance",
 			],
 		},
 	},
