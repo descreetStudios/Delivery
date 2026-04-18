@@ -40,7 +40,8 @@
 					</div>
 				</div>
 				<AppRoutingCardComponent
-					v-if="routingStore.code === 'Ok' && activeOrder.items!=0"
+					v-if="routingStore.code === 'Ok' && activeOrder.items != 0"
+					class="border-border-default border-b"
 				/>
 				<div>
 					<p class="text-black whitespace-nowrap">{{ $t('sidebar.userQuestion') }}
@@ -49,6 +50,9 @@
 				</div>
 			</template>
 		</AppSidebarComponent>
+		<div class="pl-17.5 border-border-default border-b">
+			<AppRoutingCardComponent v-if="routingStore.code === 'Ok' && activeOrder.items != 0 && width <= 640" />
+		</div>
 		<AppMapComponent
 			ref="mapRef"
 			@map-loaded="onMapLoaded"
@@ -65,7 +69,7 @@ import { useRoutingStore } from "@/stores/routingStore";
 import { useOrderStore } from "@/stores/orderStore";
 import { point } from "@turf/helpers";
 import { distance } from "@turf/distance";
-
+import { useWindowSize } from "@vueuse/core";
 
 useHead({
 	title: "Rider",
@@ -82,6 +86,7 @@ const orderMessage = ref("");
 const orderMessageDisabled = ref(true);
 const restaurantDist = ref(0);
 const destinationDist = ref(0);
+const { width } = useWindowSize();
 
 const coordsRef = ref(null);
 const mapInstance = ref(null);

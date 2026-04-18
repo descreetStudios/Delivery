@@ -8,7 +8,7 @@
 				format="webp"
 			/>
 			<div class="flex flex-col items-start">
-				<h1 class="font-semibold text-bg-secondary-home text-lg">
+				<h1 class="font-semibold text-bg-secondary-home text-md md:text-lg">
 					{{ instructionText }}
 				</h1>
 				<p
@@ -25,7 +25,7 @@
 				</p>
 			</div>
 		</div>
-		<hr class="mt-5 border-0.5 border-border-default w-full">
+		<br class="mt-5 w-full">
 	</div>
 </template>
 
