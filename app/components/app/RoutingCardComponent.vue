@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-col w-full">
-		<div class="flex flex-row justify-center items-center gap-7.5 w-full h-25">
+		<div class="flex flex-row md:justify-center items-center gap-7.5 mb-1 w-full h-25">
 			<NuxtImg
 				class="my-1 w-20 h-auto"
 				draggable="false"
@@ -25,7 +25,6 @@
 				</p>
 			</div>
 		</div>
-		<br class="mt-5 w-full">
 	</div>
 </template>
 
