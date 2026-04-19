@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col bg-bg-home h-full">
+	<div class="flex flex-col bg-bg-root h-full">
 		<AppLoadingComponent
 			v-if="!mapInstance"
 			class="z-1000"
@@ -7,7 +7,7 @@
 		<AppSidebarComponent>
 			<template #sidebar>
 				<!-- Courier Status -->
-				<div class="mb-2 p-4 rounded-lg w-full bg-text-home">
+				<div class="mb-2 p-4 rounded-lg w-full bg-text-tertiary">
 					<h2 class="mb-2 font-bold text-white text-lg">{{$t('RiderPage.courier')}} {{ courierId }}</h2>
 
 					<!-- Active Order -->
@@ -44,7 +44,7 @@
 					class="border-border-default border-b"
 				/>
 				<div>
-					<p class="text-black whitespace-nowrap">{{ $t('sidebar.userQuestion') }}
+					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.userQuestion') }}
 						<NuxtLink to="/UserPage">{{ $t('sidebar.ctaClick') }}</NuxtLink>
 					</p>
 				</div>

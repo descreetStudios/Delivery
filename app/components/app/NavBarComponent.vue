@@ -52,7 +52,7 @@
 						>
 							<div
 								v-show="areLocalesExpanded"
-								class="top-full left-1/2 z-30 absolute flex flex-col bg-bg-home shadow-md backdrop-blur-sm mt-2 border border-black/10 rounded-xl w-full overflow-hidden text-black -translate-x-1/2"
+								class="top-full left-1/2 z-30 absolute flex flex-col bg-bg-root shadow-md backdrop-blur-sm mt-2 border border-black/10 rounded-xl w-full overflow-hidden text-text-primary -translate-x-1/2"
 							>
 								<button
 									v-for="availableLocale in availableLocales"

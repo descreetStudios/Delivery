@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="bottom-10 left-2 absolute bg-bg-surface shadow backdrop-blur px-3 py-1 rounded text-text-primary text-xs + 5"
+		class="bottom-10 left-2 absolute bg-white shadow backdrop-blur px-3 py-1 border border-border-default rounded text-text-primary text-xs + 5"
 	>
 		<span
 			v-if="lng !== null"

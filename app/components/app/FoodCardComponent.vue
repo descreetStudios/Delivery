@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="flex flex-col justify-center items-center shadow-lg p-2 border border-border-default rounded-2xl w-full aspect-square bg-text-home text-center"
+		class="flex flex-col justify-center items-center shadow-lg p-2 border border-border-default rounded-2xl w-full aspect-square bg-text-tertiary text-center"
 	>
 		<h1 class="text-white">{{ props.name }}</h1>
 		<NuxtImg
@@ -10,7 +10,7 @@
 		/>
 		<h2 class="text-white">€{{ props.price.toFixed(2) }}</h2>
 		<button
-			class="bg-bg-secondary-home px-3 py-0.5 rounded-lg text-center cursor-pointer" 
+			class="bg-bg-secondary px-3 py-0.5 rounded-lg text-center cursor-pointer" 
 			@click="buyItem"
 		>
 			{{ $t('FoodCardComponent.buy') }}

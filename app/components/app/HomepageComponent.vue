@@ -1,16 +1,16 @@
 <template>
-	<div class="bg-bg-home w-full overflow-hidden home-highlight">
+	<div class="bg-bg-root w-full overflow-hidden home-highlight">
 		<section class="flex flex-col justify-center items-center gap-8 h-screen text-center">
 			<h1 class="text-5xl md:text-7xl leading-normal">
 				<span class="font-barlow">{{ $t('HomePageComponent.yourNext') }} </span>
-				<span class="font-modak text-text-home text-6xl md:text-8xl">{{ $t('HomePageComponent.meal') }} </span>
+				<span class="font-modak text-text-tertiary text-6xl md:text-8xl">{{ $t('HomePageComponent.meal') }} </span>
 				<span class="font-barlow">{{ $t('HomePageComponent.already') }} </span>
 				<span
-					class="bg-bg-secondary-home py-1 pr-2 rounded-lg font-orbitron italic tracking-wide select-none"
+					class="bg-bg-secondary py-1 pr-2 rounded-lg font-orbitron italic tracking-wide select-none"
 				>{{
 					$t('HomePageComponent.onTheWay') }} </span>
 			</h1>
-			<p class="font-barlow text-text-home text-3xl">
+			<p class="font-barlow text-text-tertiary text-3xl">
 				{{ $t('HomePageComponent.how') }}
 			</p>
 			<div class="top-[10%] relative flex flex-col items-center gap-1 translate-x-[-50%] translate-y-[-50%]">
@@ -27,18 +27,18 @@
 			:class="['flex flex-wrap items-center justify-center gap-5 md:gap-20 xl:gap-40 p-8 md:p-15 transition-all ease-in-out', { 'flex-row-reverse': section.reversed }]"
 		>
 			<div class="flex flex-col flex-1 max-w-200">
-				<h2 class="pb-6 pl-1.25 font-semibold text-text-home text-5xl">
+				<h2 class="pb-6 pl-1.25 font-semibold text-text-tertiary text-5xl">
 					{{ section.title }}
 				</h2>
 				<div
-					class="bg-[rgba(255,255,255,0.08)] shadow-2xl backdrop-blur-lg p-4 border-3 border-text-home rounded-2xl text-black text-2xl leading-8"
+					class="bg-[rgba(255,255,255,0.08)] shadow-2xl backdrop-blur-lg p-4 border-3 border-text-tertiary rounded-2xl text-text-primary text-2xl leading-8"
 				>
 					<template v-if="section.links">
 						<NuxtLink
 							v-for="(text, i) in section.links"
 							:key="i"
 							:to="text.to"
-							class="text-bg-secondary-home selection:text-white hover:underline no-underline"
+							class="text-bg-secondary selection:text-white hover:underline no-underline"
 							@dragstart.prevent
 						>
 							<p class="my-2">{{ text.label }}</p>

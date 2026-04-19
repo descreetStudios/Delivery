@@ -1,63 +1,63 @@
 <template>
-	<div class="bg-bg-home p-5 md:p-10 h-full overflow-x-hidden home-highlight">
+	<div class="bg-bg-root p-5 md:p-10 h-full overflow-x-hidden home-highlight">
 		<div
-			class="flex flex-col gap-8 shadow-xl m-12 mx-auto p-5 md:p-10 rounded-3xl max-w-250 font-system-ui bg-text-home text-primary-text"
+			class="flex flex-col gap-8 shadow-xl m-12 mx-auto p-5 md:p-10 rounded-3xl max-w-250 font-system-ui bg-text-tertiary text-primary-text"
 		>
 			<header class="flex justify-center items-center p-5">
 				<NuxtLink
 					to="/"
-					class="flex md:flex-row flex-col justify-center items-center gap-3 md:gap-6 bg-surface w-fit h-fit no-underline cursor-pointer select-none"
+					class="flex md:flex-row flex-col justify-center items-center gap-3 md:gap-6 w-fit h-fit no-underline cursor-pointer select-none"
 					@dragstart.prevent
 				>
 					<NuxtImg
 						src="/images/delivery-logo.png"
 						alt="Delivery Logo"
-						class="mb-2 w-20 md:w-25 h-auto text-bg-home pointer-events-none select-none shrink-0"
+						class="mb-2 w-20 md:w-25 h-auto text-bg-root pointer-events-none select-none shrink-0"
 						format="webp"
 						@dragstart.prevent
 					/>
 					<h1
-						class="m-0 font-bold text-bg-home text-2xl md:text-4xl text-center uppercase pointer-events-none select-none shrink-0"
+						class="m-0 font-bold text-bg-root text-2xl md:text-4xl text-center uppercase pointer-events-none select-none shrink-0"
 					>
 						Untitled Delivery Project</h1>
 				</NuxtLink>
 			</header>
 
 			<h2
-				class="flex justify-center m-0 pb-2 border-bg-secondary-home border-b-2 font-semibold text-bg-home text-xl md:text-3xl text-center"
+				class="flex justify-center m-0 pb-2 border-bg-secondary border-b-2 font-semibold text-bg-root text-xl md:text-3xl text-center"
 			>
 				<span>GNU Affero General Public License v3.0 (AGPLv3)</span>
 			</h2>
 
-			<p class="m-0 text-bg-home text-lg text-center leading-relaxed">
+			<p class="m-0 text-bg-root text-lg text-center leading-relaxed">
 				{{ $t('License.intro') }}
 				<strong>GNU Affero General Public License v3.0</strong>.<br>
 				{{ $t('License.mid') }}
 			</p>
 
-			<section class="bg-bg-home mb-0 p-4 md:p-8 rounded-xl">
-				<h3 class="flex items-center gap-2 mb-4 font-semibold text-black text-2xl">
+			<section class="bg-bg-root mb-0 p-4 md:p-8 rounded-xl">
+				<h3 class="flex items-center gap-2 mb-4 font-semibold text-text-primary text-2xl">
 					<span>{{ $t('License.key') }}</span>
 				</h3>
-				<ul class="pl-3 text-black text-base leading-7 list-disc list-inside">
+				<ul class="pl-3 text-text-primary text-base leading-7 list-disc list-inside">
 					<li>{{ $t('License.firstKey') }}</li>
 					<li>{{ $t('License.secondKey') }}</li>
 					<li>{{ $t('License.thirdKey') }}</li>
 				</ul>
 			</section>
 
-			<section class="bg-bg-home mb-0 p-4 md:p-8 rounded-xl">
-				<h3 class="flex items-center gap-2 mb-4 font-semibold text-black text-2xl">
+			<section class="bg-bg-root mb-0 p-4 md:p-8 rounded-xl">
+				<h3 class="flex items-center gap-2 mb-4 font-semibold text-text-primary text-2xl">
 					<span>{{ $t('License.full') }}</span>
 				</h3>
 				<div class="relative border rounded-xl max-h-112.5 overflow-hidden">
 					<pre
-						class="box-border bg-surface m-0 p-5 max-h-112.5 overflow-y-auto text-black text-sm whitespace-pre-wrap scrollbar-custom"
+						class="box-border m-0 p-5 max-h-112.5 overflow-y-auto text-text-primary text-sm whitespace-pre-wrap scrollbar-custom"
 					>{{ agplText }}</pre>
 				</div>
 			</section>
 
-			<footer class="mt-4 text-bg-home text-base text-center">
+			<footer class="mt-4 text-bg-root text-base text-center">
 				<p>
 					{{ $t('License.moreInformation') }}
 					<NuxtLink

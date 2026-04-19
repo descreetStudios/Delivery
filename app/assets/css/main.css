@@ -10,49 +10,24 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 */
 
 @theme {
-  --breakpoint-3xl: 1920px;
-
   --font-barlow: "Barlow", sans-serif;
   --font-modak: "Modak", sans-serif;
   --font-orbitron: "Orbitron", sans-serif;
   
-  --accent-primary: var(--color-blue-500);
-  --accent-primary-hover: var(--color-blue-600);
-  --accent-primary-soft: var(--color-blue-100);
+  --color-bg-root:oklch(0.9065 0.0236 82.12);
+  --color-bg-secondary: oklch(0.7445 0.1724 51.27);
   
+  --color-text-primary: var(--color-black);
+  --color-text-secondary: oklch(45% 0 0);
+  --color-text-tertiary: oklch(0.3167 0.0723 38.86);
+  
+  --color-border-default: oklch(0.39 0.0021 67.76);
+  --color-shadow-default: rgba(0, 0, 0, 0.15);
+
   --color-error: oklch(66.1% 0.233 29.23);
   --color-warning: oklch(75.2% 0.2 70.3);
   --color-info: oklch(81.2% 0.2 215.3);
   --color-success: oklch(75.4% 0.2 142.3);
-  
-  --color-bg-root: oklch(15% 0 0);
-  --color-bg-home:oklch(0.9065 0.0236 82.12);
-  --color-bg-secondary-home: oklch(0.7445 0.1724 51.27);
-  --color-bg-surface: oklch(22% 0 0);
-  --color-bg-primary-surface: oklch(22% 0 0);
-  --color-bg-secondary-surface: oklch(28% 0 250);
-  
-  --color-text-primary: var(--color-white);
-  --color-text-secondary: oklch(65% 0 0);
-  --color-text-home: oklch(0.3167 0.0723 38.86);
-  --color-text-muted: oklch(50% 0 0);
-  
-  --color-border-default: oklch(0.39 0.0021 67.76);
-  --color-shadow-default: rgba(0, 0, 0, 0.4);
-}
-
-[data-theme="light"] {
-  --color-bg-root: oklch(96% 0 0);
-  --color-bg-surface: oklch(100% 0 0);
-  --color-bg-primary-surface: var(--color-blue-100);
-  --color-bg-secondary-surface: var(--color-blue-200);
-  
-  --color-text-primary: var(--color-black);
-  --color-text-secondary: oklch(45% 0 0);
-  --color-text-muted: oklch(60% 0 0);
-  
-  --color-border-default: oklch(0.39 0.0021 67.76);
-  --color-shadow-default: rgba(0, 0, 0, 0.15);
 }
 
 #__nuxt, html, body{
@@ -63,11 +38,23 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
 	input,
 	textarea,
 	select {
-		@apply px-4 py-3 rounded-md border bg-bg-surface text-text-primary text-base placeholder-text-secondary focus:bg-bg-surface focus:border-border-default focus:outline-none transition;
+		@apply px-4 py-3 rounded-md border bg-bg-root text-text-primary text-base placeholder-text-secondary focus:bg-bg-root focus:border-border-default focus:outline-none transition;
 	}
 }
 
 @layer utilities {
+  .font-modak {
+    font-family: var(--font-modak);
+  }
+
+  .font-orbitron {
+    font-family: var(--font-orbitron);
+  }
+
+  .font-barlow {
+    font-family: var(--font-barlow);
+  }
+
   .scrollbar-custom {
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-thumb, rgba(0, 0, 0, 0.3)) transparent;
@@ -94,20 +81,8 @@ NOTE: If you don't have Tailwind CSS IntelliSense installed,"Unknown at rule @th
     background-color: var(--scrollbar-thumb-hover, rgba(0, 0, 0, 0.5));
   }
 
-  .font-modak {
-    font-family: var(--font-modak);
-  }
-
-  .font-orbitron {
-    font-family: var(--font-orbitron);
-  }
-
-  .font-barlow {
-    font-family: var(--font-barlow);
-  }
-
   .home-highlight::selection {
-  background-color: var(--color-bg-secondary-home);
+  background-color: var(--color-bg-secondary);
   }
 
   @keyframes arrows {

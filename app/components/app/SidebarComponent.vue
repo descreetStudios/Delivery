@@ -11,7 +11,7 @@
 					icon="i-heroicons-bars-3-20-solid"
 					color="neutral"
 					variant="solid"
-					class="flex justify-center items-center bg-bg-home shadow-lg rounded-full size-11 text-text-primary cursor-pointer"
+					class="flex justify-center items-center bg-bg-root shadow-lg border border-border-default rounded-full size-11 text-text-primary cursor-pointer"
 					@click="toggleCollapse"
 				/>
 			</div>
@@ -20,7 +20,7 @@
 		<!-- Sidebar -->
 		<aside
 			:style="{ width: isCollapsed ? '0px' : sidebarWidth + 'px' }"
-			class="relative flex flex-col bg-bg-home border-border-default border-r h-full overflow-x-hidden transition-all duration-300 ease-in-out pointer-events-auto shrink-0"
+			class="relative flex flex-col bg-bg-root border-border-default border-r h-full overflow-x-hidden transition-all duration-300 ease-in-out pointer-events-auto shrink-0"
 		>
 			<!-- Toggle button -->
 			<div

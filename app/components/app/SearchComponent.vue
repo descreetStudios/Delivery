@@ -3,9 +3,9 @@
 		ref="rootEl"
 		class="z-10 w-full"
 	>
-		<div class="flex items-center bg-bg-surface shadow-lg px-4 border border-border-default rounded-full h-12">
+		<div class="flex items-center bg-bg-root shadow-lg px-4 border border-border-default rounded-full h-12">
 			
-			<div class="justify-center items-center invert size-5 text-bg-surface">
+			<div class="justify-center items-center invert size-5 text-white">
 				<!-- Search Icon -->
 				<svg
 					v-if="!loading"
@@ -63,86 +63,94 @@
 		</div>
 
 		<!-- Results -->
-		<transition name="dropdown">
+		<transition
+			enter-from-class="opacity-0 -translate-y-1.5"
+			enter-active-class="transition duration-150 ease-out"
+			enter-to-class="opacity-100 translate-y-0"
+			leave-from-class="opacity-100 translate-y-0"
+			leave-active-class="transition duration-150 ease-in"
+			leave-to-class="opacity-0 -translate-y-1.5"
+		>
 			<div
 				v-if="!justSelected && (results.length || (!loading && query.length >= 2))"
-				class="bg-bg-root shadow-lg mt-2 border border-border-default rounded-xl max-h-60 overflow-hidden overflow-y-auto appearance-none results-scroll"
+				class="bg-bg-root shadow-lg mt-2 border border-border-default rounded-xl overflow-hidden appearance-none"
 			>
-				<ul>
-					<!-- No results -->
-					<div
-						v-if="!results.length && !loading && query.length >= 2 && !justSelected"
-						class="px-4 py-3 text-gray-500 text-sm"
-					>
-						No results found
-					</div>
-
-					<li
-						v-for="(item, i) in results"
-						:key="i"
-						:ref="el => itemRefs[i] = el"
-						class="group gap-3 px-4 py-3 transition-colors duration-150 cursor-pointer list-item"
-						:class="[
-							i === activeIndex
-								? 'bg-bg-primary-surface hover:bg-bg-primary-surface'
-								: 'hover:bg-bg-secondary-surface'
-						]"
-						@click="select(i)"
-					>
-						<!-- pin -->
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="size-5.5 text-text-primary"
+				<div class="max-h-60 overflow-x-hidden overflow-y-auto">
+					<ul>
+						<!-- No results -->
+						<div
+							v-if="!results.length && !loading && query.length >= 2 && !justSelected"
+							class="px-4 py-3 text-text-secondary text-sm"
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-							/>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-							/>
-						</svg>
-
-						<div>
-							<!-- Label -->
-							<p class="font-medium text-text-primary text-sm leading-tight">
-								<span
-									v-for="(part, idx) in highlightParts(item.label, query)"
-									:key="idx"
-									:class="part.match
-										? 'text-blue-600 font-semibold highlight-anim'
-										: 'unhighlight-anim'"
-								>
-									{{ part.text }}
-								</span>
-							</p>
-							<!-- Description -->
-							<p
-								v-if="item.description"
-								class="text-text-primary text-xs"
-							>
-								<span
-									v-for="(part, idx) in highlightParts(item.description, query)"
-									:key="idx"
-									:class="part.match
-										? 'text-blue-600 font-semibold highlight-anim'
-										: 'unhighlight-anim'"
-								>
-									{{ part.text }}
-								</span>
-							</p>
+							No results found
 						</div>
-					</li>
-				</ul>
-			</div>
-		</transition>
+
+						<li
+							v-for="(item, i) in results"
+							:key="i"
+							:ref="el => itemRefs[i] = el"
+							class="group hover:bg-[oklch(0.28_0.06_60)] hover:shadow-[inset_3px_0_0_var(--color-bg-secondary)] px-4 py-3 transition-all hover:translate-x-1 duration-150 cursor-pointer"
+							:class="[
+								i === activeIndex
+									? 'bg-text-tertiary hover:bg-bg-primary-surface text-white'
+									: 'hover:bg-[oklch(0.89_0.035_72)] text-text-primary'
+							]"
+							@click="select(i)"
+						>
+							<!-- pin -->
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="size-5.5 text-text-primary"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+								/>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+								/>
+							</svg>
+
+							<div>
+								<!-- Label -->
+								<p class="font-medium text-sm leading-tight">
+									<span
+										v-for="(part, idx) in highlightParts(item.label, query)"
+										:key="idx"
+										:class="part.match
+											? 'text-bg-secondary font-semibold highlight-anim'
+											: 'unhighlight-anim'"
+									>
+										{{ part.text }}
+									</span>
+								</p>
+								<!-- Description -->
+								<p
+									v-if="item.description"
+									class="text-xs"
+								>
+									<span
+										v-for="(part, idx) in highlightParts(item.description, query)"
+										:key="idx"
+										:class="part.match
+											? 'text-bg-secondary font-semibold highlight-anim'
+											: 'unhighlight-anim'"
+									>
+										{{ part.text }}
+									</span>
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div></transition>
 	</div>
 </template>
 
@@ -232,10 +240,11 @@ watch(activeIndex, () => {
 const isCivic = (item) => {
 	const civicTypes = [
 		"restaurant",
-		"fast-food",
+		"fast_food",
 		"cafe",
 		"bar",
 		"pub",
+		"ice_cream",
 	];
 
 	return civicTypes.includes(item.description);
@@ -347,16 +356,16 @@ defineExpose({
 <style scoped>
 /* Scrollbar */
 ::-webkit-scrollbar {
-	width: 6px;
+	width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #d1d5db;
-	border-radius: 9999px;
+    background-color: var(--scrollbar-thumb, rgba(0, 0, 0, 0.3));
+	border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #9ca3af;
+    background-color: var(--scrollbar-thumb-hover, rgba(0, 0, 0, 0.5));
 }
 
 /* Highlight text animation */
@@ -393,43 +402,5 @@ defineExpose({
 		opacity: 1;
 		transform: translateY(0);
 	}
-}
-
-/* Dropdown animation */
-.dropdown-enter-from,
-.dropdown-leave-to {
-	opacity: 0;
-	transform: translateY(-6px);
-}
-
-.dropdown-enter-active,
-.dropdown-leave-active {
-	transition: opacity 150ms ease, transform 150ms ease;
-}
-
-.dropdown-enter-to,
-.dropdown-leave-from {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-/* List item animation */
-.list-item {
-	transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
-}
-
-.list-item:hover {
-	transform: translateX(4px);
-	background-color: var(bg-bg-secondary-surface);
-	box-shadow: inset 3px 0 0 #3b82f6;
-}
-
-.list-item.bg-blue-100 {
-	box-shadow: inset 3px 0 0 #3b82f6;
-}
-
-.list-item.bg-blue-100:hover {
-	background-color: #bfdbfe;
-	transform: translateX(4px);
 }
 </style>

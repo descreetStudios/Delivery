@@ -1,5 +1,5 @@
 <template>
-	<div class="absolute flex flex-1 justify-center items-center bg-bg-home w-full h-full">
+	<div class="absolute flex flex-1 justify-center items-center bg-bg-root w-full h-full">
 		<video
 			class="w-150 h-auto"
 			autoplay
