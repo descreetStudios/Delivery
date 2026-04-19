@@ -76,7 +76,7 @@ export const useOrderStore = defineStore("orderStore", {
 				this.items = data.items;
 				this.totalPrice = data.totalPrice;
 				this.status = data.status;
-				console.log("Status: " , data.status);
+				if ($DEBUG) console.log("Status: " , data.status);
 				if ($DEBUG) console.log(data);
 				if ($DEBUG) console.log("State: ", this.$state);
 				return this.$state;

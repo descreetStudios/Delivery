@@ -36,26 +36,28 @@ export const useCourierTrackingStore = defineStore("courierTrackingStore", {
 			if (!courierId || courierId === "0") {
 				return;
 			}
-
 			const ws = getLocationWebSocket();
 
-			if (!ws.isConnected.value) {
-				return;
-			}
+			let stopLocationWatch: (() => void) | null = null;
 
-			this.associatedCourierId = courierId;
-			this.isTracking = true;
+			const stopWatch = watch(ws.isConnected, (newVal) => {
+				if (newVal){
+					this.associatedCourierId = courierId;
+					this.isTracking = true;
 
-			// Set up location update handler
-			watch(ws.lastLocation, (data) => {
-				if (!data) return;
+					// Subscribe to the courier
+					ws.subscribeToCourier(this.associatedCourierId);
+					this.isSubscribed = true;
 
-				this.courierLocation = data as CourierLocation;
-			});
+					if (stopLocationWatch) stopLocationWatch();
 
-			// Subscribe to the courier
-			ws.subscribeToCourier(courierId);
-			this.isSubscribed = true;
+					stopLocationWatch = watch(ws.lastLocation, (data) => {
+						if (!data) return;
+						this.courierLocation = data as CourierLocation;
+					});
+					stopWatch();
+				};
+			});			
 		},
 
 		/**
@@ -69,13 +71,15 @@ export const useCourierTrackingStore = defineStore("courierTrackingStore", {
 			}
 
 			if (this.isSubscribed) {
-				ws.unsubscribeFromCourier();
+				ws.unsubscribeFromCourier(this.associatedCourierId);
 				this.isSubscribed = false;
 			}
 
 			this.isTracking = false;
 			this.courierLocation = null;
 			this.associatedCourierId = "";
+
+			this.$reset();
 		},
 
 		/**

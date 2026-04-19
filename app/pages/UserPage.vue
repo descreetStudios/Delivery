@@ -318,6 +318,7 @@ const startOrderStatusPolling = (id) => {
 						message: "Your order has been delivered to the delivery location!",
 					};
 					showDeliveryStatus.value = true;
+					courierTrackingStore.stopTracking();
 					stopOrderStatusPolling();
 				}
 				return;
@@ -381,11 +382,7 @@ const onSearchCivicSelect = (item) => {
 
 onMounted(async () => {
 	if (orderId.value !== "0000") {
-		const order = await orderStore.fetchOrder(orderId.value);
-		// If order exists and has a courier, start tracking
-		if (order && order.associatedCourierId && order.associatedCourierId !== "0") {
-			courierTrackingStore.startTracking(order.associatedCourierId);
-		}
+		startOrderStatusPolling(orderId.value);
 	}
 });
 
@@ -399,10 +396,15 @@ onUnmounted(() => {
 watch(
 	() => courierTrackingStore.courierLocation,
 	(newLocation) => {
-		if (newLocation && mapRef.value) {
-			const coords = [newLocation.longitude, newLocation.latitude];
-			if ($DEBUG) console.log("Updating courier pin on map:", coords);
-			mapRef.value.showCourierPin(coords);
+		if(mapRef.value){
+			if (newLocation) {
+				const coords = [newLocation.longitude, newLocation.latitude];
+				if ($DEBUG) console.log("Updating courier pin on map:", coords);
+				mapRef.value.showCourierPin(coords);
+			} 
+			else{
+				mapRef.value.hideCourierPin();
+			}
 		}
 	},
 	{ deep: true },
