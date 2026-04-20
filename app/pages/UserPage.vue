@@ -19,21 +19,26 @@
 			</template>
 			<template #sidebar>
 				<AppSearchComponent
-					v-if="!cartShown || width>=925"
+					v-if="!cartShown || width >= 925"
 					@select="onSearchSelect"
 					@select-civic="onSearchCivicSelect"
 				/>
 				<hr
-					v-if="!cartShown || width>=925"
+					v-if="!cartShown || width >= 925"
 					class="border-0.5 border-border-default w-full"
 				>
 				<h2
-					v-if="restaurant != null && (!cartShown || width>=925)"
+					v-if="restaurant != null && (!cartShown || width >= 925)"
 					class="text-text-primary"
-				><span class="font-bold">{{
-					$t('UserPage.restaurant') }}:</span> {{ restaurant.label }}</h2>
+				><span
+						class="font-bold"
+					>
+						{{ $t('UserPage.restaurant') }}:
+					</span>
+					{{ restaurant.label }}
+				</h2>
 				<div
-					v-if="restaurant != null && (!cartShown || width>=925)"
+					v-if="restaurant != null && (!cartShown || width >= 925)"
 					class="py-0.5 pr-0.5 border border-border-default rounded-lg"
 				>
 					<div
@@ -112,7 +117,7 @@
 					]"
 					class="z-200 flex flex-col items-center gap-2 bg-bg-root p-3"
 				>
-					<h1 class="top-0 flex text-text-primary text-xl">{{$t('UserPage.order2')}}</h1>
+					<h1 class="top-0 flex text-text-primary text-xl">{{ $t('UserPage.order2') }}</h1>
 					<div class="mt-4 min-[925px]:mt-0 py-0.5 pr-0.5 border border-border-default rounded-lg">
 						<div class="flex flex-col gap-3 p-3 w-90 h-121 overflow-y-auto scrollbar-custom">
 							<AppOrderComponent
@@ -129,7 +134,7 @@
 						class="bg-bg-secondary disabled:bg-gray-300 my-auto px-2 py-2 rounded-lg disabled:text-gray-600 text-center cursor-pointer disabled:cursor-not-allowed"
 						@click="sendOrder"
 					>
-						{{$t('UserPage.submit')}}({{ totalPrice }}€)
+						{{ $t('UserPage.submit') }}({{ totalPrice }}€)
 					</button>
 				</div>
 				<div>
@@ -137,7 +142,8 @@
 						<NuxtLink
 							class="font-bold text-text-tertiary"
 							to="/RiderPage"
-						>{{ $t('sidebar.ctaClick') }}</NuxtLink>
+						>{{ $t('sidebar.ctaClick') }}
+						</NuxtLink>
 					</p>
 				</div>
 			</template>
@@ -150,37 +156,12 @@
 		/>
 		<AppCoordinatesComponent ref="coordsRef" />
 
-		<!-- Status Modals -->
 		<AppStatusModalComponent
 			v-model:visible="showOrderStatus"
-			:title="orderStatus?.assigned ? 'Order Assigned' : 'Order Queued'"
+			:title="orderStatus?.title"
 			:order-id="orderStatus?.orderId"
 			:message="orderStatus?.message"
 			@click="closeOrderStatus"
-		/>
-
-		<AppStatusModalComponent
-			v-model:visible="showDeliveryStatus"
-			:title="$t('UserPage.delivered')"
-			:order-id="deliveryStatus?.orderId"
-			:message="deliveryStatus?.message"
-			@click="closeDeliveryStatus"
-		/>
-
-		<AppStatusModalComponent
-			v-model:visible="showPickedUpStatus"
-			:title="$t('UserPage.pickedUp')"
-			:order-id="pickedUpStatus?.orderId"
-			:message="pickedUpStatus?.message"
-			@click="closePickedUpStatus"
-		/>
-
-		<AppStatusModalComponent
-			v-model:visible="showQueuedStatus"
-			:title="$t('UserPage.queued')"
-			:order-id="queuedStatus?.orderId"
-			:message="queuedStatus?.message"
-			@click="closeQueuedStatus"
 		/>
 	</div>
 </template>
@@ -201,6 +182,7 @@ const orderStore = useOrderStore();
 const courierTrackingStore = useCourierTrackingStore();
 const router = useRouter();
 const route = useRoute();
+const { t } = useI18n();
 
 const orderId = computed(() => route.query.orderId ?? null);
 const restaurant = ref(null);
@@ -209,16 +191,9 @@ const coordsRef = ref(null);
 const mapInstance = ref(null);
 const cartShown = ref(false);
 const gpsCoords = ref({ latitude: 0, longitude: 0 });
-const orderStatus = ref(null); // To track order status after submission
-const showOrderStatus = ref(false); // To show order status modal
-const orderPollingInterval = ref(null); // Interval for polling order status
-const deliveryStatus = ref(null);
-const showDeliveryStatus = ref(false);
-const pickedUpStatus = ref(null);
-const showPickedUpStatus = ref(false);
-const queuedStatus = ref(null);
-const showQueuedStatus = ref(false);
-const hasShownAssignedStatus = ref(false);
+const orderStatus = ref(null);
+const showOrderStatus = ref(false);
+const orderPollingInterval = ref(null);
 
 const totalPrice = computed(() => {
 	return order.value.items.reduce((sum, item) => {
@@ -275,11 +250,8 @@ const sendOrder = async () => {
 		order.value.items = [];
 
 		// Reset status flags for new order
-		hasShownAssignedStatus.value = false;
 		showOrderStatus.value = false;
 		orderStatus.value = null;
-		showQueuedStatus.value = false;
-		queuedStatus.value = null;
 
 		// Start polling for assignment
 		startOrderStatusPolling(id);
@@ -291,23 +263,6 @@ const sendOrder = async () => {
 const closeOrderStatus = () => {
 	showOrderStatus.value = false;
 	orderStatus.value = null;
-	// DON'T reset hasShownAssignedStatus here - it should stay true
-	// so the modal doesn't show again on subsequent polls
-};
-
-const closeDeliveryStatus = () => {
-	showDeliveryStatus.value = false;
-	deliveryStatus.value = null;
-};
-
-const closePickedUpStatus = () => {
-	showPickedUpStatus.value = false;
-	pickedUpStatus.value = null;
-};
-
-const closeQueuedStatus = () => {
-	showQueuedStatus.value = false;
-	queuedStatus.value = null;
 };
 
 const startOrderStatusPolling = (id) => {
@@ -318,67 +273,64 @@ const startOrderStatusPolling = (id) => {
 			const orderData = await orderStore.fetchOrder(id);
 			if ($DEBUG) console.log("Polling order status:", orderData?.status, "assigned:", orderData?.associatedCourierId);
 
-			// Check for delivery completion first
+			if ((orderStatus.value && orderData) && orderStatus.value.status === orderData.status) return;
+
+			// Check for status (COMPLETED)
 			if (orderData && orderData.status === "COMPLETED") {
-				if (!deliveryStatus.value?.delivered) {
-					deliveryStatus.value = {
-						orderId: orderData.orderId,
-						delivered: true,
-						message: "Your order has been delivered to the delivery location!",
-					};
-					showDeliveryStatus.value = true;
-					courierTrackingStore.stopTracking();
-					stopOrderStatusPolling();
-				}
+				orderStatus.value = {
+					title: t("UserPage.delivered"),
+					orderId: orderData.orderId,
+					message: "Your order has been delivered to the delivery location!",
+					status: orderData.status,
+				};
+				showOrderStatus.value = true;
+				courierTrackingStore.stopTracking();
+				stopOrderStatusPolling();
 				return;
 			}
 
-			// Check for queued status
+			// Check for status (QUEUED)
 			if (orderData && orderData.status === "QUEUED") {
-				if (!queuedStatus.value?.queued) {
-					queuedStatus.value = {
-						orderId: orderData.orderId,
-						queued: true,
-						message: "Your order has been added to the queue!",
-					};
-					showQueuedStatus.value = true;
-				}
+				orderStatus.value = {
+					title: t("UserPage.queued"),
+					orderId: orderData.orderId,
+					message: "Your order has been added to the queue!",
+					status: orderData.status,
+				};
+				showOrderStatus.value = true;
+				return;
 			}
 
-			// Check for picked up status (DELIVERING)
+			// Check for status (DELIVERING)
 			if (orderData && orderData.status === "DELIVERING") {
-				if (!pickedUpStatus.value?.pickedUp) {
-					pickedUpStatus.value = {
-						orderId: orderData.orderId,
-						pickedUp: true,
-						message: "Your order has been picked up from the pickup location!",
-					};
-					showPickedUpStatus.value = true;
-				}
+				orderStatus.value = {
+					title: t("UserPage.delivering"),
+					orderId: orderData.orderId,
+					message: "Your order has been picked up from the pickup location!",
+					status: orderData.status,
+				};
+				showOrderStatus.value = true;
+				return;
 			}
 
 			// Check if assigned to courier
 			if (orderData && orderData.associatedCourierId && orderData.associatedCourierId !== "0") {
-				// Order has been assigned to a courier
-				if (!hasShownAssignedStatus.value) {
-					if ($DEBUG) console.log("Showing assigned status for order:", id);
-					// Update status and show notification
-					orderStatus.value = {
-						orderId: orderData.orderId,
-						assigned: true,
-						message: "Your order has been assigned to a courier!",
-						courierId: orderData.associatedCourierId,
-					};
-					showOrderStatus.value = true;
-					hasShownAssignedStatus.value = true;
+				if ($DEBUG) console.log("Showing assigned status for order:", id);
+				orderStatus.value = {
+					title: t("UserPage.assigned"),
+					orderId: orderData.orderId,
+					message: "Your order has been assigned to a courier!",
+					status: orderData.status,
+				};
+				showOrderStatus.value = true;
 
-					// Start tracking the courier
-					courierTrackingStore.startTracking(orderData.associatedCourierId);
-				} else {
-					if ($DEBUG) console.log("Already showed assigned status for order:", id);
-				}
-				// Continue polling to detect completion
+				// Start tracking the courier
+				courierTrackingStore.startTracking(orderData.associatedCourierId);
+				return;
+			} else {
+				if ($DEBUG) console.log("Already showed assigned status for order:", id);
 			}
+			// Continue polling to detect completion
 		} catch (error) {
 			// Silently handle 404 errors (order not found) without throwing
 			if (error?.status === 404) {
@@ -422,24 +374,19 @@ onMounted(async () => {
 onUnmounted(() => {
 	stopOrderStatusPolling();
 	courierTrackingStore.stopTracking();
-	hasShownAssignedStatus.value = false;
-	showPickedUpStatus.value = false;
-	pickedUpStatus.value = null;
-	showQueuedStatus.value = false;
-	queuedStatus.value = null;
 });
 
 // Watch courier location changes and update map
 watch(
 	() => courierTrackingStore.courierLocation,
 	(newLocation) => {
-		if(mapRef.value){
+		if (mapRef.value) {
 			if (newLocation) {
 				const coords = [newLocation.longitude, newLocation.latitude];
 				if ($DEBUG) console.log("Updating courier pin on map:", coords);
 				mapRef.value.showCourierPin(coords);
 			}
-			else{
+			else {
 				mapRef.value.hideCourierPin();
 			}
 		}

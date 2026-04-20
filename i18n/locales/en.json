@@ -102,7 +102,7 @@
         "status":"Status:",
         "nearest":"Your order will be assigned to the nearest available courier as soon as one becomes free.",
         "close":"Close",
-        "delivered":"✅ Order Delivered",
+        "delivered":"Order Delivered",
         "queued":"Order Queued",
         "order2":"order"
         
