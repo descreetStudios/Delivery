@@ -166,6 +166,14 @@
 			:message="deliveryStatus?.message"
 			@click="closeDeliveryStatus"
 		/>
+
+		<AppStatusModalComponent
+			v-model:visible="showPickedUpStatus"
+			:title="$t('UserPage.pickedUp')"
+			:order-id="pickedUpStatus?.orderId"
+			:message="pickedUpStatus?.message"
+			@click="closePickedUpStatus"
+		/>
 	</div>
 </template>
 
@@ -196,9 +204,11 @@ const gpsCoords = ref({ latitude: 0, longitude: 0 });
 const orderStatus = ref(null); // To track order status after submission
 const showOrderStatus = ref(false); // To show order status modal
 const orderPollingInterval = ref(null); // Interval for polling order status
-const deliveryStatus = ref(null); // To track delivery status after completion
-const showDeliveryStatus = ref(false); // To show delivery confirmation modal
-const hasShownAssignedStatus = ref(false); // Track if we've already shown the assigned status
+const deliveryStatus = ref(null);
+const showDeliveryStatus = ref(false);
+const pickedUpStatus = ref(null);
+const showPickedUpStatus = ref(false);
+const hasShownAssignedStatus = ref(false);
 
 const totalPrice = computed(() => {
 	return order.value.items.reduce((sum, item) => {
@@ -278,6 +288,11 @@ const closeDeliveryStatus = () => {
 	deliveryStatus.value = null;
 };
 
+const closePickedUpStatus = () => {
+	showPickedUpStatus.value = false;
+	pickedUpStatus.value = null;
+};
+
 const checkOrderStatus = async (id) => {
 	try {
 		const order = await orderStore.fetchOrder(id);
@@ -325,6 +340,18 @@ const startOrderStatusPolling = (id) => {
 					stopOrderStatusPolling();
 				}
 				return;
+			}
+
+			// Check for picked up status (DELIVERING)
+			if (orderData && orderData.status === "DELIVERING") {
+				if (!pickedUpStatus.value?.pickedUp) {
+					pickedUpStatus.value = {
+						orderId: orderData.orderId,
+						pickedUp: true,
+						message: "Your order has been picked up from the pickup location!",
+					};
+					showPickedUpStatus.value = true;
+				}
 			}
 
 			// Check if assigned to courier
@@ -393,6 +420,8 @@ onUnmounted(() => {
 	stopOrderStatusPolling();
 	courierTrackingStore.stopTracking();
 	hasShownAssignedStatus.value = false;
+	showPickedUpStatus.value = false;
+	pickedUpStatus.value = null;
 });
 
 // Watch courier location changes and update map
@@ -404,7 +433,7 @@ watch(
 				const coords = [newLocation.longitude, newLocation.latitude];
 				if ($DEBUG) console.log("Updating courier pin on map:", coords);
 				mapRef.value.showCourierPin(coords);
-			} 
+			}
 			else{
 				mapRef.value.hideCourierPin();
 			}
