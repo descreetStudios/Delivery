@@ -174,6 +174,14 @@
 			:message="pickedUpStatus?.message"
 			@click="closePickedUpStatus"
 		/>
+
+		<AppStatusModalComponent
+			v-model:visible="showQueuedStatus"
+			:title="$t('UserPage.queued')"
+			:order-id="queuedStatus?.orderId"
+			:message="queuedStatus?.message"
+			@click="closeQueuedStatus"
+		/>
 	</div>
 </template>
 
@@ -208,6 +216,8 @@ const deliveryStatus = ref(null);
 const showDeliveryStatus = ref(false);
 const pickedUpStatus = ref(null);
 const showPickedUpStatus = ref(false);
+const queuedStatus = ref(null);
+const showQueuedStatus = ref(false);
 const hasShownAssignedStatus = ref(false);
 
 const totalPrice = computed(() => {
@@ -268,8 +278,10 @@ const sendOrder = async () => {
 		hasShownAssignedStatus.value = false;
 		showOrderStatus.value = false;
 		orderStatus.value = null;
+		showQueuedStatus.value = false;
+		queuedStatus.value = null;
 
-		// Start polling for assignment - checkOrderStatus will be called by polling
+		// Start polling for assignment
 		startOrderStatusPolling(id);
 	} catch (error) {
 		console.log(error);
@@ -293,30 +305,9 @@ const closePickedUpStatus = () => {
 	pickedUpStatus.value = null;
 };
 
-const checkOrderStatus = async (id) => {
-	try {
-		const order = await orderStore.fetchOrder(id);
-		if (order) {
-			const isAssigned = order.associatedCourierId && order.associatedCourierId !== "0";
-			orderStatus.value = {
-				orderId: order.orderId,
-				assigned: isAssigned,
-				message: isAssigned
-					? "Your order has been assigned to a courier!"
-					: "Your order is waiting in the queue for a courier.",
-				courierId: order.associatedCourierId,
-			};
-
-			// If assigned to courier, start tracking
-			if (isAssigned && order.associatedCourierId) {
-				courierTrackingStore.startTracking(order.associatedCourierId);
-			}
-
-			showOrderStatus.value = true;
-		}
-	} catch (error) {
-		if ($DEBUG) console.error("Error checking order status:", error);
-	}
+const closeQueuedStatus = () => {
+	showQueuedStatus.value = false;
+	queuedStatus.value = null;
 };
 
 const startOrderStatusPolling = (id) => {
@@ -340,6 +331,18 @@ const startOrderStatusPolling = (id) => {
 					stopOrderStatusPolling();
 				}
 				return;
+			}
+
+			// Check for queued status
+			if (orderData && orderData.status === "QUEUED") {
+				if (!queuedStatus.value?.queued) {
+					queuedStatus.value = {
+						orderId: orderData.orderId,
+						queued: true,
+						message: "Your order has been added to the queue!",
+					};
+					showQueuedStatus.value = true;
+				}
 			}
 
 			// Check for picked up status (DELIVERING)
@@ -422,6 +425,8 @@ onUnmounted(() => {
 	hasShownAssignedStatus.value = false;
 	showPickedUpStatus.value = false;
 	pickedUpStatus.value = null;
+	showQueuedStatus.value = false;
+	queuedStatus.value = null;
 });
 
 // Watch courier location changes and update map

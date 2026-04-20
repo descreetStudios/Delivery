@@ -102,7 +102,8 @@
         "status":"Estado:",
         "nearest":"Tu pedido será asignado al repartidor disponible más cercano tan pronto como haya uno libre.",
         "close":"Cerrar",
-        "delivered":"✅ Pedido Entregado",
+        "delivered":"Pedido Entregado",
+        "queued":"Pedido en Cola",
         "order2":"Pedido"
     },
     "sidebar": {
