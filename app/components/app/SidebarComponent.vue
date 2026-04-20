@@ -66,7 +66,6 @@ const isCollapsed = ref(true);
 const toggleCollapse = () => {
 	if (isCollapsed.value) {
 		isCollapsed.value = false;
-		sidebarWidth.value = oldSidebarWidth.value || DEFAULT_WIDTH;
 	} else {
 		oldSidebarWidth.value = sidebarWidth.value;
 		isCollapsed.value = true;
