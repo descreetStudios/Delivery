@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { getLocationWebSocket } from "#imports";
-import { watch } from "vue";
+import { watch, type WatchStopHandle } from "vue";
 
 
 interface CourierLocation {
@@ -20,11 +20,12 @@ interface CourierTrackingState {
 }
 
 export const useCourierTrackingStore = defineStore("courierTrackingStore", {
-	state: (): CourierTrackingState => ({
+	state: (): CourierTrackingState & { stopLocationWatch: WatchStopHandle | null } => ({
 		associatedCourierId: "",
 		courierLocation: null,
 		isTracking: false,
 		isSubscribed: false,
+		stopLocationWatch: null,
 	}),
 
 	actions: {
@@ -38,26 +39,41 @@ export const useCourierTrackingStore = defineStore("courierTrackingStore", {
 			}
 			const ws = getLocationWebSocket();
 
-			let stopLocationWatch: (() => void) | null = null;
+			if (!ws.isConnected.value) {
+				const stopWatch = watch(ws.isConnected, (newVal) => {
+					if (newVal) {
+						this.associatedCourierId = courierId;
+						this.isTracking = true;
 
-			const stopWatch = watch(ws.isConnected, (newVal) => {
-				if (newVal){
-					this.associatedCourierId = courierId;
-					this.isTracking = true;
+						// Subscribe to the courier
+						ws.subscribeToCourier(this.associatedCourierId);
+						this.isSubscribed = true;
 
-					// Subscribe to the courier
-					ws.subscribeToCourier(this.associatedCourierId);
-					this.isSubscribed = true;
+						this.stopLocationWatch?.();
 
-					if (stopLocationWatch) stopLocationWatch();
+						this.stopLocationWatch = watch(ws.lastLocation, (data) => {
+							if (!data) return;
+							this.courierLocation = data as CourierLocation;
+						});
+						stopWatch();
+					};
+				});
+			} else {
+				this.associatedCourierId = courierId;
+				this.isTracking = true;
 
-					stopLocationWatch = watch(ws.lastLocation, (data) => {
-						if (!data) return;
-						this.courierLocation = data as CourierLocation;
-					});
-					stopWatch();
-				};
-			});			
+				// Subscribe to the courier
+				ws.subscribeToCourier(this.associatedCourierId);
+				this.isSubscribed = true;
+
+				this.stopLocationWatch?.();
+
+				this.stopLocationWatch = watch(ws.lastLocation, (data) => {
+					if (!data) return;
+					this.courierLocation = data as CourierLocation;
+				});
+			}
+
 		},
 
 		/**
