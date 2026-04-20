@@ -9,8 +9,13 @@
 				@map:load="handleMapLoad"
 			>
 				<MglImage
-					id="pin-icon"
-					url="/images/pin-icon.png"
+					id="courier-pin-icon"
+					url="/images/courier-pin-icon.png"
+				/>
+
+				<MglImage
+					id="pickup-pin-icon"
+					url="/images/pickup-pin-icon.png"
 				/>
 
 				<MglGeoJsonSource
@@ -89,7 +94,7 @@ const pinIconGeojsonSource = computed(() => ({
 				coordinates: pinCoordinates.value,
 			},
 			properties: {
-				symbol: "pin-icon",
+				symbol: "pickup-pin-icon",
 			},
 		},
 	],
@@ -105,7 +110,7 @@ const courierPinGeojsonSource = computed(() => ({
 				coordinates: courierCoordinates.value,
 			},
 			properties: {
-				symbol: "pin-icon",
+				symbol: "courier-pin-icon",
 			},
 		},
 	],

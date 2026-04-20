@@ -103,7 +103,7 @@
         "nearest":"Tu pedido será asignado al repartidor disponible más cercano tan pronto como haya uno libre.",
         "close":"Cerrar",
         "delivered":"✅ Pedido Entregado",
-        "oreder2":"Pedido"
+        "order2":"Pedido"
     },
     "sidebar": {
         "riderQuestion": "Oye, ¿eres repartidor?",
