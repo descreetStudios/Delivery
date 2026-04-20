@@ -1,7 +1,7 @@
 <template>
 	<div
 		ref="rootEl"
-		class="z-10 w-full"
+		class="z-10 w-full home-highlight"
 	>
 		<div class="flex items-center bg-bg-root shadow-lg px-4 border border-border-default rounded-full h-12">
 			
@@ -104,7 +104,7 @@
 								viewBox="0 0 24 24"
 								stroke-width="1.5"
 								stroke="currentColor"
-								class="size-5.5 text-text-primary"
+								class="size-5.5"
 							>
 								<path
 									stroke-linecap="round"
@@ -125,7 +125,7 @@
 										v-for="(part, idx) in highlightParts(item.label, query)"
 										:key="idx"
 										:class="part.match
-											? 'text-bg-secondary font-semibold highlight-anim'
+											? 'text-bg-secondary selection:text-white font-semibold highlight-anim'
 											: 'unhighlight-anim'"
 									>
 										{{ part.text }}
@@ -140,7 +140,7 @@
 										v-for="(part, idx) in highlightParts(item.description, query)"
 										:key="idx"
 										:class="part.match
-											? 'text-bg-secondary font-semibold highlight-anim'
+											? 'text-bg-secondary selection:text-white font-semibold highlight-anim'
 											: 'unhighlight-anim'"
 									>
 										{{ part.text }}
@@ -156,6 +156,7 @@
 
 <script setup>
 const { $DEBUG } = useNuxtApp();
+const { locale } = useI18n();
 
 const emit = defineEmits(["select", "select-civic"]);
 
@@ -179,7 +180,7 @@ const search = async (q) => {
 
 	const res = await fetch(url, {
 		headers: {
-			"Accept-Language": ["en", "it", "de"],
+			"Accept-Language": locale.value,
 		},
 	});
 

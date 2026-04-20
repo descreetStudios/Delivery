@@ -1,5 +1,5 @@
 <template>
-	<div class="z-5 absolute flex-col h-full overflow-hidden font-mono">
+	<div class="z-5 absolute flex-col h-full overflow-hidden font-mono home-highlight">
 
 		<!-- Floating toggle button -->
 		<Transition name="float">

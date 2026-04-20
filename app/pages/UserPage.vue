@@ -134,7 +134,10 @@
 				</div>
 				<div>
 					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.riderQuestion') }}
-						<NuxtLink to="/RiderPage">{{ $t('sidebar.ctaClick') }}</NuxtLink>
+						<NuxtLink
+							class="font-bold text-text-tertiary"
+							to="/RiderPage"
+						>{{ $t('sidebar.ctaClick') }}</NuxtLink>
 					</p>
 				</div>
 			</template>

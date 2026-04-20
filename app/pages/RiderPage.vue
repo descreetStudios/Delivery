@@ -45,7 +45,10 @@
 				/>
 				<div>
 					<p class="text-text-primary whitespace-nowrap">{{ $t('sidebar.userQuestion') }}
-						<NuxtLink to="/UserPage">{{ $t('sidebar.ctaClick') }}</NuxtLink>
+						<NuxtLink
+							class="font-bold text-text-tertiary"
+							to="/UserPage"
+						>{{ $t('sidebar.ctaClick') }}</NuxtLink>
 					</p>
 				</div>
 			</template>
