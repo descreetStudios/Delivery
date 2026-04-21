@@ -19,7 +19,7 @@
 				class="bg-bg-secondary hover:bg-[oklch(0.70_0.1724_51.27)] mt-4 px-4 py-2 rounded-lg w-full text-white transition-colors"
 				@click="handleClose"
 			>
-				Close
+				{{$t('StatusModalComponent.Close')}}
 			</button>
 		</div>
 	</div>

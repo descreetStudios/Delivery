@@ -126,5 +126,8 @@
         "id": "ID del Pedido:",
         "items": "Artículos:",
         "total": "Total: €"
+    },
+    "StatusModalComponent":{
+        "Close":"Cerrar"
     }
 }
