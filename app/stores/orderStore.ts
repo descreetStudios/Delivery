@@ -91,7 +91,6 @@ export const useOrderStore = defineStore("orderStore", {
 
 		async fetchAndSetActiveOrder(associatedCourierId: string) {
 			const { fetchActiveOrder } = useOrdersApi();
-			const routingStore = useRoutingStore();
 			const nuxtApp = useNuxtApp();
 			const $DEBUG = await nuxtApp.$DEBUG;
 
@@ -111,7 +110,6 @@ export const useOrderStore = defineStore("orderStore", {
 					this.items = order.items;
 					this.status = order.status;
 					this.totalPrice = order.totalPrice;
-					routingStore.syncRoutingData();
 
 					if($DEBUG) console.log("Fetched active order for courier ", this.associatedCourierId, ": ", order);
 

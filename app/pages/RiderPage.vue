@@ -81,7 +81,7 @@ useHead({
 const { $DEBUG } = useNuxtApp();
 
 const routingStore = useRoutingStore();
-const { currentGPS, waypoints } = storeToRefs(routingStore);
+const { currentGPS, waypoints, code } = storeToRefs(routingStore);
 const orderStore = useOrderStore();
 const route = useRoute();
 const courierId = ref(route.query.courierId ?? null);
@@ -116,6 +116,9 @@ const onGPSChange = async (coords) => {
 	await routingStore.syncGeolocation(
 		[coords.coords.longitude, coords.coords.latitude],
 		coords.coords.heading);
+
+	if (code.value != "Ok") return;
+
 	restaurantDist.value = distance(
 		point(currentGPS.value),
 		point(waypoints.value[1].location),

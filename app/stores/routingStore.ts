@@ -127,6 +127,8 @@ export const useRoutingStore = defineStore("routingStore", {
 
 			const orderStore = useOrderStore();
 
+			if(!this.activeOrderId || this.activeOrderId=="0") return;
+
 			try {
 				const data: RoutingData = await getRoutingData(
 					this.courierId, orderStore.restaurant, orderStore.destination) as RoutingData;
@@ -197,6 +199,7 @@ export const useRoutingStore = defineStore("routingStore", {
 						this.$reset();
 						this.courierId = courierId;
 						this.activeOrderId = activeOrderId;
+						this.syncRoutingData();
 					}
 				} catch (error) {
 					this.code = error as string;
