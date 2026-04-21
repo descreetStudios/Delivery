@@ -97,7 +97,7 @@
     },
     "UserPage": {
         "restaurant": "Restaurante",
-        "submit":"Envía tu pedido",
+        "submit":"Envía tu pedido ",
         "order":"ID del Pedido:",
         "status":"Estado:",
         "nearest":"Tu pedido será asignado al repartidor disponible más cercano tan pronto como haya uno libre.",

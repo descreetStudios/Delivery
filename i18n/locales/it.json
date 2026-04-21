@@ -97,7 +97,7 @@
     },
     "UserPage": {
         "restaurant": "Ristorante",
-        "submit":"Invia il tuo ordine",
+        "submit":"Invia il tuo ordine ",
         "order":"ID Ordine:",
         "status":"Stato:",
         "nearest":"Il tuo ordine verrà assegnato al corriere disponibile più vicino non appena uno sarà libero.",
