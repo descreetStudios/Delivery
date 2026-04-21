@@ -12,14 +12,14 @@
 						@dragstart.prevent
 					>AGPL-3.0 License</NuxtLink>
 				</p>
-				<p>Navigation icons by 
+				<p>{{$t('FooterComponent.navigation')}} 
 					<a
 						href="https://github.com/mapbox/directions-icons"
 						class="font-semibold text-bg-root hover:text-secondary-hover hover:underline no-underline"
 						target="_blank"
 						rel="noopener noreferrer"
 					>Mapbox</a>
-					- licensed under CC0 1.0 Universal
+				{{$t('FooterComponent.licensed')}} CC0 1.0 Universal
 				</p>
 				<p>{{$t('FooterComponent.design')}}
 					<a

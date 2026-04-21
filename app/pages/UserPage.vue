@@ -280,7 +280,7 @@ const startOrderStatusPolling = (id) => {
 				orderStatus.value = {
 					title: t("UserPage.delivered"),
 					orderId: orderData.orderId,
-					message: "Your order has been delivered to the delivery location!",
+					message:t( "UserPage.message"),
 					status: orderData.status,
 				};
 				showOrderStatus.value = true;
@@ -294,7 +294,7 @@ const startOrderStatusPolling = (id) => {
 				orderStatus.value = {
 					title: t("UserPage.queued"),
 					orderId: orderData.orderId,
-					message: "Your order has been added to the queue!",
+					message:t("UserPage.messageQueued"),
 					status: orderData.status,
 				};
 				showOrderStatus.value = true;
@@ -306,7 +306,7 @@ const startOrderStatusPolling = (id) => {
 				orderStatus.value = {
 					title: t("UserPage.delivering"),
 					orderId: orderData.orderId,
-					message: "Your order has been picked up from the pickup location!",
+					message: t("UserPage.messageDelivering"),
 					status: orderData.status,
 				};
 				showOrderStatus.value = true;
@@ -319,7 +319,7 @@ const startOrderStatusPolling = (id) => {
 				orderStatus.value = {
 					title: t("UserPage.assigned"),
 					orderId: orderData.orderId,
-					message: "Your order has been assigned to a courier!",
+					message: t("UserPage.messageAssigned"),
 					status: orderData.status,
 				};
 				showOrderStatus.value = true;

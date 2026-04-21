@@ -1,12 +1,9 @@
 {
-    "FoodCardComponent":{
-        "buy":"Acquista"
+    "FoodCardComponent": {
+        "buy": "Acquista"
     },
-    "FoodSearchComponent":{
-        "noResults":"Nessun risultato trovato"
-    },
-    "OrderComponent":{
-        "delete":"Elimina"
+    "OrderComponent": {
+        "delete": "Elimina"
     },
     "maneuver": {
         "turn": {
@@ -14,8 +11,8 @@
             "left": "Gira a sinistra {distance}",
             "slight right": "Svolta leggermente a destra {distance}",
             "slight left": "Svolta leggermente a sinistra {distance}",
-            "sharp right": "Svolta bruscamente a destra {distance}",
-            "sharp left": "Svolta bruscamente a sinistra {distance}",
+            "sharp right": "Svolta brusca a destra {distance}",
+            "sharp left": "Svolta brusca a sinistra {distance}",
             "straight": "Continua dritto {distance}",
             "uturn": "Fai un'inversione a U {distance}"
         },
@@ -46,15 +43,15 @@
         },
         "restaurants": {
             "title": "Esplora i Ristoranti Locali",
-            "description": "Sfoglia una vasta selezione di ristoranti, dai preferiti locali ai posti più in voga. Qualunque sia la tua voglia, ce l'abbiamo."
+            "description": "Scopri un'ampia selezione di ristoranti, dai preferiti locali ai posti più in voga. Qualsiasi cosa tu voglia, ce l'abbiamo."
         },
         "delivery": {
-            "title": "Consegna Veloce e Affidabile",
-            "description": "I nostri rider garantiscono una consegna rapida e sicura, mantenendo il tuo cibo fresco e puntuale."
+            "title": "Consegna Rapida e Affidabile",
+            "description": "I nostri rider garantiscono consegne rapide e sicure, mantenendo il tuo cibo fresco e puntuale."
         },
         "how": {
             "title": "Come Funziona",
-            "description": "1. Scegli il tuo piatto\n2. Invia l'ordine\n3. Traccialo in tempo reale\n4. Goditi il tuo pasto a casa",
+            "description": "1. Scegli il tuo piatto\n2. Effettua l'ordine\n3. Traccialo in tempo reale\n4. Goditi il tuo pasto a casa",
             "link": "Ordina ora"
         },
         "riders": {
@@ -76,19 +73,22 @@
         "how": "Come funziona?"
     },
     "SearchComponent": {
-        "search": "Cerca un ristorante"
+        "search": "Cerca un ristorante",
+        "noResults": "Nessun risultato trovato"
     },
     "FooterComponent": {
         "foot": " Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
-        "secondFoot": "Questo progetto è open-source e concesso in licenza sotto",
+        "secondFoot": "Questo progetto è open‑source e concesso sotto licenza",
         "built": "Realizzato con",
         "support": "Supportaci su",
-        "design": "Design di"
+        "design": "Design di",
+        "licensed": "- concesso sotto licenza",
+        "navigation": "Icone di navigazione di"
     },
     "License": {
         "intro": "Questa applicazione è distribuita secondo i termini della",
-        "mid": "Sei libero di ridistribuirla e/o modificarla in conformità a tali termini.",
-        "key": "Termini Chiave",
+        "mid": "Sei libero di ridistribuirla e/o modificarla in conformità con tali termini.",
+        "key": "Punti Chiave",
         "firstKey": "Libertà di usare, studiare, modificare e condividere il software.",
         "secondKey": "Obbligo di rendere disponibile il codice sorgente, anche per l'uso in rete.",
         "thirdKey": "Le versioni modificate devono rimanere libere e aperte.",
@@ -97,27 +97,34 @@
     },
     "UserPage": {
         "restaurant": "Ristorante",
-        "submit":"Invia il tuo ordine ",
-        "order":"ID Ordine:",
-        "status":"Stato:",
-        "nearest":"Il tuo ordine verrà assegnato al corriere disponibile più vicino non appena uno sarà libero.",
-        "close":"Chiudi",
-        "delivered":"Ordine Consegnato",
-        "queued":"Ordine in Coda",
-        "order2":"Ordine"
+        "submit": "Invia il tuo ordine ",
+        "order": "ID Ordine:",
+        "status": "Stato:",
+        "nearest": "Il tuo ordine verrà assegnato al corriere disponibile più vicino appena possibile.",
+        "close": "Chiudi",
+        "delivered": "Ordine Consegnato",
+        "queued": "Ordine in Coda",
+        "order2": "ordine",
+        "message": "Il tuo ordine è stato consegnato al luogo di consegna!",
+        "queue": "Ordine in coda",
+        "messageQueued": "Il tuo ordine è stato aggiunto alla coda!",
+        "delivering": "Ordine in Consegna",
+        "messageDelivering": "Il tuo ordine è stato ritirato dal punto di prelievo!",
+        "assigned": "Ordine Assegnato",
+        "messageAssigned": "Il tuo ordine è stato assegnato a un corriere!"
     },
     "sidebar": {
         "riderQuestion": "Ehi, sei un rider?",
         "userQuestion": "Ehi, sei un utente?",
         "ctaClick": "Clicca qui!"
     },
-    "RiderPage":{
-        "complete":"Completa ordine",
-        "waiting":"In attesa di ordini...",
-        "courier":"Corriere",
-        "order":"Ordine Assegnato",
-        "id":"ID Ordine:",
-        "items":"Articoli:",
-        "total":"Totale: €"
+    "RiderPage": {
+        "complete": "Completa ordine",
+        "waiting": "In attesa di ordini...",
+        "courier": "Corriere",
+        "order": "Ordine Assegnato",
+        "id": "ID Ordine:",
+        "items": "Articoli:",
+        "total": "Totale: €"
     }
 }

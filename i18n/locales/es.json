@@ -1,12 +1,9 @@
 {
-    "FoodCardComponent":{
-        "buy":"Comprar"
+    "FoodCardComponent": {
+        "buy": "Comprar"
     },
-    "FoodSearchComponent":{
-        "noResults":"No se encontraron resultados"
-    },
-    "OrderComponent":{
-        "delete":"Eliminar"
+    "OrderComponent": {
+        "delete": "Eliminar"
     },
     "maneuver": {
         "turn": {
@@ -16,7 +13,7 @@
             "slight left": "Gira ligeramente a la izquierda {distance}",
             "sharp right": "Gira bruscamente a la derecha {distance}",
             "sharp left": "Gira bruscamente a la izquierda {distance}",
-            "straight": "Continúa recto {distance}",
+            "straight": "Sigue recto {distance}",
             "uturn": "Haz un giro en U {distance}"
         },
         "continue": "Continúa {distance}",
@@ -26,31 +23,31 @@
         "fork": {
             "right": "Mantente a la derecha en la bifurcación {distance}",
             "left": "Mantente a la izquierda en la bifurcación {distance}",
-            "straight": "Continúa recto en la bifurcación {distance}"
+            "straight": "Sigue recto en la bifurcación {distance}"
         },
         "endOfRoad": {
-            "right": "Gira a la derecha al final de la calle {distance}",
-            "left": "Gira a la izquierda al final de la calle {distance}",
-            "straight": "Continúa al final de la calle {distance}"
+            "right": "Gira a la derecha al final de la carretera {distance}",
+            "left": "Gira a la izquierda al final de la carretera {distance}",
+            "straight": "Continúa al final de la carretera {distance}"
         },
-        "newName": "El nombre de la calle cambia {distance}",
+        "newName": "El nombre de la carretera cambia {distance}",
         "arrive": "Has llegado a tu destino",
         "depart": "Avanza {distance} para comenzar",
         "notification": "{distance}"
     },
     "sections": {
         "hero": {
-            "title": "Comida Caliente, Cero Distancia",
+            "title": "Comidas Calientes, Cero Distancia",
             "description": "Pide de tus restaurantes favoritos y recibe tu comida rápido, fresca y directamente en tu puerta.",
             "link": "Pedir ahora"
         },
         "restaurants": {
             "title": "Explora Restaurantes Locales",
-            "description": "Explora una amplia selección de restaurantes, desde favoritos locales hasta lugares de moda. Sea lo que sea que antojes, lo tenemos."
+            "description": "Descubre una amplia selección de restaurantes, desde favoritos locales hasta lugares de moda. Lo que se te antoje, lo tenemos."
         },
         "delivery": {
             "title": "Entrega Rápida y Confiable",
-            "description": "Nuestros repartidores garantizan una entrega rápida y segura, manteniendo tu comida fresca y puntual."
+            "description": "Nuestros repartidores garantizan entregas rápidas y seguras, manteniendo tu comida fresca y puntual."
         },
         "how": {
             "title": "Cómo Funciona",
@@ -76,48 +73,58 @@
         "how": "¿Cómo funciona?"
     },
     "SearchComponent": {
-        "search": "Buscar un restaurante"
+        "search": "Buscar un restaurante",
+        "noResults": "No se encontraron resultados"
     },
     "FooterComponent": {
         "foot": " Untitled Delivery Project. Desarrollado por un equipo independiente. Todos los derechos reservados.",
         "secondFoot": "Este proyecto es de código abierto y está licenciado bajo",
         "built": "Construido con",
         "support": "Apóyanos en",
-        "design": "Diseño por"
+        "design": "Diseño por",
+        "licensed": "- licenciado bajo",
+        "navigation": "Iconos de navegación por"
     },
     "License": {
         "intro": "Esta aplicación se distribuye bajo los términos de la",
         "mid": "Eres libre de redistribuirla y/o modificarla de acuerdo con estos términos.",
-        "key": "Términos Clave",
+        "key": "Puntos Clave",
         "firstKey": "Libertad para usar, estudiar, modificar y compartir el software.",
-        "secondKey": "Requisito de poner el código fuente a disposición, incluso para uso en red.",
+        "secondKey": "Obligación de hacer disponible el código fuente, incluso para uso en red.",
         "thirdKey": "Las versiones modificadas deben permanecer libres y abiertas.",
         "full": "Texto Completo de la Licencia",
         "moreInformation": "Para más información, visita el sitio oficial de GNU:"
     },
     "UserPage": {
         "restaurant": "Restaurante",
-        "submit":"Envía tu pedido ",
-        "order":"ID del Pedido:",
-        "status":"Estado:",
-        "nearest":"Tu pedido será asignado al repartidor disponible más cercano tan pronto como haya uno libre.",
-        "close":"Cerrar",
-        "delivered":"Pedido Entregado",
-        "queued":"Pedido en Cola",
-        "order2":"Pedido"
+        "submit": "Enviar tu pedido ",
+        "order": "ID del Pedido:",
+        "status": "Estado:",
+        "nearest": "Tu pedido será asignado al repartidor disponible más cercano en cuanto sea posible.",
+        "close": "Cerrar",
+        "delivered": "Pedido Entregado",
+        "queued": "Pedido en Cola",
+        "order2": "pedido",
+        "message": "¡Tu pedido ha sido entregado en el punto de entrega!",
+        "queue": "Pedido en cola",
+        "messageQueued": "¡Tu pedido ha sido añadido a la cola!",
+        "delivering": "Pedido en Entrega",
+        "messageDelivering": "¡Tu pedido ha sido recogido del punto de recogida!",
+        "assigned": "Pedido Asignado",
+        "messageAssigned": "¡Tu pedido ha sido asignado a un repartidor!"
     },
     "sidebar": {
         "riderQuestion": "Oye, ¿eres repartidor?",
         "userQuestion": "Oye, ¿eres usuario?",
         "ctaClick": "Haz clic aquí!"
     },
-    "RiderPage":{
-        "complete":"Completar pedido",
-        "waiting":"Esperando pedidos...",
-        "courier":"Repartidor",
-        "order":"Pedido Asignado",
-        "id":"ID del Pedido:",
-        "items":"Artículos:",
-        "total":"Total: €"
+    "RiderPage": {
+        "complete": "Completar pedido",
+        "waiting": "Esperando pedidos...",
+        "courier": "Repartidor",
+        "order": "Pedido Asignado",
+        "id": "ID del Pedido:",
+        "items": "Artículos:",
+        "total": "Total: €"
     }
 }

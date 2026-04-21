@@ -82,7 +82,7 @@
 							v-if="!results.length && !loading && query.length >= 2 && !justSelected"
 							class="px-4 py-3 text-text-secondary text-sm"
 						>
-							No results found
+							{{$t('SearchComponent.noResults')}}
 						</div>
 
 						<li

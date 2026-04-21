@@ -2,9 +2,6 @@
     "FoodCardComponent":{
         "buy":"Buy"
     },
-    "FoodSearchComponent":{
-        "noResults":"No results found"
-    },
     "OrderComponent":{
         "delete":"Delete"
     },
@@ -76,14 +73,17 @@
         "how": "How does it work?"
     },
     "SearchComponent": {
-        "search": "Search a restaurant"
+        "search": "Search a restaurant",
+        "noResults":"No results found"
     },
     "FooterComponent": {
         "foot": " Untitled Delivery Project. Developed by an independent team. All rights reserved.",
         "secondFoot": "This project is open-source and licensed under",
         "built": "Built with",
         "support": "Support us on",
-        "design": "Design by"
+        "design": "Design by",
+        "licensed":"- licensed under",
+        "navigation":"Navigation icons by"
     },
     "License": {
         "intro": "This application is distributed under the terms of the",
@@ -104,7 +104,15 @@
         "close":"Close",
         "delivered":"Order Delivered",
         "queued":"Order Queued",
-        "order2":"order"
+        "order2":"order",
+        "message":"Your order has been delivered to the delivery location!",
+        "queue":"Order in queue ",
+        "messageQueued":"Your order has been added to the queue!",
+        "delivering":"Ordine in consegna",
+        "messageDelivering":"Your order has been picked up from the pickup location!",
+        "assigned":"Assigned order",
+        "messageAssigned":"Your order has been assigned to a courier!"
+        
         
     },
     "sidebar": {
