@@ -61,7 +61,7 @@
         }
     },
     "NavBarComponent": {
-        "user": "User",
+        "user": "Order now",
         "rider": "Rider",
         "license": "License"
     },

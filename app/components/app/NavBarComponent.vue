@@ -19,6 +19,16 @@
 				<!-- Navigation buttons (Center) -->
 				<div class="flex flex-row gap-1 md:gap-10">
 					<NuxtLink
+						v-for="link in userLink"
+						:key="link.label"
+						class="bg-bg-secondary px-3 py-2 rounded-2xl font-barlow font-semibold text-md md:text-lg"
+						:to="link.to"
+						:prefetch="false"
+					>
+						{{ link.label }}
+					</NuxtLink>
+
+					<NuxtLink
 						v-for="link in navLinks"
 						:key="link.label"
 						class="px-3 py-2 font-barlow font-semibold text-md md:text-lg"
@@ -80,9 +90,12 @@ const { t, locale, locales, setLocale, setLocaleCookie } = useI18n();
 const areLocalesExpanded = ref(false);
 
 const navLinks = computed(() => [
-	{ label: t("NavBarComponent.user"), to: "/UserPage" },
 	{ label: t("NavBarComponent.rider"), to: "/RiderPage" },
 	{ label: t("NavBarComponent.license"), to: "/License" },
+]);
+
+const userLink = computed(() => [
+	{ label: t("NavBarComponent.user"), to: "/UserPage" },
 ]);
 
 const availableLocales = computed(() => {
