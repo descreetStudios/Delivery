@@ -9,31 +9,96 @@
         "turn": {
             "right": "Turn right {distance}",
             "left": "Turn left {distance}",
-            "slight right": "Bear right {distance}",
-            "slight left": "Bear left {distance}",
-            "sharp right": "Turn sharp right {distance}",
-            "sharp left": "Turn sharp left {distance}",
+            "slightRight": "Bear right {distance}",
+            "slightLeft": "Bear left {distance}",
+            "sharpRight": "Turn sharp right {distance}",
+            "sharpLeft": "Turn sharp left {distance}",
             "straight": "Continue straight {distance}",
             "uturn": "Make a U-turn {distance}"
         },
-        "continue": "Continue {distance}",
-        "merge": "Merge {distance}",
-        "roundabout": "Enter roundabout {distance}",
-        "exitRoundabout": "Exit roundabout",
+        "continue": {
+            "straight": "Continue {distance}",
+            "left": "Continue left {distance}",
+            "right": "Continue right {distance}",
+            "slightLeft": "Continue slightly left {distance}",
+            "slightRight": "Continue slightly right {distance}",
+            "uturn": "Continue with a U-turn {distance}",
+            "sharpLeft": "Continue with a sharp left {distance}",
+            "sharpRight": "Continue with a sharp right {distance}"
+        },
+        "merge": {
+            "straight": "Merge {distance}",
+            "left": "Merge left {distance}",
+            "right": "Merge right {distance}",
+            "slightLeft": "Merge slightly left {distance}",
+            "slightRight": "Merge slightly right {distance}"
+        },
+        "onRamp": {
+            "straight": "Take the ramp straight {distance}",
+            "left": "Take the ramp left {distance}",
+            "right": "Take the ramp right {distance}",
+            "slightLeft": "Take the ramp slightly left {distance}",
+            "slightRight": "Take the ramp slightly right {distance}",
+            "sharpLeft": "Take the ramp sharp left {distance}",
+            "sharpRight": "Take the ramp sharp right {distance}"
+        },
+        "offRamp": {
+            "straight": "Take the exit straight {distance}",
+            "left": "Take the exit left {distance}",
+            "right": "Take the exit right {distance}",
+            "slightLeft": "Take the exit slightly left {distance}",
+            "slightRight": "Take the exit slightly right {distance}"
+        },
         "fork": {
+            "straight": "Continue straight at fork {distance}",
             "right": "Keep right at fork {distance}",
             "left": "Keep left at fork {distance}",
-            "straight": "Continue straight at fork {distance}"
+            "slightRight": "Keep slightly right at fork {distance}",
+            "slightLeft": "Keep slightly left at fork {distance}"
         },
         "endOfRoad": {
+            "straight": "Continue at end of road {distance}",
             "right": "Turn right at end of road {distance}",
-            "left": "Turn left at end of road {distance}",
-            "straight": "Continue at end of road {distance}"
+            "left": "Turn left at end of road {distance}"
         },
-        "newName": "Road name changes {distance}",
+        "newName": {
+            "left": "Road name changes to {name} {distance}",
+            "right": "Road name changes to {name} {distance}",
+            "straight": "Road name changes to {name} {distance}",
+            "slightLeft": "Road name changes to {name} {distance}",
+            "slightRight": "Road name changes to {name} {distance}",
+            "sharpLeft": "Road name changes to {name} {distance}",
+            "sharpRight": "Road name changes to {name} {distance}"
+        },
+        "roundabout": "Enter roundabout {distance}",
+        "exitRoundabout": {
+            "left": "Exit roundabout to the left {distance}",
+            "right": "Exit roundabout to the right {distance}",
+            "straight": "Exit roundabout straight {distance}",
+            "uturn": "Exit roundabout with a U-turn {distance}"
+        },
+        "rotary": "Enter rotary {distance}",
+        "exitRotary": {
+            "left": "Exit rotary to the left {distance}",
+            "right": "Exit rotary to the right {distance}",
+            "straight": "Exit rotary straight {distance}",
+            "uturn": "Exit rotary with a U-turn {distance}"
+        },
+        "roundaboutTurn": {
+            "left": "Turn left at roundabout {distance}",
+            "right": "Turn right at roundabout {distance}",
+            "straight": "Go straight through roundabout {distance}",
+            "slightLeft": "Turn slightly left at roundabout {distance}",
+            "slightRight": "Turn slightly right at roundabout {distance}",
+            "sharpLeft": "Turn sharp left at roundabout {distance}",
+            "sharpRight": "Turn sharp right at roundabout {distance}",
+            "uturn": "Make a U-turn at roundabout {distance}"
+        },
         "arrive": "You have arrived at your destination",
         "depart": "Head {distance} to start",
-        "notification": "{distance}"
+        "useLane": "Stay in lane {distance}",
+        "notification": "{distance}",
+        "unknown": "{distance}"
     },
     "sections": {
         "hero": {

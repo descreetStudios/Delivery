@@ -9,31 +9,96 @@
         "turn": {
             "right": "Gira a la derecha {distance}",
             "left": "Gira a la izquierda {distance}",
-            "slight right": "Gira ligeramente a la derecha {distance}",
-            "slight left": "Gira ligeramente a la izquierda {distance}",
-            "sharp right": "Gira bruscamente a la derecha {distance}",
-            "sharp left": "Gira bruscamente a la izquierda {distance}",
-            "straight": "Sigue recto {distance}",
+            "slightRight": "Gira ligeramente a la derecha {distance}",
+            "slightLeft": "Gira ligeramente a la izquierda {distance}",
+            "sharpRight": "Gira bruscamente a la derecha {distance}",
+            "sharpLeft": "Gira bruscamente a la izquierda {distance}",
+            "straight": "Continúa recto {distance}",
             "uturn": "Haz un giro en U {distance}"
         },
-        "continue": "Continúa {distance}",
-        "merge": "Incorpórate {distance}",
-        "roundabout": "Entra en la rotonda {distance}",
-        "exitRoundabout": "Sal de la rotonda",
+        "continue": {
+            "straight": "Continúa {distance}",
+            "left": "Continúa a la izquierda {distance}",
+            "right": "Continúa a la derecha {distance}",
+            "slightLeft": "Continúa ligeramente a la izquierda {distance}",
+            "slightRight": "Continúa ligeramente a la derecha {distance}",
+            "uturn": "Continúa con un giro en U {distance}",
+            "sharpLeft": "Continúa con una giro bruscamente a la izquierda {distance}",
+            "sharpRight": "Continúa con una giro bruscamente a la derecha {distance}"
+        },
+        "merge": {
+            "straight": "Incorpórate {distance}",
+            "left": "Incorpórate a la izquierda {distance}",
+            "right": "Incorpórate a la derecha {distance}",
+            "slightLeft": "Incorpórate ligeramente a la izquierda {distance}",
+            "slightRight": "Incorpórate ligeramente a la derecha {distance}"
+        },
+        "onRamp": {
+            "straight": "Toma la rampa recto {distance}",
+            "left": "Toma la rampa a la izquierda {distance}",
+            "right": "Toma la rampa a la derecha {distance}",
+            "slightLeft": "Toma la rampa ligeramente a la izquierda {distance}",
+            "slightRight": "Toma la rampa ligeramente a la derecha {distance}",
+            "sharpLeft": "Toma la rampa bruscamente a la izquierda {distance}",
+            "sharpRight": "Toma la rampa bruscamente a la derecha {distance}"
+        },
+        "offRamp": {
+            "straight": "Toma la salida recto {distance}",
+            "left": "Toma la salida a la izquierda {distance}",
+            "right": "Toma la salida a la derecha {distance}",
+            "slightLeft": "Toma la salida ligeramente a la izquierda {distance}",
+            "slightRight": "Toma la salida ligeramente a la derecha {distance}"
+        },
         "fork": {
+            "straight": "Continúa recto en la bifurcación {distance}",
             "right": "Mantente a la derecha en la bifurcación {distance}",
             "left": "Mantente a la izquierda en la bifurcación {distance}",
-            "straight": "Sigue recto en la bifurcación {distance}"
+            "slightRight": "Mantente ligeramente a la derecha en la bifurcación {distance}",
+            "slightLeft": "Mantente ligeramente a la izquierda en la bifurcación {distance}"
         },
         "endOfRoad": {
-            "right": "Gira a la derecha al final de la carretera {distance}",
-            "left": "Gira a la izquierda al final de la carretera {distance}",
-            "straight": "Continúa al final de la carretera {distance}"
+            "straight": "Continúa al final de la calle {distance}",
+            "right": "Gira a la derecha al final de la calle {distance}",
+            "left": "Gira a la izquierda al final de la calle {distance}"
         },
-        "newName": "El nombre de la carretera cambia {distance}",
+        "newName": {
+            "left": "El nombre de la calle cambia a la izquierda {distance}",
+            "right": "El nombre de la calle cambia a la derecha {distance}",
+            "straight": "El nombre de la calle cambia {distance}",
+            "slightLeft": "El nombre de la calle cambia ligeramente a la izquierda {distance}",
+            "slightRight": "El nombre de la calle cambia ligeramente a la derecha {distance}",
+            "sharpLeft": "El nombre de la calle cambia bruscamente a la izquierda {distance}",
+            "sharpRight": "El nombre de la calle cambia bruscamente a la derecha {distance}"
+        },
+        "roundabout": "Entra en la rotonda {distance}",
+        "exitRoundabout": {
+            "left": "Sal de la rotonda a la izquierda {distance}",
+            "right": "Sal de la rotonda a la derecha {distance}",
+            "straight": "Sal de la rotonda recto {distance}",
+            "uturn": "Sal de la rotonda con un giro en U {distance}"
+        },
+        "rotary": "Entra en la rotatoria {distance}",
+        "exitRotary": {
+            "left": "Sal de la rotatoria a la izquierda {distance}",
+            "right": "Sal de la rotatoria a la derecha {distance}",
+            "straight": "Sal de la rotatoria recto {distance}",
+            "uturn": "Sal de la rotatoria con un giro en U {distance}"
+        },
+        "roundaboutTurn": {
+            "left": "Gira a la izquierda en la rotonda {distance}",
+            "right": "Gira a la derecha en la rotonda {distance}",
+            "straight": "Continúa recto por la rotonda {distance}",
+            "slightLeft": "Gira ligeramente a la izquierda en la rotonda {distance}",
+            "slightRight": "Gira ligeramente a la derecha en la rotonda {distance}",
+            "sharpLeft": "Gira bruscamente a la izquierda en la rotonda {distance}",
+            "sharpRight": "Gira bruscamente a la derecha en la rotonda {distance}",
+            "uturn": "Haz un giro en U en la rotonda {distance}"
+        },
         "arrive": "Has llegado a tu destino",
         "depart": "Avanza {distance} para comenzar",
-        "notification": "{distance}"
+        "useLane": "Mantén el carril {distance}",
+        "notification": "{distance}",
+        "unknown": "{distance}"
     },
     "sections": {
         "hero": {

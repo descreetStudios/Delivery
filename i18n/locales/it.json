@@ -9,31 +9,96 @@
         "turn": {
             "right": "Gira a destra {distance}",
             "left": "Gira a sinistra {distance}",
-            "slight right": "Svolta leggermente a destra {distance}",
-            "slight left": "Svolta leggermente a sinistra {distance}",
-            "sharp right": "Svolta brusca a destra {distance}",
-            "sharp left": "Svolta brusca a sinistra {distance}",
+            "slightRight": "Svolta leggermente a destra {distance}",
+            "slightLeft": "Svolta leggermente a sinistra {distance}",
+            "sharpRight": "Svolta bruscamente a destra {distance}",
+            "sharpLeft": "Svolta bruscamente a sinistra {distance}",
             "straight": "Continua dritto {distance}",
             "uturn": "Fai un'inversione a U {distance}"
         },
-        "continue": "Continua {distance}",
-        "merge": "Immettiti {distance}",
-        "roundabout": "Entra nella rotonda {distance}",
-        "exitRoundabout": "Esci dalla rotonda",
+        "continue": {
+            "straight": "Continua {distance}",
+            "left": "Continua a sinistra {distance}",
+            "right": "Continua a destra {distance}",
+            "slightLeft": "Continua leggermente a sinistra {distance}",
+            "slightRight": "Continua leggermente a destra {distance}",
+            "uturn": "Continua con un'inversione a U {distance}",
+            "sharpLeft": "Continua con una svolta bruscamente a sinistra {distance}",
+            "sharpRight": "Continua con una svolta bruscamente a destra {distance}"
+        },
+        "merge": {
+            "straight": "Immettiti {distance}",
+            "left": "Immettiti a sinistra {distance}",
+            "right": "Immettiti a destra {distance}",
+            "slightLeft": "Immettiti leggermente a sinistra {distance}",
+            "slightRight": "Immettiti leggermente a destra {distance}"
+        },
+        "onRamp": {
+            "straight": "Prendi l'uscita dritta {distance}",
+            "left": "Prendi l'uscita a sinistra {distance}",
+            "right": "Prendi l'uscita a destra {distance}",
+            "slightLeft": "Prendi l'uscita leggermente a sinistra {distance}",
+            "slightRight": "Prendi l'uscita leggermente a destra {distance}",
+            "sharpLeft": "Prendi l'uscita bruscamente a sinistra {distance}",
+            "sharpRight": "Prendi l'uscita bruscamente a destra {distance}"
+        },
+        "offRamp": {
+            "straight": "Prendi l'uscita dritta {distance}",
+            "left": "Prendi l'uscita a sinistra {distance}",
+            "right": "Prendi l'uscita a destra {distance}",
+            "slightLeft": "Prendi l'uscita leggermente a sinistra {distance}",
+            "slightRight": "Prendi l'uscita leggermente a destra {distance}"
+        },
         "fork": {
+            "straight": "Continua dritto al bivio {distance}",
             "right": "Tieni la destra al bivio {distance}",
             "left": "Tieni la sinistra al bivio {distance}",
-            "straight": "Continua dritto al bivio {distance}"
+            "slightRight": "Tieni leggermente la destra al bivio {distance}",
+            "slightLeft": "Tieni leggermente la sinistra al bivio {distance}"
         },
         "endOfRoad": {
+            "straight": "Continua alla fine della strada {distance}",
             "right": "Gira a destra alla fine della strada {distance}",
-            "left": "Gira a sinistra alla fine della strada {distance}",
-            "straight": "Continua alla fine della strada {distance}"
+            "left": "Gira a sinistra alla fine della strada {distance}"
         },
-        "newName": "Il nome della strada cambia {distance}",
+        "newName": {
+            "left": "La strada cambia nome a sinistra {distance}",
+            "right": "La strada cambia nome a destra {distance}",
+            "straight": "La strada cambia nome {distance}",
+            "slightLeft": "La strada cambia leggermente a sinistra {distance}",
+            "slightRight": "La strada cambia leggermente a destra {distance}",
+            "sharpLeft": "La strada cambia bruscamente a sinistra {distance}",
+            "sharpRight": "La strada cambia bruscamente a destra {distance}"
+        },
+        "roundabout": "Entra nella rotonda {distance}",
+        "exitRoundabout": {
+            "left": "Esci dalla rotonda a sinistra {distance}",
+            "right": "Esci dalla rotonda a destra {distance}",
+            "straight": "Esci dalla rotonda dritto {distance}",
+            "uturn": "Esci dalla rotonda con un'inversione a U {distance}"
+        },
+        "rotary": "Entra nel rotatorio {distance}",
+        "exitRotary": {
+            "left": "Esci dal rotatorio a sinistra {distance}",
+            "right": "Esci dal rotatorio a destra {distance}",
+            "straight": "Esci dal rotatorio dritto {distance}",
+            "uturn": "Esci dal rotatorio con un'inversione a U {distance}"
+        },
+        "roundaboutTurn": {
+            "left": "Gira a sinistra nella rotonda {distance}",
+            "right": "Gira a destra nella rotonda {distance}",
+            "straight": "Continua dritto nella rotonda {distance}",
+            "slightLeft": "Gira leggermente a sinistra nella rotonda {distance}",
+            "slightRight": "Gira leggermente a destra nella rotonda {distance}",
+            "sharpLeft": "Gira bruscamente a sinistra nella rotonda {distance}",
+            "sharpRight": "Gira bruscamente a destra nella rotonda {distance}",
+            "uturn": "Fai un'inversione a U nella rotonda {distance}"
+        },
         "arrive": "Sei arrivato a destinazione",
         "depart": "Procedi {distance} per iniziare",
-        "notification": "{distance}"
+        "useLane": "Mantieni la corsia {distance}",
+        "notification": "{distance}",
+        "unknown": "{distance}"
     },
     "sections": {
         "hero": {
