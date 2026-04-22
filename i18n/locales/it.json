@@ -22,32 +22,32 @@
             "right": "Continua a destra {distance}",
             "slightLeft": "Continua leggermente a sinistra {distance}",
             "slightRight": "Continua leggermente a destra {distance}",
-            "uturn": "Continua con un'inversione a U {distance}",
-            "sharpLeft": "Continua con una svolta bruscamente a sinistra {distance}",
-            "sharpRight": "Continua con una svolta bruscamente a destra {distance}"
+            "uturn": "Fai un'inversione a U {distance}",
+            "sharpLeft": "Svolta bruscamente a sinistra {distance}",
+            "sharpRight": "Svolta bruscamente a destra {distance}"
         },
         "merge": {
-            "straight": "Immettiti {distance}",
+            "straight": "Immettiti sulla strada {distance}",
             "left": "Immettiti a sinistra {distance}",
             "right": "Immettiti a destra {distance}",
             "slightLeft": "Immettiti leggermente a sinistra {distance}",
             "slightRight": "Immettiti leggermente a destra {distance}"
         },
         "onRamp": {
-            "straight": "Prendi l'uscita dritta {distance}",
-            "left": "Prendi l'uscita a sinistra {distance}",
-            "right": "Prendi l'uscita a destra {distance}",
-            "slightLeft": "Prendi l'uscita leggermente a sinistra {distance}",
-            "slightRight": "Prendi l'uscita leggermente a destra {distance}",
-            "sharpLeft": "Prendi l'uscita bruscamente a sinistra {distance}",
-            "sharpRight": "Prendi l'uscita bruscamente a destra {distance}"
+            "straight": "Immettiti sulla strada {distance}",
+            "left": "Immettiti a sinistra {distance}",
+            "right": "Immettiti a destra {distance}",
+            "slightLeft": "Immettiti leggermente a sinistra {distance}",
+            "slightRight": "Immettiti leggermente a destra {distance}",
+            "sharpLeft": "Immettiti bruscamente a sinistra {distance}",
+            "sharpRight": "Immettiti bruscamente a destra {distance}"
         },
         "offRamp": {
-            "straight": "Prendi l'uscita dritta {distance}",
-            "left": "Prendi l'uscita a sinistra {distance}",
-            "right": "Prendi l'uscita a destra {distance}",
-            "slightLeft": "Prendi l'uscita leggermente a sinistra {distance}",
-            "slightRight": "Prendi l'uscita leggermente a destra {distance}"
+            "straight": "Esci dritto {distance}",
+            "left": "Esci a sinistra {distance}",
+            "right": "Esci a destra {distance}",
+            "slightLeft": "Esci leggermente a sinistra {distance}",
+            "slightRight": "Esci leggermente a destra {distance}"
         },
         "fork": {
             "straight": "Continua dritto al bivio {distance}",
@@ -65,10 +65,10 @@
             "left": "La strada cambia nome a sinistra {distance}",
             "right": "La strada cambia nome a destra {distance}",
             "straight": "La strada cambia nome {distance}",
-            "slightLeft": "La strada cambia leggermente a sinistra {distance}",
-            "slightRight": "La strada cambia leggermente a destra {distance}",
-            "sharpLeft": "La strada cambia bruscamente a sinistra {distance}",
-            "sharpRight": "La strada cambia bruscamente a destra {distance}"
+            "slightLeft": "La strada cambia nome leggermente a sinistra {distance}",
+            "slightRight": "La strada cambia nome leggermente a destra {distance}",
+            "sharpLeft": "La strada cambia nome bruscamente a sinistra {distance}",
+            "sharpRight": "La strada cambia nome bruscamente a destra {distance}"
         },
         "roundabout": "Entra nella rotonda {distance}",
         "exitRoundabout": {
@@ -77,12 +77,12 @@
             "straight": "Esci dalla rotonda dritto {distance}",
             "uturn": "Esci dalla rotonda con un'inversione a U {distance}"
         },
-        "rotary": "Entra nel rotatorio {distance}",
+        "rotary": "Entra nella rotonda {distance}",
         "exitRotary": {
-            "left": "Esci dal rotatorio a sinistra {distance}",
-            "right": "Esci dal rotatorio a destra {distance}",
-            "straight": "Esci dal rotatorio dritto {distance}",
-            "uturn": "Esci dal rotatorio con un'inversione a U {distance}"
+            "left": "Esci dalla rotonda a sinistra {distance}",
+            "right": "Esci dalla rotonda a destra {distance}",
+            "straight": "Esci dalla rotonda dritto {distance}",
+            "uturn": "Esci dalla rotonda con un'inversione a U {distance}"
         },
         "roundaboutTurn": {
             "left": "Gira a sinistra nella rotonda {distance}",
@@ -142,7 +142,7 @@
         "noResults": "Nessun risultato trovato"
     },
     "FooterComponent": {
-        "foot": " Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
+        "foot": "Untitled Delivery Project. Sviluppato da un team indipendente. Tutti i diritti riservati.",
         "secondFoot": "Questo progetto è open‑source e concesso sotto licenza",
         "built": "Realizzato con",
         "support": "Supportaci su",
@@ -184,7 +184,7 @@
         "ctaClick": "Clicca qui!"
     },
     "RiderPage": {
-        "complete": "Completa ordine",
+        "complete": "Completa l'ordine",
         "waiting": "In attesa di ordini...",
         "courier": "Corriere",
         "order": "Ordine Assegnato",

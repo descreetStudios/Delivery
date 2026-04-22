@@ -1,6 +1,6 @@
 {
     "FoodCardComponent":{
-        "buy":"Buy"
+        "buy":"Add to order"
     },
     "OrderComponent":{
         "delete":"Delete"
@@ -18,16 +18,16 @@
         },
         "continue": {
             "straight": "Continue {distance}",
-            "left": "Continue left {distance}",
-            "right": "Continue right {distance}",
+            "left": "Continue to the left {distance}",
+            "right": "Continue to the right {distance}",
             "slightLeft": "Continue slightly left {distance}",
             "slightRight": "Continue slightly right {distance}",
-            "uturn": "Continue with a U-turn {distance}",
+            "uturn": "Make a U-turn {distance}",
             "sharpLeft": "Continue with a sharp left {distance}",
             "sharpRight": "Continue with a sharp right {distance}"
         },
         "merge": {
-            "straight": "Merge {distance}",
+            "straight": "Merge ahead {distance}",
             "left": "Merge left {distance}",
             "right": "Merge right {distance}",
             "slightLeft": "Merge slightly left {distance}",
@@ -35,8 +35,8 @@
         },
         "onRamp": {
             "straight": "Take the ramp straight {distance}",
-            "left": "Take the ramp left {distance}",
-            "right": "Take the ramp right {distance}",
+            "left": "Take the ramp on the left {distance}",
+            "right": "Take the ramp on the right {distance}",
             "slightLeft": "Take the ramp slightly left {distance}",
             "slightRight": "Take the ramp slightly right {distance}",
             "sharpLeft": "Take the ramp sharp left {distance}",
@@ -70,19 +70,19 @@
             "sharpLeft": "Road name changes to {name} {distance}",
             "sharpRight": "Road name changes to {name} {distance}"
         },
-        "roundabout": "Enter roundabout {distance}",
+        "roundabout": "Enter the roundabout {distance}",
         "exitRoundabout": {
             "left": "Exit roundabout to the left {distance}",
             "right": "Exit roundabout to the right {distance}",
             "straight": "Exit roundabout straight {distance}",
             "uturn": "Exit roundabout with a U-turn {distance}"
         },
-        "rotary": "Enter rotary {distance}",
+        "rotary": "Enter the roundabout {distance}",
         "exitRotary": {
-            "left": "Exit rotary to the left {distance}",
-            "right": "Exit rotary to the right {distance}",
-            "straight": "Exit rotary straight {distance}",
-            "uturn": "Exit rotary with a U-turn {distance}"
+            "left": "Exit roundabout to the left {distance}",
+            "right": "Exit roundabout to the right {distance}",
+            "straight": "Exit roundabout straight {distance}",
+            "uturn": "Exit roundabout with a U-turn {distance}"
         },
         "roundaboutTurn": {
             "left": "Turn left at roundabout {distance}",
@@ -95,7 +95,7 @@
             "uturn": "Make a U-turn at roundabout {distance}"
         },
         "arrive": "You have arrived at your destination",
-        "depart": "Head {distance} to start",
+        "depart": "Start and continue for {distance}",
         "useLane": "Stay in lane {distance}",
         "notification": "{distance}",
         "unknown": "{distance}"
@@ -138,11 +138,11 @@
         "how": "How does it work?"
     },
     "SearchComponent": {
-        "search": "Search a restaurant",
+        "search": "Search for a restaurant",
         "noResults":"No results found"
     },
     "FooterComponent": {
-        "foot": " Untitled Delivery Project. Developed by an independent team. All rights reserved.",
+        "foot": "Untitled Delivery Project. Developed by an independent team. All rights reserved.",
         "secondFoot": "This project is open-source and licensed under",
         "built": "Built with",
         "support": "Support us on",
@@ -173,7 +173,7 @@
         "message":"Your order has been delivered to the delivery location!",
         "queue":"Order in queue ",
         "messageQueued":"Your order has been added to the queue!",
-        "delivering":"Ordine in consegna",
+        "delivering":"Order in delivery",
         "messageDelivering":"Your order has been picked up from the pickup location!",
         "assigned":"Assigned order",
         "messageAssigned":"Your order has been assigned to a courier!"

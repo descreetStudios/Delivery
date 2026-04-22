@@ -23,8 +23,8 @@
             "slightLeft": "Continúa ligeramente a la izquierda {distance}",
             "slightRight": "Continúa ligeramente a la derecha {distance}",
             "uturn": "Continúa con un giro en U {distance}",
-            "sharpLeft": "Continúa con una giro bruscamente a la izquierda {distance}",
-            "sharpRight": "Continúa con una giro bruscamente a la derecha {distance}"
+            "sharpLeft": "Continúa con un giro brusco a la izquierda {distance}",
+            "sharpRight": "Continúa con un giro brusco a la derecha {distance}"
         },
         "merge": {
             "straight": "Incorpórate {distance}",
@@ -34,16 +34,16 @@
             "slightRight": "Incorpórate ligeramente a la derecha {distance}"
         },
         "onRamp": {
-            "straight": "Toma la rampa recto {distance}",
-            "left": "Toma la rampa a la izquierda {distance}",
-            "right": "Toma la rampa a la derecha {distance}",
-            "slightLeft": "Toma la rampa ligeramente a la izquierda {distance}",
-            "slightRight": "Toma la rampa ligeramente a la derecha {distance}",
-            "sharpLeft": "Toma la rampa bruscamente a la izquierda {distance}",
-            "sharpRight": "Toma la rampa bruscamente a la derecha {distance}"
+            "straight": "Incorpórate recto {distance}",
+            "left": "Incorpórate a la izquierda {distance}",
+            "right": "Incorpórate a la derecha {distance}",
+            "slightLeft": "Incorpórate ligeramente a la izquierda {distance}",
+            "slightRight": "Incorpórate ligeramente a la derecha {distance}",
+            "sharpLeft": "Incorpórate bruscamente a la izquierda {distance}",
+            "sharpRight": "Incorpórate bruscamente a la derecha {distance}"
         },
         "offRamp": {
-            "straight": "Toma la salida recto {distance}",
+            "straight": "Toma la salida {distance}",
             "left": "Toma la salida a la izquierda {distance}",
             "right": "Toma la salida a la derecha {distance}",
             "slightLeft": "Toma la salida ligeramente a la izquierda {distance}",
@@ -62,13 +62,13 @@
             "left": "Gira a la izquierda al final de la calle {distance}"
         },
         "newName": {
-            "left": "El nombre de la calle cambia a la izquierda {distance}",
-            "right": "El nombre de la calle cambia a la derecha {distance}",
-            "straight": "El nombre de la calle cambia {distance}",
-            "slightLeft": "El nombre de la calle cambia ligeramente a la izquierda {distance}",
-            "slightRight": "El nombre de la calle cambia ligeramente a la derecha {distance}",
-            "sharpLeft": "El nombre de la calle cambia bruscamente a la izquierda {distance}",
-            "sharpRight": "El nombre de la calle cambia bruscamente a la derecha {distance}"
+            "left": "La calle pasa a llamarse {name} {distance}",
+            "right": "La calle pasa a llamarse {name} {distance}",
+            "straight": "La calle pasa a llamarse {name} {distance}",
+            "slightLeft": "La calle pasa a llamarse {name} {distance}",
+            "slightRight": "La calle pasa a llamarse {name} {distance}",
+            "sharpLeft": "La calle pasa a llamarse {name} {distance}",
+            "sharpRight": "La calle pasa a llamarse {name} {distance}"
         },
         "roundabout": "Entra en la rotonda {distance}",
         "exitRoundabout": {
@@ -77,12 +77,12 @@
             "straight": "Sal de la rotonda recto {distance}",
             "uturn": "Sal de la rotonda con un giro en U {distance}"
         },
-        "rotary": "Entra en la rotatoria {distance}",
+        "rotary": "Entra en la glorieta {distance}",
         "exitRotary": {
-            "left": "Sal de la rotatoria a la izquierda {distance}",
-            "right": "Sal de la rotatoria a la derecha {distance}",
-            "straight": "Sal de la rotatoria recto {distance}",
-            "uturn": "Sal de la rotatoria con un giro en U {distance}"
+            "left": "Sal de la glorieta a la izquierda {distance}",
+            "right": "Sal de la glorieta a la derecha {distance}",
+            "straight": "Sal de la glorieta recto {distance}",
+            "uturn": "Sal de la glorieta con un giro en U {distance}"
         },
         "roundaboutTurn": {
             "left": "Gira a la izquierda en la rotonda {distance}",
@@ -142,7 +142,7 @@
         "noResults": "No se encontraron resultados"
     },
     "FooterComponent": {
-        "foot": " Untitled Delivery Project. Desarrollado por un equipo independiente. Todos los derechos reservados.",
+        "foot": "Untitled Delivery Project. Desarrollado por un equipo independiente. Todos los derechos reservados.",
         "secondFoot": "Este proyecto es de código abierto y está licenciado bajo",
         "built": "Construido con",
         "support": "Apóyanos en",
@@ -173,7 +173,7 @@
         "message": "¡Tu pedido ha sido entregado en el punto de entrega!",
         "queue": "Pedido en cola",
         "messageQueued": "¡Tu pedido ha sido añadido a la cola!",
-        "delivering": "Pedido en Entrega",
+        "delivering": "Pedido en camino",
         "messageDelivering": "¡Tu pedido ha sido recogido del punto de recogida!",
         "assigned": "Pedido Asignado",
         "messageAssigned": "¡Tu pedido ha sido asignado a un repartidor!"
@@ -181,10 +181,10 @@
     "sidebar": {
         "riderQuestion": "Oye, ¿eres repartidor?",
         "userQuestion": "Oye, ¿eres usuario?",
-        "ctaClick": "Haz clic aquí!"
+        "ctaClick": "¡Haz clic aquí!"
     },
     "RiderPage": {
-        "complete": "Completar pedido",
+        "complete": "Completar el pedido",
         "waiting": "Esperando pedidos...",
         "courier": "Repartidor",
         "order": "Pedido Asignado",
@@ -192,7 +192,7 @@
         "items": "Artículos:",
         "total": "Total: €"
     },
-    "StatusModalComponent":{
-        "Close":"Cerrar"
+    "StatusModalComponent": {
+        "Close": "Cerrar"
     }
 }
