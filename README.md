@@ -1,6 +1,6 @@
 # Untitled Delivery Project
 
-![Preview Screenshot](Screenshots/latest.png "Showcase")
+![Preview Screenshot](screenshots/latest.png "Showcase")
 
 A real-time food delivery platform that connects customers with couriers through live GPS tracking, automatic order assignment, and turn-by-turn navigation. Built as a full-stack application with a Nuxt 4 frontend and a Spring Boot backend.
 
