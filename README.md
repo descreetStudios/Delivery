@@ -1,5 +1,7 @@
 # Untitled Delivery Project
 
+![Preview Screenshot](Screenshots/latest.png "Showcase")
+
 A real-time food delivery platform that connects customers with couriers through live GPS tracking, automatic order assignment, and turn-by-turn navigation. Built as a full-stack application with a Nuxt 4 frontend and a Spring Boot backend.
 
 ![Tech Stack](https://img.shields.io/badge/Nuxt-4-black?style=flat-square&logo=nuxt.js)
@@ -20,6 +22,7 @@ When a customer places an order, the system automatically assigns it to the near
 - **Redis-powered state** -- all data persisted in Redis with TTL-based expiration and distributed locking
 
 ## Project structure
+
 
 ```
 .
